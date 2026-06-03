@@ -86,13 +86,6 @@
       - ownerReferences
 
   pre_tasks:
-    # ADD THIS TEMPORARY TASK TO TROUBLESHOOT:
-    - name: Debug survey variables
-      ansible.builtin.debug:
-        msg: 
-          - "survey_url is: {{ survey_url | default('UNDEFINED') }}"
-          - "survey_token is: {{ survey_token | default('UNDEFINED') }}"
-          
     - name: Validate required connection variables
       ansible.builtin.assert:
         that:
