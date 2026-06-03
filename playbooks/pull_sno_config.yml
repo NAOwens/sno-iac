@@ -6,8 +6,8 @@
 
   vars:
     # --- Connection (pass via Extra Vars, survey, or environment) ---
-    ocp_host: "{{ survey_url | default(lookup('env', 'OCP_HOST')) }}"
-    ocp_token: "{{ survey_token | default(lookup('env', 'OCP_TOKEN')) }}"
+    ocp_host: "{{ survey_url }}"
+    ocp_token: "{{ survey_token }}"
     validate_certs_flag: "{{ validate_certs | default(false) }}"
 
     # --- Export settings ---
