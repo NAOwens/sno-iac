@@ -13,6 +13,12 @@
     # --- Export settings ---
     export_dir: "../iac-exports"
 
+    # --- GitHub settings (pass via Extra Vars or survey) ---
+    git_token_variable: "{{ github_token }}"
+    github_repo: "NAOwens/sno-iac"
+    git_user_email: "owensna7@gmail.com"
+    git_user_name: "NAOwens"
+
     # Namespaces to always skip (ephemeral / cluster-managed)
     # Note: 'default' is intentionally NOT excluded so VMs running there are captured
     system_namespaces:
@@ -91,7 +97,8 @@
         that:
           - ocp_host is defined and ocp_host != ''
           - ocp_token is defined and ocp_token != ''
-        fail_msg: "OCP_HOST and OCP_TOKEN must be set via Extra Vars or environment variables"
+          - github_token is defined and github_token != ''
+        fail_msg: "survey_url, survey_token, and survey_github_token must be set via Extra Vars or survey"
 
     - name: Create export directory tree
       ansible.builtin.file:
@@ -1173,3 +1180,33 @@
           or via an External Secrets Operator before running deploy.
           VM disks (PVCs) contain data that cannot be exported — snapshots
           or storage-level replication must be used to migrate disk contents.
+
+    - name: Clone the SNO IaC repository
+      ansible.builtin.git:
+        repo: "https://{{ github_token }}@github.com/{{ github_repo }}.git"
+        dest: /tmp/sno_iac_repo
+        version: main
+        accept_hostkey: true
+
+    - name: Copy exported files to the git repository
+      ansible.builtin.copy:
+        src: "{{ export_dir }}/"
+        dest: /tmp/sno_iac_repo/iac-exports/
+        remote_src: true
+
+    - name: Commit and push exported files to GitHub
+      ansible.builtin.shell: |
+        git config user.email "{{ git_user_email }}"
+        git config user.name "{{ git_user_name }}"
+        git remote set-url origin https://{{ git_user_name }}:{{ git_token_variable }}@github.com/{{ github_repo }}.git
+        git add .
+        git commit -m "Automated SNO config export"
+        git push origin main
+      args:
+        chdir: /tmp/sno_iac_repo
+      environment:
+        GIT_TERMINAL_PROMPT: "0"
+      register: git_result
+      failed_when:
+        - git_result.rc != 0
+        - "'nothing to commit' not in git_result.stdout"
