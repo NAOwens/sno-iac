@@ -753,6 +753,7 @@
         content: |
           {{ _cluster_role_bindings.resources
              | rejectattr('metadata.name', 'match', '^(system:|kubeadm|openshift)')
+             | selectattr('subjects', 'defined')
              | rejectattr('subjects', 'equalto', None)
              | rejectattr('subjects', 'equalto', [])
              | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
