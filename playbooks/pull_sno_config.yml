@@ -97,7 +97,7 @@
         that:
           - ocp_host is defined and ocp_host != ''
           - ocp_token is defined and ocp_token != ''
-          - github_token is defined and github_token != ''
+          - github_token_variable is defined and github_token_variable != ''
         fail_msg: "survey_url, survey_token, and survey_github_token must be set via Extra Vars or survey"
 
     - name: Create export directory tree
