@@ -1,0 +1,1174 @@
+---
+- name: Pull SNO Cluster Configuration for Infrastructure as Code
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    # --- Connection (pass via Extra Vars, survey, or environment) ---
+    ocp_host: "{{ survey_url | default(lookup('env', 'OCP_HOST')) }}"
+    ocp_token: "{{ survey_token | default(lookup('env', 'OCP_TOKEN')) }}"
+    validate_certs_flag: "{{ validate_certs | default(false) }}"
+
+    # --- Export settings ---
+    export_dir: "../iac-exports"
+
+    # Namespaces to always skip (ephemeral / cluster-managed)
+    # Note: 'default' is intentionally NOT excluded so VMs running there are captured
+    system_namespaces:
+      - kube-system
+      - kube-public
+      - kube-node-lease
+      - openshift
+      - openshift-apiserver
+      - openshift-apiserver-operator
+      - openshift-authentication
+      - openshift-authentication-operator
+      - openshift-cloud-credential-operator
+      - openshift-cluster-machine-approver
+      - openshift-cluster-node-tuning-operator
+      - openshift-cluster-samples-operator
+      - openshift-cluster-storage-operator
+      - openshift-cluster-version
+      - openshift-config
+      - openshift-config-managed
+      - openshift-config-operator
+      - openshift-console
+      - openshift-console-operator
+      - openshift-console-user-settings
+      - openshift-controller-manager
+      - openshift-controller-manager-operator
+      - openshift-dns
+      - openshift-dns-operator
+      - openshift-etcd
+      - openshift-etcd-operator
+      - openshift-host-network
+      - openshift-image-registry
+      - openshift-infra
+      - openshift-ingress
+      - openshift-ingress-canary
+      - openshift-ingress-operator
+      - openshift-insights
+      - openshift-kni-infra
+      - openshift-kube-apiserver
+      - openshift-kube-apiserver-operator
+      - openshift-kube-controller-manager
+      - openshift-kube-controller-manager-operator
+      - openshift-kube-scheduler
+      - openshift-kube-scheduler-operator
+      - openshift-kube-storage-version-migrator
+      - openshift-kube-storage-version-migrator-operator
+      - openshift-machine-api
+      - openshift-machine-config-operator
+      - openshift-monitoring
+      - openshift-multus
+      - openshift-network-diagnostics
+      - openshift-network-operator
+      - openshift-node
+      - openshift-oauth-apiserver
+      - openshift-openstack-infra
+      - openshift-operator-lifecycle-manager
+      - openshift-ovirt-infra
+      - openshift-route-controller-manager
+      - openshift-service-ca
+      - openshift-service-ca-operator
+      - openshift-user-workload-monitoring
+      - openshift-vsphere-infra
+
+    # Metadata fields that are cluster-instance-specific and break portability
+    meta_to_strip:
+      - resourceVersion
+      - uid
+      - creationTimestamp
+      - generation
+      - managedFields
+      - selfLink
+      - ownerReferences
+
+  pre_tasks:
+    - name: Validate required connection variables
+      ansible.builtin.assert:
+        that:
+          - ocp_host is defined and ocp_host != ''
+          - ocp_token is defined and ocp_token != ''
+        fail_msg: "OCP_HOST and OCP_TOKEN must be set via Extra Vars or environment variables"
+
+    - name: Create export directory tree
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ export_dir }}/cluster"
+        - "{{ export_dir }}/machine-config"
+        - "{{ export_dir }}/operators"
+        - "{{ export_dir }}/storage"
+        - "{{ export_dir }}/networking"
+        - "{{ export_dir }}/rbac"
+        - "{{ export_dir }}/namespaces"
+
+    - name: Verify cluster connectivity
+      kubernetes.core.k8s_info:
+        api_version: config.openshift.io/v1
+        kind: ClusterVersion
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _cluster_version_check
+      failed_when: _cluster_version_check.resources | length == 0
+
+  tasks:
+    # ---------------------------------------------------------
+    # CLUSTER-LEVEL CONFIGURATION
+    # ---------------------------------------------------------
+    - name: Pull ClusterVersion
+      kubernetes.core.k8s_info:
+        api_version: config.openshift.io/v1
+        kind: ClusterVersion
+        name: version
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _cv
+
+    - name: Write ClusterVersion
+      ansible.builtin.copy:
+        content: |
+          {{ (_cv.resources | map('dict2items') | map('rejectattr', 'key', 'in', ['status'] + meta_to_strip) | map('items2dict') | list)[0] | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/cluster/cluster_version.yml"
+      when: _cv.resources | length > 0
+
+    - name: Pull cluster config resources (config.openshift.io)
+      kubernetes.core.k8s_info:
+        api_version: config.openshift.io/v1
+        kind: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _cluster_configs
+      loop:
+        - Infrastructure
+        - Network
+        - OAuth
+        - APIServer
+        - Ingress
+        - Image
+        - Proxy
+        - Scheduler
+        - Console
+        - DNS
+        - FeatureGate
+
+    - name: Write cluster config resources
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('combine', {'metadata': {}})
+             | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/cluster/{{ item.item | lower }}.yml"
+      loop: "{{ _cluster_configs.results }}"
+      when: item.resources | length > 0
+
+    # ---------------------------------------------------------
+    # IMAGE REGISTRY OPERATOR CONFIG
+    # config.openshift.io/v1 Image (pulled above) controls allowed registries/sources.
+    # This pulls the registry operator config which controls storage, managementState,
+    # replicas, and routes — the piece SNO requires manual setup for after install.
+    # ---------------------------------------------------------
+    - name: Pull image registry operator config
+      kubernetes.core.k8s_info:
+        api_version: imageregistry.operator.openshift.io/v1
+        kind: Config
+        name: cluster
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _image_registry_config
+
+    - name: Write image registry operator config
+      ansible.builtin.copy:
+        content: |
+          {{ _image_registry_config.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/cluster/image_registry_config.yml"
+      when: _image_registry_config.resources | length > 0
+
+    # ---------------------------------------------------------
+    # MACHINE CONFIGURATION (SNO node config / ignition)
+    # ---------------------------------------------------------
+    - name: Pull MachineConfigs
+      kubernetes.core.k8s_info:
+        api_version: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _machine_configs
+
+    - name: Write MachineConfigs
+      ansible.builtin.copy:
+        content: |
+          {{ _machine_configs.resources
+             | rejectattr('metadata.name', 'match', '^(00|01|99)-.*generated.*')
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/machine-config/machine_configs.yml"
+      when: _machine_configs.resources | length > 0
+
+    - name: Pull MachineConfigPools
+      kubernetes.core.k8s_info:
+        api_version: machineconfiguration.openshift.io/v1
+        kind: MachineConfigPool
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _mcp
+
+    - name: Write MachineConfigPools
+      ansible.builtin.copy:
+        content: |
+          {{ _mcp.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/machine-config/machine_config_pools.yml"
+      when: _mcp.resources | length > 0
+
+    # ---------------------------------------------------------
+    # OPERATOR LIFECYCLE MANAGER (OLM)
+    # ---------------------------------------------------------
+    - name: Pull CatalogSources
+      kubernetes.core.k8s_info:
+        api_version: operators.coreos.com/v1alpha1
+        kind: CatalogSource
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _catalog_sources
+
+    - name: Write CatalogSources
+      ansible.builtin.copy:
+        content: |
+          {{ _catalog_sources.resources
+             | selectattr('metadata.namespace', 'ne', 'openshift-marketplace')
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/catalog_sources.yml"
+      when: _catalog_sources.resources | length > 0
+
+    - name: Pull OperatorGroups
+      kubernetes.core.k8s_info:
+        api_version: operators.coreos.com/v1
+        kind: OperatorGroup
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _operator_groups
+
+    - name: Write OperatorGroups
+      ansible.builtin.copy:
+        content: |
+          {{ _operator_groups.resources
+             | rejectattr('metadata.namespace', 'in', system_namespaces)
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/operator_groups.yml"
+      when: _operator_groups.resources | length > 0
+
+    - name: Pull Subscriptions
+      kubernetes.core.k8s_info:
+        api_version: operators.coreos.com/v1alpha1
+        kind: Subscription
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _subscriptions
+
+    - name: Write Subscriptions
+      ansible.builtin.copy:
+        content: |
+          {{ _subscriptions.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/subscriptions.yml"
+      when: _subscriptions.resources | length > 0
+
+    - name: Pull ClusterServiceVersions
+      kubernetes.core.k8s_info:
+        api_version: operators.coreos.com/v1alpha1
+        kind: ClusterServiceVersion
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _csvs
+
+    - name: Write CSV summary (names/versions/namespaces only)
+      ansible.builtin.copy:
+        content: |
+          {{ _csvs.resources
+             | map(attribute='metadata')
+             | map('dict2items') | map('selectattr', 'key', 'in', ['name', 'namespace', 'labels']) | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/installed_csvs.yml"
+      when: _csvs.resources | length > 0
+
+    # ---------------------------------------------------------
+    # OPENSHIFT VIRTUALIZATION (hco.kubevirt.io)
+    # HyperConverged is the single CR that controls all OCP-V sub-operators
+    # (KubeVirt, CDI, NetworkAddonsConfig, SSP, etc.)
+    # ---------------------------------------------------------
+    - name: Pull HyperConverged configuration
+      kubernetes.core.k8s_info:
+        api_version: hco.kubevirt.io/v1beta1
+        kind: HyperConverged
+        namespace: openshift-cnv
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _hyperconverged
+      ignore_errors: true
+
+    - name: Write HyperConverged configuration
+      ansible.builtin.copy:
+        content: |
+          {{ _hyperconverged.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/hyperconverged.yml"
+      when:
+        - not _hyperconverged.failed | default(false)
+        - _hyperconverged.resources | length > 0
+
+    - name: Pull NetworkAttachmentDefinitions from openshift-cnv
+      kubernetes.core.k8s_info:
+        api_version: k8s.cni.cncf.io/v1
+        kind: NetworkAttachmentDefinition
+        namespace: openshift-cnv
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _cnv_nads
+      ignore_errors: true
+
+    - name: Write openshift-cnv Network Attachment Definitions
+      ansible.builtin.copy:
+        content: |
+          {{ _cnv_nads.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/ocpv_network_attachment_definitions.yml"
+      when:
+        - not _cnv_nads.failed | default(false)
+        - _cnv_nads.resources | length > 0
+
+    # ---------------------------------------------------------
+    # LVMS (Logical Volume Manager Storage)
+    # LVMCluster defines the device selector and storage pools
+    # ---------------------------------------------------------
+    - name: Pull LVMCluster configuration
+      kubernetes.core.k8s_info:
+        api_version: lvm.topolvm.io/v1alpha1
+        kind: LVMCluster
+        namespace: openshift-storage
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _lvm_cluster
+      ignore_errors: true
+
+    - name: Write LVMCluster configuration
+      ansible.builtin.copy:
+        content: |
+          {{ _lvm_cluster.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/lvm_cluster.yml"
+      when:
+        - not _lvm_cluster.failed | default(false)
+        - _lvm_cluster.resources | length > 0
+
+    # ---------------------------------------------------------
+    # ANSIBLE AUTOMATION PLATFORM OPERATOR
+    # Covers AAP 2.6+ unified platform CR and older standalone CRs.
+    # All pulled without a namespace filter to catch any install namespace.
+    # ---------------------------------------------------------
+    - name: Pull AnsibleAutomationPlatform (AAP 2.6+ unified)
+      kubernetes.core.k8s_info:
+        api_version: aap.ansible.com/v1alpha1
+        kind: AnsibleAutomationPlatform
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _aap
+      ignore_errors: true
+
+    - name: Write AnsibleAutomationPlatform
+      ansible.builtin.copy:
+        content: |
+          {{ _aap.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/aap.yml"
+      when:
+        - not _aap.failed | default(false)
+        - _aap.resources | length > 0
+
+    - name: Pull AutomationController (AAP 2.4-2.5 standalone)
+      kubernetes.core.k8s_info:
+        api_version: automationcontroller.ansible.com/v1beta1
+        kind: AutomationController
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _aap_controller
+      ignore_errors: true
+
+    - name: Write AutomationController
+      ansible.builtin.copy:
+        content: |
+          {{ _aap_controller.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/automation_controller.yml"
+      when:
+        - not _aap_controller.failed | default(false)
+        - _aap_controller.resources | length > 0
+
+    - name: Pull AutomationHub (standalone)
+      kubernetes.core.k8s_info:
+        api_version: automationhub.ansible.com/v1beta1
+        kind: AutomationHub
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _aap_hub
+      ignore_errors: true
+
+    - name: Write AutomationHub
+      ansible.builtin.copy:
+        content: |
+          {{ _aap_hub.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/automation_hub.yml"
+      when:
+        - not _aap_hub.failed | default(false)
+        - _aap_hub.resources | length > 0
+
+    - name: Pull EDA (Event Driven Automation)
+      kubernetes.core.k8s_info:
+        api_version: eda.ansible.com/v1alpha1
+        kind: EDA
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _aap_eda
+      ignore_errors: true
+
+    - name: Write EDA
+      ansible.builtin.copy:
+        content: |
+          {{ _aap_eda.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/operators/eda.yml"
+      when:
+        - not _aap_eda.failed | default(false)
+        - _aap_eda.resources | length > 0
+
+    # ---------------------------------------------------------
+    # STORAGE
+    # ---------------------------------------------------------
+    - name: Pull StorageClasses
+      kubernetes.core.k8s_info:
+        api_version: storage.k8s.io/v1
+        kind: StorageClass
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _storage_classes
+
+    - name: Write StorageClasses
+      ansible.builtin.copy:
+        content: |
+          {{ _storage_classes.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/storage/storage_classes.yml"
+      when: _storage_classes.resources | length > 0
+
+    - name: Pull VolumeSnapshotClasses
+      kubernetes.core.k8s_info:
+        api_version: snapshot.storage.k8s.io/v1
+        kind: VolumeSnapshotClass
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _snapshot_classes
+      ignore_errors: true
+
+    - name: Write VolumeSnapshotClasses
+      ansible.builtin.copy:
+        content: |
+          {{ _snapshot_classes.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/storage/volume_snapshot_classes.yml"
+      when:
+        - not _snapshot_classes.failed | default(false)
+        - _snapshot_classes.resources | length > 0
+
+    - name: Pull PersistentVolumes
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: PersistentVolume
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _pvs
+
+    - name: Write PersistentVolumes (user-bound only)
+      ansible.builtin.copy:
+        content: |
+          {{ _pvs.resources
+             | rejectattr('spec.claimRef.namespace', 'in', system_namespaces)
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/storage/persistent_volumes.yml"
+      when: _pvs.resources | length > 0
+
+    # ---------------------------------------------------------
+    # NETWORKING (cluster-scoped)
+    # ---------------------------------------------------------
+    - name: Pull IngressControllers
+      kubernetes.core.k8s_info:
+        api_version: operator.openshift.io/v1
+        kind: IngressController
+        namespace: openshift-ingress-operator
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _ingress_controllers
+
+    - name: Write IngressControllers
+      ansible.builtin.copy:
+        content: |
+          {{ _ingress_controllers.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/networking/ingress_controllers.yml"
+      when: _ingress_controllers.resources | length > 0
+
+    - name: Pull cluster-scoped Network Attachment Definitions
+      kubernetes.core.k8s_info:
+        api_version: k8s.cni.cncf.io/v1
+        kind: NetworkAttachmentDefinition
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _cluster_nads
+      ignore_errors: true
+
+    - name: Write cluster-scoped Network Attachment Definitions
+      ansible.builtin.copy:
+        content: |
+          {{ _cluster_nads.resources
+             | rejectattr('metadata.namespace', 'in', system_namespaces)
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/networking/network_attachment_definitions.yml"
+      when:
+        - not _cluster_nads.failed | default(false)
+        - _cluster_nads.resources | length > 0
+
+    # ---------------------------------------------------------
+    # NMSTATE OPERATOR
+    # NMState instance activates the operator; NNCPs define node
+    # network config (bonds, VLANs, bridges, static IPs, etc.)
+    # ---------------------------------------------------------
+    - name: Pull NMState instance
+      kubernetes.core.k8s_info:
+        api_version: nmstate.io/v1
+        kind: NMState
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _nmstate
+      ignore_errors: true
+
+    - name: Write NMState instance
+      ansible.builtin.copy:
+        content: |
+          {{ _nmstate.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/networking/nmstate.yml"
+      when:
+        - not _nmstate.failed | default(false)
+        - _nmstate.resources | length > 0
+
+    - name: Pull NodeNetworkConfigurationPolicies
+      kubernetes.core.k8s_info:
+        api_version: nmstate.io/v1
+        kind: NodeNetworkConfigurationPolicy
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _nncps
+      ignore_errors: true
+
+    - name: Write NodeNetworkConfigurationPolicies
+      ansible.builtin.copy:
+        content: |
+          {{ _nncps.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/networking/node_network_configuration_policies.yml"
+      when:
+        - not _nncps.failed | default(false)
+        - _nncps.resources | length > 0
+
+    # ---------------------------------------------------------
+    # IDENTITY & ACCESS (Users, Groups, htpasswd secret)
+    # ---------------------------------------------------------
+    - name: Pull OpenShift Users
+      kubernetes.core.k8s_info:
+        api_version: user.openshift.io/v1
+        kind: User
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _ocp_users
+
+    - name: Write OpenShift Users
+      ansible.builtin.copy:
+        content: |
+          {{ _ocp_users.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/rbac/users.yml"
+      when: _ocp_users.resources | length > 0
+
+    - name: Pull OpenShift Groups
+      kubernetes.core.k8s_info:
+        api_version: user.openshift.io/v1
+        kind: Group
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _ocp_groups
+
+    - name: Write OpenShift Groups
+      ansible.builtin.copy:
+        content: |
+          {{ _ocp_groups.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/rbac/groups.yml"
+      when: _ocp_groups.resources | length > 0
+
+    - name: Pull htpasswd secret from openshift-config
+      # The OAuth config (already exported) references this secret by name.
+      # The file contains bcrypt-hashed passwords — store the output securely.
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Secret
+        namespace: openshift-config
+        label_selectors:
+          - "app=htpasswd"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _htpasswd_secrets_labeled
+      ignore_errors: true
+
+    - name: Pull htpasswd secret by name if label selector found nothing
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Secret
+        namespace: openshift-config
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _all_oauth_secrets
+      when: _htpasswd_secrets_labeled.resources | default([]) | length == 0
+      ignore_errors: true
+
+    - name: Write htpasswd secret (contains bcrypt hashes — store output securely)
+      ansible.builtin.copy:
+        content: |
+          # htpasswd secret from openshift-config.
+          # Contains bcrypt-hashed passwords. Apply to openshift-config namespace on the new cluster
+          # before applying the OAuth config, using: oc apply -f this_file -n openshift-config
+          {{ (
+               _htpasswd_secrets_labeled.resources
+               if _htpasswd_secrets_labeled.resources | default([]) | length > 0
+               else _all_oauth_secrets.resources | default([])
+                    | selectattr('type', '==', 'Opaque')
+                    | rejectattr('metadata.name', 'match', '^(pull-secret|router-certs|etcd|kube-|openshift-|service-account-)')
+                    | list
+             )
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/rbac/htpasswd_secret.yml"
+        mode: '0600'
+      when: >
+        (_htpasswd_secrets_labeled.resources | default([]) | length > 0) or
+        (_all_oauth_secrets.resources | default([]) | length > 0)
+
+    # ---------------------------------------------------------
+    # RBAC (cluster-scoped, custom only)
+    # ---------------------------------------------------------
+    - name: Pull ClusterRoles
+      kubernetes.core.k8s_info:
+        api_version: rbac.authorization.k8s.io/v1
+        kind: ClusterRole
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _cluster_roles
+
+    - name: Write custom ClusterRoles (exclude system-managed)
+      ansible.builtin.copy:
+        content: |
+          {{ _cluster_roles.resources
+             | rejectattr('metadata.name', 'match', '^(system:|kubeadm|openshift|admin|edit|view|cluster-admin|aggregate-to-)')
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/rbac/cluster_roles.yml"
+      when: _cluster_roles.resources | length > 0
+
+    - name: Pull ClusterRoleBindings
+      kubernetes.core.k8s_info:
+        api_version: rbac.authorization.k8s.io/v1
+        kind: ClusterRoleBinding
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _cluster_role_bindings
+
+    - name: Write custom ClusterRoleBindings (keep user-assigned admin bindings)
+      ansible.builtin.copy:
+        content: |
+          {{ _cluster_role_bindings.resources
+             | rejectattr('metadata.name', 'match', '^(system:|kubeadm|openshift)')
+             | rejectattr('subjects', 'equalto', None)
+             | rejectattr('subjects', 'equalto', [])
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/rbac/cluster_role_bindings.yml"
+      when: _cluster_role_bindings.resources | length > 0
+
+    # ---------------------------------------------------------
+    # NAMESPACE DISCOVERY
+    # ---------------------------------------------------------
+    - name: Pull all Namespaces
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Namespace
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _all_namespaces
+
+    - name: Build user namespace list
+      ansible.builtin.set_fact:
+        user_namespaces: >-
+          {{
+            _all_namespaces.resources
+            | rejectattr('metadata.name', 'in', system_namespaces)
+            | rejectattr('metadata.name', 'match', '^(openshift|kube)-')
+            | map(attribute='metadata.name')
+            | list
+          }}
+
+    - name: Write Namespace definitions
+      ansible.builtin.copy:
+        content: |
+          {{ _all_namespaces.resources
+             | rejectattr('metadata.name', 'in', system_namespaces)
+             | rejectattr('metadata.name', 'match', '^(openshift|kube)-')
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/namespaces.yml"
+
+    - name: Pull OpenShift Projects
+      # Project is the OpenShift-native wrapper around Namespace. It carries the
+      # display name and description set at creation time and is what you apply
+      # to recreate projects via `oc apply` rather than `oc new-project`.
+      kubernetes.core.k8s_info:
+        api_version: project.openshift.io/v1
+        kind: Project
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _projects
+
+    - name: Write OpenShift Projects
+      ansible.builtin.copy:
+        content: |
+          {{ _projects.resources
+             | rejectattr('metadata.name', 'in', system_namespaces)
+             | rejectattr('metadata.name', 'match', '^(openshift|kube)-')
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/projects.yml"
+      when: _projects.resources | length > 0
+
+    - name: Display discovered user namespaces
+      ansible.builtin.debug:
+        msg: "Exporting {{ user_namespaces | length }} user namespace(s): {{ user_namespaces | join(', ') }}"
+
+    # ---------------------------------------------------------
+    # PER-NAMESPACE RESOURCE EXPORT
+    # ---------------------------------------------------------
+    - name: Create per-namespace export directories
+      ansible.builtin.file:
+        path: "{{ export_dir }}/namespaces/{{ item }}"
+        state: directory
+        mode: '0755'
+      loop: "{{ user_namespaces }}"
+
+    - name: Pull Deployments
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: Deployment
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _deployments
+      loop: "{{ user_namespaces }}"
+
+    - name: Write Deployments per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/deployments.yml"
+      loop: "{{ _deployments.results }}"
+      when: item.resources | length > 0
+
+    - name: Pull StatefulSets
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: StatefulSet
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _statefulsets
+      loop: "{{ user_namespaces }}"
+
+    - name: Write StatefulSets per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/statefulsets.yml"
+      loop: "{{ _statefulsets.results }}"
+      when: item.resources | length > 0
+
+    - name: Pull DaemonSets
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: DaemonSet
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _daemonsets
+      loop: "{{ user_namespaces }}"
+
+    - name: Write DaemonSets per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/daemonsets.yml"
+      loop: "{{ _daemonsets.results }}"
+      when: item.resources | length > 0
+
+    - name: Pull CronJobs
+      kubernetes.core.k8s_info:
+        api_version: batch/v1
+        kind: CronJob
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _cronjobs
+      loop: "{{ user_namespaces }}"
+
+    - name: Write CronJobs per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/cronjobs.yml"
+      loop: "{{ _cronjobs.results }}"
+      when: item.resources | length > 0
+
+    - name: Pull Services
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Service
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _services
+      loop: "{{ user_namespaces }}"
+
+    - name: Write Services per namespace (exclude kubernetes endpoint)
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | rejectattr('metadata.name', '==', 'kubernetes')
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/services.yml"
+      loop: "{{ _services.results }}"
+      when: item.resources | length > 0
+
+    - name: Pull Routes
+      kubernetes.core.k8s_info:
+        api_version: route.openshift.io/v1
+        kind: Route
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _routes
+      loop: "{{ user_namespaces }}"
+
+    - name: Write Routes per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/routes.yml"
+      loop: "{{ _routes.results }}"
+      when: item.resources | length > 0
+
+    - name: Pull ConfigMaps
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: ConfigMap
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _configmaps
+      loop: "{{ user_namespaces }}"
+
+    - name: Write ConfigMaps per namespace (exclude service-account token CMs)
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | rejectattr('metadata.name', 'match', '^(kube-root-ca|openshift-service-ca|istio-ca-root-cert)')
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/configmaps.yml"
+      loop: "{{ _configmaps.results }}"
+      when: item.resources | length > 0
+
+    - name: Pull NetworkPolicies
+      kubernetes.core.k8s_info:
+        api_version: networking.k8s.io/v1
+        kind: NetworkPolicy
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _network_policies
+      loop: "{{ user_namespaces }}"
+
+    - name: Write NetworkPolicies per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/network_policies.yml"
+      loop: "{{ _network_policies.results }}"
+      when: item.resources | length > 0
+
+    - name: Pull PersistentVolumeClaims
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: PersistentVolumeClaim
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _pvcs
+      loop: "{{ user_namespaces }}"
+
+    - name: Write PersistentVolumeClaims per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/pvcs.yml"
+      loop: "{{ _pvcs.results }}"
+      when: item.resources | length > 0
+
+    - name: Pull namespace-scoped Network Attachment Definitions
+      kubernetes.core.k8s_info:
+        api_version: k8s.cni.cncf.io/v1
+        kind: NetworkAttachmentDefinition
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _nads
+      loop: "{{ user_namespaces }}"
+      ignore_errors: true
+
+    - name: Write Network Attachment Definitions per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/network_attachment_definitions.yml"
+      loop: "{{ _nads.results }}"
+      when:
+        - not item.failed | default(false)
+        - item.resources | length > 0
+
+    - name: Pull VirtualMachines
+      kubernetes.core.k8s_info:
+        api_version: kubevirt.io/v1
+        kind: VirtualMachine
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _vms
+      loop: "{{ user_namespaces }}"
+      ignore_errors: true
+
+    - name: Write VirtualMachines per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/virtual_machines.yml"
+      loop: "{{ _vms.results }}"
+      when:
+        - not item.failed | default(false)
+        - item.resources | length > 0
+
+    - name: Pull DataVolumes (VM disk provisioning sources)
+      kubernetes.core.k8s_info:
+        api_version: cdi.kubevirt.io/v1beta1
+        kind: DataVolume
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _datavolumes
+      loop: "{{ user_namespaces }}"
+      ignore_errors: true
+
+    - name: Write DataVolumes per namespace
+      ansible.builtin.copy:
+        content: |
+          {{ item.resources
+             | map('dict2items') | map('rejectattr', 'key', '==', 'status') | map('items2dict') | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/data_volumes.yml"
+      loop: "{{ _datavolumes.results }}"
+      when:
+        - not item.failed | default(false)
+        - item.resources | length > 0
+
+    - name: Pull Secrets metadata (names and types only — no secret data exported)
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Secret
+        namespace: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _secrets
+      loop: "{{ user_namespaces }}"
+
+    - name: Write Secrets inventory (metadata + type only, data deliberately excluded)
+      ansible.builtin.copy:
+        content: |
+          # SECRET DATA IS NOT EXPORTED. Recreate manually or via Vault/External Secrets Operator.
+          # This file lists only the names and types of secrets that must exist.
+          {{ item.resources
+             | rejectattr('type', 'match', '^(kubernetes.io/service-account-token|kubernetes.io/dockercfg)')
+             | map(attribute='metadata')
+             | map('dict2items') | map('selectattr', 'key', 'in', ['name', 'namespace', 'labels', 'annotations']) | map('items2dict')
+             | zip(item.resources | rejectattr('type', 'match', '^(kubernetes.io/service-account-token|kubernetes.io/dockercfg)') | map(attribute='type') | list)
+             | map('list')
+             | list
+             | to_nice_yaml(indent=2) }}
+        dest: "{{ export_dir }}/namespaces/{{ item.item }}/secrets_inventory.yml"
+      loop: "{{ _secrets.results }}"
+      when: item.resources | length > 0
+
+  post_tasks:
+    - name: Display export summary
+      ansible.builtin.debug:
+        msg: |
+          SNO Configuration Export Complete
+          Export directory: {{ export_dir }}
+
+          Cluster-level:
+            - ClusterVersion, Infrastructure, Network, OAuth, APIServer, Ingress, etc.
+            - Image registry operator config (storage backend, managementState, routes)
+
+          Machine Config:
+            - MachineConfigs and MachineConfigPools
+
+          Operators (OLM):
+            - CatalogSources, OperatorGroups, Subscriptions, CSV inventory
+            - HyperConverged (OpenShift Virtualization config)
+            - LVMCluster (LVMS storage pool config)
+            - AnsibleAutomationPlatform / AutomationController / AutomationHub / EDA (AAP)
+
+          Storage:
+            - StorageClasses, PersistentVolumes, VolumeSnapshotClasses
+
+          Networking:
+            - IngressControllers, Network Attachment Definitions
+            - NMState instance, NodeNetworkConfigurationPolicies
+
+          Identity & Access:
+            - OpenShift Users and Groups
+            - htpasswd secret (bcrypt hashes — stored at mode 0600)
+            - OAuth config already captured under cluster-level
+
+          RBAC:
+            - Custom ClusterRoles and ClusterRoleBindings (including user admin bindings)
+
+          Per-namespace resources:
+            - Deployments, StatefulSets, DaemonSets, CronJobs
+            - Services, Routes, NetworkPolicies, PVCs
+            - ConfigMaps, Network Attachment Definitions
+            - VirtualMachines, DataVolumes
+            - Secrets inventory (names/types only — data NOT exported)
+
+          Projects/Namespaces exported ({{ user_namespaces | length }}):
+          {% for ns in user_namespaces %}
+            - {{ ns }}
+          {% endfor %}
+
+          NOTE: Secret data was NOT exported. Recreate secrets manually
+          or via an External Secrets Operator before running deploy.
+          VM disks (PVCs) contain data that cannot be exported — snapshots
+          or storage-level replication must be used to migrate disk contents.
