@@ -1,0 +1,72 @@
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: 'yes'
+      pv.kubernetes.io/bound-by-controller: 'yes'
+      volume.beta.kubernetes.io/storage-provisioner: topolvm.io
+      volume.kubernetes.io/storage-provisioner: topolvm.io
+    creationTimestamp: '2026-05-05T19:53:42Z'
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      application: costmanagement-metrics-operator
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:application: {}
+        f:spec:
+          f:accessModes: {}
+          f:resources:
+            f:requests:
+              .: {}
+              f:storage: {}
+          f:volumeMode: {}
+      manager: costmanagement-metrics-operator
+      operation: Update
+      time: '2026-05-05T19:53:42Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/bind-completed: {}
+            f:pv.kubernetes.io/bound-by-controller: {}
+            f:volume.beta.kubernetes.io/storage-provisioner: {}
+            f:volume.kubernetes.io/storage-provisioner: {}
+        f:spec:
+          f:volumeName: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: '2026-05-05T19:53:44Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-05-05T19:53:44Z'
+    name: costmanagement-metrics-operator-data
+    namespace: costmanagement-metrics-operator
+    resourceVersion: '34247164'
+    uid: 40c5eae3-f019-4e6b-bfef-d0c8b331d78e
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Filesystem
+    volumeName: pvc-40c5eae3-f019-4e6b-bfef-d0c8b331d78e

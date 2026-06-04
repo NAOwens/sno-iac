@@ -1,0 +1,542 @@
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"labels":{"app.kubernetes.io/component":"database","app.kubernetes.io/instance":"postgres-15-myaap","app.kubernetes.io/managed-by":"aap-gateway-operator","app.kubernetes.io/name":"postgres-15","app.kubernetes.io/part-of":"myaap"},"name":"myaap-postgres-15","namespace":"aap"},"spec":{"replicas":1,"selector":{"matchLabels":{"app.kubernetes.io/component":"database","app.kubernetes.io/instance":"postgres-15-myaap","app.kubernetes.io/managed-by":"aap-gateway-operator","app.kubernetes.io/name":"postgres-15"}},"serviceName":"myaap","template":{"metadata":{"annotations":{"checksum-secret-postgres_configuration_secret":"5df850d39461dca39acb860eeeaa1fba1f115d1b","configmap/sha":"78a1dd8c2a517f0d7cde0ee15d071a58e370fcf1"},"labels":{"app.kubernetes.io/component":"database","app.kubernetes.io/instance":"postgres-15-myaap","app.kubernetes.io/managed-by":"aap-gateway-operator","app.kubernetes.io/name":"postgres-15","app.kubernetes.io/part-of":"myaap"}},"spec":{"containers":[{"env":[{"name":"POSTGRESQL_ADMIN_PASSWORD","valueFrom":{"secretKeyRef":{"key":"postgres_admin_password","name":"myaap-gateway-postgres-configuration"}}},{"name":"POSTGRESQL_MAX_CONNECTIONS","value":"1024"},{"name":"POSTGRESQL_LOG_DESTINATION","value":"/dev/stderr"}],"image":"registry.redhat.io/rhel9/postgresql-15:1@sha256:5e225c1646251d2509b3a6e45fad23abfb11dd5c45d3224b59178f90deb38a70","imagePullPolicy":"IfNotPresent","livenessProbe":{"exec":{"command":["bash","-c","pg_isready
+        -p 5432 -d postgres"]},"initialDelaySeconds":45,"timeoutSeconds":2},"name":"postgres","ports":[{"containerPort":5432,"name":"postgres-15"}],"readinessProbe":{"exec":{"command":["bash","-c","pg_isready
+        -p 5432 -d postgres"]},"initialDelaySeconds":15,"timeoutSeconds":2},"resources":{"requests":{"cpu":"200m","memory":"512Mi"}},"volumeMounts":[{"mountPath":"/var/lib/pgsql/data","name":"postgres-15","subPath":"data"},{"mountPath":"/opt/app-root/src/postgresql-start","name":"postgresql-init"}]}],"priorityClassName":"","securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]}},"volumes":[{"configMap":{"name":"myaap-postgresql-init"},"name":"postgresql-init","resources":{"requests":{"cpu":"200m","memory":"512Mi"}}}]}},"updateStrategy":{"type":"RollingUpdate"},"volumeClaimTemplates":[{"metadata":{"name":"postgres-15"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"8Gi"}}}}]}}'
+    creationTimestamp: '2026-04-09T22:14:55Z'
+    generation: 1
+    labels:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: postgres-15-myaap
+      app.kubernetes.io/managed-by: aap-gateway-operator
+      app.kubernetes.io/name: postgres-15
+      app.kubernetes.io/part-of: myaap
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+        f:spec:
+          f:persistentVolumeClaimRetentionPolicy:
+            .: {}
+            f:whenDeleted: {}
+            f:whenScaled: {}
+          f:podManagementPolicy: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:serviceName: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:checksum-secret-postgres_configuration_secret: {}
+                f:configmap/sha: {}
+              f:labels:
+                .: {}
+                f:app.kubernetes.io/component: {}
+                f:app.kubernetes.io/instance: {}
+                f:app.kubernetes.io/managed-by: {}
+                f:app.kubernetes.io/name: {}
+                f:app.kubernetes.io/part-of: {}
+            f:spec:
+              f:containers:
+                k:{"name":"postgres"}:
+                  .: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"POSTGRESQL_ADMIN_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef: {}
+                    k:{"name":"POSTGRESQL_LOG_DESTINATION"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POSTGRESQL_MAX_CONNECTIONS"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:exec:
+                      .: {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":5432,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:exec:
+                      .: {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/opt/app-root/src/postgresql-start"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/lib/pgsql/data"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"postgresql-init"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+          f:updateStrategy:
+            f:type: {}
+          f:volumeClaimTemplates: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:14:55Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:availableReplicas: {}
+          f:collisionCount: {}
+          f:currentReplicas: {}
+          f:currentRevision: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updateRevision: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:24Z'
+    name: myaap-postgres-15
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '75984502'
+    uid: b14afae1-e0fb-4e04-9525-7cab3f78c856
+  spec:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    podManagementPolicy: OrderedReady
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app.kubernetes.io/component: database
+        app.kubernetes.io/instance: postgres-15-myaap
+        app.kubernetes.io/managed-by: aap-gateway-operator
+        app.kubernetes.io/name: postgres-15
+    serviceName: myaap
+    template:
+      metadata:
+        annotations:
+          checksum-secret-postgres_configuration_secret: 5df850d39461dca39acb860eeeaa1fba1f115d1b
+          configmap/sha: 78a1dd8c2a517f0d7cde0ee15d071a58e370fcf1
+        labels:
+          app.kubernetes.io/component: database
+          app.kubernetes.io/instance: postgres-15-myaap
+          app.kubernetes.io/managed-by: aap-gateway-operator
+          app.kubernetes.io/name: postgres-15
+          app.kubernetes.io/part-of: myaap
+      spec:
+        containers:
+        - env:
+          - name: POSTGRESQL_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: postgres_admin_password
+                name: myaap-gateway-postgres-configuration
+          - name: POSTGRESQL_MAX_CONNECTIONS
+            value: '1024'
+          - name: POSTGRESQL_LOG_DESTINATION
+            value: /dev/stderr
+          image: registry.redhat.io/rhel9/postgresql-15:1@sha256:5e225c1646251d2509b3a6e45fad23abfb11dd5c45d3224b59178f90deb38a70
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+              - bash
+              - -c
+              - pg_isready -p 5432 -d postgres
+            failureThreshold: 3
+            initialDelaySeconds: 45
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
+          name: postgres
+          ports:
+          - containerPort: 5432
+            name: postgres-15
+            protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+              - bash
+              - -c
+              - pg_isready -p 5432 -d postgres
+            failureThreshold: 3
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/pgsql/data
+            name: postgres-15
+            subPath: data
+          - mountPath: /opt/app-root/src/postgresql-start
+            name: postgresql-init
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: myaap-postgresql-init
+          name: postgresql-init
+    updateStrategy:
+      type: RollingUpdate
+    volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: postgres-15
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 8Gi
+        volumeMode: Filesystem
+      status:
+        phase: Pending
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"labels":{"app.kubernetes.io/component":"cache","app.kubernetes.io/instance":"redis-myaap","app.kubernetes.io/managed-by":"aap-gateway-operator","app.kubernetes.io/name":"redis","app.kubernetes.io/part-of":"myaap"},"name":"myaap-redis","namespace":"aap"},"spec":{"replicas":1,"selector":{"matchLabels":{"app.kubernetes.io/component":"cache","app.kubernetes.io/instance":"redis-myaap","app.kubernetes.io/managed-by":"aap-operator","app.kubernetes.io/name":"redis","app.kubernetes.io/part-of":"aap"}},"serviceName":"myaap-redis-svc","template":{"metadata":{"annotations":{"configmap/sha":"6b431889c64565fd1b3eeca95640ddf6ede4f859"},"labels":{"app.kubernetes.io/component":"cache","app.kubernetes.io/instance":"redis-myaap","app.kubernetes.io/managed-by":"aap-operator","app.kubernetes.io/name":"redis","app.kubernetes.io/part-of":"aap"}},"spec":{"containers":[{"args":["run-redis","--aclfile","/etc/redis/users.acl"],"env":[{"name":"REDIS_PASSWORD","valueFrom":{"secretKeyRef":{"key":"redis_admin_password","name":"myaap-gateway-redis-configuration"}}}],"image":"registry.redhat.io/rhel9/redis-6:1@sha256:7b3311563330085e24ff23d0da5540858241284d802393d4988b51254d17931e","imagePullPolicy":"IfNotPresent","livenessProbe":{"enabled":true,"exec":{"command":["/bin/sh","-i","-c","redis-cli
+        -h 127.0.0.1 -p 6379"]},"failureThreshold":5,"initialDelaySeconds":5,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":5},"name":"redis","ports":[{"containerPort":6379,"protocol":"TCP"}],"readinessProbe":{"enabled":true,"exec":{"command":["/bin/sh","-i","-c","redis-cli
+        -h 127.0.0.1 -p 6379"]},"failureThreshold":5,"initialDelaySeconds":5,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":5},"resources":{"requests":{"cpu":"50m","memory":"100Mi"}},"volumeMounts":[{"mountPath":"/var/lib/redis/data","name":"myaap-redis-data","readOnly":false},{"mountPath":"/etc/redis/users.acl","name":"myaap-redis-users-acl","subPath":"users.acl"}]}],"volumes":[{"emptyDir":{},"name":"myaap-redis-data"},{"name":"myaap-redis-users-acl","secret":{"items":[{"key":"users.acl","path":"users.acl"}],"secretName":"myaap-redis-users-acl"}}]}}}}'
+    creationTimestamp: '2026-04-09T22:14:48Z'
+    generation: 2
+    labels:
+      app.kubernetes.io/component: cache
+      app.kubernetes.io/instance: redis-myaap
+      app.kubernetes.io/managed-by: aap-gateway-operator
+      app.kubernetes.io/name: redis
+      app.kubernetes.io/part-of: myaap
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+        f:spec:
+          f:persistentVolumeClaimRetentionPolicy:
+            .: {}
+            f:whenDeleted: {}
+            f:whenScaled: {}
+          f:podManagementPolicy: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:serviceName: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:configmap/sha: {}
+              f:labels:
+                .: {}
+                f:app.kubernetes.io/component: {}
+                f:app.kubernetes.io/instance: {}
+                f:app.kubernetes.io/managed-by: {}
+                f:app.kubernetes.io/name: {}
+                f:app.kubernetes.io/part-of: {}
+            f:spec:
+              f:containers:
+                k:{"name":"redis"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"REDIS_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:exec:
+                      .: {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":6379,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:exec:
+                      .: {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/etc/redis/users.acl"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/var/lib/redis/data"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"myaap-redis-data"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"myaap-redis-users-acl"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:items: {}
+                    f:secretName: {}
+          f:updateStrategy:
+            f:rollingUpdate:
+              .: {}
+              f:partition: {}
+            f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-05-04T19:38:02Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:availableReplicas: {}
+          f:collisionCount: {}
+          f:currentReplicas: {}
+          f:currentRevision: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updateRevision: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:38Z'
+    name: myaap-redis
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '75981730'
+    uid: 604a94da-4559-433c-b7ca-4f721be3f284
+  spec:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    podManagementPolicy: OrderedReady
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app.kubernetes.io/component: cache
+        app.kubernetes.io/instance: redis-myaap
+        app.kubernetes.io/managed-by: aap-operator
+        app.kubernetes.io/name: redis
+        app.kubernetes.io/part-of: aap
+    serviceName: myaap-redis-svc
+    template:
+      metadata:
+        annotations:
+          configmap/sha: 6b431889c64565fd1b3eeca95640ddf6ede4f859
+        labels:
+          app.kubernetes.io/component: cache
+          app.kubernetes.io/instance: redis-myaap
+          app.kubernetes.io/managed-by: aap-operator
+          app.kubernetes.io/name: redis
+          app.kubernetes.io/part-of: aap
+      spec:
+        containers:
+        - args:
+          - run-redis
+          - --aclfile
+          - /etc/redis/users.acl
+          env:
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: redis_admin_password
+                name: myaap-gateway-redis-configuration
+          image: registry.redhat.io/rhel9/redis-6:1@sha256:7b3311563330085e24ff23d0da5540858241284d802393d4988b51254d17931e
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+              - /bin/sh
+              - -i
+              - -c
+              - redis-cli -h 127.0.0.1 -p 6379
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: redis
+          ports:
+          - containerPort: 6379
+            protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+              - /bin/sh
+              - -i
+              - -c
+              - redis-cli -h 127.0.0.1 -p 6379
+            failureThreshold: 5
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/redis/data
+            name: myaap-redis-data
+          - mountPath: /etc/redis/users.acl
+            name: myaap-redis-users-acl
+            subPath: users.acl
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: myaap-redis-data
+        - name: myaap-redis-users-acl
+          secret:
+            defaultMode: 420
+            items:
+            - key: users.acl
+              path: users.acl
+            secretName: myaap-redis-users-acl
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate

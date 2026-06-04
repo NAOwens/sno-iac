@@ -1,0 +1,289 @@
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      cdi.kubevirt.io/createdForDataVolume: 174bfac3-5875-44c1-a6d5-f87f77f91199
+      cdi.kubevirt.io/storage.condition.running: 'false'
+      cdi.kubevirt.io/storage.condition.running.message: ''
+      cdi.kubevirt.io/storage.condition.running.reason: Completed
+      cdi.kubevirt.io/storage.contentType: kubevirt
+      cdi.kubevirt.io/storage.pod.phase: Succeeded
+      cdi.kubevirt.io/storage.pod.restarts: '0'
+      cdi.kubevirt.io/storage.pod.schedulable: 'true'
+      cdi.kubevirt.io/storage.populator.progress: 100.0%
+      cdi.kubevirt.io/storage.populator.pvcPrime: prime-0beee35b-1ac1-4a26-9a16-c9a286dc4ef4
+      cdi.kubevirt.io/storage.preallocation.requested: 'false'
+      cdi.kubevirt.io/storage.usePopulator: 'true'
+      pv.kubernetes.io/bind-completed: 'yes'
+      pv.kubernetes.io/bound-by-controller: 'yes'
+      volume.beta.kubernetes.io/storage-provisioner: topolvm.io
+      volume.kubernetes.io/storage-provisioner: topolvm.io
+    creationTimestamp: '2026-04-10T18:42:31Z'
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app: containerized-data-importer
+      app.kubernetes.io/component: storage
+      app.kubernetes.io/managed-by: cdi-controller
+      app.kubernetes.io/part-of: hyperconverged-cluster
+      app.kubernetes.io/version: 4.21.1
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:pv.kubernetes.io/bind-completed: {}
+            f:pv.kubernetes.io/bound-by-controller: {}
+            f:volume.beta.kubernetes.io/storage-provisioner: {}
+            f:volume.kubernetes.io/storage-provisioner: {}
+        f:spec:
+          f:volumeName: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: '2026-04-10T18:42:35Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:accessModes: {}
+          f:capacity: {}
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-10T18:42:35Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:cdi.kubevirt.io/createdForDataVolume: {}
+            f:cdi.kubevirt.io/storage.condition.running: {}
+            f:cdi.kubevirt.io/storage.condition.running.message: {}
+            f:cdi.kubevirt.io/storage.condition.running.reason: {}
+            f:cdi.kubevirt.io/storage.contentType: {}
+            f:cdi.kubevirt.io/storage.pod.phase: {}
+            f:cdi.kubevirt.io/storage.pod.restarts: {}
+            f:cdi.kubevirt.io/storage.pod.schedulable: {}
+            f:cdi.kubevirt.io/storage.populator.progress: {}
+            f:cdi.kubevirt.io/storage.populator.pvcPrime: {}
+            f:cdi.kubevirt.io/storage.preallocation.requested: {}
+            f:cdi.kubevirt.io/storage.usePopulator: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/part-of: {}
+            f:app.kubernetes.io/version: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"174bfac3-5875-44c1-a6d5-f87f77f91199"}: {}
+        f:spec:
+          f:accessModes: {}
+          f:dataSourceRef:
+            .: {}
+            f:apiGroup: {}
+            f:kind: {}
+            f:name: {}
+          f:resources:
+            f:requests: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-10T18:42:35Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:resources:
+            f:requests:
+              f:storage: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-10T20:00:07Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:allocatedResources:
+            .: {}
+            f:storage: {}
+          f:capacity:
+            f:storage: {}
+      manager: lvms
+      operation: Update
+      subresource: status
+      time: '2026-04-10T20:00:08Z'
+    name: dv-rhel-8-ocpv-disk-for-nfsocprwx-86-czatib
+    namespace: default
+    ownerReferences:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DataVolume
+      name: dv-rhel-8-ocpv-disk-for-nfsocprwx-86-czatib
+      uid: 174bfac3-5875-44c1-a6d5-f87f77f91199
+    resourceVersion: '2917917'
+    uid: 0beee35b-1ac1-4a26-9a16-c9a286dc4ef4
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    dataSource:
+      apiGroup: cdi.kubevirt.io
+      kind: VolumeImportSource
+      name: volume-import-source-174bfac3-5875-44c1-a6d5-f87f77f91199
+    dataSourceRef:
+      apiGroup: cdi.kubevirt.io
+      kind: VolumeImportSource
+      name: volume-import-source-174bfac3-5875-44c1-a6d5-f87f77f91199
+    resources:
+      requests:
+        storage: 200Gi
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+    volumeName: pvc-252392e6-76e3-47c1-8386-fd5c8d08c1c9
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      cdi.kubevirt.io/allowClaimAdoption: 'true'
+      cdi.kubevirt.io/clonePhase: Succeeded
+      cdi.kubevirt.io/cloneType: copy
+      cdi.kubevirt.io/createdForDataVolume: 75afdb09-11b6-4df4-a964-e274e439e8d0
+      cdi.kubevirt.io/dataSourceNamespace: openshift-virtualization-os-images
+      cdi.kubevirt.io/storage.clone.token: eyJhbGciOiJQUzI1NiJ9.eyJleHAiOjE3NzU1OTQ2NTEsImlhdCI6MTc3NTU5NDM1MSwiaXNzIjoiY2RpLWFwaXNlcnZlciIsIm5hbWUiOiJyaGVsOC0wMDRlMjRjZmFjZWMiLCJuYW1lc3BhY2UiOiJvcGVuc2hpZnQtdmlydHVhbGl6YXRpb24tb3MtaW1hZ2VzIiwibmJmIjoxNzc1NTk0MzUxLCJvcGVyYXRpb24iOiJDbG9uZSIsInBhcmFtcyI6eyJ0YXJnZXROYW1lIjoicmhlbC04LW9jcHYtdm9sdW1lIiwidGFyZ2V0TmFtZXNwYWNlIjoiZGVmYXVsdCJ9LCJyZXNvdXJjZSI6eyJncm91cCI6IiIsInJlc291cmNlIjoicGVyc2lzdGVudHZvbHVtZWNsYWltcyIsInZlcnNpb24iOiJ2MSJ9fQ.OLn6nwKLYMlN5kqTUIXJSEU7lnLQLfoANJFQ21mq7wXaLKbIeyTKXWgTcFfMCevGxdmh4UEQnO00YXQNWXpV4qQO8J8rJxwSF3dv37xMhZABqd6G3SeiY5F6R5eO8N0vYXjH79R95ImIGulEOzJ0t0kzqDj0Vw_GxWO9AfpD41aasaXIyh4vtJ0OSZ41u2m5f0Q4VZpBBEBAburFuHNHQnJohVuWLGXZwhb6uYMwWd39khFrf7VQiMJgv4cRw0CoWwO2ovWe86ckYEbqUkji4AWgPQmRXx4OHTehpFw3c07n-jzAwmpVlq3PqBGVvaaOC65EDn4u2duDQ4OABDxEiw
+      cdi.kubevirt.io/storage.condition.running: 'false'
+      cdi.kubevirt.io/storage.condition.running.message: Clone Complete
+      cdi.kubevirt.io/storage.condition.running.reason: Completed
+      cdi.kubevirt.io/storage.contentType: kubevirt
+      cdi.kubevirt.io/storage.extended.clone.token: eyJhbGciOiJQUzI1NiJ9.eyJleHAiOjIwOTA5NTQzNTEsImlhdCI6MTc3NTU5NDM1MSwiaXNzIjoiY2RpLWRlcGxveW1lbnQiLCJuYW1lIjoicmhlbDgtMDA0ZTI0Y2ZhY2VjIiwibmFtZXNwYWNlIjoib3BlbnNoaWZ0LXZpcnR1YWxpemF0aW9uLW9zLWltYWdlcyIsIm5iZiI6MTc3NTU5NDM1MSwib3BlcmF0aW9uIjoiQ2xvbmUiLCJwYXJhbXMiOnsidGFyZ2V0TmFtZSI6InJoZWwtOC1vY3B2LXZvbHVtZSIsInRhcmdldE5hbWVzcGFjZSI6ImRlZmF1bHQiLCJ1aWQiOiI5MDE1ZDU4Yy05YjVhLTQ0ZmMtODNiZS1mYTc2YzBlZmVmYWEifSwicmVzb3VyY2UiOnsiZ3JvdXAiOiIiLCJyZXNvdXJjZSI6InBlcnNpc3RlbnR2b2x1bWVjbGFpbXMiLCJ2ZXJzaW9uIjoidjEifX0.Wx2YnWAb93kHvDSlnGxWeAiYLbtUy4CBoHDs-PmUWiaQJuZ1BAK6Oz7DlpXi-AM4j9kBRmu9xOGu6WcgHJyfnHEJoLaeazxE5rkQtM0D9yPqzdpXL7QTRJuIVM9fRXJ-MSbztnpNcmQVNVae65_tovP7TDM0U58GTYbCbxnIxM8BitlRadeVyNTzxMKsduskAjf20NOGbTyee6l2f9AoOAGh3iVfrBiWLA5dxpqjgZk4DILW0DzMr9s2pgm_7ROelgS2-HUI7t9bP57UGNDzXKA0gEu01RkWYDlGVR42sGLE1oX35b_Yyob4FVchkUF5U1zV-0vNc1SjST-unknc6A
+      cdi.kubevirt.io/storage.pod.restarts: '0'
+      cdi.kubevirt.io/storage.populator.progress: 100.0%
+      cdi.kubevirt.io/storage.preallocation.requested: 'false'
+      cdi.kubevirt.io/storage.usePopulator: 'true'
+      pv.kubernetes.io/bind-completed: 'yes'
+      pv.kubernetes.io/bound-by-controller: 'yes'
+      volume.beta.kubernetes.io/storage-provisioner: topolvm.io
+      volume.kubernetes.io/storage-provisioner: topolvm.io
+    creationTimestamp: '2026-04-07T20:39:11Z'
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app: containerized-data-importer
+      app.kubernetes.io/component: storage
+      app.kubernetes.io/managed-by: cdi-controller
+      app.kubernetes.io/part-of: hyperconverged-cluster
+      app.kubernetes.io/version: 4.21.1
+      instancetype.kubevirt.io/default-instancetype: u1.medium
+      instancetype.kubevirt.io/default-preference: rhel.8
+      kubevirt.io/created-by: dba2a93b-5daa-4e0c-8ca0-dc00a15b7b5a
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:pv.kubernetes.io/bind-completed: {}
+            f:pv.kubernetes.io/bound-by-controller: {}
+            f:volume.beta.kubernetes.io/storage-provisioner: {}
+            f:volume.kubernetes.io/storage-provisioner: {}
+        f:spec:
+          f:volumeName: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: '2026-04-07T20:40:14Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-07T20:40:14Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:cdi.kubevirt.io/allowClaimAdoption: {}
+            f:cdi.kubevirt.io/clonePhase: {}
+            f:cdi.kubevirt.io/cloneType: {}
+            f:cdi.kubevirt.io/createdForDataVolume: {}
+            f:cdi.kubevirt.io/dataSourceNamespace: {}
+            f:cdi.kubevirt.io/storage.clone.token: {}
+            f:cdi.kubevirt.io/storage.condition.running: {}
+            f:cdi.kubevirt.io/storage.condition.running.message: {}
+            f:cdi.kubevirt.io/storage.condition.running.reason: {}
+            f:cdi.kubevirt.io/storage.contentType: {}
+            f:cdi.kubevirt.io/storage.extended.clone.token: {}
+            f:cdi.kubevirt.io/storage.pod.restarts: {}
+            f:cdi.kubevirt.io/storage.populator.progress: {}
+            f:cdi.kubevirt.io/storage.preallocation.requested: {}
+            f:cdi.kubevirt.io/storage.usePopulator: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/part-of: {}
+            f:app.kubernetes.io/version: {}
+            f:instancetype.kubevirt.io/default-instancetype: {}
+            f:instancetype.kubevirt.io/default-preference: {}
+            f:kubevirt.io/created-by: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"75afdb09-11b6-4df4-a964-e274e439e8d0"}: {}
+        f:spec:
+          f:accessModes: {}
+          f:dataSourceRef:
+            .: {}
+            f:apiGroup: {}
+            f:kind: {}
+            f:name: {}
+          f:resources:
+            f:requests:
+              .: {}
+              f:storage: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-07T20:40:14Z'
+    name: rhel-8-ocpv-volume
+    namespace: default
+    ownerReferences:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DataVolume
+      name: rhel-8-ocpv-volume
+      uid: 75afdb09-11b6-4df4-a964-e274e439e8d0
+    resourceVersion: '73650'
+    uid: 9015d58c-9b5a-44fc-83be-fa76c0efefaa
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    dataSource:
+      apiGroup: cdi.kubevirt.io
+      kind: VolumeCloneSource
+      name: volume-clone-source-75afdb09-11b6-4df4-a964-e274e439e8d0
+    dataSourceRef:
+      apiGroup: cdi.kubevirt.io
+      kind: VolumeCloneSource
+      name: volume-clone-source-75afdb09-11b6-4df4-a964-e274e439e8d0
+    resources:
+      requests:
+        storage: '32212254720'
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+    volumeName: pvc-b883f753-8d05-40d8-9cba-1ca024afdb6a

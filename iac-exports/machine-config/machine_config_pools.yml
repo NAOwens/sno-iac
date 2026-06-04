@@ -1,0 +1,209 @@
+- apiVersion: machineconfiguration.openshift.io/v1
+  kind: MachineConfigPool
+  metadata:
+    creationTimestamp: '2026-04-07T16:25:55Z'
+    generation: 5
+    labels:
+      machineconfiguration.openshift.io/mco-built-in: ''
+      operator.machineconfiguration.openshift.io/required-for-upgrade: ''
+      pools.operator.machineconfiguration.openshift.io/master: ''
+    managedFields:
+    - apiVersion: machineconfiguration.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:machineconfiguration.openshift.io/mco-built-in: {}
+            f:operator.machineconfiguration.openshift.io/required-for-upgrade: {}
+            f:pools.operator.machineconfiguration.openshift.io/master: {}
+        f:spec:
+          .: {}
+          f:machineConfigSelector: {}
+          f:nodeSelector: {}
+          f:paused: {}
+      manager: machine-config-operator
+      operation: Update
+      time: '2026-04-07T16:25:55Z'
+    - apiVersion: machineconfiguration.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:configuration: {}
+      manager: machine-config-controller
+      operation: Update
+      time: '2026-06-02T16:12:43Z'
+    - apiVersion: machineconfiguration.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:certExpirys: {}
+          f:conditions: {}
+          f:configuration: {}
+          f:degradedMachineCount: {}
+          f:machineCount: {}
+          f:observedGeneration: {}
+          f:poolSynchronizersStatus:
+            .: {}
+            k:{"poolSynchronizerType":"PinnedImageSets"}:
+              .: {}
+              f:availableMachineCount: {}
+              f:machineCount: {}
+              f:poolSynchronizerType: {}
+              f:readyMachineCount: {}
+              f:unavailableMachineCount: {}
+              f:updatedMachineCount: {}
+          f:readyMachineCount: {}
+          f:unavailableMachineCount: {}
+          f:updatedMachineCount: {}
+      manager: machine-config-controller
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:31:52Z'
+    name: master
+    resourceVersion: '75987644'
+    uid: d5bccdf7-12c3-44b5-ada7-6891ed7a0ab8
+  spec:
+    configuration:
+      name: rendered-master-ad6f2270ffab35f7906fec0950ce0eca
+      source:
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 00-master
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 01-master-container-runtime
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 01-master-kubelet
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 50-master-dnsmasq-configuration
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 50-masters-chrony-configuration
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 50-masters-iscsi-nic-reapply
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 97-master-generated-kubelet
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 98-master-generated-kubelet
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 99-master-generated-registries
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 99-master-ssh
+    machineConfigSelector:
+      matchLabels:
+        machineconfiguration.openshift.io/role: master
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/master: ''
+    paused: false
+- apiVersion: machineconfiguration.openshift.io/v1
+  kind: MachineConfigPool
+  metadata:
+    creationTimestamp: '2026-04-07T16:25:55Z'
+    generation: 5
+    labels:
+      machineconfiguration.openshift.io/mco-built-in: ''
+      pools.operator.machineconfiguration.openshift.io/worker: ''
+    managedFields:
+    - apiVersion: machineconfiguration.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:machineconfiguration.openshift.io/mco-built-in: {}
+            f:pools.operator.machineconfiguration.openshift.io/worker: {}
+        f:spec:
+          .: {}
+          f:machineConfigSelector: {}
+          f:nodeSelector: {}
+          f:paused: {}
+      manager: machine-config-operator
+      operation: Update
+      time: '2026-04-07T16:25:55Z'
+    - apiVersion: machineconfiguration.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:configuration: {}
+      manager: machine-config-controller
+      operation: Update
+      time: '2026-06-02T16:12:43Z'
+    - apiVersion: machineconfiguration.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:certExpirys: {}
+          f:conditions: {}
+          f:configuration: {}
+          f:degradedMachineCount: {}
+          f:machineCount: {}
+          f:observedGeneration: {}
+          f:poolSynchronizersStatus:
+            .: {}
+            k:{"poolSynchronizerType":"PinnedImageSets"}:
+              .: {}
+              f:availableMachineCount: {}
+              f:machineCount: {}
+              f:poolSynchronizerType: {}
+              f:readyMachineCount: {}
+              f:unavailableMachineCount: {}
+              f:updatedMachineCount: {}
+          f:readyMachineCount: {}
+          f:unavailableMachineCount: {}
+          f:updatedMachineCount: {}
+      manager: machine-config-controller
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:12:48Z'
+    name: worker
+    resourceVersion: '75975033'
+    uid: ce95ffd0-5487-4743-afa1-55756dfe2761
+  spec:
+    configuration:
+      name: rendered-worker-c8c35731d20b6b58db2c3f1594150d0b
+      source:
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 00-worker
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 01-worker-container-runtime
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 01-worker-kubelet
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 50-workers-chrony-configuration
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 50-workers-iscsi-nic-reapply
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 97-worker-generated-kubelet
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 98-worker-generated-kubelet
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 99-worker-generated-registries
+      - apiVersion: machineconfiguration.openshift.io/v1
+        kind: MachineConfig
+        name: 99-worker-ssh
+    machineConfigSelector:
+      matchLabels:
+        machineconfiguration.openshift.io/role: worker
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/worker: ''
+    paused: false

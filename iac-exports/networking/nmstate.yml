@@ -1,0 +1,42 @@
+- apiVersion: nmstate.io/v1
+  kind: NMState
+  metadata:
+    creationTimestamp: '2026-04-08T03:02:45Z'
+    generation: 1
+    managedFields:
+    - apiVersion: nmstate.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions: {}
+      manager: nmstate-operator
+      operation: Apply
+      subresource: status
+      time: '2026-06-03T22:02:49Z'
+    - apiVersion: nmstate.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:logLevel: {}
+          f:metricsConfiguration:
+            .: {}
+            f:bindAddress: {}
+          f:probeConfiguration:
+            .: {}
+            f:dns:
+              .: {}
+              f:host: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-08T03:02:45Z'
+    name: nmstate
+    resourceVersion: '77831055'
+    uid: d9181bda-6016-42fa-acd8-79404a0c361f
+  spec:
+    logLevel: info
+    metricsConfiguration:
+      bindAddress: :8089
+    probeConfiguration:
+      dns:
+        host: root-servers.net

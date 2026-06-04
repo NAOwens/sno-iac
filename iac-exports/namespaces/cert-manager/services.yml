@@ -1,0 +1,208 @@
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: 8e2d92a3f2803d983269a80d04a39e809f3ab5ad61528560b621bce38b350a06
+    creationTimestamp: '2026-04-17T22:18:25Z'
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.19.4
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/version: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":9402,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: cert-manager-operator
+      operation: Update
+      time: '2026-04-20T16:49:04Z'
+    name: cert-manager
+    namespace: cert-manager
+    resourceVersion: '14714582'
+    uid: 4fa348cc-c92d-4832-8ed2-543afda03191
+  spec:
+    clusterIP: 172.30.143.88
+    clusterIPs:
+    - 172.30.143.88
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-prometheus-servicemonitor
+      port: 9402
+      protocol: TCP
+      targetPort: http-metrics
+    selector:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: cert-manager
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: 18a33ab94be9b68ad667c7f1216b32de8c7fb508dd8a4c209caf0641c50fd8a8
+    creationTimestamp: '2026-04-17T22:18:18Z'
+    labels:
+      app: cainjector
+      app.kubernetes.io/component: cainjector
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: cainjector
+      app.kubernetes.io/version: v1.19.4
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/version: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":9402,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: cert-manager-operator
+      operation: Update
+      time: '2026-04-20T16:48:55Z'
+    name: cert-manager-cainjector
+    namespace: cert-manager
+    resourceVersion: '14714380'
+    uid: a6ea41b4-549d-40ff-9417-111c99fe6c4c
+  spec:
+    clusterIP: 172.30.160.61
+    clusterIPs:
+    - 172.30.160.61
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http-metrics
+      port: 9402
+      protocol: TCP
+      targetPort: 9402
+    selector:
+      app.kubernetes.io/component: cainjector
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: cainjector
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: 06ef969bd093d127ac676981e1df9e252c1352b28fb8ce959efece993b37e740
+    creationTimestamp: '2026-04-17T22:18:18Z'
+    labels:
+      app: webhook
+      app.kubernetes.io/component: webhook
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: webhook
+      app.kubernetes.io/version: v1.19.4
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/version: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":9402,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: cert-manager-operator
+      operation: Update
+      time: '2026-04-20T16:48:56Z'
+    name: cert-manager-webhook
+    namespace: cert-manager
+    resourceVersion: '14714392'
+    uid: fe884447-3580-42b2-b57e-9d072a928383
+  spec:
+    clusterIP: 172.30.172.123
+    clusterIPs:
+    - 172.30.172.123
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: https
+    - name: metrics
+      port: 9402
+      protocol: TCP
+      targetPort: http-metrics
+    selector:
+      app.kubernetes.io/component: webhook
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: webhook
+    sessionAffinity: None
+    type: ClusterIP

@@ -1,0 +1,1328 @@
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c31,c15
+      openshift.io/sa.scc.supplemental-groups: 1000960000/10000
+      openshift.io/sa.scc.uid-range: 1000960000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-09T21:56:38Z'
+    labels:
+      kubernetes.io/metadata.name: aap
+      olm.operatorgroup.uid/aca6c566-a054-45ba-9be8-f406687418e9: ''
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T21:56:38Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T21:56:38Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-09T21:56:38Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:olm.operatorgroup.uid/aca6c566-a054-45ba-9be8-f406687418e9: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T21:56:38Z'
+    name: aap
+    resourceVersion: '1603493'
+    uid: df7e1935-d224-4d37-99a6-b57529f87e78
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c11,c5
+      openshift.io/sa.scc.supplemental-groups: 1000120000/10000
+      openshift.io/sa.scc.uid-range: 1000120000/10000
+    creationTimestamp: '2026-04-07T16:02:30Z'
+    labels:
+      kubernetes.io/metadata.name: assisted-installer
+      pod-security.kubernetes.io/audit: privileged
+      pod-security.kubernetes.io/enforce: privileged
+      pod-security.kubernetes.io/warn: privileged
+      security.openshift.io/scc.podSecurityLabelSync: 'false'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-07T16:02:31Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/enforce: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:security.openshift.io/scc.podSecurityLabelSync: {}
+      manager: cluster-bootstrap
+      operation: Update
+      time: '2026-04-07T16:02:30Z'
+    name: assisted-installer
+    resourceVersion: '523'
+    uid: d59a26fd-908b-4a82-af6b-c8015ecfd6e6
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/description: ''
+      openshift.io/display-name: ''
+      openshift.io/requester: norm
+      openshift.io/sa.scc.mcs: s0:c30,c25
+      openshift.io/sa.scc.supplemental-groups: 1000920000/10000
+      openshift.io/sa.scc.uid-range: 1000920000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-09T15:51:08Z'
+    labels:
+      kubernetes.io/metadata.name: awstest
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T15:51:08Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T15:51:08Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:openshift.io/description: {}
+            f:openshift.io/display-name: {}
+            f:openshift.io/requester: {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: openshift-apiserver
+      operation: Update
+      time: '2026-04-09T15:51:08Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:finalizers: {}
+      manager: openshift-controller-manager
+      operation: Update
+      subresource: finalize
+      time: '2026-04-09T15:51:08Z'
+    name: awstest
+    resourceVersion: '1307014'
+    uid: 49d85928-bc23-44b6-bc5e-42811d305507
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/cluster-monitoring: 'true'
+      openshift.io/sa.scc.mcs: s0:c32,c24
+      openshift.io/sa.scc.supplemental-groups: 1001040000/10000
+      openshift.io/sa.scc.uid-range: 1001040000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-17T22:18:14Z'
+    labels:
+      kubernetes.io/metadata.name: cert-manager
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-17T22:18:14Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-17T22:18:14Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:openshift.io/cluster-monitoring: {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: cert-manager-operator
+      operation: Update
+      time: '2026-04-17T22:18:14Z'
+    name: cert-manager
+    resourceVersion: '11620175'
+    uid: 9066b4f8-61d1-4cc8-89b5-0f063dbcd037
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c32,c19
+      openshift.io/sa.scc.supplemental-groups: 1001030000/10000
+      openshift.io/sa.scc.uid-range: 1001030000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-17T22:17:50Z'
+    labels:
+      kubernetes.io/metadata.name: cert-manager-operator
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-17T22:17:50Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-17T22:17:50Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-17T22:17:50Z'
+    name: cert-manager-operator
+    resourceVersion: '11619071'
+    uid: bcf2cea1-ef15-4cdf-b287-74bf4b9441af
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c31,c0
+      openshift.io/sa.scc.supplemental-groups: 1000930000/10000
+      openshift.io/sa.scc.uid-range: 1000930000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-05-05T19:52:11Z'
+    labels:
+      kubernetes.io/metadata.name: costmanagement-metrics-operator
+      olm.operatorgroup.uid/d11adc9f-bb33-4a38-968d-7edc3fd5ed44: ''
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-05-05T19:52:12Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-05-05T19:52:12Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-05-05T19:52:11Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:olm.operatorgroup.uid/d11adc9f-bb33-4a38-968d-7edc3fd5ed44: {}
+      manager: olm
+      operation: Update
+      time: '2026-05-05T19:52:12Z'
+    name: costmanagement-metrics-operator
+    resourceVersion: '34245223'
+    uid: 03b4debc-d27c-4a14-bfff-c21048051ac7
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c1,c0
+      openshift.io/sa.scc.supplemental-groups: 1000000000/10000
+      openshift.io/sa.scc.uid-range: 1000000000/10000
+    creationTimestamp: '2026-04-07T16:01:30Z'
+    labels:
+      kubernetes.io/metadata.name: default
+      pod-security.kubernetes.io/audit: privileged
+      pod-security.kubernetes.io/enforce: privileged
+      pod-security.kubernetes.io/warn: privileged
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-07T16:02:29Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/enforce: {}
+            f:pod-security.kubernetes.io/warn: {}
+      manager: privileged-namespaces-psa-label-syncer
+      operation: Apply
+      time: '2026-04-07T16:02:29Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: kube-apiserver
+      operation: Update
+      time: '2026-04-07T16:01:30Z'
+    name: default
+    resourceVersion: '478'
+    uid: b98f989f-9cb6-41dc-9148-f462d06bac84
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c30,c10
+      openshift.io/sa.scc.supplemental-groups: 1000890000/10000
+      openshift.io/sa.scc.uid-range: 1000890000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-09T14:33:42Z'
+    labels:
+      kubernetes.io/metadata.name: default-broker
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:33:42Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:33:42Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: submariner
+      operation: Update
+      time: '2026-04-09T14:33:42Z'
+    name: default-broker
+    resourceVersion: '1243626'
+    uid: 845364a0-dfaf-4386-a0ec-086e457a9c61
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/description: ''
+      openshift.io/display-name: ''
+      openshift.io/requester: kube:admin
+      openshift.io/sa.scc.mcs: s0:c28,c2
+      openshift.io/sa.scc.supplemental-groups: 1000760000/10000
+      openshift.io/sa.scc.uid-range: 1000760000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-07T18:24:32Z'
+    labels:
+      kubernetes.io/metadata.name: development
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-07T18:24:32Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-07T18:24:32Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:openshift.io/description: {}
+            f:openshift.io/display-name: {}
+            f:openshift.io/requester: {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: openshift-apiserver
+      operation: Update
+      time: '2026-04-07T18:24:32Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:finalizers: {}
+      manager: openshift-controller-manager
+      operation: Update
+      subresource: finalize
+      time: '2026-04-07T18:24:32Z'
+    name: development
+    resourceVersion: '31032'
+    uid: f32090b3-ba3a-40ea-a037-a0d37ed6475e
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c30,c5
+      openshift.io/sa.scc.supplemental-groups: 1000880000/10000
+      openshift.io/sa.scc.uid-range: 1000880000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-09T14:32:28Z'
+    labels:
+      hive.openshift.io/target-namespace: 'true'
+      kubernetes.io/metadata.name: hive
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:32:28Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:32:28Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:hive.openshift.io/target-namespace: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: hive5-operator
+      operation: Update
+      time: '2026-04-09T14:32:28Z'
+    name: hive
+    resourceVersion: '1241023'
+    uid: 0db73c5c-4700-4264-a0f5-36819b885425
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c30,c0
+      openshift.io/sa.scc.supplemental-groups: 1000870000/10000
+      openshift.io/sa.scc.uid-range: 1000870000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: privileged
+    creationTimestamp: '2026-04-09T14:32:27Z'
+    labels:
+      hypershift.openshift.io/monitoring: 'true'
+      kubernetes.io/metadata.name: hypershift
+      olm.operatorgroup.uid/495fc3bd-8e21-4ab6-8484-c7966c0b6a54: ''
+      openshift.io/cluster-monitoring: 'true'
+      pod-security.kubernetes.io/audit: privileged
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: privileged
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:32:27Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:hypershift.openshift.io/monitoring: {}
+            f:openshift.io/cluster-monitoring: {}
+        f:spec: {}
+      manager: hypershift
+      operation: Apply
+      time: '2026-04-09T14:32:49Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:32:49Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: hypershift-addon
+      operation: Update
+      time: '2026-04-09T14:32:27Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:olm.operatorgroup.uid/495fc3bd-8e21-4ab6-8484-c7966c0b6a54: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T14:35:53Z'
+    name: hypershift
+    resourceVersion: '1246055'
+    uid: bcb9bcb1-10e9-4673-8687-0863e5c7a89c
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c29,c9
+      openshift.io/sa.scc.supplemental-groups: 1000830000/10000
+      openshift.io/sa.scc.uid-range: 1000830000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-09T14:31:08Z'
+    labels:
+      cluster.open-cluster-management.io/managedCluster: local-cluster
+      kubernetes.io/metadata.name: local-cluster
+      open-cluster-management.io/cluster-name: local-cluster
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:31:09Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:31:09Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+            f:open-cluster-management.io/cluster-name: {}
+      manager: registration
+      operation: Update
+      time: '2026-04-09T14:31:08Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:cluster.open-cluster-management.io/managedCluster: {}
+      manager: managedcluster-import-controller
+      operation: Update
+      time: '2026-04-09T14:31:09Z'
+    name: local-cluster
+    resourceVersion: '1239186'
+    uid: b5d8d5e8-c97a-4b2f-97fc-e8967c708380
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c28,c12
+      openshift.io/sa.scc.supplemental-groups: 1000780000/10000
+      openshift.io/sa.scc.uid-range: 1000780000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-09T14:27:40Z'
+    labels:
+      kubernetes.io/metadata.name: multicluster-engine
+      olm.operatorgroup.uid/495fc3bd-8e21-4ab6-8484-c7966c0b6a54: ''
+      olm.operatorgroup.uid/8fc6477c-7384-4139-9757-6dc9cd0027cd: ''
+      openshift.io/cluster-monitoring: 'true'
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:27:40Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:27:40Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+            f:openshift.io/cluster-monitoring: {}
+      manager: multiclusterhub-operator
+      operation: Update
+      time: '2026-04-09T14:27:40Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:olm.operatorgroup.uid/495fc3bd-8e21-4ab6-8484-c7966c0b6a54: {}
+            f:olm.operatorgroup.uid/8fc6477c-7384-4139-9757-6dc9cd0027cd: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T14:31:34Z'
+    name: multicluster-engine
+    resourceVersion: '1240073'
+    uid: 0e377895-a14e-4fe8-93f5-a585ebc1449e
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c27,c24
+      openshift.io/sa.scc.supplemental-groups: 1000750000/10000
+      openshift.io/sa.scc.uid-range: 1000750000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: privileged
+    creationTimestamp: '2026-04-09T14:26:36Z'
+    labels:
+      kubernetes.io/metadata.name: open-cluster-management
+      olm.operatorgroup.uid/3a67264e-7c18-43bd-b075-5350aa32f001: ''
+      olm.operatorgroup.uid/495fc3bd-8e21-4ab6-8484-c7966c0b6a54: ''
+      openshift.io/cluster-monitoring: 'true'
+      pod-security.kubernetes.io/audit: privileged
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: privileged
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:26:36Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:26:45Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-09T14:26:36Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:openshift.io/cluster-monitoring: {}
+      manager: multiclusterhub-operator
+      operation: Update
+      time: '2026-04-09T14:27:32Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:olm.operatorgroup.uid/3a67264e-7c18-43bd-b075-5350aa32f001: {}
+            f:olm.operatorgroup.uid/495fc3bd-8e21-4ab6-8484-c7966c0b6a54: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T14:31:34Z'
+    name: open-cluster-management
+    resourceVersion: '1240074'
+    uid: 037e91d8-8711-4089-beec-9094600a90c4
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c29,c14
+      openshift.io/sa.scc.supplemental-groups: 1000840000/10000
+      openshift.io/sa.scc.uid-range: 1000840000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+      workload.openshift.io/allowed: management
+    creationTimestamp: '2026-04-09T14:31:13Z'
+    labels:
+      kubernetes.io/metadata.name: open-cluster-management-agent
+      open-cluster-management.io/created-by-klusterlet: klusterlet
+      operator.open-cluster-management.io/klusterlet: klusterlet
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:31:13Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:31:13Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: managedcluster-import-controller
+      operation: Update
+      time: '2026-04-09T14:31:13Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:workload.openshift.io/allowed: {}
+          f:labels:
+            f:open-cluster-management.io/created-by-klusterlet: {}
+            f:operator.open-cluster-management.io/klusterlet: {}
+      manager: registration-operator
+      operation: Update
+      time: '2026-04-09T14:31:16Z'
+    name: open-cluster-management-agent
+    resourceVersion: '1239536'
+    uid: 81da6bd3-99ce-4b41-adcc-5aae7a2b73c5
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      addon.open-cluster-management.io/deletion-orphan: ''
+      openshift.io/sa.scc.mcs: s0:c29,c24
+      openshift.io/sa.scc.supplemental-groups: 1000860000/10000
+      openshift.io/sa.scc.uid-range: 1000860000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: privileged
+      workload.openshift.io/allowed: management
+    creationTimestamp: '2026-04-09T14:31:16Z'
+    labels:
+      addon.open-cluster-management.io/namespace: 'true'
+      kubernetes.io/metadata.name: open-cluster-management-agent-addon
+      olm.operatorgroup.uid/495fc3bd-8e21-4ab6-8484-c7966c0b6a54: ''
+      open-cluster-management.io/created-by-klusterlet: klusterlet
+      openshift.io/cluster-monitoring: 'true'
+      pod-security.kubernetes.io/audit: privileged
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: privileged
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:31:16Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:31:19Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:workload.openshift.io/allowed: {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+            f:open-cluster-management.io/created-by-klusterlet: {}
+      manager: registration-operator
+      operation: Update
+      time: '2026-04-09T14:31:16Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:addon.open-cluster-management.io/deletion-orphan: {}
+          f:labels:
+            f:addon.open-cluster-management.io/namespace: {}
+            f:openshift.io/cluster-monitoring: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-04-09T14:32:16Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:olm.operatorgroup.uid/495fc3bd-8e21-4ab6-8484-c7966c0b6a54: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T14:35:53Z'
+    name: open-cluster-management-agent-addon
+    resourceVersion: '1246056'
+    uid: 689d9495-3f67-4ab7-92a4-ef7995bbec25
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c29,c19
+      openshift.io/sa.scc.supplemental-groups: 1000850000/10000
+      openshift.io/sa.scc.uid-range: 1000850000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-09T14:31:14Z'
+    labels:
+      kubernetes.io/metadata.name: open-cluster-management-global-set
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:31:14Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:31:14Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: controller
+      operation: Update
+      time: '2026-04-09T14:31:14Z'
+    name: open-cluster-management-global-set
+    resourceVersion: '1239352'
+    uid: 223437c3-be86-42dd-a257-5f06cea55fd5
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c28,c17
+      openshift.io/sa.scc.supplemental-groups: 1000790000/10000
+      openshift.io/sa.scc.uid-range: 1000790000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-09T14:29:37Z'
+    labels:
+      kubernetes.io/metadata.name: open-cluster-management-hub
+      open-cluster-management.io/created-by-clustermanager: cluster-manager
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:29:37Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:29:37Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+            f:open-cluster-management.io/created-by-clustermanager: {}
+      manager: registration-operator
+      operation: Update
+      time: '2026-04-09T14:29:37Z'
+    name: open-cluster-management-hub
+    resourceVersion: '1237558'
+    uid: b001a5e9-d60b-42c3-93f0-e55ecbbe4ea1
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/sa.scc.mcs: s0:c30,c15
+      openshift.io/sa.scc.supplemental-groups: 1000900000/10000
+      openshift.io/sa.scc.uid-range: 1000900000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-09T14:33:43Z'
+    labels:
+      kubernetes.io/metadata.name: open-cluster-management-policies
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-09T14:33:43Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-09T14:33:43Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"088cf67d-1f02-4074-95c8-6ecaf7b922bd"}: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-04-09T14:33:43Z'
+    name: open-cluster-management-policies
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-governance-policy-framework-deploy-0
+      uid: 088cf67d-1f02-4074-95c8-6ecaf7b922bd
+    resourceVersion: '1243872'
+    uid: 52b63bfc-f356-4809-ad3b-186e9260cdef
+  spec:
+    finalizers:
+    - kubernetes
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/description: ''
+      openshift.io/display-name: ''
+      openshift.io/requester: norm
+      openshift.io/sa.scc.mcs: s0:c29,c4
+      openshift.io/sa.scc.supplemental-groups: 1000820000/10000
+      openshift.io/sa.scc.uid-range: 1000820000/10000
+      security.openshift.io/MinimallySufficientPodSecurityStandard: restricted
+    creationTimestamp: '2026-04-07T20:30:16Z'
+    labels:
+      kubernetes.io/metadata.name: test-vms
+      pod-security.kubernetes.io/audit: restricted
+      pod-security.kubernetes.io/audit-version: latest
+      pod-security.kubernetes.io/warn: restricted
+      pod-security.kubernetes.io/warn-version: latest
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:openshift.io/sa.scc.mcs: {}
+            f:openshift.io/sa.scc.supplemental-groups: {}
+            f:openshift.io/sa.scc.uid-range: {}
+      manager: cluster-policy-controller
+      operation: Apply
+      time: '2026-04-07T20:30:16Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:security.openshift.io/MinimallySufficientPodSecurityStandard: {}
+          f:labels:
+            f:pod-security.kubernetes.io/audit: {}
+            f:pod-security.kubernetes.io/audit-version: {}
+            f:pod-security.kubernetes.io/warn: {}
+            f:pod-security.kubernetes.io/warn-version: {}
+      manager: pod-security-admission-label-synchronization-controller
+      operation: Apply
+      time: '2026-04-07T20:30:16Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:openshift.io/description: {}
+            f:openshift.io/display-name: {}
+            f:openshift.io/requester: {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/metadata.name: {}
+      manager: openshift-apiserver
+      operation: Update
+      time: '2026-04-07T20:30:16Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:finalizers: {}
+      manager: openshift-controller-manager
+      operation: Update
+      subresource: finalize
+      time: '2026-04-07T20:30:16Z'
+    name: test-vms
+    resourceVersion: '68903'
+    uid: 2a97184d-d040-4c6b-ab38-eccba6e7a5b0
+  spec:
+    finalizers:
+    - kubernetes

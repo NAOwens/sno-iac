@@ -1,0 +1,87 @@
+- allowVolumeExpansion: true
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    annotations:
+      description: Provides RWO and RWOP Filesystem & Block volumes
+    creationTimestamp: '2026-04-07T18:50:15Z'
+    labels:
+      owned-by.topolvm.io/group: lvm.topolvm.io
+      owned-by.topolvm.io/kind: LVMCluster
+      owned-by.topolvm.io/name: test-lvmcluster
+      owned-by.topolvm.io/namespace: openshift-lvm-storage
+      owned-by.topolvm.io/uid: 54a17e41-d17c-4eb2-af42-54f689a88e4e
+      owned-by.topolvm.io/version: v1alpha1
+    managedFields:
+    - apiVersion: storage.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:allowVolumeExpansion: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:description: {}
+          f:labels:
+            .: {}
+            f:owned-by.topolvm.io/group: {}
+            f:owned-by.topolvm.io/kind: {}
+            f:owned-by.topolvm.io/name: {}
+            f:owned-by.topolvm.io/namespace: {}
+            f:owned-by.topolvm.io/uid: {}
+            f:owned-by.topolvm.io/version: {}
+        f:parameters:
+          .: {}
+          f:csi.storage.k8s.io/fstype: {}
+          f:topolvm.io/device-class: {}
+        f:provisioner: {}
+        f:reclaimPolicy: {}
+        f:volumeBindingMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-07T18:50:15Z'
+    name: lvms-vg1
+    resourceVersion: '37055'
+    uid: 0ae7f433-1d5a-45c7-bc24-b7daa5021534
+  parameters:
+    csi.storage.k8s.io/fstype: xfs
+    topolvm.io/device-class: vg1
+  provisioner: topolvm.io
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
+- allowVolumeExpansion: true
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    annotations:
+      description: Provides RWO and RWOP Filesystem & Block volumes
+      storageclass.kubernetes.io/is-default-class: 'true'
+    creationTimestamp: '2026-04-07T19:22:29Z'
+    managedFields:
+    - apiVersion: storage.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:allowVolumeExpansion: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:description: {}
+            f:storageclass.kubernetes.io/is-default-class: {}
+        f:parameters:
+          .: {}
+          f:csi.storage.k8s.io/fstype: {}
+          f:topolvm.io/device-class: {}
+        f:provisioner: {}
+        f:reclaimPolicy: {}
+        f:volumeBindingMode: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-07T19:22:36Z'
+    name: lvms-vg1-immediate
+    resourceVersion: '40557'
+    uid: d1dc391f-285f-4694-9804-5d7858fef38f
+  parameters:
+    csi.storage.k8s.io/fstype: xfs
+    topolvm.io/device-class: vg1
+  provisioner: topolvm.io
+  reclaimPolicy: Delete
+  volumeBindingMode: Immediate

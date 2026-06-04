@@ -1,0 +1,38 @@
+- apiVersion: v1
+  data:
+    ca-cert-path: ''
+    check-cluster-version: 'true'
+    cluster-id: 5a097cb8-a9f0-47ff-a295-74da6c9339f2
+    control-plane-count: '1'
+    inventory-url: https://api.openshift.com
+    must-gather-image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:b5e7057308015f9243cbb509998ce4b5c9b2a5d668bb2c001f93b5cf1510b36a
+    skip-cert-verification: 'false'
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: '2026-04-07T16:03:00Z'
+    labels:
+      app: assisted-installer-controller
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca-cert-path: {}
+          f:check-cluster-version: {}
+          f:cluster-id: {}
+          f:control-plane-count: {}
+          f:inventory-url: {}
+          f:must-gather-image: {}
+          f:skip-cert-verification: {}
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+      manager: cluster-bootstrap
+      operation: Update
+      time: '2026-04-07T16:03:00Z'
+    name: assisted-installer-controller-config
+    namespace: assisted-installer
+    resourceVersion: '669'
+    uid: d6469997-8dde-479b-8428-9130601e8b84

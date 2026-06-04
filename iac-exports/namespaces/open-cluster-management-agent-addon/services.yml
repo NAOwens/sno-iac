@@ -1,0 +1,403 @@
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: dcec4c92e8cdcb585ced66b3f2efc3f04946110ae7bac935a614551a55b82d2e
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-secret-name: cert-policy-controller-metrics
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:33:42Z'
+    labels:
+      addon.open-cluster-management.io/hosted-manifest-location: hosting
+      app: cert-policy-controller
+      chart: cert-policy-controller-2.2.0
+      heritage: Helm
+      release: cert-policy-controller
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:33:42Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:addon.open-cluster-management.io/hosted-manifest-location: {}
+            f:app: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"9f631b52-09d3-40bf-b053-3b1095dfadb2"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-04-09T14:33:42Z'
+    name: cert-policy-controller-metrics
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-cert-policy-controller-deploy-0
+      uid: 9f631b52-09d3-40bf-b053-3b1095dfadb2
+    resourceVersion: '1243655'
+    uid: e8507c34-8e88-447f-9d5e-7cc1dc5d7410
+  spec:
+    clusterIP: 172.30.54.203
+    clusterIPs:
+    - 172.30.54.203
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    selector:
+      app: cert-policy-controller
+      release: cert-policy-controller
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: 7f0b83b46c91d7bdee8e298dffa332deefd26d5094403345a6c819c583eeb7df
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-secret-name: config-policy-controller-metrics
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:33:43Z'
+    labels:
+      addon.open-cluster-management.io/hosted-manifest-location: hosting
+      app: config-policy-controller
+      chart: config-policy-controller-2.2.0
+      heritage: Helm
+      release: config-policy-controller
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:33:43Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:addon.open-cluster-management.io/hosted-manifest-location: {}
+            f:app: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"db243625-2deb-479d-9dec-30d2018f7655"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-04-09T14:33:43Z'
+    name: config-policy-controller-metrics
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-config-policy-controller-deploy-0
+      uid: db243625-2deb-479d-9dec-30d2018f7655
+    resourceVersion: '1243859'
+    uid: a853dcac-b053-474c-aa13-ff9b3b2a5771
+  spec:
+    clusterIP: 172.30.228.185
+    clusterIPs:
+    - 172.30.228.185
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    selector:
+      app: config-policy-controller
+      release: config-policy-controller
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: 2cad24e205f8b2b1a8fc75afc5966c8452734d698ecb6f4d7441f5d8fe5cf33a
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-secret-name: governance-policy-framework-metrics
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:33:43Z'
+    labels:
+      addon.open-cluster-management.io/hosted-manifest-location: hosting
+      app: governance-policy-framework
+      chart: governance-policy-framework-2.2.0
+      heritage: Helm
+      release: governance-policy-framework
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:33:43Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:addon.open-cluster-management.io/hosted-manifest-location: {}
+            f:app: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"088cf67d-1f02-4074-95c8-6ecaf7b922bd"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-04-09T14:33:43Z'
+    name: governance-policy-framework-metrics
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-governance-policy-framework-deploy-0
+      uid: 088cf67d-1f02-4074-95c8-6ecaf7b922bd
+    resourceVersion: '1243841'
+    uid: 9a6ce159-54f3-4cbd-8cc0-80ca9061b4d4
+  spec:
+    clusterIP: 172.30.246.236
+    clusterIPs:
+    - 172.30.246.236
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    selector:
+      app: governance-policy-framework
+      release: governance-policy-framework
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: 8ec3be88b55bbf94880437e25cee21a19acda191a2b3b68235ad8be1592326e5
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-secret-name: hypershift-addon-agent-metrics
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:32:13Z'
+    labels:
+      app: hypershift-addon-agent
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"13344933-9b98-4032-820a-69e93efe4a29"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-04-09T14:32:13Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:32:14Z'
+    name: hypershift-addon-agent-metrics
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-hypershift-addon-deploy-0
+      uid: 13344933-9b98-4032-820a-69e93efe4a29
+    resourceVersion: '1240689'
+    uid: f2bdb716-ed4a-4f6b-8815-f23f4e53bfed
+  spec:
+    clusterIP: 172.30.227.137
+    clusterIPs:
+    - 172.30.227.137
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 8443
+      protocol: TCP
+      targetPort: https
+    selector:
+      app: hypershift-addon-agent
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: 72739bbff7fb3e5a32e632446a01c60bb706fc31bed8760b3e89478463400661
+    creationTimestamp: '2026-04-09T14:33:36Z'
+    labels:
+      app: mc-subscription-metrics
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+          f:labels:
+            .: {}
+            f:app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"eb1e06f7-7f88-4fba-8c0e-72aed5ac2889"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8388,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-04-09T14:33:36Z'
+    name: mc-subscription-metrics
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-application-manager-deploy-0
+      uid: eb1e06f7-7f88-4fba-8c0e-72aed5ac2889
+    resourceVersion: '1243286'
+    uid: c1055558-7463-4e21-bfc4-3d656924f344
+  spec:
+    clusterIP: 172.30.244.11
+    clusterIPs:
+    - 172.30.244.11
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 8388
+      protocol: TCP
+      targetPort: 8388
+    selector:
+      component: application-manager
+    sessionAffinity: None
+    type: ClusterIP

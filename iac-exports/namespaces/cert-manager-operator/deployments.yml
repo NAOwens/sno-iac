@@ -1,0 +1,527 @@
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+    creationTimestamp: '2026-04-17T22:18:07Z'
+    generation: 5
+    labels:
+      app.kubernetes.io/component: manager
+      app.kubernetes.io/created-by: cert-manager-operator
+      app.kubernetes.io/instance: controller-manager
+      app.kubernetes.io/managed-by: kustomize
+      app.kubernetes.io/name: deployment
+      app.kubernetes.io/part-of: cert-manager-operator
+      olm.deployment-spec-hash: 7qNAkaBWWuogQi9l884RCqEtTgWGtC6F6rLVqM
+      olm.managed: 'true'
+      olm.owner: cert-manager-operator.v1.19.0
+      olm.owner.kind: ClusterServiceVersion
+      olm.owner.namespace: cert-manager-operator
+      operators.coreos.com/openshift-cert-manager-operator.cert-manager-operator: ''
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/created-by: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+            f:olm.deployment-spec-hash: {}
+            f:olm.managed: {}
+            f:olm.owner: {}
+            f:olm.owner.kind: {}
+            f:olm.owner.namespace: {}
+            f:operators.coreos.com/openshift-cert-manager-operator.cert-manager-operator: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"03d6770f-2cdf-4bce-b2b2-d905a32799e3"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:alm-examples: {}
+                f:capabilities: {}
+                f:categories: {}
+                f:console.openshift.io/disable-operand-delete: {}
+                f:containerImage: {}
+                f:createdAt: {}
+                f:features.operators.openshift.io/cnf: {}
+                f:features.operators.openshift.io/cni: {}
+                f:features.operators.openshift.io/csi: {}
+                f:features.operators.openshift.io/disconnected: {}
+                f:features.operators.openshift.io/fips-compliant: {}
+                f:features.operators.openshift.io/proxy-aware: {}
+                f:features.operators.openshift.io/tls-profiles: {}
+                f:features.operators.openshift.io/token-auth-aws: {}
+                f:features.operators.openshift.io/token-auth-azure: {}
+                f:features.operators.openshift.io/token-auth-gcp: {}
+                f:kubectl.kubernetes.io/default-container: {}
+                f:olm.operatorGroup: {}
+                f:olm.operatorNamespace: {}
+                f:olm.skipRange: {}
+                f:olm.targetNamespaces: {}
+                f:operator.openshift.io/uninstall-message: {}
+                f:operatorframework.io/cluster-monitoring: {}
+                f:operatorframework.io/properties: {}
+                f:operatorframework.io/suggested-namespace: {}
+                f:operators.openshift.io/valid-subscription: {}
+                f:operators.operatorframework.io/builder: {}
+                f:operators.operatorframework.io/project_layout: {}
+                f:repository: {}
+                f:support: {}
+              f:labels:
+                .: {}
+                f:name: {}
+            f:spec:
+              f:affinity:
+                .: {}
+                f:nodeAffinity:
+                  .: {}
+                  f:requiredDuringSchedulingIgnoredDuringExecution: {}
+              f:containers:
+                k:{"name":"cert-manager-operator"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"CLOUD_CREDENTIALS_SECRET_NAME"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"ISTIOCSR_OPERAND_IMAGE_VERSION"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"OPERAND_IMAGE_VERSION"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"OPERATOR_CONDITION_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"OPERATOR_IMAGE_VERSION"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"OPERATOR_LOG_LEVEL"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"OPERATOR_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"RELATED_IMAGE_CERT_MANAGER_ACMESOLVER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"RELATED_IMAGE_CERT_MANAGER_CA_INJECTOR"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"RELATED_IMAGE_CERT_MANAGER_CONTROLLER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"RELATED_IMAGE_CERT_MANAGER_ISTIOCSR"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"RELATED_IMAGE_CERT_MANAGER_TRUST_MANAGER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"RELATED_IMAGE_CERT_MANAGER_WEBHOOK"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"TRUSTED_CA_CONFIGMAP_NAME"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"TRUSTMANAGER_OPERAND_IMAGE_VERSION"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"UNSUPPORTED_ADDON_FEATURES"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"WATCH_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":8443,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources:
+                    .: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsNonRoot: {}
+                    f:seccompProfile:
+                      .: {}
+                      f:type: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:runAsNonRoot: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-20T16:42:50Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:18Z'
+    name: cert-manager-operator-controller-manager
+    namespace: cert-manager-operator
+    ownerReferences:
+    - apiVersion: operators.coreos.com/v1alpha1
+      blockOwnerDeletion: false
+      controller: false
+      kind: ClusterServiceVersion
+      name: cert-manager-operator.v1.19.0
+      uid: 03d6770f-2cdf-4bce-b2b2-d905a32799e3
+    resourceVersion: '75980745'
+    uid: 7c19a15e-4422-4422-b0ba-395e2ac688d0
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 1
+    selector:
+      matchLabels:
+        name: cert-manager-operator
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          alm-examples: "[\n  {\n    \"apiVersion\": \"acme.cert-manager.io/v1\",\n
+            \   \"kind\": \"Challenge\",\n    \"metadata\": {\n      \"name\": \"tls-cert-sample\",\n
+            \     \"namespace\": \"default\"\n    },\n    \"spec\": {\n      \"authorizationURL\":
+            \"https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/XXXXX\",\n
+            \     \"dnsName\": \"sample.dns.name\",\n      \"issuerRef\": {\n        \"kind\":
+            \"Issuer\",\n        \"name\": \"letsencrypt-staging\"\n      },\n      \"key\":
+            \"XXX\",\n      \"solver\": {\n        \"dns01\": {\n          \"route53\":
+            {\n            \"accessKeyID\": \"XXX\",\n            \"hostedZoneID\":
+            \"XXX\",\n            \"region\": \"us-east-1\",\n            \"secretAccessKeySecretRef\":
+            {\n              \"key\": \"awsSecretAccessKey\",\n              \"name\":
+            \"aws-secret\"\n            }\n          }\n        },\n        \"selector\":
+            {\n          \"dnsNames\": [\n            \"sample.dns.name\"\n          ]\n
+            \       }\n      },\n      \"token\": \"XXX\",\n      \"type\": \"DNS-01\",\n
+            \     \"url\": \"https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/XXXXXX/XXXXX\",\n
+            \     \"wildcard\": false\n    }\n  },\n  {\n    \"apiVersion\": \"acme.cert-manager.io/v1\",\n
+            \   \"kind\": \"Order\",\n    \"metadata\": {\n      \"annotations\":
+            {\n        \"cert-manager.io/certificate-name\": \"tls-cert\",\n        \"cert-manager.io/certificate-revision\":
+            \"1\",\n        \"cert-manager.io/private-key-secret-name\": \"tls-cert-sample\"\n
+            \     },\n      \"name\": \"tls-cert-sample\",\n      \"namespace\": \"default\"\n
+            \   },\n    \"spec\": {\n      \"commonName\": \"sample.dns.name\",\n
+            \     \"dnsNames\": [\n        \"sample.dns.name\"\n      ],\n      \"issuerRef\":
+            {\n        \"kind\": \"Issuer\",\n        \"name\": \"letsencrypt-staging\"\n
+            \     },\n      \"request\": \"XXX\"\n    }\n  },\n  {\n    \"apiVersion\":
+            \"cert-manager.io/v1\",\n    \"kind\": \"Certificate\",\n    \"metadata\":
+            {\n      \"name\": \"selfsigned-ca\",\n      \"namespace\": \"default\"\n
+            \   },\n    \"spec\": {\n      \"commonName\": \"selfsigned-ca.dns.name\",\n
+            \     \"isCA\": true,\n      \"issuerRef\": {\n        \"group\": \"cert-manager.io\",\n
+            \       \"kind\": \"ClusterIssuer\",\n        \"name\": \"ca-cluster-issuer\"\n
+            \     },\n      \"privateKey\": {\n        \"algorithm\": \"ECDSA\",\n
+            \       \"size\": 256\n      },\n      \"secretName\": \"ca-root-secret\"\n
+            \   }\n  },\n  {\n    \"apiVersion\": \"cert-manager.io/v1\",\n    \"kind\":
+            \"Certificate\",\n    \"metadata\": {\n      \"name\": \"tls-cert\",\n
+            \     \"namespace\": \"default\"\n    },\n    \"spec\": {\n      \"commonName\":
+            \"sample.dns.name\",\n      \"dnsNames\": [\n        \"sample.dns.name\"\n
+            \     ],\n      \"isCA\": false,\n      \"issuerRef\": {\n        \"kind\":
+            \"Issuer\",\n        \"name\": \"letsencrypt-staging\"\n      },\n      \"secretName\":
+            \"tls-cert\"\n    }\n  },\n  {\n    \"apiVersion\": \"cert-manager.io/v1\",\n
+            \   \"kind\": \"CertificateRequest\",\n    \"metadata\": {\n      \"annotations\":
+            {\n        \"cert-manager.io/certificate-name\": \"tls-cert\",\n        \"cert-manager.io/certificate-revision\":
+            \"1\",\n        \"cert-manager.io/private-key-secret-name\": \"tls-cert-sample\"\n
+            \     },\n      \"name\": \"tls-cert-sample\",\n      \"namespace\": \"default\"\n
+            \   },\n    \"spec\": {\n      \"groups\": [\n        \"system:serviceaccounts\",\n
+            \       \"system:serviceaccounts:cert-manager\",\n        \"system:authenticated\"\n
+            \     ],\n      \"issuerRef\": {\n        \"kind\": \"Issuer\",\n        \"name\":
+            \"letsencrypt-staging\"\n      },\n      \"request\": \"XXX\",\n      \"username\":
+            \"system:serviceaccount:cert-manager:cert-manager\"\n    }\n  },\n  {\n
+            \   \"apiVersion\": \"cert-manager.io/v1\",\n    \"kind\": \"ClusterIssuer\",\n
+            \   \"metadata\": {\n      \"name\": \"ca-cluster-issuer\"\n    },\n    \"spec\":
+            {\n      \"ca\": {\n        \"secretName\": \"ca-root-secret\"\n      }\n
+            \   }\n  },\n  {\n    \"apiVersion\": \"cert-manager.io/v1\",\n    \"kind\":
+            \"Issuer\",\n    \"metadata\": {\n      \"name\": \"ca-issuer\",\n      \"namespace\":
+            \"default\"\n    },\n    \"spec\": {\n      \"ca\": {\n        \"secretName\":
+            \"ca-root-secret\"\n      }\n    }\n  },\n  {\n    \"apiVersion\": \"cert-manager.io/v1\",\n
+            \   \"kind\": \"Issuer\",\n    \"metadata\": {\n      \"name\": \"letsencrypt-staging\",\n
+            \     \"namespace\": \"default\"\n    },\n    \"spec\": {\n      \"acme\":
+            {\n        \"email\": \"aos-ci-cd@redhat.com\",\n        \"privateKeySecretRef\":
+            {\n          \"name\": \"letsencrypt-staging\"\n        },\n        \"server\":
+            \"https://acme-staging-v02.api.letsencrypt.org/directory\",\n        \"solvers\":
+            [\n          {\n            \"dns01\": {\n              \"route53\": {\n
+            \               \"accessKeyID\": \"ACCESS_KEY_ID\",\n                \"hostedZoneID\":
+            \"HOSTED_ZONE_ID\",\n                \"region\": \"AWS_REGION\",\n                \"secretAccessKeySecretRef\":
+            {\n                  \"key\": \"access-key\",\n                  \"name\":
+            \"sample-aws-secret\"\n                }\n              }\n            },\n
+            \           \"selector\": {\n              \"dnsNames\": [\n                \"sample.dns.name\"\n
+            \             ]\n            }\n          }\n        ]\n      }\n    }\n
+            \ },\n  {\n    \"apiVersion\": \"operator.openshift.io/v1alpha1\",\n    \"kind\":
+            \"CertManager\",\n    \"metadata\": {\n      \"name\": \"cluster\"\n    },\n
+            \   \"spec\": {\n      \"logLevel\": \"Normal\",\n      \"managementState\":
+            \"Managed\"\n    }\n  },\n  {\n    \"apiVersion\": \"operator.openshift.io/v1alpha1\",\n
+            \   \"kind\": \"IstioCSR\",\n    \"metadata\": {\n      \"annotations\":
+            {\n        \"kubernetes.io/description\": \"Resource behavior is managed
+            through IstioCSR featuregate, which is enabled by default. Please refer
+            to the cert-manager documentation for more information on the istio-csr
+            feature.\"\n      },\n      \"name\": \"default\",\n      \"namespace\":
+            \"istio-csr\"\n    },\n    \"spec\": {\n      \"istioCSRConfig\": {\n
+            \       \"certManager\": {\n          \"issuerRef\": {\n            \"group\":
+            \"cert-manager.io\",\n            \"kind\": \"Issuer\",\n            \"name\":
+            \"istio-csr-issuer\"\n          }\n        },\n        \"istio\": {\n
+            \         \"namespace\": \"istio-system\"\n        },\n        \"istiodTLSConfig\":
+            {\n          \"trustDomain\": \"cluster.local\"\n        }\n      }\n
+            \   }\n  },\n  {\n    \"apiVersion\": \"operator.openshift.io/v1alpha1\",\n
+            \   \"kind\": \"TrustManager\",\n    \"metadata\": {\n      \"name\":
+            \"cluster\"\n    },\n    \"spec\": {\n      \"trustManagerConfig\": {\n
+            \       \"defaultCAPackage\": {\n          \"policy\": \"Enabled\"\n        },\n
+            \       \"logFormat\": \"text\",\n        \"logLevel\": 1,\n        \"trustNamespace\":
+            \"cert-manager\"\n      }\n    }\n  },\n  {\n    \"apiVersion\": \"trust.cert-manager.io/v1alpha1\",\n
+            \   \"kind\": \"Bundle\",\n    \"metadata\": {\n      \"name\": \"example-bundle\"\n
+            \   },\n    \"spec\": {\n      \"sources\": [\n        {\n          \"useDefaultCAs\":
+            true\n        }\n      ],\n      \"target\": {\n        \"configMap\":
+            {\n          \"key\": \"ca-certificates.crt\"\n        }\n      }\n    }\n
+            \ }\n]"
+          capabilities: Seamless Upgrades
+          categories: Security
+          console.openshift.io/disable-operand-delete: 'true'
+          containerImage: registry.redhat.io/cert-manager/cert-manager-operator-rhel9@sha256:484342520dc3babe0ff4a9360edc98816556f2bd1b9981ec3d5dbab09a7536a9
+          createdAt: '2026-04-20T13:57:26'
+          features.operators.openshift.io/cnf: 'false'
+          features.operators.openshift.io/cni: 'false'
+          features.operators.openshift.io/csi: 'false'
+          features.operators.openshift.io/disconnected: 'true'
+          features.operators.openshift.io/fips-compliant: 'true'
+          features.operators.openshift.io/proxy-aware: 'true'
+          features.operators.openshift.io/tls-profiles: 'false'
+          features.operators.openshift.io/token-auth-aws: 'true'
+          features.operators.openshift.io/token-auth-azure: 'true'
+          features.operators.openshift.io/token-auth-gcp: 'true'
+          kubectl.kubernetes.io/default-container: cert-manager-operator
+          olm.operatorGroup: cert-manager-operator-vnfdz
+          olm.operatorNamespace: cert-manager-operator
+          olm.skipRange: '>=1.18.0 <1.19.0'
+          olm.targetNamespaces: ''
+          operator.openshift.io/uninstall-message: The cert-manager Operator for Red
+            Hat OpenShift will be removed from cert-manager-operator namespace. If
+            your Operator configured any off-cluster resources, these will continue
+            to run and require manual cleanup. All operands created by the operator
+            will need to be manually cleaned up. Please refer to https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/cert-manager-operator-uninstall.html
+            for additional steps.
+          operatorframework.io/cluster-monitoring: 'true'
+          operatorframework.io/properties: '{"properties":[{"type":"olm.gvk","value":{"group":"acme.cert-manager.io","kind":"Challenge","version":"v1"}},{"type":"olm.gvk","value":{"group":"acme.cert-manager.io","kind":"Order","version":"v1"}},{"type":"olm.gvk","value":{"group":"cert-manager.io","kind":"Certificate","version":"v1"}},{"type":"olm.gvk","value":{"group":"cert-manager.io","kind":"CertificateRequest","version":"v1"}},{"type":"olm.gvk","value":{"group":"cert-manager.io","kind":"ClusterIssuer","version":"v1"}},{"type":"olm.gvk","value":{"group":"cert-manager.io","kind":"Issuer","version":"v1"}},{"type":"olm.gvk","value":{"group":"operator.openshift.io","kind":"CertManager","version":"v1alpha1"}},{"type":"olm.gvk","value":{"group":"operator.openshift.io","kind":"IstioCSR","version":"v1alpha1"}},{"type":"olm.gvk","value":{"group":"operator.openshift.io","kind":"TrustManager","version":"v1alpha1"}},{"type":"olm.gvk","value":{"group":"trust.cert-manager.io","kind":"Bundle","version":"v1alpha1"}},{"type":"olm.package","value":{"packageName":"openshift-cert-manager-operator","version":"1.19.0"}}]}'
+          operatorframework.io/suggested-namespace: cert-manager-operator
+          operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine",
+            "OpenShift Container Platform", "OpenShift Platform Plus"]'
+          operators.operatorframework.io/builder: operator-sdk-v1.25.1
+          operators.operatorframework.io/project_layout: go.kubebuilder.io/v3
+          repository: https://github.com/openshift/cert-manager-operator
+          support: Red Hat, Inc.
+        labels:
+          name: cert-manager-operator
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+                  - arm64
+                  - ppc64le
+                  - s390x
+                - key: kubernetes.io/os
+                  operator: In
+                  values:
+                  - linux
+        containers:
+        - args:
+          - start
+          - --v=$(OPERATOR_LOG_LEVEL)
+          - --trusted-ca-configmap=$(TRUSTED_CA_CONFIGMAP_NAME)
+          - --cloud-credentials-secret=$(CLOUD_CREDENTIALS_SECRET_NAME)
+          - --unsupported-addon-features=$(UNSUPPORTED_ADDON_FEATURES)
+          command:
+          - /usr/bin/cert-manager-operator
+          env:
+          - name: WATCH_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.annotations['olm.targetNamespaces']
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: OPERATOR_NAME
+            value: cert-manager-operator
+          - name: RELATED_IMAGE_CERT_MANAGER_WEBHOOK
+            value: registry.redhat.io/cert-manager/jetstack-cert-manager-rhel9@sha256:f0467f589027c52288f2707bab33d0ccd1c15410dcbc9010d0f948feb4e50dd0
+          - name: RELATED_IMAGE_CERT_MANAGER_CA_INJECTOR
+            value: registry.redhat.io/cert-manager/jetstack-cert-manager-rhel9@sha256:f0467f589027c52288f2707bab33d0ccd1c15410dcbc9010d0f948feb4e50dd0
+          - name: RELATED_IMAGE_CERT_MANAGER_CONTROLLER
+            value: registry.redhat.io/cert-manager/jetstack-cert-manager-rhel9@sha256:f0467f589027c52288f2707bab33d0ccd1c15410dcbc9010d0f948feb4e50dd0
+          - name: RELATED_IMAGE_CERT_MANAGER_ACMESOLVER
+            value: registry.redhat.io/cert-manager/jetstack-cert-manager-acmesolver-rhel9@sha256:2118a138033fa32afb314d697dc29d2690277a978c8a84b1eba4f152a6d59c1a
+          - name: RELATED_IMAGE_CERT_MANAGER_ISTIOCSR
+            value: registry.redhat.io/cert-manager/cert-manager-istio-csr-rhel9@sha256:65711de646434e6462387113e80cf3fdc31736369a2a2046ea56eb59643e92fb
+          - name: RELATED_IMAGE_CERT_MANAGER_TRUST_MANAGER
+            value: registry.redhat.io/cert-manager/cert-manager-trust-manager-rhel9@sha256:d0834b140e53cb2b96d30f227b0c7dcab3463eeab80049df608582c45c792a82
+          - name: OPERAND_IMAGE_VERSION
+            value: 1.19.4
+          - name: ISTIOCSR_OPERAND_IMAGE_VERSION
+            value: 0.16.0
+          - name: TRUSTMANAGER_OPERAND_IMAGE_VERSION
+            value: 0.20.3
+          - name: OPERATOR_IMAGE_VERSION
+            value: 1.19.0
+          - name: OPERATOR_LOG_LEVEL
+            value: '2'
+          - name: TRUSTED_CA_CONFIGMAP_NAME
+          - name: CLOUD_CREDENTIALS_SECRET_NAME
+          - name: UNSUPPORTED_ADDON_FEATURES
+          - name: OPERATOR_CONDITION_NAME
+            value: cert-manager-operator.v1.19.0
+          image: registry.redhat.io/cert-manager/cert-manager-operator-rhel9@sha256:484342520dc3babe0ff4a9360edc98816556f2bd1b9981ec3d5dbab09a7536a9
+          imagePullPolicy: IfNotPresent
+          name: cert-manager-operator
+          ports:
+          - containerPort: 8443
+            name: https
+            protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        serviceAccount: cert-manager-operator-controller-manager
+        serviceAccountName: cert-manager-operator-controller-manager
+        terminationGracePeriodSeconds: 10
+        volumes:
+        - emptyDir: {}
+          name: tmp

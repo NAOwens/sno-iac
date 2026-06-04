@@ -1,0 +1,1160 @@
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+      service.alpha.openshift.io/serving-cert-secret-name: managedcluster-import-agent-registration-serving-cert
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:29:16Z'
+    labels:
+      backplaneconfig.name: multiclusterengine
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+            f:service.alpha.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+        f:spec:
+          f:ports:
+            k:{"port":9091,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:53Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:service.alpha.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":9091,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:16Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:29:17Z'
+    name: agent-registration
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482666'
+    uid: e89488d6-d3d2-4ba1-ae77-46b549478914
+  spec:
+    clusterIP: 172.30.33.4
+    clusterIPs:
+    - 172.30.33.4
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: agentregistration
+      port: 9091
+      protocol: TCP
+      targetPort: 9091
+    selector:
+      app: managedcluster-import-controller-v2
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+    creationTimestamp: '2026-04-09T14:29:45Z'
+    labels:
+      backplaneconfig.name: multiclusterengine
+      chart: cluster-proxy-addon-2.1.0
+      component: cluster-proxy-addon-anp-server
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+            f:chart: {}
+            f:component: {}
+        f:spec:
+          f:ports:
+            k:{"port":8091,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+          f:selector: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:54Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+            f:chart: {}
+            f:component: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8091,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:45Z'
+    name: cluster-proxy-addon-anp
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482805'
+    uid: 2cbd1eb9-3d39-412a-aa57-3f6f17182818
+  spec:
+    clusterIP: 172.30.184.188
+    clusterIPs:
+    - 172.30.184.188
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: anp-port
+      port: 8091
+      protocol: TCP
+      targetPort: 8091
+    selector:
+      proxy.open-cluster-management.io/component-name: proxy-server
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+      service.alpha.openshift.io/serving-cert-secret-name: cluster-proxy-user-serving-cert
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:29:45Z'
+    labels:
+      backplaneconfig.name: multiclusterengine
+      chart: cluster-proxy-addon-2.1.0
+      component: cluster-proxy-addon-user
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+            f:service.alpha.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+            f:chart: {}
+            f:component: {}
+        f:spec:
+          f:ports:
+            k:{"port":9092,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+          f:selector: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:54Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:service.alpha.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+            f:chart: {}
+            f:component: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":9092,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:45Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:29:45Z'
+    name: cluster-proxy-addon-user
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482763'
+    uid: 5d151665-ddd5-4894-b364-ffb4c8d725e0
+  spec:
+    clusterIP: 172.30.31.110
+    clusterIPs:
+    - 172.30.31.110
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: user-port
+      port: 9092
+      protocol: TCP
+      targetPort: 9092
+    selector:
+      chart: cluster-proxy-addon-2.1.0
+      component: cluster-proxy-addon-user
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-secret-name: clusterlifecycle-state-metrics-certs
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:29:16Z'
+    labels:
+      backplaneconfig.name: multiclusterengine
+      clc-app: clusterlifecycle-state-metrics-v2
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+            f:clc-app: {}
+        f:spec:
+          f:ports:
+            k:{"port":8443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:53Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+            f:clc-app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:16Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:29:16Z'
+    name: clusterlifecycle-state-metrics-v2
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482497'
+    uid: f809ed8a-f1e1-471c-8c0e-58ef7ea006e9
+  spec:
+    clusterIP: 172.30.185.110
+    clusterIPs:
+    - 172.30.185.110
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: https
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    selector:
+      app: clusterlifecycle-state-metrics-v2
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-secret-name: console-mce-console-certs
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:29:15Z'
+    labels:
+      app: console-mce
+      backplaneconfig.name: multiclusterengine
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            f:app: {}
+            f:backplaneconfig.name: {}
+        f:spec:
+          f:ports:
+            k:{"port":3000,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:52Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:backplaneconfig.name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":3000,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:15Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:29:15Z'
+    name: console-mce-console
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482371'
+    uid: a9ae124a-ab83-4e8a-89e4-0dc6f1854df9
+  spec:
+    clusterIP: 172.30.9.198
+    clusterIPs:
+    - 172.30.9.198
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      app: console-mce
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+    creationTimestamp: '2026-04-09T14:29:15Z'
+    labels:
+      backplaneconfig.name: multiclusterengine
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+        f:spec:
+          f:ports:
+            k:{"port":8080,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:52Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8080,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:15Z'
+    name: discovery-operator
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482410'
+    uid: bc76f35a-3042-4a39-82c9-caa2cc6e943d
+  spec:
+    clusterIP: 172.30.100.237
+    clusterIPs:
+    - 172.30.100.237
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: discovery-operator
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-secret-name: discovery-operator-webhook-service
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:29:15Z'
+    labels:
+      backplaneconfig.name: multiclusterengine
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+        f:spec:
+          f:ports:
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:52Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:15Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:29:16Z'
+    name: discovery-operator-webhook-service
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482427'
+    uid: 2a85a405-7856-4bb3-9765-0db73b34bb99
+  spec:
+    clusterIP: 172.30.80.247
+    clusterIPs:
+    - 172.30.80.247
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 443
+      protocol: TCP
+      targetPort: 9443
+    selector:
+      app: discovery-operator
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: '2026-04-09T14:31:01Z'
+    labels:
+      app: hcp-cli-download
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3c6cda7a-a71a-4bc7-a74b-2d9efcfa7bab"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":80,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: hypershift-addon
+      operation: Update
+      time: '2026-04-09T14:31:01Z'
+    name: hcp-cli-download
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: hypershift-addon-manager
+      uid: 3c6cda7a-a71a-4bc7-a74b-2d9efcfa7bab
+    resourceVersion: '1239018'
+    uid: b967449c-4840-4c06-b6a9-87b4a9d0eacd
+  spec:
+    clusterIP: 172.30.178.224
+    clusterIPs:
+    - 172.30.178.224
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: hcp-cli-download
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: '2026-04-09T14:29:18Z'
+    labels:
+      control-plane: backplane-operator
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:control-plane: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8080,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:18Z'
+    name: multicluster-engine-operator-metrics
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '1237164'
+    uid: 2e91cdba-190f-41e0-88b9-c6be2a7c7fe8
+  spec:
+    clusterIP: 172.30.103.73
+    clusterIPs:
+    - 172.30.103.73
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      control-plane: backplane-operator
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      service.beta.openshift.io/serving-cert-secret-name: multicluster-engine-operator-webhook
+    creationTimestamp: '2026-04-09T14:28:34Z'
+    labels:
+      olm.managed: 'true'
+      operators.coreos.com/multicluster-engine.multicluster-engine: ''
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:olm.managed: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"4e8ce7ed-1200-4be0-8517-248aefcd8176"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: catalog
+      operation: Update
+      time: '2026-05-05T23:35:45Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:operators.coreos.com/multicluster-engine.multicluster-engine: {}
+      manager: olm
+      operation: Update
+      time: '2026-05-05T23:35:57Z'
+    name: multicluster-engine-operator-webhook-service
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: operators.coreos.com/v1alpha1
+      blockOwnerDeletion: false
+      controller: false
+      kind: ClusterServiceVersion
+      name: multicluster-engine.v2.11.1
+      uid: 4e8ce7ed-1200-4be0-8517-248aefcd8176
+    resourceVersion: '34478998'
+    uid: 93bddf2b-597b-42c9-9e7c-ae2cf1a2384c
+  spec:
+    clusterIP: 172.30.72.88
+    clusterIPs:
+    - 172.30.72.88
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 443
+      protocol: TCP
+      targetPort: 9443
+    selector:
+      control-plane: backplane-operator
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-secret-name: ocm-proxyserver
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:29:17Z'
+    labels:
+      backplaneconfig.name: multiclusterengine
+      control-plane: ocm-proxyserver
+      ocm-antiaffinity-selector: ocm-proxyserver
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+            f:control-plane: {}
+            f:ocm-antiaffinity-selector: {}
+        f:spec:
+          f:ports:
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:53Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+            f:control-plane: {}
+            f:ocm-antiaffinity-selector: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:17Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:29:17Z'
+    name: ocm-proxyserver
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482730'
+    uid: 65547abb-1e37-4192-b37b-2427116f6126
+  spec:
+    clusterIP: 172.30.99.147
+    clusterIPs:
+    - 172.30.99.147
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: secure
+      port: 443
+      protocol: TCP
+      targetPort: 6443
+    selector:
+      control-plane: ocm-proxyserver
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-secret-name: ocm-webhook
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:29:16Z'
+    labels:
+      backplaneconfig.name: multiclusterengine
+      control-plane: ocm-webhook
+      ocm-antiaffinity-selector: ocm-webhook
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+            f:control-plane: {}
+            f:ocm-antiaffinity-selector: {}
+        f:spec:
+          f:ports:
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:53Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:service.beta.openshift.io/serving-cert-secret-name: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+            f:control-plane: {}
+            f:ocm-antiaffinity-selector: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:16Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:29:17Z'
+    name: ocm-webhook
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482631'
+    uid: 0875f339-5622-4cd5-a2eb-2a6bceabd12c
+  spec:
+    clusterIP: 172.30.35.175
+    clusterIPs:
+    - 172.30.35.175
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 443
+      protocol: TCP
+      targetPort: 8000
+    selector:
+      control-plane: ocm-webhook
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      proxy.open-cluster-management.io/configuration-generation: '1'
+    creationTimestamp: '2026-04-09T14:31:35Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:proxy.open-cluster-management.io/configuration-generation: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"87987eb4-0865-4881-8612-c5507e17d823"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8090,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":8091,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: manager
+      operation: Update
+      time: '2026-04-09T14:31:35Z'
+    name: proxy-entrypoint
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: proxy.open-cluster-management.io/v1alpha1
+      blockOwnerDeletion: true
+      kind: ManagedProxyConfiguration
+      name: cluster-proxy
+      uid: 87987eb4-0865-4881-8612-c5507e17d823
+    resourceVersion: '1240126'
+    uid: a1e62e3b-f093-4568-a639-2b2fe079ffe0
+  spec:
+    clusterIP: 172.30.69.39
+    clusterIPs:
+    - 172.30.69.39
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: proxy-server
+      port: 8090
+      protocol: TCP
+      targetPort: 8090
+    - name: agent-server
+      port: 8091
+      protocol: TCP
+      targetPort: 8091
+    selector:
+      proxy.open-cluster-management.io/component-name: proxy-server
+    sessionAffinity: None
+    type: ClusterIP

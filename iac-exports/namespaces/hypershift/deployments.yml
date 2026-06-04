@@ -1,0 +1,385 @@
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '3'
+      hypershift.openshift.io/install-cli-version: 'openshift/hypershift: 6202ab927f91ca188e621b62c802d8f3e5de1c48.
+        Latest supported OCP: 4.21.0'
+    creationTimestamp: '2026-04-09T14:32:49Z'
+    generation: 3
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:hypershift.openshift.io/install-cli-version: {}
+        f:spec:
+          f:replicas: {}
+          f:selector: {}
+          f:strategy: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                f:app: {}
+                f:hypershift.openshift.io/operator-component: {}
+                f:name: {}
+            f:spec:
+              f:affinity:
+                f:podAntiAffinity:
+                  f:preferredDuringSchedulingIgnoredDuringExecution: {}
+              f:containers:
+                k:{"name":"operator"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    k:{"name":"CERT_ROTATION_SCALE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"ENABLE_ETCD_RECOVERY"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"IMAGE_AGENT_CAPI_PROVIDER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"IMAGE_KUBEVIRT_CAPI_PROVIDER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"METRICS_SET"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"MY_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        f:fieldRef: {}
+                    k:{"name":"MY_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        f:fieldRef: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    k:{"containerPort":9000,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":9443,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    f:requests:
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsUser: {}
+                    f:seccompProfile:
+                      f:type: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    k:{"mountPath":"/etc/pki/ca-trust/extracted/pem"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/var/run/secrets/serving-cert"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:initContainers:
+                k:{"name":"init-environment"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsUser: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    k:{"mountPath":"/trust-bundle"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/ca-trust"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:priorityClassName: {}
+              f:serviceAccountName: {}
+              f:volumes:
+                k:{"name":"openshift-config-managed-trusted-ca-bundle"}:
+                  .: {}
+                  f:configMap:
+                    f:items: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"serving-cert"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    f:secretName: {}
+                k:{"name":"trusted-ca-bundle"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+      manager: hypershift
+      operation: Apply
+      time: '2026-05-05T23:43:59Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:template:
+            f:spec:
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"open-cluster-management-image-pull-credentials"}: {}
+      manager: hypershift-addon
+      operation: Update
+      time: '2026-04-09T14:32:57Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-03T11:37:33Z'
+    name: operator
+    namespace: hypershift
+    resourceVersion: '77179318'
+    uid: b1642cf2-5ee9-48b5-83bb-ce686e4bb1ee
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 2
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        name: operator
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: operator
+          hypershift.openshift.io/operator-component: operator
+          name: operator
+      spec:
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: name
+                    operator: In
+                    values:
+                    - operator
+                topologyKey: kubernetes.io/hostname
+              weight: 10
+        containers:
+        - args:
+          - run
+          - --namespace=$(MY_NAMESPACE)
+          - --pod-name=$(MY_NAME)
+          - --metrics-addr=:9000
+          - --enable-dedicated-request-serving-isolation=true
+          - --enable-ocp-cluster-monitoring=false
+          - --enable-ci-debug-output=false
+          - --private-platform=None
+          - --cert-dir=/var/run/secrets/serving-cert
+          - --enable-validating-webhook=true
+          - --enable-uwm-telemetry-remote-write
+          command:
+          - /usr/bin/hypershift-operator
+          env:
+          - name: MY_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: MY_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: METRICS_SET
+            value: Telemetry
+          - name: CERT_ROTATION_SCALE
+            value: 24h0m0s
+          - name: ENABLE_ETCD_RECOVERY
+            value: '1'
+          - name: IMAGE_AGENT_CAPI_PROVIDER
+            value: registry.redhat.io/multicluster-engine/cluster-api-provider-agent-rhel9@sha256:2ddf6a7796ff51604ebab1ed5426ebcaa640657fd0ffadfd6931fb0b852adbe4
+          - name: IMAGE_KUBEVIRT_CAPI_PROVIDER
+            value: registry.redhat.io/multicluster-engine/cluster-api-provider-kubevirt-rhel9@sha256:fd64f8c7c4ab7c2041a87771dbae640a380f9e70cc11be6a98ddcdfc74270a66
+          image: registry.redhat.io/multicluster-engine/hypershift-rhel9-operator@sha256:c3cc4224bb83b09cc7283e30587501d729c13f827e0f4ca19a0a8f3d60d6068e
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /metrics
+              port: 9000
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: operator
+          ports:
+          - containerPort: 9000
+            name: metrics
+            protocol: TCP
+          - containerPort: 9443
+            name: manager
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /metrics
+              port: 9000
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 10m
+              memory: 150Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1000
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: FallbackToLogsOnError
+          volumeMounts:
+          - mountPath: /var/run/secrets/serving-cert
+            name: serving-cert
+          - mountPath: /etc/pki/ca-trust/extracted/pem
+            name: trusted-ca-bundle
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: open-cluster-management-image-pull-credentials
+        initContainers:
+        - args:
+          - init
+          command:
+          - /usr/bin/hypershift-operator
+          image: registry.redhat.io/multicluster-engine/hypershift-rhel9-operator@sha256:c3cc4224bb83b09cc7283e30587501d729c13f827e0f4ca19a0a8f3d60d6068e
+          imagePullPolicy: IfNotPresent
+          name: init-environment
+          resources: {}
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsUser: 1000
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: FallbackToLogsOnError
+          volumeMounts:
+          - mountPath: /var/run/ca-trust
+            name: openshift-config-managed-trusted-ca-bundle
+            readOnly: true
+          - mountPath: /trust-bundle
+            name: trusted-ca-bundle
+        priorityClassName: hypershift-operator
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: operator
+        serviceAccountName: operator
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: serving-cert
+          secret:
+            defaultMode: 420
+            secretName: manager-serving-cert
+        - configMap:
+            defaultMode: 420
+            items:
+            - key: ca-bundle.crt
+              path: tls-ca-bundle.pem
+            name: openshift-config-managed-trusted-ca-bundle
+            optional: true
+          name: openshift-config-managed-trusted-ca-bundle
+        - emptyDir: {}
+          name: trusted-ca-bundle

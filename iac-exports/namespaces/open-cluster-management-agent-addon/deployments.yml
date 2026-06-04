@@ -1,0 +1,2658 @@
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+    creationTimestamp: '2026-04-09T14:33:35Z'
+    generation: 2
+    labels:
+      component: application-manager
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:component: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"eb1e06f7-7f88-4fba-8c0e-72aed5ac2889"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:target.workload.openshift.io/management: {}
+              f:labels:
+                .: {}
+                f:component: {}
+            f:spec:
+              f:containers:
+                k:{"name":"subscription-controller"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"OPERATOR_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"WATCH_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:exec:
+                      .: {}
+                      f:command: {}
+                    f:failureThreshold: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsNonRoot: {}
+                    f:runAsUser: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/klusterlet"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"open-cluster-management-image-pull-credentials"}: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                .: {}
+                k:{"name":"klusterlet-config"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-05-05T23:45:00Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:18Z'
+    name: application-manager
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-application-manager-deploy-0
+      uid: eb1e06f7-7f88-4fba-8c0e-72aed5ac2889
+    resourceVersion: '75983949'
+    uid: 89b12ec6-0bc7-46eb-b0f2-617cb80f1eac
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 2
+    selector:
+      matchLabels:
+        component: application-manager
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+        labels:
+          component: application-manager
+      spec:
+        containers:
+        - args:
+          - --alsologtostderr
+          - --cluster-name=local-cluster
+          - --hub-cluster-configfile=/var/run/klusterlet/kubeconfig
+          - --leader-election-lease-duration=137s
+          - --leader-election-renew-deadline=107s
+          - --leader-election-retry-period=26s
+          command:
+          - /usr/local/bin/multicluster-operators-subscription
+          env:
+          - name: WATCH_NAMESPACE
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: OPERATOR_NAME
+            value: subscription-controller
+          image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9@sha256:68b1f2a87b904efd37201cd3b261197e800bcb45daf6b3c25ce712aa7a28b184
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: subscription-controller
+          readinessProbe:
+            exec:
+              command:
+              - ls
+            failureThreshold: 3
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 4Gi
+            requests:
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/run/klusterlet
+            name: klusterlet-config
+          - mountPath: /tmp
+            name: tmp
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: open-cluster-management-image-pull-credentials
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+        serviceAccount: application-manager
+        serviceAccountName: application-manager
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: dedicated
+          operator: Equal
+          value: infra
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        volumes:
+        - name: klusterlet-config
+          secret:
+            defaultMode: 420
+            secretName: application-manager-hub-kubeconfig
+        - emptyDir: {}
+          name: tmp
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+    creationTimestamp: '2026-04-09T14:33:42Z'
+    generation: 2
+    labels:
+      addon.open-cluster-management.io/hosted-manifest-location: hosting
+      app: cert-policy-controller
+      chart: cert-policy-controller-2.2.0
+      heritage: Helm
+      release: cert-policy-controller
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:addon.open-cluster-management.io/hosted-manifest-location: {}
+            f:app: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"9f631b52-09d3-40bf-b053-3b1095dfadb2"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:target.workload.openshift.io/management: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:chart: {}
+                f:heritage: {}
+                f:release: {}
+            f:spec:
+              f:affinity: {}
+              f:containers:
+                k:{"name":"cert-policy-controller"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"HTTPS_PROXY"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"HTTP_PROXY"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"NO_PROXY"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"OPERATOR_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"WATCH_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":8443,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:startupProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/var/run/klusterlet"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/metrics-cert"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"open-cluster-management-image-pull-credentials"}: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:runAsNonRoot: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                .: {}
+                k:{"name":"klusterlet-config"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"metrics-cert"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-05-05T23:44:27Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:37Z'
+    name: cert-policy-controller
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-cert-policy-controller-deploy-0
+      uid: 9f631b52-09d3-40bf-b053-3b1095dfadb2
+    resourceVersion: '75981681'
+    uid: f201efb0-785c-4804-8095-e8519800e6c5
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: cert-policy-controller
+        release: cert-policy-controller
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        annotations:
+          target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+        labels:
+          app: cert-policy-controller
+          chart: cert-policy-controller-2.2.0
+          heritage: Helm
+          release: cert-policy-controller
+      spec:
+        affinity: {}
+        containers:
+        - args:
+          - --enable-lease=true
+          - --cluster-name=local-cluster
+          - --update-frequency=30
+          - --leader-elect=false
+          - --log-encoder=console
+          - --log-level=0
+          - --v=0
+          - --secure-metrics=true
+          - --metrics-bind-address=0.0.0.0:8443
+          env:
+          - name: WATCH_NAMESPACE
+            value: local-cluster
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: OPERATOR_NAME
+            value: cert-policy-controller
+          - name: HTTP_PROXY
+          - name: HTTPS_PROXY
+          - name: NO_PROXY
+          image: registry.redhat.io/rhacm2/cert-policy-controller-rhel9@sha256:2e616fd1dc4126a1cab82cb568964510d928e93252e6f15af03d19b1b84b287a
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: cert-policy-controller
+          ports:
+          - containerPort: 8443
+            name: metrics
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 300Mi
+            requests:
+              memory: 150Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /readyz
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/run/metrics-cert
+            name: metrics-cert
+            readOnly: true
+          - mountPath: /var/run/klusterlet
+            name: klusterlet-config
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: open-cluster-management-image-pull-credentials
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          runAsNonRoot: true
+        serviceAccount: cert-policy-controller-sa
+        serviceAccountName: cert-policy-controller-sa
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: dedicated
+          operator: Exists
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - effect: NoSchedule
+          key: node.kubernetes.io/not-ready
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        volumes:
+        - name: klusterlet-config
+          secret:
+            defaultMode: 420
+            secretName: cert-policy-controller-hub-kubeconfig
+        - name: metrics-cert
+          secret:
+            defaultMode: 420
+            secretName: cert-policy-controller-metrics
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '3'
+      proxy.open-cluster-management.io/configuration-generation: '2'
+    creationTimestamp: '2026-04-09T14:32:11Z'
+    generation: 3
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:proxy.open-cluster-management.io/configuration-generation: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"5057a01a-aae9-489a-a4c2-a15638d58200"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:proxy.open-cluster-management.io/configuration-generation: {}
+                f:target.workload.openshift.io/management: {}
+              f:labels:
+                .: {}
+                f:open-cluster-management.io/addon: {}
+                f:proxy.open-cluster-management.io/component-name: {}
+            f:spec:
+              f:containers:
+                k:{"name":"addon-agent"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"POD_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsNonRoot: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/etc/kubeconfig/"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/tls"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                k:{"name":"proxy-agent"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"ROOT_CA_CERT"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsNonRoot: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/etc/ca"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/tls"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                k:{"name":"service-proxy"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsNonRoot: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/additional-service-ca"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/kubeconfig/"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/tls"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/server-cert"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:hostAliases:
+                .: {}
+                k:{"ip":"127.0.0.1"}:
+                  .: {}
+                  f:hostnames: {}
+                  f:ip: {}
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"open-cluster-management-image-pull-credentials"}: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                .: {}
+                k:{"name":"additional-service-ca"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"ca"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"hub"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"hub-kubeconfig"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"service-proxy-server-cert"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-05-05T23:50:21Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:17Z'
+    name: cluster-proxy-proxy-agent
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-cluster-proxy-deploy-0
+      uid: 5057a01a-aae9-489a-a4c2-a15638d58200
+    resourceVersion: '75983844'
+    uid: dd563523-4196-482b-88ed-04c3ab400f15
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        open-cluster-management.io/addon: cluster-proxy
+        proxy.open-cluster-management.io/component-name: proxy-agent
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          proxy.open-cluster-management.io/configuration-generation: '2'
+          target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+        labels:
+          open-cluster-management.io/addon: cluster-proxy
+          proxy.open-cluster-management.io/component-name: proxy-agent
+      spec:
+        containers:
+        - args:
+          - --proxy-server-host=cluster-proxy-anp.apps.sno.ofam.dev
+          - --proxy-server-port=443
+          - --agent-identifiers=host=cluster-1a5d5c2f2bf4ee4fe8024e013e92dbe1d830715878ae3db7.open-cluster-management.proxy
+          - --ca-cert=/etc/ca/ca.crt
+          - --agent-cert=/etc/tls/tls.crt
+          - --agent-key=/etc/tls/tls.key
+          command:
+          - /proxy-agent
+          env:
+          - name: ROOT_CA_CERT
+            value: /etc/ca/ca.crt
+          image: registry.redhat.io/multicluster-engine/cluster-proxy-rhel9@sha256:cb0f2bb5a4d2e480d301c0acf502bf4c324838a01cc0f8e5c29b8b671fd9dec8
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 1
+            httpGet:
+              path: /healthz
+              port: 8888
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: proxy-agent
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/ca
+            name: ca
+            readOnly: true
+          - mountPath: /etc/tls
+            name: hub
+            readOnly: true
+        - args:
+          - --v=2
+          - --hub-kubeconfig=/etc/kubeconfig/kubeconfig
+          - --cluster-name=local-cluster
+          - --proxy-server-namespace=multicluster-engine
+          command:
+          - /agent
+          env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          image: registry.redhat.io/multicluster-engine/cluster-proxy-rhel9@sha256:cb0f2bb5a4d2e480d301c0acf502bf4c324838a01cc0f8e5c29b8b671fd9dec8
+          imagePullPolicy: IfNotPresent
+          name: addon-agent
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/kubeconfig/
+            name: hub-kubeconfig
+            readOnly: true
+          - mountPath: /etc/tls
+            name: hub
+            readOnly: true
+        - args:
+          - service-proxy
+          - --additional-service-ca=/additional-service-ca/service-ca.crt
+          - --enable-impersonation=true
+          - --cert=/server-cert/tls.crt
+          - --key=/server-cert/tls.key
+          - --hub-kubeconfig=/etc/kubeconfig/kubeconfig
+          command:
+          - /cluster-proxy
+          image: registry.redhat.io/multicluster-engine/cluster-proxy-rhel9@sha256:cb0f2bb5a4d2e480d301c0acf502bf4c324838a01cc0f8e5c29b8b671fd9dec8
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: service-proxy
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /etc/kubeconfig/
+            name: hub-kubeconfig
+            readOnly: true
+          - mountPath: /etc/tls
+            name: hub
+            readOnly: true
+          - mountPath: /additional-service-ca
+            name: additional-service-ca
+            readOnly: true
+          - mountPath: /server-cert
+            name: service-proxy-server-cert
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        hostAliases:
+        - hostnames:
+          - cluster-1a5d5c2f2bf4ee4fe8024e013e92dbe1d830715878ae3db7.open-cluster-management.proxy
+          ip: 127.0.0.1
+        imagePullSecrets:
+        - name: open-cluster-management-image-pull-credentials
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: cluster-proxy
+        serviceAccountName: cluster-proxy
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: dedicated
+          operator: Equal
+          value: infra
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        volumes:
+        - name: ca
+          secret:
+            defaultMode: 420
+            secretName: cluster-proxy-ca
+        - name: hub
+          secret:
+            defaultMode: 420
+            secretName: cluster-proxy-open-cluster-management.io-proxy-agent-signer-client-cert
+        - name: hub-kubeconfig
+          secret:
+            defaultMode: 420
+            secretName: cluster-proxy-hub-kubeconfig
+        - configMap:
+            defaultMode: 420
+            name: openshift-service-ca.crt
+            optional: true
+          name: additional-service-ca
+        - name: service-proxy-server-cert
+          secret:
+            defaultMode: 420
+            secretName: cluster-proxy-service-proxy-server-certificates
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+      policy.open-cluster-management.io/uninstalling: 'false'
+    creationTimestamp: '2026-04-09T14:33:43Z'
+    generation: 2
+    labels:
+      addon.open-cluster-management.io/hosted-manifest-location: hosting
+      app: config-policy-controller
+      chart: config-policy-controller-2.2.0
+      heritage: Helm
+      release: config-policy-controller
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:policy.open-cluster-management.io/uninstalling: {}
+          f:labels:
+            .: {}
+            f:addon.open-cluster-management.io/hosted-manifest-location: {}
+            f:app: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"db243625-2deb-479d-9dec-30d2018f7655"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/default-container: {}
+                f:target.workload.openshift.io/management: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:chart: {}
+                f:heritage: {}
+                f:release: {}
+            f:spec:
+              f:affinity: {}
+              f:containers:
+                k:{"name":"config-policy-controller"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"HTTPS_PROXY"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"HTTP_PROXY"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"NO_PROXY"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"OPERATOR_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"WATCH_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":8443,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:startupProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/var/run/klusterlet"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/metrics-cert"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"open-cluster-management-image-pull-credentials"}: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:runAsNonRoot: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                .: {}
+                k:{"name":"klusterlet-config"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"metrics-cert"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-05-05T23:44:27Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-03T12:53:12Z'
+    name: config-policy-controller
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-config-policy-controller-deploy-0
+      uid: db243625-2deb-479d-9dec-30d2018f7655
+    resourceVersion: '77258327'
+    uid: eef78326-f9b5-4e66-a819-20863aca666f
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: config-policy-controller
+        release: config-policy-controller
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/default-container: config-policy-controller
+          target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+        labels:
+          app: config-policy-controller
+          chart: config-policy-controller-2.2.0
+          heritage: Helm
+          release: config-policy-controller
+      spec:
+        affinity: {}
+        containers:
+        - args:
+          - controller
+          - --enable-lease=true
+          - --cluster-name=local-cluster
+          - --leader-elect=false
+          - --log-encoder=console
+          - --log-level=0
+          - --v=0
+          - --evaluation-concurrency=2
+          - --client-max-qps=30
+          - --client-burst=45
+          - --health-probe-bind-address=:8081
+          - --secure-metrics=true
+          - --metrics-bind-address=0.0.0.0:8443
+          - --enable-operator-policy=true
+          - --operator-policy-default-namespace=openshift-operators
+          command:
+          - config-policy-controller
+          env:
+          - name: WATCH_NAMESPACE
+            value: local-cluster
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: OPERATOR_NAME
+            value: config-policy-controller
+          - name: HTTP_PROXY
+          - name: HTTPS_PROXY
+          - name: NO_PROXY
+          image: registry.redhat.io/rhacm2/config-policy-controller-rhel9@sha256:c956a72eef19227296c9ba36c6ff296446ac2273a01131f2dca7e85108139755
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: config-policy-controller
+          ports:
+          - containerPort: 8443
+            name: metrics
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /readyz
+              port: 8081
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/run/metrics-cert
+            name: metrics-cert
+            readOnly: true
+          - mountPath: /var/run/klusterlet
+            name: klusterlet-config
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: open-cluster-management-image-pull-credentials
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        serviceAccount: config-policy-controller-sa
+        serviceAccountName: config-policy-controller-sa
+        terminationGracePeriodSeconds: 120
+        tolerations:
+        - effect: NoSchedule
+          key: dedicated
+          operator: Equal
+          value: infra
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        volumes:
+        - name: klusterlet-config
+          secret:
+            defaultMode: 420
+            secretName: config-policy-controller-hub-kubeconfig
+        - name: metrics-cert
+          secret:
+            defaultMode: 420
+            secretName: config-policy-controller-metrics
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+      policy.open-cluster-management.io/uninstalling: 'false'
+    creationTimestamp: '2026-04-09T14:33:43Z'
+    generation: 2
+    labels:
+      addon.open-cluster-management.io/hosted-manifest-location: hosting
+      app: governance-policy-framework
+      chart: governance-policy-framework-2.2.0
+      heritage: Helm
+      release: governance-policy-framework
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:policy.open-cluster-management.io/uninstalling: {}
+          f:labels:
+            .: {}
+            f:addon.open-cluster-management.io/hosted-manifest-location: {}
+            f:app: {}
+            f:chart: {}
+            f:heritage: {}
+            f:release: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"088cf67d-1f02-4074-95c8-6ecaf7b922bd"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubectl.kubernetes.io/default-container: {}
+                f:target.workload.openshift.io/management: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:chart: {}
+                f:heritage: {}
+                f:release: {}
+            f:spec:
+              f:affinity: {}
+              f:containers:
+                k:{"name":"governance-policy-framework-addon"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"DEPLOYMENT_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"HTTPS_PROXY"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"HTTP_PROXY"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"NO_PROXY"}:
+                      .: {}
+                      f:name: {}
+                    k:{"name":"OPERATOR_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":8443,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:startupProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/var/run/klusterlet"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/metrics-cert"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"open-cluster-management-image-pull-credentials"}: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:runAsNonRoot: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                .: {}
+                k:{"name":"klusterlet-config"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"metrics-cert"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-05-05T23:44:27Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-03T12:58:31Z'
+    name: governance-policy-framework
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-governance-policy-framework-deploy-0
+      uid: 088cf67d-1f02-4074-95c8-6ecaf7b922bd
+    resourceVersion: '77263770'
+    uid: 5cc9c2ec-efb8-4ee1-a6ea-fc17db2a7167
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: governance-policy-framework
+        release: governance-policy-framework
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/default-container: governance-policy-framework-addon
+          target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+        labels:
+          app: governance-policy-framework
+          chart: governance-policy-framework-2.2.0
+          heritage: Helm
+          release: governance-policy-framework
+      spec:
+        affinity: {}
+        containers:
+        - args:
+          - --enable-lease=true
+          - --hub-cluster-configfile=/var/run/klusterlet/kubeconfig
+          - --leader-elect=false
+          - --log-encoder=console
+          - --log-level=0
+          - --v=0
+          - --evaluation-concurrency=2
+          - --client-max-qps=30
+          - --client-burst=45
+          - --on-multicluster-hub=true
+          - --cluster-namespace=local-cluster
+          - --secure-metrics=true
+          - --metrics-bind-address=0.0.0.0:8443
+          command:
+          - governance-policy-framework-addon
+          env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: OPERATOR_NAME
+            value: governance-policy-framework-addon
+          - name: DEPLOYMENT_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.labels['app']
+          - name: HTTP_PROXY
+          - name: HTTPS_PROXY
+          - name: NO_PROXY
+          image: registry.redhat.io/rhacm2/acm-governance-policy-framework-addon-rhel9@sha256:1f80be774e54785322a8438cad1f9d9c5bc8ea7c133b794f9a583bbe353ce806
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: governance-policy-framework-addon
+          ports:
+          - containerPort: 8443
+            name: metrics
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /readyz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/run/metrics-cert
+            name: metrics-cert
+            readOnly: true
+          - mountPath: /var/run/klusterlet
+            name: klusterlet-config
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: open-cluster-management-image-pull-credentials
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          runAsNonRoot: true
+        serviceAccount: governance-policy-framework-sa
+        serviceAccountName: governance-policy-framework-sa
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: dedicated
+          operator: Equal
+          value: infra
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        volumes:
+        - name: klusterlet-config
+          secret:
+            defaultMode: 420
+            secretName: governance-policy-framework-hub-kubeconfig
+        - name: metrics-cert
+          secret:
+            defaultMode: 420
+            secretName: governance-policy-framework-metrics
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+    creationTimestamp: '2026-04-09T14:32:11Z'
+    generation: 2
+    labels:
+      app: hypershift-addon-agent
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"13344933-9b98-4032-820a-69e93efe4a29"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app: {}
+            f:spec:
+              f:containers:
+                k:{"name":"hypershift-addon-agent"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"HC_MAX_NUMBER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HC_THRESHOLD_NUMBER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":8383,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/var/run/hub"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                k:{"name":"kube-rbac-proxy"}:
+                  .: {}
+                  f:args: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":8443,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/var/run/metrics-cert"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"open-cluster-management-image-pull-credentials"}: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:runAsNonRoot: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                .: {}
+                k:{"name":"hub-config"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"metrics-cert"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-05-05T23:39:05Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:47Z'
+    name: hypershift-addon-agent
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-hypershift-addon-deploy-0
+      uid: 13344933-9b98-4032-820a-69e93efe4a29
+    resourceVersion: '75982614'
+    uid: 2ed2937e-9b10-4932-b5ac-ab5a7bc7cd2e
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: hypershift-addon-agent
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: hypershift-addon-agent
+      spec:
+        containers:
+        - args:
+          - --upstream=http://127.0.0.1:8383/
+          - --logtostderr=true
+          - --v=6
+          - --secure-listen-address=:8443
+          - --tls-cert-file=/var/run/metrics-cert/tls.crt
+          - --tls-private-key-file=/var/run/metrics-cert/tls.key
+          - --tls-min-version=VersionTLS13
+          image: registry.redhat.io/multicluster-engine/kube-rbac-proxy-mce-rhel9@sha256:a638ddf7da49c93f27a66a764ee51852b07f4cdfb42370347e391ebe4c9bc170
+          imagePullPolicy: IfNotPresent
+          name: kube-rbac-proxy
+          ports:
+          - containerPort: 8443
+            name: https
+            protocol: TCP
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/run/metrics-cert
+            name: metrics-cert
+            readOnly: true
+        - args:
+          - ./hypershift-addon
+          - agent
+          - --hub-kubeconfig=/var/run/hub/kubeconfig
+          - --cluster-name=local-cluster
+          - --addon-namespace=open-cluster-management-agent-addon
+          - --with-image-override=true
+          - --hypershfit-operator-image=registry.redhat.io/multicluster-engine/hypershift-rhel9-operator@sha256:c3cc4224bb83b09cc7283e30587501d729c13f827e0f4ca19a0a8f3d60d6068e
+          - --multicluster-pull-secret=open-cluster-management-image-pull-credentials
+          - --metrics-bind-address=0.0.0.0:8383
+          env:
+          - name: HC_MAX_NUMBER
+            value: '80'
+          - name: HC_THRESHOLD_NUMBER
+            value: '60'
+          image: registry.redhat.io/multicluster-engine/hypershift-addon-rhel9-operator@sha256:f900ed1d4edde6b47d0e8a30d1b2e712f499ed4405cafd6031faa460721b2ca9
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: hypershift-addon-agent
+          ports:
+          - containerPort: 8383
+            name: metrics
+            protocol: TCP
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/run/hub
+            name: hub-config
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: open-cluster-management-image-pull-credentials
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          runAsNonRoot: true
+        serviceAccount: hypershift-addon-agent-sa
+        serviceAccountName: hypershift-addon-agent-sa
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        volumes:
+        - name: hub-config
+          secret:
+            defaultMode: 420
+            secretName: hypershift-addon-hub-kubeconfig
+        - name: metrics-cert
+          secret:
+            defaultMode: 420
+            secretName: hypershift-addon-agent-metrics
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+    creationTimestamp: '2026-04-09T14:31:19Z'
+    generation: 2
+    labels:
+      addon.open-cluster-management.io/hosted-manifest-location: hosting
+      component: work-manager
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:addon.open-cluster-management.io/hosted-manifest-location: {}
+            f:component: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b6199f19-e764-4b34-bab0-b008bfe66dbc"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:target.workload.openshift.io/management: {}
+              f:labels:
+                .: {}
+                f:component: {}
+            f:spec:
+              f:containers:
+                k:{"name":"acm-agent"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"POD_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                    f:runAsNonRoot: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/klusterlet"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:imagePullSecrets:
+                .: {}
+                k:{"name":"open-cluster-management-image-pull-credentials"}: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                .: {}
+                k:{"name":"klusterlet-config"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-05-05T23:50:11Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:45Z'
+    name: klusterlet-addon-workmgr
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-work-manager-deploy-0
+      uid: b6199f19-e764-4b34-bab0-b008bfe66dbc
+    resourceVersion: '75982437'
+    uid: ef997fa8-793a-41f6-8553-d383d03f5643
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 2
+    selector:
+      matchLabels:
+        component: work-manager
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+        labels:
+          component: work-manager
+      spec:
+        containers:
+        - args:
+          - /agent
+          - --port=4443
+          - --agent-port=443
+          - --hub-kubeconfig=/var/run/klusterlet/kubeconfig
+          - --cluster-name=local-cluster
+          - --agent-name=klusterlet-addon-workmgr
+          env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          image: registry.redhat.io/multicluster-engine/multicloud-manager-rhel9@sha256:a8cef81889422a341a69e957f2cec0d4d8e8567637886d8e0ec4229440ae85c8
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: acm-agent
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /var/run/klusterlet
+            name: klusterlet-config
+        dnsPolicy: ClusterFirst
+        imagePullSecrets:
+        - name: open-cluster-management-image-pull-credentials
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+        serviceAccount: klusterlet-addon-workmgr
+        serviceAccountName: klusterlet-addon-workmgr
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: dedicated
+          operator: Equal
+          value: infra
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        volumes:
+        - emptyDir: {}
+          name: tmp
+        - name: klusterlet-config
+          secret:
+            defaultMode: 420
+            secretName: work-manager-hub-kubeconfig
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+    creationTimestamp: '2026-04-09T14:31:19Z'
+    generation: 2
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"55970fb0-9ba8-44fe-8634-cf312992157e"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:target.workload.openshift.io/management: {}
+              f:labels:
+                .: {}
+                f:addon-agent: {}
+            f:spec:
+              f:containers:
+                k:{"name":"addon-agent"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"CLUSTER_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HUB_KUBECONFIG"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/managed/hub-kubeconfig"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"hub-kubeconfig"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-05-05T23:38:52Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:27Z'
+    name: managed-serviceaccount-addon-agent
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-managed-serviceaccount-deploy-0
+      uid: 55970fb0-9ba8-44fe-8634-cf312992157e
+    resourceVersion: '75981152'
+    uid: 4fd1847e-9284-4b40-899e-d7115b58a984
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        addon-agent: managed-serviceaccount
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+        labels:
+          addon-agent: managed-serviceaccount
+      spec:
+        containers:
+        - args:
+          - --cluster-name=local-cluster
+          - --kubeconfig=/managed/hub-kubeconfig/kubeconfig
+          - --feature-gates=EphemeralIdentity=true
+          command:
+          - /msa
+          - agent
+          env:
+          - name: HUB_KUBECONFIG
+            value: /managed/hub-kubeconfig/kubeconfig
+          - name: CLUSTER_NAME
+            value: local-cluster
+          image: registry.redhat.io/multicluster-engine/managed-serviceaccount-rhel9@sha256:029e5605e0503fac44e974f722e378f7d79a5f32ed1827fec0778c451a68f95e
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 2
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: addon-agent
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /managed/hub-kubeconfig
+            name: hub-kubeconfig
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: managed-serviceaccount
+        serviceAccountName: managed-serviceaccount
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: hub-kubeconfig
+          secret:
+            defaultMode: 420
+            secretName: managed-serviceaccount-hub-kubeconfig

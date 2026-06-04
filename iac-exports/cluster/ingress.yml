@@ -1,0 +1,62 @@
+- apiVersion: config.openshift.io/v1
+  kind: Ingress
+  metadata: {}
+  spec:
+    domain: apps.sno.ofam.dev
+    loadBalancer:
+      platform:
+        type: ''
+  status:
+    componentRoutes:
+    - conditions:
+      - lastTransitionTime: '2026-04-18T12:30:22Z'
+        message: All is well
+        reason: AsExpected
+        status: 'False'
+        type: Progressing
+      - lastTransitionTime: '2026-04-07T16:35:02Z'
+        message: All is well
+        reason: AsExpected
+        status: 'False'
+        type: Degraded
+      consumingUsers:
+      - system:serviceaccount:oauth-openshift:authentication-operator
+      currentHostnames:
+      - oauth-openshift.apps.sno.ofam.dev
+      defaultHostname: oauth-openshift.apps.sno.ofam.dev
+      name: oauth-openshift
+      namespace: openshift-authentication
+      relatedObjects:
+      - group: route.openshift.io
+        name: oauth-openshift
+        namespace: openshift-authentication
+        resource: routes
+    - conditions:
+      - lastTransitionTime: '2026-06-03T11:37:04Z'
+        message: All is well
+        reason: AsExpected
+        status: 'False'
+        type: Degraded
+      - lastTransitionTime: '2026-06-03T11:37:04Z'
+        message: All is well
+        reason: AsExpected
+        status: 'False'
+        type: Progressing
+      - lastTransitionTime: '2026-06-03T11:37:04Z'
+        message: All is well
+        reason: AsExpected
+        status: 'True'
+        type: Available
+      consumingUsers:
+      - system:serviceaccount:openshift-cnv:hyperconverged-cluster-operator
+      currentHostnames:
+      - hyperconverged-cluster-cli-download-openshift-cnv.apps.sno.ofam.dev
+      defaultHostname: hyperconverged-cluster-cli-download-openshift-cnv.apps.sno.ofam.dev
+      name: virt-downloads
+      namespace: openshift-cnv
+      relatedObjects:
+      - group: route.openshift.io
+        name: hyperconverged-cluster-cli-download
+        namespace: openshift-cnv
+        resource: routes
+    defaultPlacement: ControlPlane

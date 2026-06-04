@@ -1,0 +1,2007 @@
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/bound-by-controller: 'yes'
+    creationTimestamp: '2026-04-10T21:42:07Z'
+    finalizers:
+    - kubernetes.io/pv-protection
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:nfs:
+            .: {}
+            f:path: {}
+            f:server: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-10T21:42:07Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/bound-by-controller: {}
+        f:spec:
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: '2026-04-10T22:12:40Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-10T22:12:40Z'
+    name: nfsocprwx
+    resourceVersion: '3049770'
+    uid: e563f1e4-00c6-497f-a6de-29b07c8ae87a
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: myaap-hub-file-storage
+      namespace: aap
+      resourceVersion: '3049768'
+      uid: 983ccc88-e82f-4c82-9d0e-1d7dca84bbfc
+    nfs:
+      path: /mnt/nfsocprwx
+      server: 192.168.8.181
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: manual-nfs
+    volumeMode: Filesystem
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-04-09T22:14:56Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-09T22:14:56Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:fsType: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-09T22:14:56Z'
+    name: pvc-00909444-431f-486c-bbbd-da21f4232e0f
+    resourceVersion: '1622937'
+    uid: e83d769e-8be0-4533-9745-b7b3f108d3fa
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: postgres-15-myaap-postgres-15-0
+      namespace: aap
+      resourceVersion: '1622908'
+      uid: 00909444-431f-486c-bbbd-da21f4232e0f
+    csi:
+      driver: topolvm.io
+      fsType: xfs
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1775586777030-1460-topolvm.io
+      volumeHandle: 71ad4444-c0e3-4dbf-b11e-7171a0f3e990
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Filesystem
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-04-07T20:01:17Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-07T20:01:17Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-07T20:01:17Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-07T20:01:32Z'
+    name: pvc-08fa002e-ad87-4ccc-a501-1039198b8b04
+    resourceVersion: '53727'
+    uid: ecb3ce4d-636d-40b3-912a-ac9c98015af3
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: fedora-68ed96832eca
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '53717'
+      uid: 007afc72-a1c2-47f8-adc9-b68d38987e91
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1775586777030-1460-topolvm.io
+      volumeHandle: e97d5e50-5425-4708-887d-9dc5b44521df
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-04-10T18:42:32Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-10T18:42:32Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-10T18:42:35Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-10T20:00:08Z'
+    name: pvc-252392e6-76e3-47c1-8386-fd5c8d08c1c9
+    resourceVersion: '2917913'
+    uid: 5e0b281e-10b5-4d8c-91ac-11fa819bc257
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 200Gi
+    claimRef:
+      name: dv-rhel-8-ocpv-disk-for-nfsocprwx-86-czatib
+      namespace: default
+      resourceVersion: '2840853'
+      uid: 0beee35b-1ac1-4a26-9a16-c9a286dc4ef4
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1775586777030-1460-topolvm.io
+      volumeHandle: 4963081d-0ee3-4b42-8012-763db89b5e76
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-05-28T03:34:53Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-05-28T03:34:53Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-05-28T03:34:53Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-05-28T03:35:16Z'
+    name: pvc-3b22bc23-c425-4f30-80af-bcb8d190f29b
+    resourceVersion: '67705442'
+    uid: 10506d20-d841-469f-93b5-56e85d318f4c
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: centos-stream9-250299200671
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '67705437'
+      uid: bd30b085-dacb-4cfd-b2f4-1d4fc0427a8b
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: 3b926358-6d73-456f-a50d-c9b292baaf18
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-04-09T22:17:50Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-09T22:17:50Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:fsType: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-09T22:17:50Z'
+    name: pvc-3da44d06-79c0-407c-a98c-475d912ba304
+    resourceVersion: '1626055'
+    uid: dc15caa2-3b60-4857-ba3d-99bfc37ccd0a
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: myaap-hub-redis-data
+      namespace: aap
+      resourceVersion: '1626020'
+      uid: 3da44d06-79c0-407c-a98c-475d912ba304
+    csi:
+      driver: topolvm.io
+      fsType: xfs
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1775586777030-1460-topolvm.io
+      volumeHandle: e76e4197-93bf-4631-b9f7-5464c1b6e4df
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Filesystem
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-05-05T19:53:43Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-05-05T19:53:43Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:fsType: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-05-05T19:53:44Z'
+    name: pvc-40c5eae3-f019-4e6b-bfef-d0c8b331d78e
+    resourceVersion: '34247163'
+    uid: 2d0ad11d-ef7f-4851-8627-d21507d6acb1
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 10Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: costmanagement-metrics-operator-data
+      namespace: costmanagement-metrics-operator
+      resourceVersion: '34247089'
+      uid: 40c5eae3-f019-4e6b-bfef-d0c8b331d78e
+    csi:
+      driver: topolvm.io
+      fsType: xfs
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: cf4f5370-c46e-4607-ae8b-3a21fc62a4c9
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Filesystem
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-04-07T19:57:42Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-07T19:57:42Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-07T19:57:42Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-07T20:03:33Z'
+    name: pvc-48123f96-cd03-4ffc-8094-1f501dfed150
+    resourceVersion: '54874'
+    uid: b1c4a779-1a71-436d-a283-faa3919f2ce4
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: rhel9-ab4ec16077fe
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '54869'
+      uid: a274aef1-85f0-4d80-925a-fc655902ba38
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1775586777030-1460-topolvm.io
+      volumeHandle: bdeba34c-c657-4aac-af2a-460c5f588c36
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-05-20T03:33:01Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-05-20T03:33:01Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-05-20T03:33:01Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-05-20T03:35:01Z'
+    name: pvc-4d592856-5777-4a8b-9f77-89b3b8a27e1b
+    resourceVersion: '55713489'
+    uid: 34883e4b-5cb2-40f0-99f6-06795ed102b4
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: rhel9-5ac861530430
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '55713485'
+      uid: 98bc05f6-7db8-4b01-8a73-8b0246643e6f
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: dfe1ff4c-13dc-4ebe-b5a9-e5f6f68862c3
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-05-20T03:33:02Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-05-20T03:33:02Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-05-20T03:33:02Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-05-20T03:36:45Z'
+    name: pvc-4d823ba9-7508-4128-9f84-d51ae350d79d
+    resourceVersion: '55715618'
+    uid: 31e0adef-f350-47e6-ba8d-d2e07a04b0b4
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: rhel10-c5b97492a6e3
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '55715613'
+      uid: f0a0c406-66e1-4af7-a090-498a65c096f5
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: d9fe0f4a-533f-4903-b47b-cdd191ba23f3
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-06-02T03:36:22Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T03:36:23Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-06-02T03:36:23Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-06-02T03:36:47Z'
+    name: pvc-5c4fd11d-a1b2-4670-a657-8d9991661da2
+    resourceVersion: '75191989'
+    uid: 406ff4cf-8a47-448e-b01a-04beabaf13ab
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: centos-stream10-9458ef296b0e
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '75191985'
+      uid: c85148fa-c2e0-4953-a21b-a576ddf5e2b1
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: 6f60bbef-0bed-48aa-a6b0-3018ce0702df
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-05-19T03:35:02Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-05-19T03:35:02Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-05-19T03:35:02Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-05-19T03:35:27Z'
+    name: pvc-7e5f4c99-0351-4234-b2c6-313a76b9c054
+    resourceVersion: '54214985'
+    uid: f9247317-9fc8-4160-8056-82cf1ef2dd34
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: centos-stream10-bc3fd60ed98e
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '54214983'
+      uid: 78e9368b-9226-41bf-8782-ba5c4a0ea871
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: 09c40701-389b-451d-8fbd-2a3e7dee6798
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-06-02T15:33:01Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T15:33:01Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-06-02T15:33:01Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-06-02T15:41:02Z'
+    name: pvc-7f1be141-af1e-4379-bb58-eb3b483aac73
+    resourceVersion: '75935774'
+    uid: c42e5256-e191-4561-b0ef-8708e6ba06c5
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: rhel9-7005186c23b8
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '75935768'
+      uid: 5582f805-5b30-424f-905a-57caf34c8831
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: 7d85f198-322c-41cd-b056-052592c4db69
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-05-27T03:35:32Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-05-27T03:35:32Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-05-27T03:35:33Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-05-27T03:35:59Z'
+    name: pvc-98918710-74f5-4e11-9527-07668a92a35c
+    resourceVersion: '66209410'
+    uid: 7ee067be-88c7-4907-912d-599cf1aee2fd
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: centos-stream10-2d2d6cc442be
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '66209407'
+      uid: f439f258-eba9-4a1d-9549-97b0190fb2c0
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: 0d91e4d1-8b80-4f38-847e-7343ae35e7ae
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-06-03T03:35:42Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-03T03:35:42Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-06-03T03:35:42Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-06-03T03:36:07Z'
+    name: pvc-aff76de0-17fb-4b0c-a009-097efbf9311d
+    resourceVersion: '76679063'
+    uid: ffc594e5-3d9f-44a9-89c1-e16b8742e697
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: centos-stream9-17a781daca15
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '76679061'
+      uid: 17c98c82-2c0d-4b34-bcdf-5683ede8f0fb
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1780417702322-7201-topolvm.io
+      volumeHandle: ea48c572-2088-4928-9502-5e22db2346bd
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-04-07T20:39:25Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-07T20:39:25Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-07T20:39:25Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-07T20:40:14Z'
+    name: pvc-b883f753-8d05-40d8-9cba-1ca024afdb6a
+    resourceVersion: '73634'
+    uid: 5b0d2f2d-8b5f-4fda-8fa5-e8dbc93aeadc
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: rhel-8-ocpv-volume
+      namespace: default
+      resourceVersion: '73610'
+      uid: 9015d58c-9b5a-44fc-83be-fa76c0efefaa
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1775586777030-1460-topolvm.io
+      volumeHandle: c204fd97-8fb3-406c-aa9f-9d9265a7bd91
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-04-07T19:57:43Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-07T19:57:43Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-07T19:57:43Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-07T20:03:43Z'
+    name: pvc-bd5d498e-acd2-44dc-a229-e99c95f9b43b
+    resourceVersion: '55036'
+    uid: 3f3d332f-867e-4802-92d2-3b38c184a556
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: rhel8-004e24cfacec
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '55031'
+      uid: fa6248a7-2c7b-43e3-a1c5-f8791e436e4a
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1775586777030-1460-topolvm.io
+      volumeHandle: 6f69a07d-890b-450f-8435-afa37bead448
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-05-20T03:35:58Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-05-20T03:35:58Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-05-20T03:35:58Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-05-26T20:54:34Z'
+    name: pvc-e00bbee1-6756-4114-b9fa-507ad059e372
+    resourceVersion: '65792000'
+    uid: 84c09da7-b8cd-4d6d-9366-cc6af6e1e6e7
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: centos-stream9-2c2deb08564e
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '65791996'
+      uid: 817958e2-35af-4b52-9351-a2f896b5b68e
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: a0c0313f-c6ba-4c34-a7ba-25046410b5ab
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-04-07T19:57:44Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-07T19:57:44Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-07T19:57:44Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-07T20:04:12Z'
+    name: pvc-e3ad8b07-ea51-4652-8ac8-e8c146348057
+    resourceVersion: '55393'
+    uid: f6777542-d602-4b1f-8a25-4d72a4dd87ff
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: rhel10-c03936a065f2
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '55387'
+      uid: 6109870c-db6f-4266-9485-8f31d2bff75e
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1775586777030-1460-topolvm.io
+      volumeHandle: 8f515940-42dc-4b06-87d7-8da23e713ccd
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: topolvm.io
+      volume.kubernetes.io/provisioner-deletion-secret-name: ''
+      volume.kubernetes.io/provisioner-deletion-secret-namespace: ''
+    creationTimestamp: '2026-04-29T03:33:54Z'
+    finalizers:
+    - external-provisioner.volume.kubernetes.io/finalizer
+    - kubernetes.io/pv-protection
+    labels:
+      kubernetes.io/hostname: geekom
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-29T03:33:54Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-name: {}
+            f:volume.kubernetes.io/provisioner-deletion-secret-namespace: {}
+          f:finalizers:
+            .: {}
+            v:"external-provisioner.volume.kubernetes.io/finalizer": {}
+          f:labels:
+            .: {}
+            f:kubernetes.io/hostname: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:namespace: {}
+          f:csi:
+            .: {}
+            f:driver: {}
+            f:volumeAttributes:
+              .: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:nodeAffinity:
+            .: {}
+            f:required: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: lvms
+      operation: Update
+      time: '2026-04-29T03:33:54Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:claimRef:
+            f:name: {}
+            f:resourceVersion: {}
+            f:uid: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-29T03:34:08Z'
+    name: pvc-ed18830b-84bc-4b47-9954-069eb9bf847e
+    resourceVersion: '24599959'
+    uid: fe2b0196-84e0-4416-a198-accf7e26786a
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 30Gi
+    claimRef:
+      name: fedora-1217dcc8c58d
+      namespace: openshift-virtualization-os-images
+      resourceVersion: '24599954'
+      uid: 51796839-8085-48b7-8b77-377db61ad423
+    csi:
+      driver: topolvm.io
+      volumeAttributes:
+        storage.kubernetes.io/csiProvisionerIdentity: 1777419151773-3370-topolvm.io
+      volumeHandle: e2f94a3a-627b-434b-aec4-c994725798f5
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.topolvm.io/node
+            operator: In
+            values:
+            - geekom
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Block

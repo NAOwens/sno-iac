@@ -1,0 +1,6 @@
+- apiVersion: config.openshift.io/v1
+  kind: Console
+  metadata: {}
+  spec: {}
+  status:
+    consoleURL: https://console-openshift-console.apps.sno.ofam.dev

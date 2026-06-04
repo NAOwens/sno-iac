@@ -1,0 +1,227 @@
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"name":"myaap-hub-file-storage","namespace":"aap"},"spec":{"accessModes":["ReadWriteMany"],"resources":{"requests":{"storage":"100Gi"}},"storageClassName":"manual-nfs","volumeMode":"Filesystem"}}
+
+        '
+      pv.kubernetes.io/bind-completed: 'yes'
+      pv.kubernetes.io/bound-by-controller: 'yes'
+    creationTimestamp: '2026-04-10T22:12:40Z'
+    finalizers:
+    - kubernetes.io/pvc-protection
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:pv.kubernetes.io/bind-completed: {}
+            f:pv.kubernetes.io/bound-by-controller: {}
+        f:spec:
+          f:volumeName: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: '2026-04-10T22:12:40Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-10T22:12:40Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          f:accessModes: {}
+          f:resources:
+            f:requests:
+              .: {}
+              f:storage: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: '2026-04-10T22:12:40Z'
+    name: myaap-hub-file-storage
+    namespace: aap
+    resourceVersion: '3049772'
+    uid: 983ccc88-e82f-4c82-9d0e-1d7dca84bbfc
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 100Gi
+    storageClassName: manual-nfs
+    volumeMode: Filesystem
+    volumeName: nfsocprwx
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: 'yes'
+      pv.kubernetes.io/bound-by-controller: 'yes'
+      volume.beta.kubernetes.io/storage-provisioner: topolvm.io
+      volume.kubernetes.io/storage-provisioner: topolvm.io
+    creationTimestamp: '2026-04-09T22:17:48Z'
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: cache
+      app.kubernetes.io/instance: redis-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: redis
+      app.kubernetes.io/part-of: automationhub
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b1a976d1-2cda-486d-b116-c4d2b79daa5d"}: {}
+        f:spec:
+          f:accessModes: {}
+          f:resources:
+            f:requests:
+              .: {}
+              f:storage: {}
+          f:volumeMode: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:48Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/bind-completed: {}
+            f:pv.kubernetes.io/bound-by-controller: {}
+            f:volume.beta.kubernetes.io/storage-provisioner: {}
+            f:volume.kubernetes.io/storage-provisioner: {}
+        f:spec:
+          f:volumeName: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: '2026-04-09T22:17:50Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-09T22:17:50Z'
+    name: myaap-hub-redis-data
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationhub.ansible.com/v1beta1
+      kind: AutomationHub
+      name: myaap-hub
+      uid: b1a976d1-2cda-486d-b116-c4d2b79daa5d
+    resourceVersion: '1626057'
+    uid: 3da44d06-79c0-407c-a98c-475d912ba304
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Filesystem
+    volumeName: pvc-3da44d06-79c0-407c-a98c-475d912ba304
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: 'yes'
+      pv.kubernetes.io/bound-by-controller: 'yes'
+      volume.beta.kubernetes.io/storage-provisioner: topolvm.io
+      volume.kubernetes.io/storage-provisioner: topolvm.io
+    creationTimestamp: '2026-04-09T22:14:55Z'
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: postgres-15-myaap
+      app.kubernetes.io/managed-by: aap-gateway-operator
+      app.kubernetes.io/name: postgres-15
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/bind-completed: {}
+            f:pv.kubernetes.io/bound-by-controller: {}
+            f:volume.beta.kubernetes.io/storage-provisioner: {}
+            f:volume.kubernetes.io/storage-provisioner: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+        f:spec:
+          f:accessModes: {}
+          f:resources:
+            f:requests:
+              .: {}
+              f:storage: {}
+          f:volumeMode: {}
+          f:volumeName: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: '2026-04-09T22:14:56Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-04-09T22:14:56Z'
+    name: postgres-15-myaap-postgres-15-0
+    namespace: aap
+    resourceVersion: '1622935'
+    uid: 00909444-431f-486c-bbbd-da21f4232e0f
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: lvms-vg1-immediate
+    volumeMode: Filesystem
+    volumeName: pvc-00909444-431f-486c-bbbd-da21f4232e0f

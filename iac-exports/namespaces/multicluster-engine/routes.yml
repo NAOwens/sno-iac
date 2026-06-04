@@ -1,0 +1,358 @@
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+      openshift.io/host.generated: 'true'
+    creationTimestamp: '2026-04-09T14:29:16Z'
+    generation: 1
+    labels:
+      backplaneconfig.name: multiclusterengine
+    managedFields:
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+            f:openshift.io/host.generated: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+        f:spec:
+          f:port:
+            f:targetPort: {}
+          f:tls:
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:53Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:openshift.io/host.generated: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:port:
+            .: {}
+            f:targetPort: {}
+          f:tls:
+            .: {}
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+            f:weight: {}
+          f:wildcardPolicy: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:16Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:ingress: {}
+      manager: openshift-router
+      operation: Update
+      subresource: status
+      time: '2026-04-09T14:29:17Z'
+    name: agent-registration
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482606'
+    uid: ba06dcab-6e94-4930-995b-e24811770d92
+  spec:
+    host: agent-registration-multicluster-engine.apps.sno.ofam.dev
+    port:
+      targetPort: agentregistration
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: reencrypt
+    to:
+      kind: Service
+      name: agent-registration
+      weight: 100
+    wildcardPolicy: None
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      haproxy.router.openshift.io/balance: roundrobin
+      haproxy.router.openshift.io/timeout: 60s
+      installer.multicluster.openshift.io/release-version: 2.11.1
+    creationTimestamp: '2026-04-09T14:29:45Z'
+    generation: 1
+    labels:
+      backplaneconfig.name: multiclusterengine
+      chart: cluster-proxy-addon-2.1.0
+      component: cluster-proxy-addon-anp-server
+    managedFields:
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:haproxy.router.openshift.io/balance: {}
+            f:haproxy.router.openshift.io/timeout: {}
+            f:installer.multicluster.openshift.io/release-version: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+            f:chart: {}
+            f:component: {}
+        f:spec:
+          f:host: {}
+          f:port:
+            f:targetPort: {}
+          f:tls:
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:54Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:haproxy.router.openshift.io/balance: {}
+            f:haproxy.router.openshift.io/timeout: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+            f:chart: {}
+            f:component: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:host: {}
+          f:port:
+            .: {}
+            f:targetPort: {}
+          f:tls:
+            .: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+            f:weight: {}
+          f:wildcardPolicy: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:45Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:ingress: {}
+      manager: openshift-router
+      operation: Update
+      subresource: status
+      time: '2026-04-09T14:29:45Z'
+    name: cluster-proxy-addon-anp
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482810'
+    uid: faba97b5-7f88-47b1-84a4-2a70a3c527dc
+  spec:
+    host: cluster-proxy-anp.apps.sno.ofam.dev
+    port:
+      targetPort: anp-port
+    tls:
+      termination: passthrough
+    to:
+      kind: Service
+      name: cluster-proxy-addon-anp
+      weight: 100
+    wildcardPolicy: None
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      installer.multicluster.openshift.io/release-version: 2.11.1
+      openshift.io/host.generated: 'true'
+    creationTimestamp: '2026-04-09T14:29:45Z'
+    generation: 1
+    labels:
+      backplaneconfig.name: multiclusterengine
+      chart: cluster-proxy-addon-2.1.0
+      component: cluster-proxy-addon-user
+    managedFields:
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.multicluster.openshift.io/release-version: {}
+            f:openshift.io/host.generated: {}
+          f:labels:
+            f:backplaneconfig.name: {}
+            f:chart: {}
+            f:component: {}
+        f:spec:
+          f:host: {}
+          f:port:
+            f:targetPort: {}
+          f:tls:
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+      manager: backplane-operator
+      operation: Apply
+      time: '2026-05-05T23:38:54Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:openshift.io/host.generated: {}
+          f:labels:
+            .: {}
+            f:backplaneconfig.name: {}
+            f:chart: {}
+            f:component: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"1859aebf-9b08-4a32-8e8b-965800219e82"}: {}
+        f:spec:
+          f:host: {}
+          f:port:
+            .: {}
+            f:targetPort: {}
+          f:tls:
+            .: {}
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+            f:weight: {}
+          f:wildcardPolicy: {}
+      manager: backplane-operator
+      operation: Update
+      time: '2026-04-09T14:29:45Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:ingress: {}
+      manager: openshift-router
+      operation: Update
+      subresource: status
+      time: '2026-04-09T14:29:45Z'
+    name: cluster-proxy-addon-user
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: multicluster.openshift.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: MultiClusterEngine
+      name: multiclusterengine
+      uid: 1859aebf-9b08-4a32-8e8b-965800219e82
+    resourceVersion: '34482764'
+    uid: c85407de-cf02-4cca-8f34-ae751dd116c6
+  spec:
+    host: cluster-proxy-user.apps.sno.ofam.dev
+    port:
+      targetPort: user-port
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: reencrypt
+    to:
+      kind: Service
+      name: cluster-proxy-addon-user
+      weight: 100
+    wildcardPolicy: None
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      openshift.io/host.generated: 'true'
+    creationTimestamp: '2026-04-09T14:31:01Z'
+    generation: 1
+    managedFields:
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3c6cda7a-a71a-4bc7-a74b-2d9efcfa7bab"}: {}
+        f:spec:
+          f:port:
+            .: {}
+            f:targetPort: {}
+          f:tls:
+            .: {}
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+            f:weight: {}
+          f:wildcardPolicy: {}
+      manager: hypershift-addon
+      operation: Update
+      time: '2026-04-09T14:31:01Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:ingress: {}
+      manager: openshift-router
+      operation: Update
+      subresource: status
+      time: '2026-04-09T14:31:01Z'
+    name: hcp-cli-download
+    namespace: multicluster-engine
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: hypershift-addon-manager
+      uid: 3c6cda7a-a71a-4bc7-a74b-2d9efcfa7bab
+    resourceVersion: '1239033'
+    uid: c4cf24fb-9c07-4446-9609-09b161a03969
+  spec:
+    host: hcp-cli-download-multicluster-engine.apps.sno.ofam.dev
+    port:
+      targetPort: http
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: edge
+    to:
+      kind: Service
+      name: hcp-cli-download
+      weight: 100
+    wildcardPolicy: None

@@ -1,0 +1,314 @@
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"control-plane":"clustersync","controller-tools.k8s.io":"1.0"},"name":"hive-clustersync","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]},"spec":{"ports":[{"name":"metrics","port":2112,"protocol":"TCP","targetPort":0},{"name":"profiling","port":6060,"protocol":"TCP","targetPort":0}],"selector":{"control-plane":"clustersync","controller-tools.k8s.io":"1.0"}},"status":{"loadBalancer":{}}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:31Z'
+    labels:
+      control-plane: clustersync
+      controller-tools.k8s.io: '1.0'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:control-plane: {}
+            f:controller-tools.k8s.io: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":2112,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":6060,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:31Z'
+    name: hive-clustersync
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241099'
+    uid: 22919307-cfbe-4c94-927f-425130181dab
+  spec:
+    clusterIP: 172.30.30.103
+    clusterIPs:
+    - 172.30.30.103
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 2112
+      protocol: TCP
+      targetPort: 2112
+    - name: profiling
+      port: 6060
+      protocol: TCP
+      targetPort: 6060
+    selector:
+      control-plane: clustersync
+      controller-tools.k8s.io: '1.0'
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"control-plane":"controller-manager","controller-tools.k8s.io":"1.0"},"name":"hive-controllers","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]},"spec":{"ports":[{"name":"metrics","port":2112,"protocol":"TCP","targetPort":0},{"name":"profiling","port":6060,"protocol":"TCP","targetPort":0}],"selector":{"control-plane":"controller-manager","controller-tools.k8s.io":"1.0"}},"status":{"loadBalancer":{}}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:30Z'
+    labels:
+      control-plane: controller-manager
+      controller-tools.k8s.io: '1.0'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:control-plane: {}
+            f:controller-tools.k8s.io: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":2112,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":6060,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:30Z'
+    name: hive-controllers
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241058'
+    uid: 4411d401-d1bd-4a9a-b978-566290bba655
+  spec:
+    clusterIP: 172.30.229.157
+    clusterIPs:
+    - 172.30.229.157
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 2112
+      protocol: TCP
+      targetPort: 2112
+    - name: profiling
+      port: 6060
+      protocol: TCP
+      targetPort: 6060
+    selector:
+      control-plane: controller-manager
+      controller-tools.k8s.io: '1.0'
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"control-plane":"machinepool","controller-tools.k8s.io":"1.0"},"name":"hive-machinepool","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]},"spec":{"ports":[{"name":"metrics","port":2112,"protocol":"TCP","targetPort":0},{"name":"profiling","port":6060,"protocol":"TCP","targetPort":0}],"selector":{"control-plane":"machinepool","controller-tools.k8s.io":"1.0"}},"status":{"loadBalancer":{}}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:31Z'
+    labels:
+      control-plane: machinepool
+      controller-tools.k8s.io: '1.0'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:control-plane: {}
+            f:controller-tools.k8s.io: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":2112,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":6060,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:31Z'
+    name: hive-machinepool
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241121'
+    uid: 915d6f16-7252-4e6d-b27a-b8426493a19b
+  spec:
+    clusterIP: 172.30.50.85
+    clusterIPs:
+    - 172.30.50.85
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: metrics
+      port: 2112
+      protocol: TCP
+      targetPort: 2112
+    - name: profiling
+      port: 6060
+      protocol: TCP
+      targetPort: 6060
+    selector:
+      control-plane: machinepool
+      controller-tools.k8s.io: '1.0'
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"service.alpha.openshift.io/serving-cert-secret-name":"hiveadmission-serving-cert"},"name":"hiveadmission","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]},"spec":{"ports":[{"port":443,"protocol":"TCP","targetPort":9443}],"selector":{"app":"hiveadmission"}},"status":{"loadBalancer":{}}}
+
+        '
+      service.alpha.openshift.io/serving-cert-secret-name: hiveadmission-serving-cert
+      service.alpha.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+      service.beta.openshift.io/serving-cert-signed-by: openshift-service-serving-signer@1775579189
+    creationTimestamp: '2026-04-09T14:32:32Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+            f:service.alpha.openshift.io/serving-cert-secret-name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:32Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:service.alpha.openshift.io/serving-cert-signed-by: {}
+            f:service.beta.openshift.io/serving-cert-signed-by: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:32:32Z'
+    name: hiveadmission
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241162'
+    uid: 5685097e-eed6-4520-8c68-6353ae75fd68
+  spec:
+    clusterIP: 172.30.4.223
+    clusterIPs:
+    - 172.30.4.223
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 443
+      protocol: TCP
+      targetPort: 9443
+    selector:
+      app: hiveadmission
+    sessionAffinity: None
+    type: ClusterIP

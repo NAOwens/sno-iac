@@ -1,0 +1,782 @@
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"name":"aws-private-link","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:29Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:29Z'
+    name: aws-private-link
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241048'
+    uid: 9df8379a-cab9-499d-88d3-8c06b96a2faf
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"name":"hive-controllers-config","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:30Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:30Z'
+    name: hive-controllers-config
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241055'
+    uid: e7096656-b50d-435c-ba15-075eafbd3160
+- apiVersion: v1
+  data:
+    hive-failed-provision-config: '{}'
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"hive-failed-provision-config":"{}"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"hive-failed-provision-config","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:29Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:hive-failed-provision-config: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:29Z'
+    name: hive-failed-provision-config
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241050'
+    uid: 61c0741b-baad-4bed-9ee9-bb2a077a9147
+- apiVersion: v1
+  data:
+    HIVE_FEATURE_GATES_ENABLED: ''
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"HIVE_FEATURE_GATES_ENABLED":""},"kind":"ConfigMap","metadata":{"annotations":{},"name":"hive-feature-gates","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:30Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:HIVE_FEATURE_GATES_ENABLED: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:30Z'
+    name: hive-feature-gates
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241056'
+    uid: a3b85fed-7016-4d75-9e59-9f6d9dc2fab8
+- apiVersion: v1
+  data:
+    managed-domains: 'null'
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"managed-domains":"null"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"hive-managed-domains","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:29Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:managed-domains: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:29Z'
+    name: hive-managed-domains
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241047'
+    uid: 2b8aa1ab-ec00-4614-9224-5b525498ecdb
+- apiVersion: v1
+  data:
+    hive-metrics-config: 'null'
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"hive-metrics-config":"null"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"hive-metrics-config","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:29Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:hive-metrics-config: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:29Z'
+    name: hive-metrics-config
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241051'
+    uid: 8bdfad72-a817-4ed8-9e25-35c34d5fdcad
+- apiVersion: v1
+  data:
+    supported-contracts: '[{"name":"clusterinstall","supported":[{"group":"extensions.hive.openshift.io","version":"v1beta1","kind":"AgentClusterInstall","config":{"skipImageSetJob":"true"}},{"group":"hiveinternal.openshift.io","version":"v1alpha1","kind":"FakeClusterInstall","config":{"skipImageSetJob":"true"}},{"group":"extensions.hive.openshift.io","version":"v1alpha1","kind":"ImageClusterInstall"}]}]'
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"supported-contracts":"[{\"name\":\"clusterinstall\",\"supported\":[{\"group\":\"extensions.hive.openshift.io\",\"version\":\"v1beta1\",\"kind\":\"AgentClusterInstall\",\"config\":{\"skipImageSetJob\":\"true\"}},{\"group\":\"hiveinternal.openshift.io\",\"version\":\"v1alpha1\",\"kind\":\"FakeClusterInstall\",\"config\":{\"skipImageSetJob\":\"true\"}},{\"group\":\"extensions.hive.openshift.io\",\"version\":\"v1alpha1\",\"kind\":\"ImageClusterInstall\"}]}]"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"hive-supported-contracts","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:30Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:supported-contracts: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:30Z'
+    name: hive-supported-contracts
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241054'
+    uid: 1a168bec-d3b5-4330-af31-8228212e3ddb
+- apiVersion: v1
+  data:
+    regexes: "# AWS Specific:\n- name: AWSInsufficientCapacity\n  searchRegexStrings:\n
+      \ - \"Error: .*InsufficientInstanceCapacity.* Our system will be working on
+      provisioning additional capacity\"\n  installFailingReason: AWSInsufficientCapacity\n
+      \ installFailingMessage: AWS currently does not have sufficient capacity to
+      provision the requested EC2 instances in the specified Availability Zone. Please
+      try again later or in a different Availability Zone.\n- name: AWSEC2QuotaExceeded\n
+      \ searchRegexStrings:\n  - \"failed to generate asset.*Platform Quota Check.*MissingQuota.*ec2\"\n
+      \ installFailingReason: AWSEC2QuotaExceeded\n  installFailingMessage: AWS EC2
+      Quota Exceeded\n- name: AWSNATGatewayLimitExceeded\n  searchRegexStrings:\n
+      \ - \"NatGatewayLimitExceeded\"\n  installFailingReason: AWSNATGatewayLimitExceeded\n
+      \ installFailingMessage: AWS NAT gateway limit exceeded\n- name: AWSVPCLimitExceeded\n
+      \ searchRegexStrings:\n  - \"VpcLimitExceeded\"\n  installFailingReason: AWSVPCLimitExceeded\n
+      \ installFailingMessage: AWS VPC limit exceeded\n- name: S3BucketsLimitExceeded\n
+      \ searchRegexStrings:\n   - \"TooManyBuckets\"\n  installFailingReason: S3BucketsLimitExceeded\n
+      \ installFailingMessage: S3 Buckets Limit Exceeded\n- name: LoadBalancerLimitExceeded\n
+      \ searchRegexStrings:\n  - \"TooManyLoadBalancers: Exceeded quota of account\"\n
+      \ installFailingReason: LoadBalancerLimitExceeded\n  installFailingMessage:
+      AWS Load Balancer Limit Exceeded\n- name: EIPAddressLimitExceeded\n  searchRegexStrings:\n
+      \ - \"EIP: AddressLimitExceeded\"\n  installFailingReason: EIPAddressLimitExceeded\n
+      \ installFailingMessage: EIP Address limit exceeded\n- name: AWSSubnetInsufficientIPSpace\n
+      \ searchRegexStrings:\n  - \"InvalidSubnet: Not enough IP space available in\"\n
+      \ installFailingReason: AWSSubnetInsufficientIPSpace\n  installFailingMessage:
+      Insufficient IP space available in subnet\n- name: AWSIAMRoleTagLimitExceeded\n
+      \ searchRegexStrings:\n  - \"could not tag \\\".*\\\" instance role: LimitExceeded:
+      The number of tags has reached the maximum limit\"\n  installFailingReason:
+      AWSIAMRoleTagLimitExceeded\n  installFailingMessage: AWS IAM Role exceeds the
+      maximum number of tags allowed (50)\n- name: AWSSubnetTagLimitExceeded\n  searchRegexStrings:\n
+      \ - \"could not add tags to subnets: TagLimitExceeded\"\n  installFailingReason:
+      AWSSubnetTagLimitExceeded\n  installFailingMessage: AWS Subnet exceeds the maximum
+      number of tags allowed (50)\n- name: MissingPublicSubnetForZone\n  searchRegexStrings:\n
+      \ - \"No public subnet provided for zone\"\n  installFailingReason: MissingPublicSubnetForZone\n
+      \ installFailingMessage: No public subnet provided for at least one zone\n-
+      name: PrivateSubnetInMultipleZones\n  searchRegexStrings:\n  - \"private subnet
+      .* is also in zone\"\n  installFailingReason: PrivateSubnetInMultipleZones\n
+      \ installFailingMessage: Same private subnet used in multiple zones\n- name:
+      InvalidInstallConfigSubnet\n  searchRegexStrings:\n  - \"CIDR range start.*is
+      outside of the specified machine networks\"\n  installFailingReason: InvalidInstallConfigSubnet\n
+      \ installFailingMessage: Invalid subnet in install config. Subnet's CIDR range
+      start is outside of the specified machine networks\n# https://bugzilla.redhat.com/show_bug.cgi?id=1844320\n-
+      name: AWSUnableToFindMatchingRouteTable\n  searchRegexStrings:\n  - \"Error:
+      Unable to find matching route for Route Table\"\n  installFailingReason: AWSUnableToFindMatchingRouteTable\n
+      \ installFailingMessage: Unable to find matching route for route table\n- name:
+      DNSAlreadyExists\n  searchRegexStrings:\n  - \"aws_route53_record.*Error building
+      changeset:.*Tried to create resource record set.*but it already exists\"\n  installFailingReason:
+      DNSAlreadyExists\n  installFailingMessage: DNS record already exists\n- name:
+      PendingVerification\n  searchRegexStrings:\n  - \"PendingVerification: Your
+      request for accessing resources in this region is being validated\"\n  installFailingReason:
+      PendingVerification\n  installFailingMessage: Account pending verification for
+      region\n- name: NoMatchingRoute53Zone\n  searchRegexStrings:\n  - \"data.aws_route53_zone.public:
+      no matching Route53Zone found\"\n  installFailingReason: NoMatchingRoute53Zone\n
+      \ installFailingMessage: No matching Route53Zone found\n- name: TooManyRoute53Zones\n
+      \ searchRegexStrings:\n  - \"error creating Route53 Hosted Zone: TooManyHostedZones:
+      Limits Exceeded\"\n  installFailingReason: TooManyRoute53Zones\n  installFailingMessage:
+      Route53 hosted zone limit exceeded\n- name: MultipleRoute53ZonesFound\n  searchRegexStrings:\n
+      \   - \"Error: multiple Route53Zone found\"\n  installFailingReason: MultipleRoute53ZonesFound\n
+      \ installFailingMessage: Multiple Route53 zones found\n- name: DefaultEbsKmsKeyInsufficientPermissions\n
+      \ searchRegexStrings:\n    - \"Client.InternalError: Client error on launch\"\n
+      \   - \"Client.InvalidKMSKey.InvalidState: The KMS key provided is in an incorrect
+      state\"\n  installFailingReason: DefaultEbsKmsKeyInsufficientPermissions\n  installFailingMessage:
+      Default KMS key for EBS encryption has insufficient permissions to launch EC2
+      instances\n- name: SimulatorThrottling\n  searchRegexStrings:\n  - \"validate
+      AWS credentials: checking install permissions: error simulating policy: Throttling:
+      Rate exceeded\"\n  installFailingReason: AWSAPIRateLimitExceeded\n  installFailingMessage:
+      AWS API rate limit exceeded while simulating policy\n- name: S3AccessControlListNotSupported\n
+      \ searchRegexStrings:\n  - \"error creating S3 bucket ACL for.*AccessControlListNotSupported:
+      The bucket does not allow ACLs\"\n  installFailingReason: S3AccessControlListNotSupported\n
+      \ installFailingMessage: S3AccessControlListNotSupported\n- name: GeneralThrottling\n
+      \ searchRegexStrings:\n  - \"Throttling: Rate exceeded\"\n  installFailingReason:
+      AWSAPIRateLimitExceeded\n  installFailingMessage: AWS API rate limit exceeded\n#
+      This issue is caused by AWS throttling the CreateHostedZone request. The terraform
+      provider is not properly\n# handling the throttling response and gets stuck
+      in a state where it does not retry the request. Eventually,\n# the terraform
+      provider times out claiming that it is waiting for the hosted zone to be INSYNC.\n-
+      name: AWSRoute53Timeout\n  searchRegexStrings:\n  - \"error waiting for Route53
+      Hosted Zone .* creation: timeout while waiting for state to become 'INSYNC'\"\n
+      \ installFailingReason: AWSRoute53Timeout\n  installFailingMessage: AWS Route53
+      timeout while waiting for INSYNC. This is usually caused by Route53 rate limiting.\n-
+      name: InvalidCredentials\n  searchRegexStrings:\n  - \"InvalidClientTokenId:
+      The security token included in the request is invalid.\"\n  installFailingReason:
+      InvalidCredentials\n  installFailingMessage: Credentials are invalid\n- name:
+      InvalidAWSTags\n  searchRegexStrings:\n  - \"platform\\\\.aws\\\\.userTags.*:
+      Invalid value:.*value contains invalid characters\"\n  installFailingReason:
+      InvalidAWSTags\n  installFailingMessage: You have specified an invalid AWS tag
+      value. Verify that your tags meet AWS requirements and try again.\n- name: ErrorDeletingIAMRole\n
+      \ searchRegexStrings:\n    - \"Error deleting IAM Role .* DeleteConflict: Cannot
+      delete entity, must detach all policies first.\"\n  installFailingReason: ErrorDeletingIAMRole\n
+      \ installFailingMessage: The cluster installer was not able to delete the roles
+      it used during the installation. Ensure that no policies are added to new roles
+      by default and try again.\n- name: AWSSubnetDoesNotExist\n  searchRegexStrings:\n
+      \ - \"The subnet ID .* does not exist\"\n  installFailingReason: AWSSubnetDoesNotExist\n
+      \ installFailingMessage: AWS Subnet Does Not Exist\n# iam:CreateServiceLinkedRole
+      is a super powerful permission that we don't give to STS clusters. We require
+      it's done as a one-time prereq.\n# This is the error we see when the prereq
+      step was missed.\n- name: NATGatewayFailed\n  searchRegexStrings:\n  - \"Error
+      waiting for NAT Gateway (.*) to become available\"\n  installFailingReason:
+      NATGatewayFailed\n  installFailingMessage: Error waiting for NAT Gateway to
+      become available.\n- name: AWSAccessDeniedSLR\n  searchRegexStrings:\n  - \"Error
+      creating network Load Balancer: AccessDenied.*iam:CreateServiceLinkedRole\"\n
+      \ installFailingReason: AWSAccessDeniedSLR\n  installFailingMessage: Missing
+      prerequisite service role for load balancer\n- name: AWSInsufficientPermissions\n
+      \ searchRegexStrings:\n  - \"current credentials insufficient for performing
+      cluster installation\"\n  - \"UnauthorizedOperation: You are not authorized
+      to perform this operation. Encoded authorization failure message\"\n  installFailingReason:
+      AWSInsufficientPermissions\n  installFailingMessage: AWS credentials are insufficient
+      for performing cluster installation\n- name: AWSDeniedBySCP\n  searchRegexStrings:\n
+      \ - \"AccessDenied: .* with an explicit deny in a service control policy\"\n
+      \ - \"UnauthorizedOperation: .* with an explicit deny in a service control policy\"\n
+      \ installFailingReason: AWSDeniedBySCP\n  installFailingMessage: \"A service
+      control policy (SCP) is too restrictive for performing cluster installation\"\n-
+      name: VcpuLimitExceeded\n  searchRegexStrings:\n  - \"VcpuLimitExceeded\"\n
+      \ installFailingReason: VcpuLimitExceeded\n  installFailingMessage: The install
+      requires more vCPU capacity than your current vCPU limit\n- name: Gp3VolumeLimitExceeded\n
+      \ searchRegexStrings:\n  - \"VolumeLimitExceeded: You have exceeded your maximum
+      gp3 storage limit\"\n  installFailingReason: Gp3VolumeLimitExceeded\n  installFailingMessage:
+      \"The installation failed due to insufficient gp3 storage quota in the region
+      (QuotaCode L-7A658B76)\"\n- name: UserInitiatedShutdown\n  searchRegexStrings:\n
+      \ - \"Error waiting for instance .* to become ready .* User initiated shutdown\"\n
+      \ installFailingReason: UserInitiatedShutdown\n  installFailingMessage: User
+      initiated shutdown of instances as the install was running\n# openshift-installer
+      intermittent failure on AWS with Error: Provider produced inconsistent result
+      after apply\n- name: InconsistentTerraformResult\n  searchRegexStrings:\n  -
+      \"Error: Provider produced inconsistent result after apply\"\n  installFailingReason:
+      InconsistentTerraformResult\n  installFailingMessage: Inconsistent result after
+      Terraform apply\n- name: AWSVPCDoesNotExist\n  searchRegexStrings:\n  - \"The
+      vpc ID .* does not exist\"\n  installFailingReason: AWSVPCDoesNotExist\n  installFailingMessage:
+      The AWS VPC does not exist\n- name: TargetGroupNotFound\n# https://bugzilla.redhat.com/show_bug.cgi?id=1898265\n
+      \ searchRegexStrings:\n  - \"TargetGroupNotFound\"\n  installFailingReason:
+      TargetGroupNotFound\n  installFailingMessage: Target Group cannot be found\n-
+      name: ErrorCreatingNetworkLoadBalancer\n  searchRegexStrings:\n  - \"Error creating
+      network Load Balancer: InternalFailure: \"\n  installFailingReason: ErrorCreatingNetworkLoadBalancer\n
+      \ installFailingMessage: AWS network load balancer creation encountered an error
+      during cluster installation\n- name: TerraformFailedToDeleteResources\n  searchRegexStrings:\n
+      \   - \"terraform destroy: failed to destroy using Terraform\"\n    - \"terraform
+      destroy: failed doing terraform destroy\"\n  installFailingReason: InstallerFailedToDestroyResources\n
+      \ installFailingMessage: The installer failed to destroy installation resources\n-
+      name: AWSAccountBlocked\n  searchRegexStrings:\n    - \"Blocked: This account
+      is currently blocked and not recognized as a valid account.\"\n  installFailingReason:
+      AWSAccountIsBlocked\n  installFailingMessage: \"AWS account is currently blocked
+      and not recognized as a valid account. Please contact aws-verification@amazon.com
+      if you have questions.\"\n\n\n# GCP Specific\n- name: GCPInvalidProjectID\n
+      \ searchRegexStrings:\n  - \"platform.gcp.project.* invalid project ID\"\n  installFailingReason:
+      GCPInvalidProjectID\n  installFailingMessage: Invalid GCP project ID\n- name:
+      GCPInstanceTypeNotFound\n  searchRegexStrings:\n  - \"platform.gcp.type: Invalid
+      value:.* instance type.* not found]\"\n  installFailingReason: GCPInstanceTypeNotFound\n
+      \ installFailingMessage: GCP instance type not found\n- name: GCPPreconditionFailed\n
+      \ searchRegexStrings:\n  - \"googleapi: Error 412\"\n  installFailingReason:
+      GCPPreconditionFailed\n  installFailingMessage: GCP Precondition Failed\n- name:
+      GCPQuotaSSDTotalGBExceeded\n  searchRegexStrings:\n  - \"Quota \\'SSD_TOTAL_GB\\'
+      exceeded\"\n  installFailingReason: GCPQuotaSSDTotalGBExceeded\n  installFailingMessage:
+      GCP quota SSD_TOTAL_GB exceeded\n- name: GCPComputeQuota\n  searchRegexStrings:\n
+      \ - \"compute\\\\.googleapis\\\\.com/cpus is not available in [a-z0-9-]* because
+      the required number of resources \\\\([0-9]*\\\\) is more than\"\n  installFailingReason:
+      GCPComputeQuotaExceeded\n  installFailingMessage: GCP CPUs quota exceeded\n-
+      name: GCPServiceAccountQuota\n  searchRegexStrings:\n  - \"iam\\\\.googleapis\\\\.com/quota/service-account-count
+      is not available in global because the required number of resources \\\\([0-9]*\\\\)
+      is more than remaining quota\"\n  installFailingReason: GCPServiceAccountQuotaExceeded\n
+      \ installFailingMessage: GCP Service Account quota exceeded\n\n\n# Bare Metal\n-
+      name: LibvirtSSHKeyPermissionDenied\n  searchRegexStrings:\n  - \"platform.baremetal.libvirtURI:
+      Internal error: could not connect to libvirt: virError.Code=38, Domain=7, Message=.Cannot
+      recv data: Permission denied\"\n  installFailingReason: LibvirtSSHKeyPermissionDenied\n
+      \ installFailingMessage: \"Permission denied connecting to libvirt host, check
+      SSH key configuration and pass phrase\"\n- name: LibvirtConnectionFailed\n  searchRegexStrings:\n
+      \ - \"could not connect to libvirt\"\n  installFailingReason: LibvirtConnectionFailed\n
+      \ installFailingMessage: \"Could not connect to libvirt host\"\n\n\n# Proxy-enabled
+      clusters\n- name: ProxyTimeout\n  searchRegexStrings:\n  - \"error pinging docker
+      registry .+ proxyconnect tcp: dial tcp [^ ]+: i/o timeout\"\n  - \"error pinging
+      docker registry .+ proxyconnect tcp: dial tcp [^ ]+: connect: connection refused\"\n
+      \ - \"error pinging docker registry .+ proxyconnect tcp: dial tcp [^ ]+: connect:
+      no route to host\"\n  installFailingReason: ProxyTimeout\n  installFailingMessage:
+      The cluster is installing via a proxy, however the proxy server is refusing
+      or timing out connections. Verify that the proxy is running and would be accessible
+      from the cluster's private subnet(s).\n- name: ProxyInvalidCABundle\n  searchRegexStrings:\n
+      \ - \"error pinging docker registry .+ proxyconnect tcp: x509: certificate signed
+      by unknown authority\"\n  installFailingReason: ProxyInvalidCABundle\n  installFailingMessage:
+      The cluster is installing via a proxy, but does not trust the signing certificate
+      the proxy is presenting. Verify that the Certificate Authority certificate(s)
+      to verify proxy communications have been supplied at installation time.\n\n\n#
+      Generic OpenShift Install\n\n- name: KubeAPIWaitTimeout\n  searchRegexStrings:\n
+      \ - \"waiting for Kubernetes API: context deadline exceeded\"\n  installFailingReason:
+      KubeAPIWaitTimeout\n  installFailingMessage: Timeout waiting for the Kubernetes
+      API to begin responding\n- name: KubeAPIWaitFailed\n  searchRegexStrings:\n
+      \ - \"Failed waiting for Kubernetes API. This error usually happens when there
+      is a problem on the bootstrap host that prevents creating a temporary control
+      plane\"\n  installFailingReason: KubeAPIWaitFailed\n  installFailingMessage:
+      Failed waiting for Kubernetes API. This error usually happens when there is
+      a problem on the bootstrap host that prevents creating a temporary control plane\n-
+      name: BootstrapFailed\n  searchRegexStrings:\n  - \"Failed to wait for bootstrapping
+      to complete. This error usually happens when there is a problem with control
+      plane hosts that prevents the control plane operators from creating the control
+      plane.\"\n  installFailingReason: BootstrapFailed\n  installFailingMessage:
+      Failed to wait for bootstrapping to complete. This error usually happens when
+      there is a problem with control plane hosts that prevents the control plane
+      operators from creating the control plane. Verify the networking configuration
+      and account permissions and try again.\n- name: GenericBootstrapFailed\n  searchRegexStrings:\n
+      \ - \"Bootstrap failed to complete\"\n  installFailingReason: GenericBootstrapFailed\n
+      \ installFailingMessage: Installation Bootstrap failed to complete. Verify the
+      networking configuration and account permissions and try again.\n- name: MonitoringOperatorStillUpdating\n
+      \ searchRegexStrings:\n  - \"failed to initialize the cluster: Cluster operator
+      monitoring is still updating\"\n  installFailingReason: MonitoringOperatorStillUpdating\n
+      \ installFailingMessage: Timeout waiting for the monitoring operator to become
+      ready\n- name: NoWorkerNodesReady\n  searchRegexStrings:\n  - \"Got 0 worker
+      nodes, \\\\d+ master nodes.*none are schedulable or ready for ingress pods\"\n
+      \ installFailingReason: NoWorkerNodesReady\n  installFailingMessage: 0 worker
+      nodes have joined the cluster\n- name: IngressOperatorDegraded \n  searchRegexStrings:\n
+      \ - \"Cluster operator ingress Degraded is True\"\n  installFailingReason: IngressOperatorDegraded\n
+      \ installFailingMessage: Timeout waiting for the ingress operator to become
+      ready\n- name: AuthenticationOperatorDegraded\n  searchRegexStrings:\n  - \"Cluster
+      operator authentication Degraded is True\"\n  installFailingReason: AuthenticationOperatorDegraded\n
+      \ installFailingMessage: Timeout waiting for the authentication operator to
+      become ready\n- name: GeneralOperatorDegraded\n  searchRegexStrings:\n  - \"Cluster
+      operator.*Degraded is True\"\n  installFailingReason: GeneralOperatorDegraded\n
+      \ installFailingMessage: Timeout waiting for an operator to become ready\n-
+      name: GeneralClusterOperatorsStillUpdating\n  searchRegexStrings:\n  - \"failed
+      to initialize the cluster: Some cluster operators are still updating:\"\n  installFailingReason:
+      GeneralClusterOperatorsStillUpdating\n  installFailingMessage: Timeout waiting
+      for all cluster operators to become ready\n- name: InstallConfigNetworkAuthFail\n
+      \ searchRegexStrings:\n  - \"failed to create install config: failed to create
+      a network client: Authentication failed\"\n  installFailingReason: InstallConfigNetworkAuthFail\n
+      \ installFailingMessage: Authentication failure attempting to create a network
+      client - check credentials and certificates\n- name: InstallConfigNetworkBadCACert\n
+      \ searchRegexStrings:\n  - \"failed to create install config: failed to create
+      a network client: Error parsing CA Cert from\"\n  installFailingReason: InstallConfigNetworkBadCACert\n
+      \ installFailingMessage: Failure attempting to create a network client - invalid
+      CA certificate\n\n# Keep these at the bottom so that they're only hit if nothing
+      above matches.\n# We don't want to show these to users unless it's a last resort.
+      It's barely better than \"unknown error\".\n# These are clues to SRE that they
+      need to add more specific regexps to this file.\n- name: FallbackQuotaExceeded\n
+      \ searchRegexStrings:\n  - \"Quota '[A-Z_]*' exceeded\"\n  installFailingReason:
+      FallbackQuotaExceeded\n  installFailingMessage: Unknown quota exceeded - couldn't
+      parse a specific resource type\n- name: FallbackResourceLimitExceeded\n  searchRegexStrings:\n
+      \ - \"LimitExceeded\"\n  installFailingReason: FallbackResourceLimitExceeded\n
+      \ installFailingMessage: Unknown resource limit exceeded - couldn't parse a
+      specific resource type\n- name: FallbackInvalidInstallConfig\n  searchRegexStrings:\n
+      \ - \"failed to load asset \\\\\\\"Install Config\\\\\\\"\"\n  installFailingReason:
+      FallbackInvalidInstallConfig\n  installFailingMessage: Unknown error - installer
+      failed to load install config\n- name: FallbackInstancesFailedToBecomeReady\n
+      \ searchRegexStrings:\n  - \"Error waiting for instance .* to become ready\"\n
+      \ installFailingReason: FallbackInstancesFailedToBecomeReady\n  installFailingMessage:
+      Unknown error - instances failed to become ready\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"regexes":"#
+        AWS Specific:\n- name: AWSInsufficientCapacity\n  searchRegexStrings:\n  -
+        \"Error: .*InsufficientInstanceCapacity.* Our system will be working on provisioning
+        additional capacity\"\n  installFailingReason: AWSInsufficientCapacity\n  installFailingMessage:
+        AWS currently does not have sufficient capacity to provision the requested
+        EC2 instances in the specified Availability Zone. Please try again later or
+        in a different Availability Zone.\n- name: AWSEC2QuotaExceeded\n  searchRegexStrings:\n  -
+        \"failed to generate asset.*Platform Quota Check.*MissingQuota.*ec2\"\n  installFailingReason:
+        AWSEC2QuotaExceeded\n  installFailingMessage: AWS EC2 Quota Exceeded\n- name:
+        AWSNATGatewayLimitExceeded\n  searchRegexStrings:\n  - \"NatGatewayLimitExceeded\"\n  installFailingReason:
+        AWSNATGatewayLimitExceeded\n  installFailingMessage: AWS NAT gateway limit
+        exceeded\n- name: AWSVPCLimitExceeded\n  searchRegexStrings:\n  - \"VpcLimitExceeded\"\n  installFailingReason:
+        AWSVPCLimitExceeded\n  installFailingMessage: AWS VPC limit exceeded\n- name:
+        S3BucketsLimitExceeded\n  searchRegexStrings:\n   - \"TooManyBuckets\"\n  installFailingReason:
+        S3BucketsLimitExceeded\n  installFailingMessage: S3 Buckets Limit Exceeded\n-
+        name: LoadBalancerLimitExceeded\n  searchRegexStrings:\n  - \"TooManyLoadBalancers:
+        Exceeded quota of account\"\n  installFailingReason: LoadBalancerLimitExceeded\n  installFailingMessage:
+        AWS Load Balancer Limit Exceeded\n- name: EIPAddressLimitExceeded\n  searchRegexStrings:\n  -
+        \"EIP: AddressLimitExceeded\"\n  installFailingReason: EIPAddressLimitExceeded\n  installFailingMessage:
+        EIP Address limit exceeded\n- name: AWSSubnetInsufficientIPSpace\n  searchRegexStrings:\n  -
+        \"InvalidSubnet: Not enough IP space available in\"\n  installFailingReason:
+        AWSSubnetInsufficientIPSpace\n  installFailingMessage: Insufficient IP space
+        available in subnet\n- name: AWSIAMRoleTagLimitExceeded\n  searchRegexStrings:\n  -
+        \"could not tag \\\".*\\\" instance role: LimitExceeded: The number of tags
+        has reached the maximum limit\"\n  installFailingReason: AWSIAMRoleTagLimitExceeded\n  installFailingMessage:
+        AWS IAM Role exceeds the maximum number of tags allowed (50)\n- name: AWSSubnetTagLimitExceeded\n  searchRegexStrings:\n  -
+        \"could not add tags to subnets: TagLimitExceeded\"\n  installFailingReason:
+        AWSSubnetTagLimitExceeded\n  installFailingMessage: AWS Subnet exceeds the
+        maximum number of tags allowed (50)\n- name: MissingPublicSubnetForZone\n  searchRegexStrings:\n  -
+        \"No public subnet provided for zone\"\n  installFailingReason: MissingPublicSubnetForZone\n  installFailingMessage:
+        No public subnet provided for at least one zone\n- name: PrivateSubnetInMultipleZones\n  searchRegexStrings:\n  -
+        \"private subnet .* is also in zone\"\n  installFailingReason: PrivateSubnetInMultipleZones\n  installFailingMessage:
+        Same private subnet used in multiple zones\n- name: InvalidInstallConfigSubnet\n  searchRegexStrings:\n  -
+        \"CIDR range start.*is outside of the specified machine networks\"\n  installFailingReason:
+        InvalidInstallConfigSubnet\n  installFailingMessage: Invalid subnet in install
+        config. Subnet''s CIDR range start is outside of the specified machine networks\n#
+        https://bugzilla.redhat.com/show_bug.cgi?id=1844320\n- name: AWSUnableToFindMatchingRouteTable\n  searchRegexStrings:\n  -
+        \"Error: Unable to find matching route for Route Table\"\n  installFailingReason:
+        AWSUnableToFindMatchingRouteTable\n  installFailingMessage: Unable to find
+        matching route for route table\n- name: DNSAlreadyExists\n  searchRegexStrings:\n  -
+        \"aws_route53_record.*Error building changeset:.*Tried to create resource
+        record set.*but it already exists\"\n  installFailingReason: DNSAlreadyExists\n  installFailingMessage:
+        DNS record already exists\n- name: PendingVerification\n  searchRegexStrings:\n  -
+        \"PendingVerification: Your request for accessing resources in this region
+        is being validated\"\n  installFailingReason: PendingVerification\n  installFailingMessage:
+        Account pending verification for region\n- name: NoMatchingRoute53Zone\n  searchRegexStrings:\n  -
+        \"data.aws_route53_zone.public: no matching Route53Zone found\"\n  installFailingReason:
+        NoMatchingRoute53Zone\n  installFailingMessage: No matching Route53Zone found\n-
+        name: TooManyRoute53Zones\n  searchRegexStrings:\n  - \"error creating Route53
+        Hosted Zone: TooManyHostedZones: Limits Exceeded\"\n  installFailingReason:
+        TooManyRoute53Zones\n  installFailingMessage: Route53 hosted zone limit exceeded\n-
+        name: MultipleRoute53ZonesFound\n  searchRegexStrings:\n    - \"Error: multiple
+        Route53Zone found\"\n  installFailingReason: MultipleRoute53ZonesFound\n  installFailingMessage:
+        Multiple Route53 zones found\n- name: DefaultEbsKmsKeyInsufficientPermissions\n  searchRegexStrings:\n    -
+        \"Client.InternalError: Client error on launch\"\n    - \"Client.InvalidKMSKey.InvalidState:
+        The KMS key provided is in an incorrect state\"\n  installFailingReason: DefaultEbsKmsKeyInsufficientPermissions\n  installFailingMessage:
+        Default KMS key for EBS encryption has insufficient permissions to launch
+        EC2 instances\n- name: SimulatorThrottling\n  searchRegexStrings:\n  - \"validate
+        AWS credentials: checking install permissions: error simulating policy: Throttling:
+        Rate exceeded\"\n  installFailingReason: AWSAPIRateLimitExceeded\n  installFailingMessage:
+        AWS API rate limit exceeded while simulating policy\n- name: S3AccessControlListNotSupported\n  searchRegexStrings:\n  -
+        \"error creating S3 bucket ACL for.*AccessControlListNotSupported: The bucket
+        does not allow ACLs\"\n  installFailingReason: S3AccessControlListNotSupported\n  installFailingMessage:
+        S3AccessControlListNotSupported\n- name: GeneralThrottling\n  searchRegexStrings:\n  -
+        \"Throttling: Rate exceeded\"\n  installFailingReason: AWSAPIRateLimitExceeded\n  installFailingMessage:
+        AWS API rate limit exceeded\n# This issue is caused by AWS throttling the
+        CreateHostedZone request. The terraform provider is not properly\n# handling
+        the throttling response and gets stuck in a state where it does not retry
+        the request. Eventually,\n# the terraform provider times out claiming that
+        it is waiting for the hosted zone to be INSYNC.\n- name: AWSRoute53Timeout\n  searchRegexStrings:\n  -
+        \"error waiting for Route53 Hosted Zone .* creation: timeout while waiting
+        for state to become ''INSYNC''\"\n  installFailingReason: AWSRoute53Timeout\n  installFailingMessage:
+        AWS Route53 timeout while waiting for INSYNC. This is usually caused by Route53
+        rate limiting.\n- name: InvalidCredentials\n  searchRegexStrings:\n  - \"InvalidClientTokenId:
+        The security token included in the request is invalid.\"\n  installFailingReason:
+        InvalidCredentials\n  installFailingMessage: Credentials are invalid\n- name:
+        InvalidAWSTags\n  searchRegexStrings:\n  - \"platform\\\\.aws\\\\.userTags.*:
+        Invalid value:.*value contains invalid characters\"\n  installFailingReason:
+        InvalidAWSTags\n  installFailingMessage: You have specified an invalid AWS
+        tag value. Verify that your tags meet AWS requirements and try again.\n- name:
+        ErrorDeletingIAMRole\n  searchRegexStrings:\n    - \"Error deleting IAM Role
+        .* DeleteConflict: Cannot delete entity, must detach all policies first.\"\n  installFailingReason:
+        ErrorDeletingIAMRole\n  installFailingMessage: The cluster installer was not
+        able to delete the roles it used during the installation. Ensure that no policies
+        are added to new roles by default and try again.\n- name: AWSSubnetDoesNotExist\n  searchRegexStrings:\n  -
+        \"The subnet ID .* does not exist\"\n  installFailingReason: AWSSubnetDoesNotExist\n  installFailingMessage:
+        AWS Subnet Does Not Exist\n# iam:CreateServiceLinkedRole is a super powerful
+        permission that we don''t give to STS clusters. We require it''s done as a
+        one-time prereq.\n# This is the error we see when the prereq step was missed.\n-
+        name: NATGatewayFailed\n  searchRegexStrings:\n  - \"Error waiting for NAT
+        Gateway (.*) to become available\"\n  installFailingReason: NATGatewayFailed\n  installFailingMessage:
+        Error waiting for NAT Gateway to become available.\n- name: AWSAccessDeniedSLR\n  searchRegexStrings:\n  -
+        \"Error creating network Load Balancer: AccessDenied.*iam:CreateServiceLinkedRole\"\n  installFailingReason:
+        AWSAccessDeniedSLR\n  installFailingMessage: Missing prerequisite service
+        role for load balancer\n- name: AWSInsufficientPermissions\n  searchRegexStrings:\n  -
+        \"current credentials insufficient for performing cluster installation\"\n  -
+        \"UnauthorizedOperation: You are not authorized to perform this operation.
+        Encoded authorization failure message\"\n  installFailingReason: AWSInsufficientPermissions\n  installFailingMessage:
+        AWS credentials are insufficient for performing cluster installation\n- name:
+        AWSDeniedBySCP\n  searchRegexStrings:\n  - \"AccessDenied: .* with an explicit
+        deny in a service control policy\"\n  - \"UnauthorizedOperation: .* with an
+        explicit deny in a service control policy\"\n  installFailingReason: AWSDeniedBySCP\n  installFailingMessage:
+        \"A service control policy (SCP) is too restrictive for performing cluster
+        installation\"\n- name: VcpuLimitExceeded\n  searchRegexStrings:\n  - \"VcpuLimitExceeded\"\n  installFailingReason:
+        VcpuLimitExceeded\n  installFailingMessage: The install requires more vCPU
+        capacity than your current vCPU limit\n- name: Gp3VolumeLimitExceeded\n  searchRegexStrings:\n  -
+        \"VolumeLimitExceeded: You have exceeded your maximum gp3 storage limit\"\n  installFailingReason:
+        Gp3VolumeLimitExceeded\n  installFailingMessage: \"The installation failed
+        due to insufficient gp3 storage quota in the region (QuotaCode L-7A658B76)\"\n-
+        name: UserInitiatedShutdown\n  searchRegexStrings:\n  - \"Error waiting for
+        instance .* to become ready .* User initiated shutdown\"\n  installFailingReason:
+        UserInitiatedShutdown\n  installFailingMessage: User initiated shutdown of
+        instances as the install was running\n# openshift-installer intermittent failure
+        on AWS with Error: Provider produced inconsistent result after apply\n- name:
+        InconsistentTerraformResult\n  searchRegexStrings:\n  - \"Error: Provider
+        produced inconsistent result after apply\"\n  installFailingReason: InconsistentTerraformResult\n  installFailingMessage:
+        Inconsistent result after Terraform apply\n- name: AWSVPCDoesNotExist\n  searchRegexStrings:\n  -
+        \"The vpc ID .* does not exist\"\n  installFailingReason: AWSVPCDoesNotExist\n  installFailingMessage:
+        The AWS VPC does not exist\n- name: TargetGroupNotFound\n# https://bugzilla.redhat.com/show_bug.cgi?id=1898265\n  searchRegexStrings:\n  -
+        \"TargetGroupNotFound\"\n  installFailingReason: TargetGroupNotFound\n  installFailingMessage:
+        Target Group cannot be found\n- name: ErrorCreatingNetworkLoadBalancer\n  searchRegexStrings:\n  -
+        \"Error creating network Load Balancer: InternalFailure: \"\n  installFailingReason:
+        ErrorCreatingNetworkLoadBalancer\n  installFailingMessage: AWS network load
+        balancer creation encountered an error during cluster installation\n- name:
+        TerraformFailedToDeleteResources\n  searchRegexStrings:\n    - \"terraform
+        destroy: failed to destroy using Terraform\"\n    - \"terraform destroy: failed
+        doing terraform destroy\"\n  installFailingReason: InstallerFailedToDestroyResources\n  installFailingMessage:
+        The installer failed to destroy installation resources\n- name: AWSAccountBlocked\n  searchRegexStrings:\n    -
+        \"Blocked: This account is currently blocked and not recognized as a valid
+        account.\"\n  installFailingReason: AWSAccountIsBlocked\n  installFailingMessage:
+        \"AWS account is currently blocked and not recognized as a valid account.
+        Please contact aws-verification@amazon.com if you have questions.\"\n\n\n#
+        GCP Specific\n- name: GCPInvalidProjectID\n  searchRegexStrings:\n  - \"platform.gcp.project.*
+        invalid project ID\"\n  installFailingReason: GCPInvalidProjectID\n  installFailingMessage:
+        Invalid GCP project ID\n- name: GCPInstanceTypeNotFound\n  searchRegexStrings:\n  -
+        \"platform.gcp.type: Invalid value:.* instance type.* not found]\"\n  installFailingReason:
+        GCPInstanceTypeNotFound\n  installFailingMessage: GCP instance type not found\n-
+        name: GCPPreconditionFailed\n  searchRegexStrings:\n  - \"googleapi: Error
+        412\"\n  installFailingReason: GCPPreconditionFailed\n  installFailingMessage:
+        GCP Precondition Failed\n- name: GCPQuotaSSDTotalGBExceeded\n  searchRegexStrings:\n  -
+        \"Quota \\''SSD_TOTAL_GB\\'' exceeded\"\n  installFailingReason: GCPQuotaSSDTotalGBExceeded\n  installFailingMessage:
+        GCP quota SSD_TOTAL_GB exceeded\n- name: GCPComputeQuota\n  searchRegexStrings:\n  -
+        \"compute\\\\.googleapis\\\\.com/cpus is not available in [a-z0-9-]* because
+        the required number of resources \\\\([0-9]*\\\\) is more than\"\n  installFailingReason:
+        GCPComputeQuotaExceeded\n  installFailingMessage: GCP CPUs quota exceeded\n-
+        name: GCPServiceAccountQuota\n  searchRegexStrings:\n  - \"iam\\\\.googleapis\\\\.com/quota/service-account-count
+        is not available in global because the required number of resources \\\\([0-9]*\\\\)
+        is more than remaining quota\"\n  installFailingReason: GCPServiceAccountQuotaExceeded\n  installFailingMessage:
+        GCP Service Account quota exceeded\n\n\n# Bare Metal\n- name: LibvirtSSHKeyPermissionDenied\n  searchRegexStrings:\n  -
+        \"platform.baremetal.libvirtURI: Internal error: could not connect to libvirt:
+        virError.Code=38, Domain=7, Message=.Cannot recv data: Permission denied\"\n  installFailingReason:
+        LibvirtSSHKeyPermissionDenied\n  installFailingMessage: \"Permission denied
+        connecting to libvirt host, check SSH key configuration and pass phrase\"\n-
+        name: LibvirtConnectionFailed\n  searchRegexStrings:\n  - \"could not connect
+        to libvirt\"\n  installFailingReason: LibvirtConnectionFailed\n  installFailingMessage:
+        \"Could not connect to libvirt host\"\n\n\n# Proxy-enabled clusters\n- name:
+        ProxyTimeout\n  searchRegexStrings:\n  - \"error pinging docker registry .+
+        proxyconnect tcp: dial tcp [^ ]+: i/o timeout\"\n  - \"error pinging docker
+        registry .+ proxyconnect tcp: dial tcp [^ ]+: connect: connection refused\"\n  -
+        \"error pinging docker registry .+ proxyconnect tcp: dial tcp [^ ]+: connect:
+        no route to host\"\n  installFailingReason: ProxyTimeout\n  installFailingMessage:
+        The cluster is installing via a proxy, however the proxy server is refusing
+        or timing out connections. Verify that the proxy is running and would be accessible
+        from the cluster''s private subnet(s).\n- name: ProxyInvalidCABundle\n  searchRegexStrings:\n  -
+        \"error pinging docker registry .+ proxyconnect tcp: x509: certificate signed
+        by unknown authority\"\n  installFailingReason: ProxyInvalidCABundle\n  installFailingMessage:
+        The cluster is installing via a proxy, but does not trust the signing certificate
+        the proxy is presenting. Verify that the Certificate Authority certificate(s)
+        to verify proxy communications have been supplied at installation time.\n\n\n#
+        Generic OpenShift Install\n\n- name: KubeAPIWaitTimeout\n  searchRegexStrings:\n  -
+        \"waiting for Kubernetes API: context deadline exceeded\"\n  installFailingReason:
+        KubeAPIWaitTimeout\n  installFailingMessage: Timeout waiting for the Kubernetes
+        API to begin responding\n- name: KubeAPIWaitFailed\n  searchRegexStrings:\n  -
+        \"Failed waiting for Kubernetes API. This error usually happens when there
+        is a problem on the bootstrap host that prevents creating a temporary control
+        plane\"\n  installFailingReason: KubeAPIWaitFailed\n  installFailingMessage:
+        Failed waiting for Kubernetes API. This error usually happens when there is
+        a problem on the bootstrap host that prevents creating a temporary control
+        plane\n- name: BootstrapFailed\n  searchRegexStrings:\n  - \"Failed to wait
+        for bootstrapping to complete. This error usually happens when there is a
+        problem with control plane hosts that prevents the control plane operators
+        from creating the control plane.\"\n  installFailingReason: BootstrapFailed\n  installFailingMessage:
+        Failed to wait for bootstrapping to complete. This error usually happens when
+        there is a problem with control plane hosts that prevents the control plane
+        operators from creating the control plane. Verify the networking configuration
+        and account permissions and try again.\n- name: GenericBootstrapFailed\n  searchRegexStrings:\n  -
+        \"Bootstrap failed to complete\"\n  installFailingReason: GenericBootstrapFailed\n  installFailingMessage:
+        Installation Bootstrap failed to complete. Verify the networking configuration
+        and account permissions and try again.\n- name: MonitoringOperatorStillUpdating\n  searchRegexStrings:\n  -
+        \"failed to initialize the cluster: Cluster operator monitoring is still updating\"\n  installFailingReason:
+        MonitoringOperatorStillUpdating\n  installFailingMessage: Timeout waiting
+        for the monitoring operator to become ready\n- name: NoWorkerNodesReady\n  searchRegexStrings:\n  -
+        \"Got 0 worker nodes, \\\\d+ master nodes.*none are schedulable or ready for
+        ingress pods\"\n  installFailingReason: NoWorkerNodesReady\n  installFailingMessage:
+        0 worker nodes have joined the cluster\n- name: IngressOperatorDegraded \n  searchRegexStrings:\n  -
+        \"Cluster operator ingress Degraded is True\"\n  installFailingReason: IngressOperatorDegraded\n  installFailingMessage:
+        Timeout waiting for the ingress operator to become ready\n- name: AuthenticationOperatorDegraded\n  searchRegexStrings:\n  -
+        \"Cluster operator authentication Degraded is True\"\n  installFailingReason:
+        AuthenticationOperatorDegraded\n  installFailingMessage: Timeout waiting for
+        the authentication operator to become ready\n- name: GeneralOperatorDegraded\n  searchRegexStrings:\n  -
+        \"Cluster operator.*Degraded is True\"\n  installFailingReason: GeneralOperatorDegraded\n  installFailingMessage:
+        Timeout waiting for an operator to become ready\n- name: GeneralClusterOperatorsStillUpdating\n  searchRegexStrings:\n  -
+        \"failed to initialize the cluster: Some cluster operators are still updating:\"\n  installFailingReason:
+        GeneralClusterOperatorsStillUpdating\n  installFailingMessage: Timeout waiting
+        for all cluster operators to become ready\n- name: InstallConfigNetworkAuthFail\n  searchRegexStrings:\n  -
+        \"failed to create install config: failed to create a network client: Authentication
+        failed\"\n  installFailingReason: InstallConfigNetworkAuthFail\n  installFailingMessage:
+        Authentication failure attempting to create a network client - check credentials
+        and certificates\n- name: InstallConfigNetworkBadCACert\n  searchRegexStrings:\n  -
+        \"failed to create install config: failed to create a network client: Error
+        parsing CA Cert from\"\n  installFailingReason: InstallConfigNetworkBadCACert\n  installFailingMessage:
+        Failure attempting to create a network client - invalid CA certificate\n\n#
+        Keep these at the bottom so that they''re only hit if nothing above matches.\n#
+        We don''t want to show these to users unless it''s a last resort. It''s barely
+        better than \"unknown error\".\n# These are clues to SRE that they need to
+        add more specific regexps to this file.\n- name: FallbackQuotaExceeded\n  searchRegexStrings:\n  -
+        \"Quota ''[A-Z_]*'' exceeded\"\n  installFailingReason: FallbackQuotaExceeded\n  installFailingMessage:
+        Unknown quota exceeded - couldn''t parse a specific resource type\n- name:
+        FallbackResourceLimitExceeded\n  searchRegexStrings:\n  - \"LimitExceeded\"\n  installFailingReason:
+        FallbackResourceLimitExceeded\n  installFailingMessage: Unknown resource limit
+        exceeded - couldn''t parse a specific resource type\n- name: FallbackInvalidInstallConfig\n  searchRegexStrings:\n  -
+        \"failed to load asset \\\\\\\"Install Config\\\\\\\"\"\n  installFailingReason:
+        FallbackInvalidInstallConfig\n  installFailingMessage: Unknown error - installer
+        failed to load install config\n- name: FallbackInstancesFailedToBecomeReady\n  searchRegexStrings:\n  -
+        \"Error waiting for instance .* to become ready\"\n  installFailingReason:
+        FallbackInstancesFailedToBecomeReady\n  installFailingMessage: Unknown error
+        - instances failed to become ready\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"install-log-regexes","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:30Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:regexes: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:30Z'
+    name: install-log-regexes
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241061'
+    uid: e1ece9fd-2bc2-4a19-8b24-b5afb9923bc8
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"ConfigMap","metadata":{"annotations":{},"name":"private-link","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:29Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-04-09T14:32:29Z'
+    name: private-link
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '1241049'
+    uid: c559afd6-6d48-4e3b-999f-a5d39dd099de

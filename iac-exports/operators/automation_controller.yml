@@ -1,0 +1,192 @@
+- apiVersion: automationcontroller.ansible.com/v1beta1
+  kind: AutomationController
+  metadata:
+    annotations:
+      aap.ansible.io/client-request-timeout: 30s
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"automationcontroller.ansible.com/v1beta1","kind":"AutomationController","metadata":{"annotations":{"aap.ansible.io/client-request-timeout":"30s"},"name":"myaap-controller","namespace":"aap"},"spec":{"api_urlpattern_prefix":"controller","extra_settings":[{"setting":"ANSIBLE_BASE_JWT_KEY","value":"\"http://myaap\""},{"setting":"ANSIBLE_BASE_JWT_REDIRECT_TYPE","value":"\"awx\""},{"setting":"ENABLE_SERVICE_BACKED_SSO","value":"False"},{"setting":"SERVICE_BACKED_SSO_AUTH_CODE_REDIRECT_URL","value":"\"https://myaap-aap.apps.sno.ofam.dev\""},{"setting":"RESOURCE_SERVER","value":{"SECRET_KEY":"haAhpLP3gvECUG_j8Wc_obzrM6NLIpSgcnYsFwyKza0TAj6YoK2tGUj-lVkUPMwb9Lw1KNR_dZShuXD2IOWXMg","URL":"http://myaap","VALIDATE_HTTPS":"False"}},{"setting":"ANSIBLE_BASE_MANAGED_ROLE_REGISTRY","value":"{\"platform_auditor\":
+        {\"name\": \"Platform Auditor\", \"shortname\": \"sys_auditor\"}}"},{"setting":"OPTIONAL_UI_URL_PREFIX","value":"\"execution\""}],"idle_deployment":false,"no_log":true,"postgres_configuration_secret":"myaap-controller-postgres-configuration","public_base_url":"https://myaap-aap.apps.sno.ofam.dev"}}'
+    creationTimestamp: '2026-04-09T22:17:24Z'
+    generation: 1
+    labels:
+      app.kubernetes.io/component: automationcontroller
+      app.kubernetes.io/managed-by: automationcontroller-operator
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-controller
+    managedFields:
+    - apiVersion: automationcontroller.ansible.com/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:aap.ansible.io/client-request-timeout: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+        f:spec:
+          .: {}
+          f:admin_user: {}
+          f:api_urlpattern_prefix: {}
+          f:auto_upgrade: {}
+          f:create_preload_data: {}
+          f:extra_settings: {}
+          f:garbage_collect_secrets: {}
+          f:idle_deployment: {}
+          f:image_pull_policy: {}
+          f:ingress_type: {}
+          f:ipv6_disabled: {}
+          f:loadbalancer_class: {}
+          f:loadbalancer_ip: {}
+          f:loadbalancer_port: {}
+          f:loadbalancer_protocol: {}
+          f:metrics_utility_console_enabled: {}
+          f:metrics_utility_cronjob_gather_schedule: {}
+          f:metrics_utility_cronjob_report_schedule: {}
+          f:metrics_utility_enabled: {}
+          f:metrics_utility_pvc_claim_size: {}
+          f:no_log: {}
+          f:postgres_configuration_secret: {}
+          f:postgres_keepalives: {}
+          f:postgres_keepalives_count: {}
+          f:postgres_keepalives_idle: {}
+          f:postgres_keepalives_interval: {}
+          f:projects_persistence: {}
+          f:projects_storage_access_mode: {}
+          f:projects_storage_size: {}
+          f:public_base_url: {}
+          f:replicas: {}
+          f:route_tls_termination_mechanism: {}
+          f:set_self_labels: {}
+          f:task_liveness_failure_threshold: {}
+          f:task_liveness_initial_delay: {}
+          f:task_liveness_period: {}
+          f:task_liveness_timeout: {}
+          f:task_manage_replicas: {}
+          f:task_privileged: {}
+          f:task_readiness_failure_threshold: {}
+          f:task_readiness_initial_delay: {}
+          f:task_readiness_period: {}
+          f:task_readiness_timeout: {}
+          f:web_liveness_failure_threshold: {}
+          f:web_liveness_initial_delay: {}
+          f:web_liveness_period: {}
+          f:web_liveness_timeout: {}
+          f:web_manage_replicas: {}
+          f:web_readiness_failure_threshold: {}
+          f:web_readiness_initial_delay: {}
+          f:web_readiness_period: {}
+          f:web_readiness_timeout: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:30Z'
+    - apiVersion: automationcontroller.ansible.com/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:URL: {}
+          f:adminPasswordSecret: {}
+          f:adminUser: {}
+          f:broadcastWebsocketSecret: {}
+          f:image: {}
+          f:postgresConfigurationSecret: {}
+          f:secretKeySecret: {}
+          f:version: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      subresource: status
+      time: '2026-05-04T19:40:09Z'
+    - apiVersion: automationcontroller.ansible.com/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions: {}
+      manager: ansible-operator
+      operation: Update
+      subresource: status
+      time: '2026-06-03T21:38:41Z'
+    name: myaap-controller
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '77805809'
+    uid: 56e229e0-e41e-460a-8832-50d3860c1282
+  spec:
+    admin_user: admin
+    api_urlpattern_prefix: controller
+    auto_upgrade: true
+    create_preload_data: true
+    extra_settings:
+    - setting: ANSIBLE_BASE_JWT_KEY
+      value: '"http://myaap"'
+    - setting: ANSIBLE_BASE_JWT_REDIRECT_TYPE
+      value: '"awx"'
+    - setting: ENABLE_SERVICE_BACKED_SSO
+      value: 'False'
+    - setting: SERVICE_BACKED_SSO_AUTH_CODE_REDIRECT_URL
+      value: '"https://myaap-aap.apps.sno.ofam.dev"'
+    - setting: RESOURCE_SERVER
+      value:
+        SECRET_KEY: haAhpLP3gvECUG_j8Wc_obzrM6NLIpSgcnYsFwyKza0TAj6YoK2tGUj-lVkUPMwb9Lw1KNR_dZShuXD2IOWXMg
+        URL: http://myaap
+        VALIDATE_HTTPS: 'False'
+    - setting: ANSIBLE_BASE_MANAGED_ROLE_REGISTRY
+      value: '{"platform_auditor": {"name": "Platform Auditor", "shortname": "sys_auditor"}}'
+    - setting: OPTIONAL_UI_URL_PREFIX
+      value: '"execution"'
+    garbage_collect_secrets: false
+    idle_deployment: false
+    image_pull_policy: IfNotPresent
+    ingress_type: Route
+    ipv6_disabled: false
+    loadbalancer_class: ''
+    loadbalancer_ip: ''
+    loadbalancer_port: 80
+    loadbalancer_protocol: http
+    metrics_utility_console_enabled: false
+    metrics_utility_cronjob_gather_schedule: '@hourly'
+    metrics_utility_cronjob_report_schedule: '@monthly'
+    metrics_utility_enabled: false
+    metrics_utility_pvc_claim_size: 5Gi
+    no_log: true
+    postgres_configuration_secret: myaap-controller-postgres-configuration
+    postgres_keepalives: true
+    postgres_keepalives_count: 5
+    postgres_keepalives_idle: 5
+    postgres_keepalives_interval: 5
+    projects_persistence: false
+    projects_storage_access_mode: ReadWriteMany
+    projects_storage_size: 8Gi
+    public_base_url: https://myaap-aap.apps.sno.ofam.dev
+    replicas: 1
+    route_tls_termination_mechanism: Edge
+    set_self_labels: true
+    task_liveness_failure_threshold: 3
+    task_liveness_initial_delay: 5
+    task_liveness_period: 0
+    task_liveness_timeout: 1
+    task_manage_replicas: true
+    task_privileged: false
+    task_readiness_failure_threshold: 3
+    task_readiness_initial_delay: 20
+    task_readiness_period: 0
+    task_readiness_timeout: 1
+    web_liveness_failure_threshold: 3
+    web_liveness_initial_delay: 5
+    web_liveness_period: 0
+    web_liveness_timeout: 1
+    web_manage_replicas: true
+    web_readiness_failure_threshold: 3
+    web_readiness_initial_delay: 20
+    web_readiness_period: 0
+    web_readiness_timeout: 1

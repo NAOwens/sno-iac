@@ -1,0 +1,167 @@
+- apiVersion: hco.kubevirt.io/v1beta1
+  kind: HyperConverged
+  metadata:
+    annotations:
+      deployOVS: 'false'
+    creationTimestamp: '2026-04-07T19:55:10Z'
+    finalizers:
+    - kubevirt.io/hyperconverged
+    generation: 2
+    labels:
+      app: kubevirt-hyperconverged
+    managedFields:
+    - apiVersion: hco.kubevirt.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployOVS: {}
+        f:spec:
+          .: {}
+          f:applicationAwareConfig:
+            .: {}
+            f:allowApplicationAwareClusterResourceQuota: {}
+            f:vmiCalcConfigName: {}
+          f:certConfig:
+            .: {}
+            f:ca:
+              .: {}
+              f:duration: {}
+              f:renewBefore: {}
+            f:server:
+              .: {}
+              f:duration: {}
+              f:renewBefore: {}
+          f:deployVmConsoleProxy: {}
+          f:enableApplicationAwareQuota: {}
+          f:enableCommonBootImageImport: {}
+          f:featureGates:
+            .: {}
+            f:alignCPUs: {}
+            f:decentralizedLiveMigration: {}
+            f:declarativeHotplugVolumes: {}
+            f:deployKubeSecondaryDNS: {}
+            f:disableMDevConfiguration: {}
+            f:downwardMetrics: {}
+            f:enableMultiArchBootImageImport: {}
+            f:objectGraph: {}
+            f:persistentReservation: {}
+            f:videoConfig: {}
+          f:higherWorkloadDensity:
+            .: {}
+            f:memoryOvercommitPercentage: {}
+          f:liveMigrationConfig:
+            .: {}
+            f:allowAutoConverge: {}
+            f:allowPostCopy: {}
+            f:completionTimeoutPerGiB: {}
+            f:parallelMigrationsPerCluster: {}
+            f:parallelOutboundMigrationsPerNode: {}
+            f:progressTimeout: {}
+          f:resourceRequirements:
+            .: {}
+            f:vmiCPUAllocationRatio: {}
+          f:uninstallStrategy: {}
+          f:virtualMachineOptions:
+            .: {}
+            f:disableFreePageReporting: {}
+            f:disableSerialConsoleLog: {}
+          f:workloadUpdateStrategy:
+            .: {}
+            f:batchEvictionInterval: {}
+            f:batchEvictionSize: {}
+            f:workloadUpdateMethods: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-07T19:55:10Z'
+    - apiVersion: hco.kubevirt.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"kubevirt.io/hyperconverged": {}
+          f:labels:
+            .: {}
+            f:app: {}
+        f:spec:
+          f:infra: {}
+          f:workloads: {}
+      manager: hyperconverged-cluster-operator
+      operation: Update
+      time: '2026-04-07T19:55:11Z'
+    - apiVersion: hco.kubevirt.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:dataImportCronTemplates: {}
+          f:dataImportSchedule: {}
+          f:infrastructureHighlyAvailable: {}
+          f:nodeInfo:
+            .: {}
+            f:controlPlaneArchitectures: {}
+            f:workloadsArchitectures: {}
+          f:observedGeneration: {}
+          f:relatedObjects: {}
+          f:systemHealthStatus: {}
+          f:versions: {}
+      manager: hyperconverged-cluster-operator
+      operation: Update
+      subresource: status
+      time: '2026-06-03T15:33:06Z'
+    name: kubevirt-hyperconverged
+    namespace: openshift-cnv
+    resourceVersion: '77425092'
+    uid: 5deacf5c-b484-4cc7-a50e-6f79029385e4
+  spec:
+    applicationAwareConfig:
+      allowApplicationAwareClusterResourceQuota: false
+      vmiCalcConfigName: DedicatedVirtualResources
+    certConfig:
+      ca:
+        duration: 48h0m0s
+        renewBefore: 24h0m0s
+      server:
+        duration: 24h0m0s
+        renewBefore: 12h0m0s
+    deployVmConsoleProxy: false
+    enableApplicationAwareQuota: false
+    enableCommonBootImageImport: true
+    evictionStrategy: None
+    featureGates:
+      alignCPUs: false
+      decentralizedLiveMigration: false
+      declarativeHotplugVolumes: false
+      deployKubeSecondaryDNS: false
+      disableMDevConfiguration: false
+      downwardMetrics: false
+      enableMultiArchBootImageImport: false
+      objectGraph: false
+      persistentReservation: false
+      videoConfig: true
+    higherWorkloadDensity:
+      memoryOvercommitPercentage: 100
+    infra: {}
+    ksmConfiguration: {}
+    liveMigrationConfig:
+      allowAutoConverge: false
+      allowPostCopy: false
+      completionTimeoutPerGiB: 150
+      parallelMigrationsPerCluster: 5
+      parallelOutboundMigrationsPerNode: 2
+      progressTimeout: 150
+    resourceRequirements:
+      vmiCPUAllocationRatio: 10
+    uninstallStrategy: BlockUninstallIfWorkloadsExist
+    virtualMachineOptions:
+      disableFreePageReporting: false
+      disableSerialConsoleLog: false
+    workloadUpdateStrategy:
+      batchEvictionInterval: 1m0s
+      batchEvictionSize: 10
+      workloadUpdateMethods:
+      - LiveMigrate
+    workloads: {}

@@ -1,0 +1,476 @@
+- apiVersion: operators.coreos.com/v1
+  kind: OperatorGroup
+  metadata:
+    annotations:
+      olm.providedAPIs: AnsibleAutomationPlatform.v1alpha1.aap.ansible.com,AnsibleAutomationPlatformBackup.v1alpha1.aap.ansible.com,AnsibleAutomationPlatformRestore.v1alpha1.aap.ansible.com,AnsibleCredential.v1alpha1.tower.ansible.com,AnsibleInstanceGroup.v1alpha1.tower.ansible.com,AnsibleInventory.v1alpha1.tower.ansible.com,AnsibleJob.v1alpha1.tower.ansible.com,AnsibleLightspeed.v1alpha1.lightspeed.ansible.com,AnsibleMCPServer.v1alpha1.mcpserver.ansible.com,AnsibleProject.v1alpha1.tower.ansible.com,AnsibleSchedule.v1alpha1.tower.ansible.com,AnsibleWorkflow.v1alpha1.tower.ansible.com,AutomationController.v1beta1.automationcontroller.ansible.com,AutomationControllerBackup.v1beta1.automationcontroller.ansible.com,AutomationControllerMeshIngress.v1alpha1.automationcontroller.ansible.com,AutomationControllerRestore.v1beta1.automationcontroller.ansible.com,AutomationHub.v1beta1.automationhub.ansible.com,AutomationHubBackup.v1beta1.automationhub.ansible.com,AutomationHubRestore.v1beta1.automationhub.ansible.com,EDA.v1alpha1.eda.ansible.com,EDABackup.v1alpha1.eda.ansible.com,EDARestore.v1alpha1.eda.ansible.com,JobTemplate.v1alpha1.tower.ansible.com,MetricsService.v1alpha1.automationmetricsservice.ansible.com,MetricsServiceBackup.v1alpha1.automationmetricsservice.ansible.com,MetricsServiceRestore.v1alpha1.automationmetricsservice.ansible.com,WorkflowTemplate.v1alpha1.tower.ansible.com
+    creationTimestamp: '2026-04-09T21:56:38Z'
+    generateName: aap-
+    generation: 1
+    managedFields:
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+        f:spec:
+          .: {}
+          f:targetNamespaces:
+            .: {}
+            v:"aap": {}
+          f:upgradeStrategy: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-09T21:56:38Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:lastUpdated: {}
+          f:namespaces:
+            .: {}
+            v:"aap": {}
+      manager: olm
+      operation: Update
+      subresource: status
+      time: '2026-04-09T21:56:38Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:olm.providedAPIs: {}
+      manager: olm
+      operation: Update
+      time: '2026-05-04T19:35:16Z'
+    name: aap-8mhjx
+    namespace: aap
+    resourceVersion: '32741037'
+    uid: aca6c566-a054-45ba-9be8-f406687418e9
+  spec:
+    targetNamespaces:
+    - aap
+    upgradeStrategy: Default
+- apiVersion: operators.coreos.com/v1
+  kind: OperatorGroup
+  metadata:
+    annotations:
+      olm.providedAPIs: Bundle.v1alpha1.trust.cert-manager.io,CertManager.v1alpha1.operator.openshift.io,Certificate.v1.cert-manager.io,CertificateRequest.v1.cert-manager.io,Challenge.v1.acme.cert-manager.io,ClusterIssuer.v1.cert-manager.io,Issuer.v1.cert-manager.io,IstioCSR.v1alpha1.operator.openshift.io,Order.v1.acme.cert-manager.io,TrustManager.v1alpha1.operator.openshift.io
+    creationTimestamp: '2026-04-17T22:17:50Z'
+    generateName: cert-manager-operator-
+    generation: 1
+    managedFields:
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+        f:spec:
+          .: {}
+          f:upgradeStrategy: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-17T22:17:50Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:lastUpdated: {}
+          f:namespaces:
+            .: {}
+            v:"": {}
+      manager: olm
+      operation: Update
+      subresource: status
+      time: '2026-04-17T22:17:50Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:olm.providedAPIs: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-20T16:42:45Z'
+    name: cert-manager-operator-vnfdz
+    namespace: cert-manager-operator
+    resourceVersion: '14706367'
+    uid: b5bc58db-88a2-48c2-a79f-915ea47b4c8d
+  spec:
+    upgradeStrategy: Default
+- apiVersion: operators.coreos.com/v1
+  kind: OperatorGroup
+  metadata:
+    annotations:
+      olm.providedAPIs: CostManagementMetricsConfig.v1beta1.costmanagement-metrics-cfg.openshift.io
+    creationTimestamp: '2026-05-05T19:52:11Z'
+    generateName: costmanagement-metrics-operator-
+    generation: 1
+    managedFields:
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+        f:spec:
+          .: {}
+          f:targetNamespaces:
+            .: {}
+            v:"costmanagement-metrics-operator": {}
+          f:upgradeStrategy: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-05-05T19:52:11Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:lastUpdated: {}
+          f:namespaces:
+            .: {}
+            v:"costmanagement-metrics-operator": {}
+      manager: olm
+      operation: Update
+      subresource: status
+      time: '2026-05-05T19:52:12Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:olm.providedAPIs: {}
+      manager: olm
+      operation: Update
+      time: '2026-05-05T19:52:22Z'
+    name: costmanagement-metrics-operator-78d8q
+    namespace: costmanagement-metrics-operator
+    resourceVersion: '34245464'
+    uid: d11adc9f-bb33-4a38-968d-7edc3fd5ed44
+  spec:
+    targetNamespaces:
+    - costmanagement-metrics-operator
+    upgradeStrategy: Default
+- apiVersion: operators.coreos.com/v1
+  kind: OperatorGroup
+  metadata:
+    annotations:
+      olm.providedAPIs: MultiClusterEngine.v1.multicluster.openshift.io
+    creationTimestamp: '2026-04-09T14:27:45Z'
+    generation: 1
+    managedFields:
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:targetNamespaces:
+            v:"multicluster-engine": {}
+      manager: multiclusterhub-operator
+      operation: Apply
+      time: '2026-04-09T14:27:45Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:lastUpdated: {}
+          f:namespaces:
+            .: {}
+            v:"multicluster-engine": {}
+      manager: olm
+      operation: Update
+      subresource: status
+      time: '2026-04-09T14:27:45Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:olm.providedAPIs: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T14:28:33Z'
+    name: default
+    namespace: multicluster-engine
+    resourceVersion: '1235719'
+    uid: 8fc6477c-7384-4139-9757-6dc9cd0027cd
+  spec:
+    targetNamespaces:
+    - multicluster-engine
+    upgradeStrategy: Default
+- apiVersion: operators.coreos.com/v1
+  kind: OperatorGroup
+  metadata:
+    annotations:
+      olm.providedAPIs: MultiClusterHub.v1.operator.open-cluster-management.io
+    creationTimestamp: '2026-04-09T14:26:36Z'
+    generateName: open-cluster-management-
+    generation: 1
+    managedFields:
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+        f:spec:
+          .: {}
+          f:targetNamespaces:
+            .: {}
+            v:"open-cluster-management": {}
+          f:upgradeStrategy: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-09T14:26:36Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:lastUpdated: {}
+          f:namespaces:
+            .: {}
+            v:"open-cluster-management": {}
+      manager: olm
+      operation: Update
+      subresource: status
+      time: '2026-04-09T14:26:36Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:olm.providedAPIs: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T14:26:43Z'
+    name: open-cluster-management-qm4hf
+    namespace: open-cluster-management
+    resourceVersion: '1234237'
+    uid: 3a67264e-7c18-43bd-b075-5350aa32f001
+  spec:
+    targetNamespaces:
+    - open-cluster-management
+    upgradeStrategy: Default
+- apiVersion: operators.coreos.com/v1
+  kind: OperatorGroup
+  metadata:
+    annotations:
+      olm.providedAPIs: AAQ.v1alpha1.aaq.kubevirt.io,CDI.v1beta1.cdi.kubevirt.io,HostPathProvisioner.v1beta1.hostpathprovisioner.kubevirt.io,HyperConverged.v1beta1.hco.kubevirt.io,KubeVirt.v1.kubevirt.io,MigController.v1alpha1.migrations.kubevirt.io,NetworkAddonsConfig.v1.networkaddonsoperator.network.kubevirt.io,SSP.v1beta2.ssp.kubevirt.io,SSP.v1beta3.ssp.kubevirt.io
+    creationTimestamp: '2026-04-07T19:50:04Z'
+    generateName: openshift-cnv-
+    generation: 1
+    managedFields:
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+        f:spec:
+          .: {}
+          f:targetNamespaces:
+            .: {}
+            v:"openshift-cnv": {}
+          f:upgradeStrategy: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-07T19:50:04Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:lastUpdated: {}
+          f:namespaces:
+            .: {}
+            v:"openshift-cnv": {}
+      manager: olm
+      operation: Update
+      subresource: status
+      time: '2026-04-07T19:50:04Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:olm.providedAPIs: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-07T19:50:15Z'
+    name: openshift-cnv-8kwcd
+    namespace: openshift-cnv
+    resourceVersion: '45564'
+    uid: 9d87d170-dd79-4c02-adc1-7e1139c007be
+  spec:
+    targetNamespaces:
+    - openshift-cnv
+    upgradeStrategy: Default
+- apiVersion: operators.coreos.com/v1
+  kind: OperatorGroup
+  metadata:
+    annotations:
+      olm.providedAPIs: LVMCluster.v1alpha1.lvm.topolvm.io,LVMVolumeGroup.v1alpha1.lvm.topolvm.io,LVMVolumeGroupNodeStatus.v1alpha1.lvm.topolvm.io,LogicalVolume.v1.topolvm.io
+    creationTimestamp: '2026-04-07T18:32:33Z'
+    generateName: openshift-lvm-storage-
+    generation: 1
+    managedFields:
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+        f:spec:
+          .: {}
+          f:targetNamespaces:
+            .: {}
+            v:"openshift-lvm-storage": {}
+          f:upgradeStrategy: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-07T18:32:33Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:lastUpdated: {}
+          f:namespaces:
+            .: {}
+            v:"openshift-lvm-storage": {}
+      manager: olm
+      operation: Update
+      subresource: status
+      time: '2026-04-07T18:32:33Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:olm.providedAPIs: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-07T18:32:44Z'
+    name: openshift-lvm-storage-fmmmx
+    namespace: openshift-lvm-storage
+    resourceVersion: '31999'
+    uid: 63595e1d-34cb-4cd9-bfdb-3a73408581d4
+  spec:
+    targetNamespaces:
+    - openshift-lvm-storage
+    upgradeStrategy: Default
+- apiVersion: operators.coreos.com/v1
+  kind: OperatorGroup
+  metadata:
+    annotations:
+      olm.providedAPIs: NMState.v1.nmstate.io
+    creationTimestamp: '2026-04-08T02:46:07Z'
+    generateName: openshift-nmstate-
+    generation: 1
+    managedFields:
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:generateName: {}
+        f:spec:
+          .: {}
+          f:targetNamespaces:
+            .: {}
+            v:"openshift-nmstate": {}
+          f:upgradeStrategy: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-08T02:46:07Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:lastUpdated: {}
+          f:namespaces:
+            .: {}
+            v:"openshift-nmstate": {}
+      manager: olm
+      operation: Update
+      subresource: status
+      time: '2026-04-08T02:46:07Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:olm.providedAPIs: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-08T02:46:15Z'
+    name: openshift-nmstate-qzmbs
+    namespace: openshift-nmstate
+    resourceVersion: '241507'
+    uid: aedd197f-0303-475b-9bca-a39064225c33
+  spec:
+    targetNamespaces:
+    - openshift-nmstate
+    upgradeStrategy: Default
+- apiVersion: operators.coreos.com/v1
+  kind: OperatorGroup
+  metadata:
+    annotations:
+      capability.openshift.io/name: OperatorLifecycleManager
+      include.release.openshift.io/hypershift: 'true'
+      include.release.openshift.io/ibm-cloud-managed: 'true'
+      include.release.openshift.io/self-managed-high-availability: 'true'
+    creationTimestamp: '2026-04-07T16:03:46Z'
+    generation: 1
+    managedFields:
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:capability.openshift.io/name: {}
+            f:include.release.openshift.io/hypershift: {}
+            f:include.release.openshift.io/ibm-cloud-managed: {}
+            f:include.release.openshift.io/self-managed-high-availability: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"6bf6faaa-c694-444f-a403-efa0db9e8b38"}: {}
+        f:spec:
+          .: {}
+          f:upgradeStrategy: {}
+      manager: cluster-version-operator
+      operation: Update
+      time: '2026-04-07T16:03:46Z'
+    - apiVersion: operators.coreos.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:lastUpdated: {}
+          f:namespaces:
+            .: {}
+            v:"": {}
+      manager: olm
+      operation: Update
+      subresource: status
+      time: '2026-04-07T16:35:03Z'
+    name: global-operators
+    namespace: openshift-operators
+    ownerReferences:
+    - apiVersion: config.openshift.io/v1
+      controller: true
+      kind: ClusterVersion
+      name: version
+      uid: 6bf6faaa-c694-444f-a403-efa0db9e8b38
+    resourceVersion: '13763'
+    uid: 92967cc7-bc88-4041-97b1-169908a599aa
+  spec:
+    upgradeStrategy: Default

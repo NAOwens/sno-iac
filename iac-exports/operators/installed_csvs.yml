@@ -1,0 +1,1063 @@
+- labels:
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+    operators.coreos.com/ansible-automation-platform-operator.aap: ''
+  name: aap-operator.v2.6.0-0.1777410689
+  namespace: aap
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: aap
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: assisted-installer
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: awstest
+- labels:
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+    operators.coreos.com/openshift-cert-manager-operator.cert-manager-operator: ''
+  name: cert-manager-operator.v1.19.0
+  namespace: cert-manager-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: cert-manager
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: costmanagement-metrics-operator
+- labels:
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+    operators.coreos.com/costmanagement-metrics-operator.costmanagement-metrics-operator: ''
+  name: costmanagement-metrics-operator.4.4.0
+  namespace: costmanagement-metrics-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: default-broker
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: default
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: development
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: hive
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: hypershift
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: kube-node-lease
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: kube-public
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: kube-system
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: local-cluster
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: multicluster-engine
+- labels:
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+    operators.coreos.com/multicluster-engine.multicluster-engine: ''
+  name: multicluster-engine.v2.11.1
+  namespace: multicluster-engine
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: open-cluster-management-agent-addon
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: open-cluster-management-agent
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: open-cluster-management-global-set
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: open-cluster-management-hub
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: open-cluster-management-policies
+- labels:
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+    operators.coreos.com/advanced-cluster-management.open-cluster-management: ''
+  name: advanced-cluster-management.v2.16.1
+  namespace: open-cluster-management
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: open-cluster-management
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-apiserver-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-apiserver
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-authentication-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-authentication
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-catalogd
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cloud-controller-manager-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cloud-controller-manager
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cloud-credential-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cloud-network-config-controller
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cloud-platform-infra
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cluster-csi-drivers
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cluster-machine-approver
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cluster-node-tuning-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cluster-olm-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cluster-samples-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cluster-storage-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cluster-version
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-cnv
+- labels:
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+    operators.coreos.com/kubevirt-hyperconverged.openshift-cnv: ''
+  name: kubevirt-hyperconverged-operator.v4.21.8
+  namespace: openshift-cnv
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-config-managed
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-config-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-config
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-console-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-console-user-settings
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-console
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-controller-manager-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-controller-manager
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-debug-9tkrp
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-debug-brvdm
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-debug-r884p
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-dns-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-dns
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-etcd-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-etcd
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-host-network
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-image-registry
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-infra
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-ingress-canary
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-ingress-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-ingress
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-insights
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-kni-infra
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-kube-apiserver-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-kube-apiserver
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-kube-controller-manager-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-kube-controller-manager
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-kube-scheduler-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-kube-scheduler
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-kube-storage-version-migrator-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-kube-storage-version-migrator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-lvm-storage
+- labels:
+    full_version: 4.21.0-1
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operators.coreos.com/lvms-operator.openshift-lvm-storage: ''
+  name: lvms-operator.v4.21.0
+  namespace: openshift-lvm-storage
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-machine-api
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-machine-config-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-marketplace
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-monitoring
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-multus
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-network-console
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-network-diagnostics
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-network-node-identity
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-network-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-nmstate
+- labels:
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operators.coreos.com/kubernetes-nmstate-operator.openshift-nmstate: ''
+  name: kubernetes-nmstate-operator.4.21.0-202605270323
+  namespace: openshift-nmstate
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-node
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-nutanix-infra
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-oauth-apiserver
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-openstack-infra
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-operator-controller
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-operator-lifecycle-manager
+- labels:
+    olm.clusteroperator.name: operator-lifecycle-manager-packageserver
+    olm.version: 0.0.1-snapshot
+  name: packageserver
+  namespace: openshift-operator-lifecycle-manager
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-operators
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-ovirt-infra
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-ovn-kubernetes
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-route-controller-manager
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-service-ca-operator
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-service-ca
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-user-workload-monitoring
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-virtualization-os-images
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift-vsphere-infra
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: openshift
+- labels:
+    olm.copiedFrom: cert-manager-operator
+    olm.managed: 'true'
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+  name: cert-manager-operator.v1.19.0
+  namespace: test-vms

@@ -1,0 +1,132 @@
+- apiVersion: eda.ansible.com/v1alpha1
+  kind: EDA
+  metadata:
+    annotations:
+      aap.ansible.io/client-request-timeout: 30s
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"eda.ansible.com/v1alpha1","kind":"EDA","metadata":{"annotations":{"aap.ansible.io/client-request-timeout":"30s"},"name":"myaap-eda","namespace":"aap"},"spec":{"automation_server_url":"http://myaap-controller-service","database":{"database_secret":"myaap-eda-postgres-configuration"},"event_stream":{"prefix":"/eda-event-streams"},"extra_settings":[{"setting":"EDA_ANSIBLE_BASE_JWT_KEY","value":"http://myaap"},{"setting":"EDA_ANSIBLE_BASE_JWT_REDIRECT_TYPE","value":"eda"},{"setting":"ENABLE_SERVICE_BACKED_SSO","value":"@bool
+        false"},{"setting":"EDA_RESOURCE_SERVER__URL","value":"http://myaap"},{"setting":"EDA_RESOURCE_SERVER__SECRET_KEY","value":"mP1I8ORjwNdU0HjEhMXji0d8It89fWAaoI-Fywx-v2iAPeHjak_pMTuYcO_pUXz0TxLb7_7_2-YFWvjHdNAcDg"},{"setting":"EDA_RESOURCE_SERVER__VALIDATE_HTTPS","value":"False"},{"setting":"EDA_ANSIBLE_BASE_MANAGED_ROLE_REGISTRY","value":"@json
+        {\\\"platform_auditor\\\": {\\\"name\\\": \\\"Platform Auditor\\\", \\\"shortname\\\":
+        \\\"sys_auditor\\\"}}"}],"idle_deployment":false,"no_log":true,"postgres_configuration_secret":"myaap-eda-postgres-configuration","public_base_url":"https://myaap-aap.apps.sno.ofam.dev","redis":{"redis_secret":"myaap-eda-redis-configuration"},"ui_disabled":true}}'
+    creationTimestamp: '2026-04-09T22:17:25Z'
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    managedFields:
+    - apiVersion: eda.ansible.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:aap.ansible.io/client-request-timeout: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+        f:spec:
+          .: {}
+          f:admin_user: {}
+          f:automation_server_url: {}
+          f:database:
+            .: {}
+            f:database_secret: {}
+            f:postgres_data_volume_init: {}
+          f:event_stream:
+            .: {}
+            f:gunicorn_workers: {}
+            f:mtls: {}
+            f:prefix: {}
+            f:replicas: {}
+          f:extra_settings: {}
+          f:idle_deployment: {}
+          f:image_pull_policy: {}
+          f:ingress_type: {}
+          f:no_log: {}
+          f:public_base_url: {}
+          f:redis:
+            .: {}
+            f:redis_secret: {}
+            f:replicas: {}
+          f:ui_disabled: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:29Z'
+    - apiVersion: eda.ansible.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:URL: {}
+          f:adminPasswordSecret: {}
+          f:adminUser: {}
+          f:databaseConfigurationSecret: {}
+          f:dbFieldsEncryptionSecret: {}
+          f:image: {}
+          f:version: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      subresource: status
+      time: '2026-05-04T19:38:56Z'
+    - apiVersion: eda.ansible.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions: {}
+      manager: ansible-operator
+      operation: Update
+      subresource: status
+      time: '2026-06-03T21:37:47Z'
+    name: myaap-eda
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '77804879'
+    uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+  spec:
+    admin_user: admin
+    automation_server_url: http://myaap-controller-service
+    database:
+      database_secret: myaap-eda-postgres-configuration
+      postgres_data_volume_init: false
+    event_stream:
+      gunicorn_workers: 2
+      mtls: true
+      prefix: /eda-event-streams
+      replicas: 1
+    extra_settings:
+    - setting: EDA_ANSIBLE_BASE_JWT_KEY
+      value: http://myaap
+    - setting: EDA_ANSIBLE_BASE_JWT_REDIRECT_TYPE
+      value: eda
+    - setting: ENABLE_SERVICE_BACKED_SSO
+      value: '@bool false'
+    - setting: EDA_RESOURCE_SERVER__URL
+      value: http://myaap
+    - setting: EDA_RESOURCE_SERVER__SECRET_KEY
+      value: mP1I8ORjwNdU0HjEhMXji0d8It89fWAaoI-Fywx-v2iAPeHjak_pMTuYcO_pUXz0TxLb7_7_2-YFWvjHdNAcDg
+    - setting: EDA_RESOURCE_SERVER__VALIDATE_HTTPS
+      value: 'False'
+    - setting: EDA_ANSIBLE_BASE_MANAGED_ROLE_REGISTRY
+      value: '@json {\"platform_auditor\": {\"name\": \"Platform Auditor\", \"shortname\":
+        \"sys_auditor\"}}'
+    idle_deployment: false
+    image_pull_policy: IfNotPresent
+    ingress_type: Route
+    no_log: true
+    public_base_url: https://myaap-aap.apps.sno.ofam.dev
+    redis:
+      redis_secret: myaap-eda-redis-configuration
+      replicas: 1
+    ui_disabled: true

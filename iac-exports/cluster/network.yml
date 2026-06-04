@@ -1,0 +1,31 @@
+- apiVersion: config.openshift.io/v1
+  kind: Network
+  metadata: {}
+  spec:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    externalIP:
+      policy: {}
+    networkDiagnostics:
+      mode: ''
+      sourcePlacement: {}
+      targetPlacement: {}
+    networkType: OVNKubernetes
+    serviceNetwork:
+    - 172.30.0.0/16
+  status:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    clusterNetworkMTU: 1400
+    conditions:
+    - lastTransitionTime: '2026-06-02T16:34:42Z'
+      message: ''
+      observedGeneration: 0
+      reason: AsExpected
+      status: 'True'
+      type: NetworkDiagnosticsAvailable
+    networkType: OVNKubernetes
+    serviceNetwork:
+    - 172.30.0.0/16

@@ -1,0 +1,822 @@
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"control-plane":"controller-manager","controller-tools.k8s.io":"1.0"},"name":"hive-controllers","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]},"spec":{"replicas":1,"revisionHistoryLimit":4,"selector":{"matchLabels":{"control-plane":"controller-manager","controller-tools.k8s.io":"1.0"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"annotations":{"hive.openshift.io/hiveconfig-hash":"b476e4edbec3c8a75a8968a02d3d4434"},"labels":{"control-plane":"controller-manager","controller-tools.k8s.io":"1.0"}},"spec":{"containers":[{"args":["--disabled-controllers","clustersync,machinepool"],"command":["/opt/services/manager"],"env":[{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}},{"name":"POD_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"CLI_CACHE_DIR","value":"/var/cache/kubectl"},{"name":"HIVE_NS","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"TMPDIR","value":"/tmp"},{"name":"HIVE_IMAGE","value":"registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885"},{"name":"HIVE_IMAGE_PULL_POLICY","value":"IfNotPresent"},{"name":"MANAGED_DOMAINS_FILE","value":"/data/config/managed-domains"},{"name":"AWS_PRIVATELINK_CONTROLLER_CONFIG_FILE","value":"/data/aws-private-link-config/aws-private-link"},{"name":"PRIVATELINK_CONTROLLER_CONFIG_FILE","value":"/data/private-link-config/private-link"},{"name":"FAILED_PROVISION_CONFIG_FILE","value":"/data/failed-provision-config/hive-failed-provision-config"},{"name":"METRICS_CONFIG_FILE","value":"/data/metrics-config/hive-metrics-config"},{"name":"SUPPORTED_CONTRACT_IMPLEMENTATIONS_FILE","value":"/data/supported-contracts-config/supported-contracts"}],"envFrom":[{"configMapRef":{"name":"hive-controllers-config"}}],"image":"registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885","imagePullPolicy":"IfNotPresent","livenessProbe":{"httpGet":{"path":"/healthz","port":8080}},"name":"manager","readinessProbe":{"httpGet":{"path":"/readyz","port":8080}},"resources":{"requests":{"cpu":"50m","memory":"512Mi"}},"securityContext":{"privileged":false,"readOnlyRootFilesystem":true},"volumeMounts":[{"mountPath":"/var/cache/kubectl","name":"kubectl-cache"},{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/data/config","name":"hive-managed-domains"},{"mountPath":"/data/aws-private-link-config","name":"aws-private-link"},{"mountPath":"/data/private-link-config","name":"private-link"},{"mountPath":"/data/failed-provision-config","name":"hive-failed-provision-config"},{"mountPath":"/data/metrics-config","name":"hive-metrics-config"},{"mountPath":"/data/supported-contracts-config","name":"hive-supported-contracts"}]}],"serviceAccountName":"hive-controllers","terminationGracePeriodSeconds":10,"tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/infra","operator":"Exists"},{"effect":"NoExecute","key":"node.kubernetes.io/not-ready","operator":"Exists","tolerationSeconds":300},{"effect":"NoExecute","key":"node.kubernetes.io/unreachable","operator":"Exists","tolerationSeconds":300},{"effect":"NoSchedule","key":"node.kubernetes.io/memory-pressure","operator":"Exists"}],"volumes":[{"emptyDir":{},"name":"kubectl-cache"},{"emptyDir":{},"name":"tmp"},{"configMap":{"name":"hive-managed-domains"},"name":"hive-managed-domains"},{"configMap":{"name":"aws-private-link","optional":true},"name":"aws-private-link"},{"configMap":{"name":"private-link","optional":true},"name":"private-link"},{"configMap":{"name":"hive-failed-provision-config","optional":true},"name":"hive-failed-provision-config"},{"configMap":{"name":"hive-metrics-config","optional":true},"name":"hive-metrics-config"},{"configMap":{"name":"hive-supported-contracts","optional":true},"name":"hive-supported-contracts"}]}}},"status":{}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:31Z'
+    generation: 2
+    labels:
+      control-plane: controller-manager
+      controller-tools.k8s.io: '1.0'
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:control-plane: {}
+            f:controller-tools.k8s.io: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:hive.openshift.io/hiveconfig-hash: {}
+              f:labels:
+                .: {}
+                f:control-plane: {}
+                f:controller-tools.k8s.io: {}
+            f:spec:
+              f:containers:
+                k:{"name":"manager"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"AWS_PRIVATELINK_CONTROLLER_CONFIG_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"CLI_CACHE_DIR"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"FAILED_PROVISION_CONFIG_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HIVE_IMAGE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HIVE_IMAGE_PULL_POLICY"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HIVE_NS"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"MANAGED_DOMAINS_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"METRICS_CONFIG_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"POD_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"PRIVATELINK_CONTROLLER_CONFIG_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"SUPPORTED_CONTRACT_IMPLEMENTATIONS_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"TMPDIR"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/data/aws-private-link-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/data/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/data/failed-provision-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/data/metrics-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/data/private-link-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/data/supported-contracts-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/cache/kubectl"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                .: {}
+                k:{"name":"aws-private-link"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"hive-failed-provision-config"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"hive-managed-domains"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"hive-metrics-config"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"hive-supported-contracts"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"kubectl-cache"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"private-link"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-05-05T23:41:58Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:36Z'
+    name: hive-controllers
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '75981583'
+    uid: 437e842f-aca2-4d38-a771-9375fdd44477
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 4
+    selector:
+      matchLabels:
+        control-plane: controller-manager
+        controller-tools.k8s.io: '1.0'
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        annotations:
+          hive.openshift.io/hiveconfig-hash: b476e4edbec3c8a75a8968a02d3d4434
+        labels:
+          control-plane: controller-manager
+          controller-tools.k8s.io: '1.0'
+      spec:
+        containers:
+        - args:
+          - --disabled-controllers
+          - clustersync,machinepool
+          command:
+          - /opt/services/manager
+          env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: CLI_CACHE_DIR
+            value: /var/cache/kubectl
+          - name: HIVE_NS
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: TMPDIR
+            value: /tmp
+          - name: HIVE_IMAGE
+            value: registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885
+          - name: HIVE_IMAGE_PULL_POLICY
+            value: IfNotPresent
+          - name: MANAGED_DOMAINS_FILE
+            value: /data/config/managed-domains
+          - name: AWS_PRIVATELINK_CONTROLLER_CONFIG_FILE
+            value: /data/aws-private-link-config/aws-private-link
+          - name: PRIVATELINK_CONTROLLER_CONFIG_FILE
+            value: /data/private-link-config/private-link
+          - name: FAILED_PROVISION_CONFIG_FILE
+            value: /data/failed-provision-config/hive-failed-provision-config
+          - name: METRICS_CONFIG_FILE
+            value: /data/metrics-config/hive-metrics-config
+          - name: SUPPORTED_CONTRACT_IMPLEMENTATIONS_FILE
+            value: /data/supported-contracts-config/supported-contracts
+          envFrom:
+          - configMapRef:
+              name: hive-controllers-config
+          image: registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: manager
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            requests:
+              cpu: 50m
+              memory: 512Mi
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/cache/kubectl
+            name: kubectl-cache
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /data/config
+            name: hive-managed-domains
+          - mountPath: /data/aws-private-link-config
+            name: aws-private-link
+          - mountPath: /data/private-link-config
+            name: private-link
+          - mountPath: /data/failed-provision-config
+            name: hive-failed-provision-config
+          - mountPath: /data/metrics-config
+            name: hive-metrics-config
+          - mountPath: /data/supported-contracts-config
+            name: hive-supported-contracts
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: hive-controllers
+        serviceAccountName: hive-controllers
+        terminationGracePeriodSeconds: 10
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        - effect: NoExecute
+          key: node.kubernetes.io/not-ready
+          operator: Exists
+          tolerationSeconds: 300
+        - effect: NoExecute
+          key: node.kubernetes.io/unreachable
+          operator: Exists
+          tolerationSeconds: 300
+        - effect: NoSchedule
+          key: node.kubernetes.io/memory-pressure
+          operator: Exists
+        volumes:
+        - emptyDir: {}
+          name: kubectl-cache
+        - emptyDir: {}
+          name: tmp
+        - configMap:
+            defaultMode: 420
+            name: hive-managed-domains
+          name: hive-managed-domains
+        - configMap:
+            defaultMode: 420
+            name: aws-private-link
+            optional: true
+          name: aws-private-link
+        - configMap:
+            defaultMode: 420
+            name: private-link
+            optional: true
+          name: private-link
+        - configMap:
+            defaultMode: 420
+            name: hive-failed-provision-config
+            optional: true
+          name: hive-failed-provision-config
+        - configMap:
+            defaultMode: 420
+            name: hive-metrics-config
+            optional: true
+          name: hive-metrics-config
+        - configMap:
+            defaultMode: 420
+            name: hive-supported-contracts
+            optional: true
+          name: hive-supported-contracts
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '7'
+      hive.openshift.io/ca-hash: aa02a3bcc92ac6c4aa0f7420accc879e
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"hive.openshift.io/ca-hash":"aa02a3bcc92ac6c4aa0f7420accc879e"},"labels":{"app":"hiveadmission","hiveadmission":"true"},"name":"hiveadmission","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]},"spec":{"replicas":2,"selector":{"matchLabels":{"app":"hiveadmission","hiveadmission":"true"}},"strategy":{},"template":{"metadata":{"annotations":{"hive.openshift.io/ca-hash":"aa02a3bcc92ac6c4aa0f7420accc879e","hive.openshift.io/hive-admission-input-sources-hash":"8d89d996f5ac127e9e75fc4019e483d2","hive.openshift.io/serving-cert-secret-hash":"7af3bdf979d90a5a62630cbf8fbd658e"},"labels":{"app":"hiveadmission","hiveadmission":"true"},"name":"hiveadmission"},"spec":{"containers":[{"command":["/opt/services/hiveadmission","--secure-port=9443","--audit-log-path=-","--tls-cert-file=/var/serving-cert/tls.crt","--tls-private-key-file=/var/serving-cert/tls.key","--tls-min-version=VersionTLS12","--tls-cipher-suites=TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256"],"env":[{"name":"TMPDIR","value":"/tmp"},{"name":"MANAGED_DOMAINS_FILE","value":"/data/config/managed-domains"},{"name":"AWS_PRIVATELINK_CONTROLLER_CONFIG_FILE","value":"/data/aws-private-link-config/aws-private-link"},{"name":"PRIVATELINK_CONTROLLER_CONFIG_FILE","value":"/data/private-link-config/private-link"},{"name":"SUPPORTED_CONTRACT_IMPLEMENTATIONS_FILE","value":"/data/supported-contracts-config/supported-contracts"}],"envFrom":[{"configMapRef":{"name":"hive-feature-gates"}}],"image":"registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885","imagePullPolicy":"IfNotPresent","name":"hiveadmission","ports":[{"containerPort":9443,"protocol":"TCP"}],"readinessProbe":{"httpGet":{"path":"/healthz","port":9443,"scheme":"HTTPS"}},"resources":{},"securityContext":{"privileged":false,"readOnlyRootFilesystem":true},"volumeMounts":[{"mountPath":"/var/serving-cert","name":"serving-cert"},{"mountPath":"/tmp","name":"tmp"},{"mountPath":"/data/config","name":"hive-managed-domains"},{"mountPath":"/data/aws-private-link-config","name":"aws-private-link"},{"mountPath":"/data/private-link-config","name":"private-link"},{"mountPath":"/data/supported-contracts-config","name":"hive-supported-contracts"}]}],"serviceAccountName":"hiveadmission","tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/infra","operator":"Exists"},{"effect":"NoExecute","key":"node.kubernetes.io/not-ready","operator":"Exists","tolerationSeconds":300},{"effect":"NoExecute","key":"node.kubernetes.io/unreachable","operator":"Exists","tolerationSeconds":300},{"effect":"NoSchedule","key":"node.kubernetes.io/memory-pressure","operator":"Exists"}],"volumes":[{"name":"serving-cert","secret":{"defaultMode":420,"secretName":"hiveadmission-serving-cert"}},{"emptyDir":{},"name":"tmp"},{"configMap":{"name":"hive-managed-domains"},"name":"hive-managed-domains"},{"configMap":{"name":"aws-private-link","optional":true},"name":"aws-private-link"},{"configMap":{"name":"private-link","optional":true},"name":"private-link"},{"configMap":{"name":"hive-supported-contracts","optional":true},"name":"hive-supported-contracts"}]}}},"status":{}}
+
+        '
+    creationTimestamp: '2026-04-09T14:32:32Z'
+    generation: 7
+    labels:
+      app: hiveadmission
+      hiveadmission: 'true'
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:hive.openshift.io/ca-hash: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:hiveadmission: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:hive.openshift.io/ca-hash: {}
+                f:hive.openshift.io/hive-admission-input-sources-hash: {}
+                f:hive.openshift.io/serving-cert-secret-hash: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:hiveadmission: {}
+              f:name: {}
+            f:spec:
+              f:containers:
+                k:{"name":"hiveadmission"}:
+                  .: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"AWS_PRIVATELINK_CONTROLLER_CONFIG_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"MANAGED_DOMAINS_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"PRIVATELINK_CONTROLLER_CONFIG_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"SUPPORTED_CONTRACT_IMPLEMENTATIONS_FILE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"TMPDIR"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":9443,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/data/aws-private-link-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/data/config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/data/private-link-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/data/supported-contracts-config"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/serving-cert"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes:
+                .: {}
+                k:{"name":"aws-private-link"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"hive-managed-domains"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"hive-supported-contracts"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"private-link"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                    f:optional: {}
+                  f:name: {}
+                k:{"name":"serving-cert"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:secretName: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-05-23T11:11:27Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:50Z'
+    name: hiveadmission
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '75982889'
+    uid: f978abc2-0c2e-451f-874f-e8699c8dff75
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 2
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: hiveadmission
+        hiveadmission: 'true'
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          hive.openshift.io/ca-hash: aa02a3bcc92ac6c4aa0f7420accc879e
+          hive.openshift.io/hive-admission-input-sources-hash: 8d89d996f5ac127e9e75fc4019e483d2
+          hive.openshift.io/serving-cert-secret-hash: 7af3bdf979d90a5a62630cbf8fbd658e
+        labels:
+          app: hiveadmission
+          hiveadmission: 'true'
+        name: hiveadmission
+      spec:
+        containers:
+        - command:
+          - /opt/services/hiveadmission
+          - --secure-port=9443
+          - --audit-log-path=-
+          - --tls-cert-file=/var/serving-cert/tls.crt
+          - --tls-private-key-file=/var/serving-cert/tls.key
+          - --tls-min-version=VersionTLS12
+          - --tls-cipher-suites=TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+          env:
+          - name: TMPDIR
+            value: /tmp
+          - name: MANAGED_DOMAINS_FILE
+            value: /data/config/managed-domains
+          - name: AWS_PRIVATELINK_CONTROLLER_CONFIG_FILE
+            value: /data/aws-private-link-config/aws-private-link
+          - name: PRIVATELINK_CONTROLLER_CONFIG_FILE
+            value: /data/private-link-config/private-link
+          - name: SUPPORTED_CONTRACT_IMPLEMENTATIONS_FILE
+            value: /data/supported-contracts-config/supported-contracts
+          envFrom:
+          - configMapRef:
+              name: hive-feature-gates
+          image: registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885
+          imagePullPolicy: IfNotPresent
+          name: hiveadmission
+          ports:
+          - containerPort: 9443
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 9443
+              scheme: HTTPS
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/serving-cert
+            name: serving-cert
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /data/config
+            name: hive-managed-domains
+          - mountPath: /data/aws-private-link-config
+            name: aws-private-link
+          - mountPath: /data/private-link-config
+            name: private-link
+          - mountPath: /data/supported-contracts-config
+            name: hive-supported-contracts
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: hiveadmission
+        serviceAccountName: hiveadmission
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        - effect: NoExecute
+          key: node.kubernetes.io/not-ready
+          operator: Exists
+          tolerationSeconds: 300
+        - effect: NoExecute
+          key: node.kubernetes.io/unreachable
+          operator: Exists
+          tolerationSeconds: 300
+        - effect: NoSchedule
+          key: node.kubernetes.io/memory-pressure
+          operator: Exists
+        volumes:
+        - name: serving-cert
+          secret:
+            defaultMode: 420
+            secretName: hiveadmission-serving-cert
+        - emptyDir: {}
+          name: tmp
+        - configMap:
+            defaultMode: 420
+            name: hive-managed-domains
+          name: hive-managed-domains
+        - configMap:
+            defaultMode: 420
+            name: aws-private-link
+            optional: true
+          name: aws-private-link
+        - configMap:
+            defaultMode: 420
+            name: private-link
+            optional: true
+          name: private-link
+        - configMap:
+            defaultMode: 420
+            name: hive-supported-contracts
+            optional: true
+          name: hive-supported-contracts

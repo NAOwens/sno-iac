@@ -1,0 +1,60 @@
+- apiVersion: v1
+  data:
+    ca-bundle.crt: '-----BEGIN CERTIFICATE-----
+
+      MIIDPzCCAiegAwIBAgIIAsCHdasx1fUwDQYJKoZIhvcNAQELBQAwLTErMCkGA1UE
+
+      AwwiY2x1c3Rlci1tYW5hZ2VyLXdlYmhvb2tAMTc3NTc0NDk3NzAeFw0yNjA0MDkx
+
+      NDI5MzZaFw0yNzA0MDkxNDI5MzdaMC0xKzApBgNVBAMMImNsdXN0ZXItbWFuYWdl
+
+      ci13ZWJob29rQDE3NzU3NDQ5NzcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+
+      AoIBAQDgmjQA0rPjn7yck5JPY8KBe5+c/jrCxb9CtT6EDgsbzP8LLfm0POAQMXZg
+
+      v4P5RD4lHOoDfrULPAu2gVZMvhpq31dkS9wjn3otwKHkpnbcc4dEPM6UiHQhi9Be
+
+      B7mfBKmT1C9B+juE9apmDkSF6TUyrhdD+kpYkOJ0/nhIjP/mKMTQSFhiQwodS6w5
+
+      aaoqePhoWEBpXpPi3LL0C1R9GHI9StIAAGisq1HF1Myg6Tyo/V/x1AxHIGW0YYrx
+
+      PcyB6+uWludci5pAeN7IEu8kI37442qgYrpeFpsQzmHeJHl80WvtoI7vJYUFEhai
+
+      m32SBf8pP3Wx5QmCTMSs24fofJB3AgMBAAGjYzBhMA4GA1UdDwEB/wQEAwICpDAP
+
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBQDyCLXxFLHkEXWeyYpHw1v0cwokTAf
+
+      BgNVHSMEGDAWgBQDyCLXxFLHkEXWeyYpHw1v0cwokTANBgkqhkiG9w0BAQsFAAOC
+
+      AQEAccCFx5CsCgepvZP5+E5yWOuufxX07h9IiY9JCsXxSH8gcLVs42YDJyk4doDh
+
+      lqnuzbCa1/ixjuvF8KhnqvBPNzTsT5dM/oHe28a+Kynk4lIeAApIqtFLJBoZerEZ
+
+      HbRmacAUMo3hwoK6mnZvyBrKTI8HuzAPlrzyKLiEEXp+KQLLsiNZc2KSIDUcoppN
+
+      A/ubOvWZAuPAzQKKS7rYWi68sEsu6WhA2Fq1hDwRZouj7w/npEcLM3xJb+bvSdjO
+
+      Is/Jiq4CRPXXsW9sbJ8njfLa7+BNuYkABNPNGUCsLa9Pc+niZDuaXdvdm4eEiBl4
+
+      JqsaoC93yrqyL5jJaKKjiu7HMw==
+
+      -----END CERTIFICATE-----
+
+      '
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: '2026-04-09T14:29:37Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:ca-bundle.crt: {}
+      manager: registration-operator
+      operation: Update
+      time: '2026-04-09T14:29:37Z'
+    name: ca-bundle-configmap
+    namespace: open-cluster-management-hub
+    resourceVersion: '1237509'
+    uid: 1c4f293c-0a90-4697-9e9d-dd0b91eefb69

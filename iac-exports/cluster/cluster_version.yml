@@ -1,0 +1,102 @@
+apiVersion: config.openshift.io/v1
+kind: ClusterVersion
+metadata:
+  creationTimestamp: '2026-04-07T16:02:41Z'
+  generation: 4
+  managedFields:
+  - apiVersion: config.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        .: {}
+        f:channel: {}
+        f:clusterID: {}
+    manager: cluster-bootstrap
+    operation: Update
+    time: '2026-04-07T16:02:41Z'
+  - apiVersion: config.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:desiredUpdate:
+          .: {}
+          f:image: {}
+          f:version: {}
+    manager: Mozilla
+    operation: Update
+    time: '2026-06-02T15:12:56Z'
+  - apiVersion: config.openshift.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        .: {}
+        f:availableUpdates: {}
+        f:capabilities:
+          .: {}
+          f:enabledCapabilities: {}
+          f:knownCapabilities: {}
+        f:conditions:
+          .: {}
+          k:{"type":"Available"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Failing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"ImplicitlyEnabledCapabilities"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Progressing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"ReleaseAccepted"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"RetrievedUpdates"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:desired:
+          .: {}
+          f:channels:
+            .: {}
+            v:"candidate-4.21": {}
+            v:"candidate-4.22": {}
+            v:"fast-4.21": {}
+            v:"stable-4.21": {}
+          f:image: {}
+          f:url: {}
+          f:version: {}
+        f:history: {}
+        f:observedGeneration: {}
+        f:versionHash: {}
+    manager: cluster-version-operator
+    operation: Update
+    subresource: status
+    time: '2026-06-02T16:34:42Z'
+  name: version
+  resourceVersion: '75993878'
+  uid: 6bf6faaa-c694-444f-a403-efa0db9e8b38
+spec:
+  channel: stable-4.21
+  clusterID: 4d301035-073d-49b7-a5ef-5dfb26903ca9
+  desiredUpdate:
+    image: quay.io/openshift-release-dev/ocp-release@sha256:52a9c863ddc434eedee8c0e75cf610805db2b6b91502688857bc8afa62ed1dd6
+    version: 4.21.17

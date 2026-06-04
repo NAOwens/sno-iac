@@ -1,0 +1,1784 @@
+- apiVersion: v1
+  data:
+    environment: 'AWX_SKIP_MIGRATIONS=true
+
+      '
+    nginx_conf: "worker_processes  1;\nworker_cpu_affinity  auto;\npid        /tmp/nginx.pid;\n\nevents
+      {\n    worker_connections 1024;\n}\n\nhttp {\n    include       /etc/nginx/mime.types;\n
+      \   default_type  application/octet-stream;\n    server_tokens off;\n    client_max_body_size
+      5M;\n\n    map $http_x_trusted_proxy $trusted_proxy_present {\n        default
+      \"trusted-proxy\";\n        \"\"      \"-\";\n    }\n\n    map $http_x_dab_jw_token
+      $dab_jwt_present {\n        default \"dab-jwt\";\n        \"\"      \"-\";\n
+      \   }\n\n    log_format  main  '$remote_addr - $remote_user [$time_local] \"$request\"
+      '\n                      '$status $body_bytes_sent \"$http_referer\" '\n                      '\"$http_user_agent\"
+      \"$http_x_forwarded_for\" '\n                      '$trusted_proxy_present $dab_jwt_present';\n\n
+      \   access_log /dev/stdout main;\n    error_log /dev/stderr warn;\n\n    map
+      $http_upgrade $connection_upgrade {\n        default upgrade;\n        ''      close;\n
+      \   }\n\n    sendfile        on;\n    #tcp_nopush     on;\n    #gzip  on;\n\n
+      \   upstream uwsgi {\n        server 127.0.0.1:8050;\n    }\n\n    upstream
+      daphne {\n        server 127.0.0.1:8051;\n    }\n\n\n    \n    server {\n                listen
+      8052 default_server;\n                    listen [::]:8052 default_server;\n
+      \               \n        # If you have a domain name, this is where to add
+      it\n        server_name _;\n        keepalive_timeout 65;\n\n        # HSTS
+      (ngx_http_headers_module is required) (15768000 seconds = 6 months)\n        add_header
+      Strict-Transport-Security max-age=15768000;\n\n        # Protect against click-jacking
+      https://www.owasp.org/index.php/Testing_for_Clickjacking_(OTG-CLIENT-009)\n
+      \       add_header X-Frame-Options \"DENY\";\n        # Protect against MIME
+      content sniffing https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options\n
+      \       add_header X-Content-Type-Options nosniff;\n\n        location /nginx_status
+      {\n            stub_status on;\n            access_log off;\n            allow
+      127.0.0.1;\n            deny all;\n        }\n\n        location /static {\n
+      \           alias /var/lib/awx/public/static/;\n        }\n\n        location
+      /locales {\n            alias /var/lib/awx/public/static/awx/locales;\n        }\n\n
+      \       location /favicon.ico {\n            alias /var/lib/awx/public/static/media/favicon.ico;\n
+      \       }\n\n        location ~ ^(/websocket/|/api/websocket/|/api/controller/v2/websocket/)
+      {\n            # Pass request to the upstream alias\n            proxy_pass
+      http://daphne;\n            # Require http version 1.1 to allow for upgrade
+      requests\n            proxy_http_version 1.1;\n            # We want proxy_buffering
+      off for proxying to websockets.\n            proxy_buffering off;\n            #
+      http://en.wikipedia.org/wiki/X-Forwarded-For\n            proxy_set_header X-Forwarded-For
+      $proxy_add_x_forwarded_for;\n            # enable this if you use HTTPS:\n            proxy_set_header
+      X-Forwarded-Proto https;\n            # pass the Host: header from the client
+      for the sake of redirects\n            proxy_set_header Host $http_host;\n            #
+      We've set the Host header, so we don't need Nginx to muddle\n            # about
+      with redirects\n            proxy_redirect off;\n            # Depending on
+      the request value, set the Upgrade and\n            # connection headers\n            proxy_set_header
+      Upgrade $http_upgrade;\n            proxy_set_header Connection $connection_upgrade;\n
+      \       }\n\n        location / {\n            # Add trailing / if missing\n
+      \           rewrite ^(.*)$http_host(.*[^/])$ $1$http_host$2/ permanent;\n            uwsgi_read_timeout
+      15s;\n            uwsgi_pass uwsgi;\n            include /etc/nginx/uwsgi_params;\n
+      \           include /etc/nginx/conf.d/*.conf;\n            proxy_set_header
+      X-Forwarded-Port 443;\n            uwsgi_param HTTP_X_FORWARDED_PORT 443;\n\n
+      \           add_header Strict-Transport-Security max-age=15768000;\n            #
+      Protect against click-jacking https://www.owasp.org/index.php/Testing_for_Clickjacking_(OTG-CLIENT-009)\n
+      \           add_header X-Frame-Options \"DENY\";\n            add_header X-Content-Type-Options
+      nosniff;\n            add_header Cache-Control \"no-cache, no-store, must-revalidate\";\n
+      \           add_header Expires \"0\";\n            add_header Pragma \"no-cache\";\n
+      \           # Return 503 Service Unavailable with JSON response if uWSGI fails
+      to respond\n            error_page 504 =503 /json_503;\n            error_page
+      502 =503 /json_503;  # Optional, in case uWSGI is completely down   \n        }\n\n
+      \       location = /json_503 {\n            # Custom JSON response for 503 Service
+      Unavailable\n            internal;\n            add_header Content-Type application/json;\n\n
+      \           # Check if X-Request-ID is set and include it in the response\n
+      \           if ($http_x_request_id) {\n                return 503 '{\"status\":
+      \"error\", \"message\": \"Service Unavailable\", \"code\": 503, \"request_id\":
+      \"$http_x_request_id\"}';\n            }\n\n            # If X-Request-ID is
+      not set, just return the basic JSON response\n            return 503 '{\"status\":
+      \"error\", \"message\": \"Service Unavailable\", \"code\": 503}';\n        }\n
+      \   }\n}\n"
+    receptor_conf: "---\n- log-level: info\n- local-only: null\n- node:\n   firewallrules:\n
+      \   - action: reject\n      tonode: HOSTNAME\n      toservice: control\n- control-service:\n
+      \   service: control\n    filename: /var/run/receptor/receptor.sock\n    permissions:
+      '0660'\n- work-command:\n    worktype: local\n    command: ansible-runner\n
+      \   params: worker\n    allowruntimeparams: true\n- work-kubernetes:\n    worktype:
+      kubernetes-runtime-auth\n    authmethod: runtime\n    allowruntimeauth: true\n
+      \   allowruntimepod: true\n    allowruntimeparams: true\n- work-kubernetes:\n
+      \   worktype: kubernetes-incluster-auth\n    authmethod: incluster\n    allowruntimeauth:
+      true\n    allowruntimepod: true\n    allowruntimeparams: true\n- tls-client:\n
+      \   cert: /etc/receptor/tls/receptor.crt\n    key: /etc/receptor/tls/receptor.key\n
+      \   name: tlsclient\n    rootcas: /etc/receptor/tls/ca/mesh-CA.crt\n    mintls13:
+      false\n- work-signing:\n    privatekey: /etc/receptor/work_private_key.pem\n
+      \   tokenexpiration: 1m\n"
+    redis_conf: 'unixsocket /var/run/redis/redis.sock
+
+      unixsocketperm 777
+
+      port 0
+
+      bind 127.0.0.1
+
+      dir /var/lib/redis/data
+
+      timeout 300
+
+      '
+    settings: "# Downstream variables\nINSIGHTS_URL_BASE = 'https://cloud.redhat.com'\nREDHAT_CANDLEPIN_HOST
+      = 'https://subscription.rhsm.redhat.com'\nREDHAT_CANDLEPIN_VERIFY = '/etc/rhsm/ca/redhat-uep.pem'\nREDHAT_CONTENT_URL
+      = 'https://cdn.redhat.com'\nAUTOMATION_ANALYTICS_URL = 'https://cloud.redhat.com/api/ingress/v1/upload'\nSUBSCRIPTION_USAGE_MODEL
+      = 'unique_managed_hosts'\nINSIGHTS_AGENT_MIME = 'application/vnd.redhat.tower.analytics+tgz'\n\nimport
+      os\nimport socket\n# Import all so that extra_settings works properly\ntry:\n
+      \   # Some AutomationController setups may have no django_auth_ldap dependency.\n
+      \   from django_auth_ldap.config import *\nexcept:\n    pass\n\ndef get_secret():\n
+      \   if os.path.exists(\"/etc/tower/SECRET_KEY\"):\n        return open('/etc/tower/SECRET_KEY',
+      'rb').read().strip()\n\nADMINS = ()\nSTATIC_ROOT = '/var/lib/awx/public/static'\nSTATIC_URL
+      = '/static/'\nPROJECTS_ROOT = '/var/lib/awx/projects'\nJOBOUTPUT_ROOT = '/var/lib/awx/job_status'\n\nIS_K8S
+      = True\n\n\n\nSECRET_KEY = get_secret()\n\nALLOWED_HOSTS = ['*']\n\nINTERNAL_API_URL
+      = 'http://127.0.0.1:8052'\n\nOPTIONAL_API_URLPATTERN_PREFIX = 'controller'\n\n#
+      Container environments don't like chroots\nAWX_PROOT_ENABLED = False\n\n# Automatically
+      deprovision pods that go offline\nAWX_AUTO_DEPROVISION_INSTANCES = True\n\nCLUSTER_HOST_ID
+      = socket.gethostname()\nSYSTEM_UUID = os.environ.get('MY_POD_UID', '00000000-0000-0000-0000-000000000000')\n\nCSRF_COOKIE_SECURE
+      = False\nSESSION_COOKIE_SECURE = False\n\nSERVER_EMAIL = 'root@localhost'\nDEFAULT_FROM_EMAIL
+      = 'webmaster@localhost'\nEMAIL_SUBJECT_PREFIX = '[AutomationController] '\n\nEMAIL_HOST
+      = 'localhost'\nEMAIL_PORT = 25\nEMAIL_HOST_USER = ''\nEMAIL_HOST_PASSWORD =
+      ''\nEMAIL_USE_TLS = False\n\nUSE_X_FORWARDED_PORT = True\nBROADCAST_WEBSOCKET_PORT
+      = 8052\nBROADCAST_WEBSOCKET_PROTOCOL = 'http'\n\n\nRECEPTOR_LOG_LEVEL = 'info'\n\n\nANSIBLE_BASE_JWT_KEY
+      = \"http://myaap\"\nANSIBLE_BASE_JWT_REDIRECT_TYPE = \"awx\"\nENABLE_SERVICE_BACKED_SSO
+      = False\nSERVICE_BACKED_SSO_AUTH_CODE_REDIRECT_URL = \"https://myaap-aap.apps.sno.ofam.dev\"\nRESOURCE_SERVER
+      = {'SECRET_KEY': 'haAhpLP3gvECUG_j8Wc_obzrM6NLIpSgcnYsFwyKza0TAj6YoK2tGUj-lVkUPMwb9Lw1KNR_dZShuXD2IOWXMg',
+      'URL': 'http://myaap', 'VALIDATE_HTTPS': 'False'}\nANSIBLE_BASE_MANAGED_ROLE_REGISTRY
+      = {\"platform_auditor\": {\"name\": \"Platform Auditor\", \"shortname\": \"sys_auditor\"}}\nOPTIONAL_UI_URL_PREFIX
+      = \"execution\"\n"
+    uwsgi_conf: '[uwsgi]
+
+      socket = 127.0.0.1:8050
+
+      processes = 5
+
+      listen = 128
+
+      master = true
+
+      vacuum = true
+
+      no-orphans = true
+
+      lazy-apps = true
+
+      manage-script-name = true
+
+      master-fifo = /var/lib/awx/awxfifo
+
+      max-requests = 1000
+
+      buffer-size = 32768
+
+
+      harakiri = 10
+
+      harakiri-graceful-timeout = 2
+
+      harakiri-graceful-signal = 6
+
+      py-call-osafterfork = true
+
+
+      if-env = UWSGI_MOUNT_PATH
+
+      mount = %(_)=awx.wsgi:application
+
+      endif =
+
+
+      if-not-env = UWSGI_MOUNT_PATH
+
+      mount = /=awx.wsgi:application
+
+      endif =
+
+      '
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"environment":"AWX_SKIP_MIGRATIONS=true\n","nginx_conf":"worker_processes  1;\nworker_cpu_affinity  auto;\npid        /tmp/nginx.pid;\n\nevents
+        {\n    worker_connections 1024;\n}\n\nhttp {\n    include       /etc/nginx/mime.types;\n    default_type  application/octet-stream;\n    server_tokens
+        off;\n    client_max_body_size 5M;\n\n    map $http_x_trusted_proxy $trusted_proxy_present
+        {\n        default \"trusted-proxy\";\n        \"\"      \"-\";\n    }\n\n    map
+        $http_x_dab_jw_token $dab_jwt_present {\n        default \"dab-jwt\";\n        \"\"      \"-\";\n    }\n\n    log_format  main  ''$remote_addr
+        - $remote_user [$time_local] \"$request\" ''\n                      ''$status
+        $body_bytes_sent \"$http_referer\" ''\n                      ''\"$http_user_agent\"
+        \"$http_x_forwarded_for\" ''\n                      ''$trusted_proxy_present
+        $dab_jwt_present'';\n\n    access_log /dev/stdout main;\n    error_log /dev/stderr
+        warn;\n\n    map $http_upgrade $connection_upgrade {\n        default upgrade;\n        ''''      close;\n    }\n\n    sendfile        on;\n    #tcp_nopush     on;\n    #gzip  on;\n\n    upstream
+        uwsgi {\n        server 127.0.0.1:8050;\n    }\n\n    upstream daphne {\n        server
+        127.0.0.1:8051;\n    }\n\n\n    \n    server {\n                listen 8052
+        default_server;\n                    listen [::]:8052 default_server;\n                \n        #
+        If you have a domain name, this is where to add it\n        server_name _;\n        keepalive_timeout
+        65;\n\n        # HSTS (ngx_http_headers_module is required) (15768000 seconds
+        = 6 months)\n        add_header Strict-Transport-Security max-age=15768000;\n\n        #
+        Protect against click-jacking https://www.owasp.org/index.php/Testing_for_Clickjacking_(OTG-CLIENT-009)\n        add_header
+        X-Frame-Options \"DENY\";\n        # Protect against MIME content sniffing
+        https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options\n        add_header
+        X-Content-Type-Options nosniff;\n\n        location /nginx_status {\n            stub_status
+        on;\n            access_log off;\n            allow 127.0.0.1;\n            deny
+        all;\n        }\n\n        location /static {\n            alias /var/lib/awx/public/static/;\n        }\n\n        location
+        /locales {\n            alias /var/lib/awx/public/static/awx/locales;\n        }\n\n        location
+        /favicon.ico {\n            alias /var/lib/awx/public/static/media/favicon.ico;\n        }\n\n        location
+        ~ ^(/websocket/|/api/websocket/|/api/controller/v2/websocket/) {\n            #
+        Pass request to the upstream alias\n            proxy_pass http://daphne;\n            #
+        Require http version 1.1 to allow for upgrade requests\n            proxy_http_version
+        1.1;\n            # We want proxy_buffering off for proxying to websockets.\n            proxy_buffering
+        off;\n            # http://en.wikipedia.org/wiki/X-Forwarded-For\n            proxy_set_header
+        X-Forwarded-For $proxy_add_x_forwarded_for;\n            # enable this if
+        you use HTTPS:\n            proxy_set_header X-Forwarded-Proto https;\n            #
+        pass the Host: header from the client for the sake of redirects\n            proxy_set_header
+        Host $http_host;\n            # We''ve set the Host header, so we don''t need
+        Nginx to muddle\n            # about with redirects\n            proxy_redirect
+        off;\n            # Depending on the request value, set the Upgrade and\n            #
+        connection headers\n            proxy_set_header Upgrade $http_upgrade;\n            proxy_set_header
+        Connection $connection_upgrade;\n        }\n\n        location / {\n            #
+        Add trailing / if missing\n            rewrite ^(.*)$http_host(.*[^/])$ $1$http_host$2/
+        permanent;\n            uwsgi_read_timeout 15s;\n            uwsgi_pass uwsgi;\n            include
+        /etc/nginx/uwsgi_params;\n            include /etc/nginx/conf.d/*.conf;\n            proxy_set_header
+        X-Forwarded-Port 443;\n            uwsgi_param HTTP_X_FORWARDED_PORT 443;\n\n            add_header
+        Strict-Transport-Security max-age=15768000;\n            # Protect against
+        click-jacking https://www.owasp.org/index.php/Testing_for_Clickjacking_(OTG-CLIENT-009)\n            add_header
+        X-Frame-Options \"DENY\";\n            add_header X-Content-Type-Options nosniff;\n            add_header
+        Cache-Control \"no-cache, no-store, must-revalidate\";\n            add_header
+        Expires \"0\";\n            add_header Pragma \"no-cache\";\n            #
+        Return 503 Service Unavailable with JSON response if uWSGI fails to respond\n            error_page
+        504 =503 /json_503;\n            error_page 502 =503 /json_503;  # Optional,
+        in case uWSGI is completely down   \n        }\n\n        location = /json_503
+        {\n            # Custom JSON response for 503 Service Unavailable\n            internal;\n            add_header
+        Content-Type application/json;\n\n            # Check if X-Request-ID is set
+        and include it in the response\n            if ($http_x_request_id) {\n                return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503, \"request_id\": \"$http_x_request_id\"}'';\n            }\n\n            #
+        If X-Request-ID is not set, just return the basic JSON response\n            return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503}'';\n        }\n    }\n}\n","receptor_conf":"---\n- log-level: info\n-
+        local-only: null\n- node:\n   firewallrules:\n    - action: reject\n      tonode:
+        HOSTNAME\n      toservice: control\n- control-service:\n    service: control\n    filename:
+        /var/run/receptor/receptor.sock\n    permissions: ''0660''\n- work-command:\n    worktype:
+        local\n    command: ansible-runner\n    params: worker\n    allowruntimeparams:
+        true\n- work-kubernetes:\n    worktype: kubernetes-runtime-auth\n    authmethod:
+        runtime\n    allowruntimeauth: true\n    allowruntimepod: true\n    allowruntimeparams:
+        true\n- work-kubernetes:\n    worktype: kubernetes-incluster-auth\n    authmethod:
+        incluster\n    allowruntimeauth: true\n    allowruntimepod: true\n    allowruntimeparams:
+        true\n- tls-client:\n    cert: /etc/receptor/tls/receptor.crt\n    key: /etc/receptor/tls/receptor.key\n    name:
+        tlsclient\n    rootcas: /etc/receptor/tls/ca/mesh-CA.crt\n    mintls13: false\n-
+        work-signing:\n    privatekey: /etc/receptor/work_private_key.pem\n    tokenexpiration:
+        1m\n","redis_conf":"unixsocket /var/run/redis/redis.sock\nunixsocketperm 777\nport
+        0\nbind 127.0.0.1\ndir /var/lib/redis/data\ntimeout 300\n","settings":"# Downstream
+        variables\nINSIGHTS_URL_BASE = ''https://cloud.redhat.com''\nREDHAT_CANDLEPIN_HOST
+        = ''https://subscription.rhsm.redhat.com''\nREDHAT_CANDLEPIN_VERIFY = ''/etc/rhsm/ca/redhat-uep.pem''\nREDHAT_CONTENT_URL
+        = ''https://cdn.redhat.com''\nAUTOMATION_ANALYTICS_URL = ''https://cloud.redhat.com/api/ingress/v1/upload''\nSUBSCRIPTION_USAGE_MODEL
+        = ''unique_managed_hosts''\nINSIGHTS_AGENT_MIME = ''application/vnd.redhat.tower.analytics+tgz''\n\nimport
+        os\nimport socket\n# Import all so that extra_settings works properly\ntry:\n    #
+        Some AutomationController setups may have no django_auth_ldap dependency.\n    from
+        django_auth_ldap.config import *\nexcept:\n    pass\n\ndef get_secret():\n    if
+        os.path.exists(\"/etc/tower/SECRET_KEY\"):\n        return open(''/etc/tower/SECRET_KEY'',
+        ''rb'').read().strip()\n\nADMINS = ()\nSTATIC_ROOT = ''/var/lib/awx/public/static''\nSTATIC_URL
+        = ''/static/''\nPROJECTS_ROOT = ''/var/lib/awx/projects''\nJOBOUTPUT_ROOT
+        = ''/var/lib/awx/job_status''\n\nIS_K8S = True\n\n\n\nSECRET_KEY = get_secret()\n\nALLOWED_HOSTS
+        = [''*'']\n\nINTERNAL_API_URL = ''http://127.0.0.1:8052''\n\nOPTIONAL_API_URLPATTERN_PREFIX
+        = ''controller''\n\n# Container environments don''t like chroots\nAWX_PROOT_ENABLED
+        = False\n\n# Automatically deprovision pods that go offline\nAWX_AUTO_DEPROVISION_INSTANCES
+        = True\n\nCLUSTER_HOST_ID = socket.gethostname()\nSYSTEM_UUID = os.environ.get(''MY_POD_UID'',
+        ''00000000-0000-0000-0000-000000000000'')\n\nCSRF_COOKIE_SECURE = False\nSESSION_COOKIE_SECURE
+        = False\n\nSERVER_EMAIL = ''root@localhost''\nDEFAULT_FROM_EMAIL = ''webmaster@localhost''\nEMAIL_SUBJECT_PREFIX
+        = ''[AutomationController] ''\n\nEMAIL_HOST = ''localhost''\nEMAIL_PORT =
+        25\nEMAIL_HOST_USER = ''''\nEMAIL_HOST_PASSWORD = ''''\nEMAIL_USE_TLS = False\n\nUSE_X_FORWARDED_PORT
+        = True\nBROADCAST_WEBSOCKET_PORT = 8052\nBROADCAST_WEBSOCKET_PROTOCOL = ''http''\n\n\nRECEPTOR_LOG_LEVEL
+        = ''info''\n\n\nANSIBLE_BASE_JWT_KEY = \"http://myaap\"\nANSIBLE_BASE_JWT_REDIRECT_TYPE
+        = \"awx\"\nENABLE_SERVICE_BACKED_SSO = False\nSERVICE_BACKED_SSO_AUTH_CODE_REDIRECT_URL
+        = \"https://myaap-aap.apps.sno.ofam.dev\"\nRESOURCE_SERVER = {''SECRET_KEY'':
+        ''haAhpLP3gvECUG_j8Wc_obzrM6NLIpSgcnYsFwyKza0TAj6YoK2tGUj-lVkUPMwb9Lw1KNR_dZShuXD2IOWXMg'',
+        ''URL'': ''http://myaap'', ''VALIDATE_HTTPS'': ''False''}\nANSIBLE_BASE_MANAGED_ROLE_REGISTRY
+        = {\"platform_auditor\": {\"name\": \"Platform Auditor\", \"shortname\": \"sys_auditor\"}}\nOPTIONAL_UI_URL_PREFIX
+        = \"execution\"\n","uwsgi_conf":"[uwsgi]\nsocket = 127.0.0.1:8050\nprocesses
+        = 5\nlisten = 128\nmaster = true\nvacuum = true\nno-orphans = true\nlazy-apps
+        = true\nmanage-script-name = true\nmaster-fifo = /var/lib/awx/awxfifo\nmax-requests
+        = 1000\nbuffer-size = 32768\n\nharakiri = 10\nharakiri-graceful-timeout =
+        2\nharakiri-graceful-signal = 6\npy-call-osafterfork = true\n\nif-env = UWSGI_MOUNT_PATH\nmount
+        = %(_)=awx.wsgi:application\nendif =\n\nif-not-env = UWSGI_MOUNT_PATH\nmount
+        = /=awx.wsgi:application\nendif =\n"},"kind":"ConfigMap","metadata":{"labels":{"app.kubernetes.io/component":"automationcontroller","app.kubernetes.io/managed-by":"automationcontroller-operator","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-controller"},"name":"myaap-controller-automationcontroller-configmap","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:17:51Z'
+    labels:
+      app.kubernetes.io/component: automationcontroller
+      app.kubernetes.io/managed-by: automationcontroller-operator
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-controller
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:environment: {}
+          f:nginx_conf: {}
+          f:receptor_conf: {}
+          f:redis_conf: {}
+          f:settings: {}
+          f:uwsgi_conf: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"56e229e0-e41e-460a-8832-50d3860c1282"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:51Z'
+    name: myaap-controller-automationcontroller-configmap
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationcontroller.ansible.com/v1beta1
+      kind: AutomationController
+      name: myaap-controller
+      uid: 56e229e0-e41e-460a-8832-50d3860c1282
+    resourceVersion: '1626098'
+    uid: 495cacee-5f0b-4939-8bca-0b0b4c71b54e
+- apiVersion: v1
+  data:
+    redirect-page.html: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n
+      \   <meta http-equiv=\"refresh\" content=\"15; url=https://myaap-aap.apps.sno.ofam.dev\">\n
+      \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n
+      \   <title>Redirecting to Ansible Automation Platform</title>\n\n    <!-- Favicon
+      links -->\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"static/media/favicon.ico\">\n\n
+      \   <!-- Link to DRF's CSS -->\n    <link rel=\"stylesheet\" type=\"text/css\"
+      href=\"static/rest_framework/css/bootstrap.min.css\">\n    <link rel=\"stylesheet\"
+      type=\"text/css\" href=\"static/rest_framework/css/bootstrap-theme.min.css\">\n\n
+      \   <style>\n        body {\n            font-family: Arial, sans-serif;\n            text-align:
+      center;\n            padding-top: 0px;\n            /* background-color: rgb(34,
+      34, 34); */\n        }\n        .banner {\n            background-color: #151414;\n
+      \           color: rgb(255, 255, 255);\n            padding: 20px;\n            margin-bottom:
+      20px;\n            min-height: 70px; /* Ensure the banner is tall enough to
+      fit the logo */\n            text-align: left;\n        }\n        .logo {\n
+      \           width: 150px;\n            margin-bottom: 20px;\n        }\n        a
+      {\n            color: #007BFF;\n            text-decoration: none;\n        }\n
+      \       a:hover {\n            text-decoration: underline;\n        }\n        .doc-note
+      {\n            font-size: 0.7em; /* Makes the text smaller */\n            color:
+      #555; /* Optional: Change text color to a lighter shade */\n            background-color:
+      #f9f9f9; /* Optional: Light background color */\n            padding: 10px;
+      /* Optional: Add some padding */\n            margin: 10px 0; /* Optional: Add
+      some margin */\n        }\n    </style>\n</head>\n<body>\n    <!-- Banner Section
+      with Brand Logo -->\n    <div class=\"banner\">\n        <img src=\"/static/media/aap-logo.svg\"
+      alt=\"Brand Logo\">\n    </div>\n\n    <h2>Redirecting to Ansible Automation
+      Platform...</h2>\n    <p>If you are not redirected automatically, <a href=\"https://myaap-aap.apps.sno.ofam.dev\">click
+      here</a> to go to AAP.</p>\n    <p class=\"doc-note\">\n        The API endpoints
+      for this platform service will temporarily remain available at the URL for this
+      service.\n        Please use the Ansible Automation Platform API endpoints corresponding
+      to this component in the future.\n        These can be found at <a href=\"https://myaap-aap.apps.sno.ofam.dev/api/controller\"
+      target=\"_blank\">https://myaap-aap.apps.sno.ofam.dev/api/controller/</a>.\n
+      \   </p>\n\n    <!-- Include any additional scripts if needed -->\n    <script
+      src=\"static/rest_framework/js/jquery-3.7.1.min.js\"></script>\n    <script
+      src=\"static/rest_framework/js/bootstrap.min.js\"></script>\n</body>\n</html>"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"redirect-page.html":"<!DOCTYPE
+        html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta
+        http-equiv=\"refresh\" content=\"15; url=https://myaap-aap.apps.sno.ofam.dev\">\n    <meta
+        name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Redirecting
+        to Ansible Automation Platform</title>\n\n    <!-- Favicon links -->\n    <link
+        rel=\"icon\" type=\"image/x-icon\" href=\"static/media/favicon.ico\">\n\n    <!--
+        Link to DRF''s CSS -->\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"static/rest_framework/css/bootstrap.min.css\">\n    <link
+        rel=\"stylesheet\" type=\"text/css\" href=\"static/rest_framework/css/bootstrap-theme.min.css\">\n\n    <style>\n        body
+        {\n            font-family: Arial, sans-serif;\n            text-align: center;\n            padding-top:
+        0px;\n            /* background-color: rgb(34, 34, 34); */\n        }\n        .banner
+        {\n            background-color: #151414;\n            color: rgb(255, 255,
+        255);\n            padding: 20px;\n            margin-bottom: 20px;\n            min-height:
+        70px; /* Ensure the banner is tall enough to fit the logo */\n            text-align:
+        left;\n        }\n        .logo {\n            width: 150px;\n            margin-bottom:
+        20px;\n        }\n        a {\n            color: #007BFF;\n            text-decoration:
+        none;\n        }\n        a:hover {\n            text-decoration: underline;\n        }\n        .doc-note
+        {\n            font-size: 0.7em; /* Makes the text smaller */\n            color:
+        #555; /* Optional: Change text color to a lighter shade */\n            background-color:
+        #f9f9f9; /* Optional: Light background color */\n            padding: 10px;
+        /* Optional: Add some padding */\n            margin: 10px 0; /* Optional:
+        Add some margin */\n        }\n    </style>\n</head>\n<body>\n    <!-- Banner
+        Section with Brand Logo -->\n    <div class=\"banner\">\n        <img src=\"/static/media/aap-logo.svg\"
+        alt=\"Brand Logo\">\n    </div>\n\n    <h2>Redirecting to Ansible Automation
+        Platform...</h2>\n    <p>If you are not redirected automatically, <a href=\"https://myaap-aap.apps.sno.ofam.dev\">click
+        here</a> to go to AAP.</p>\n    <p class=\"doc-note\">\n        The API endpoints
+        for this platform service will temporarily remain available at the URL for
+        this service.\n        Please use the Ansible Automation Platform API endpoints
+        corresponding to this component in the future.\n        These can be found
+        at <a href=\"https://myaap-aap.apps.sno.ofam.dev/api/controller\" target=\"_blank\">https://myaap-aap.apps.sno.ofam.dev/api/controller/</a>.\n    </p>\n\n    <!--
+        Include any additional scripts if needed -->\n    <script src=\"static/rest_framework/js/jquery-3.7.1.min.js\"></script>\n    <script
+        src=\"static/rest_framework/js/bootstrap.min.js\"></script>\n</body>\n</html>"},"kind":"ConfigMap","metadata":{"name":"myaap-controller-redirect-page","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:17:32Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:redirect-page.html: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"56e229e0-e41e-460a-8832-50d3860c1282"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:32Z'
+    name: myaap-controller-redirect-page
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationcontroller.ansible.com/v1beta1
+      kind: AutomationController
+      name: myaap-controller
+      uid: 56e229e0-e41e-460a-8832-50d3860c1282
+    resourceVersion: '1625566'
+    uid: c5a9130d-de44-487e-9028-87f05818e99c
+- apiVersion: v1
+  data:
+    nginx_default_conf_template: "events {\n    worker_connections 1024;\n}\nhttp
+      {\n    map $http_x_forwarded_proto $remote_scheme {\n        default $http_x_forwarded_proto;\n
+      \       ''      $scheme;\n    }\n\n    map $http_x_trusted_proxy $trusted_proxy_present
+      {\n        default \"trusted-proxy\";\n        \"\"      \"-\";\n    }\n\n    map
+      $http_x_dab_jw_token $dab_jwt_present {\n        default \"dab-jwt\";\n        \"\"
+      \     \"-\";\n    }\n\n    log_format main '$remote_addr - $remote_user [$time_local]
+      \"$request\" '\n                    '$status $body_bytes_sent \"$http_referer\"
+      '\n                    '\"$http_user_agent\" \"$http_x_forwarded_for\" '\n                    'rid=$request_id
+      $trusted_proxy_present $dab_jwt_present';\n\n    access_log /dev/stdout main;\n
+      \   error_log /dev/stderr warn;\n\n    include mime.types;\n    types {\n        application/manifest+json
+      webmanifest;\n    }\n\n    server {\n        listen 8080;\n                    listen
+      [::]:8080;\n        \n        server_name _;\n        server_tokens off;\n\n
+      \       autoindex off;\n\n        include mime.types;\n        types {\n            application/manifest+json
+      webmanifest;\n        }\n\n        sendfile on;\n\n        root /var/lib/ansible-automation-platform/eda/ui;\n\n
+      \       location ~ ^/api/eda {\n            proxy_pass http://myaap-eda-api:8000;\n
+      \           proxy_set_header Origin http://myaap-eda-api:8000;\n            proxy_set_header
+      Host $http_host;\n            proxy_set_header X-Forwarded-Proto $remote_scheme;\n
+      \           proxy_set_header X-Forwarded-Port $server_port;\n            proxy_set_header
+      X-Forwarded-For $proxy_add_x_forwarded_for;\n            # Return 503 Service
+      Unavailable with JSON response if gunicorn fails to respond\n            proxy_read_timeout
+      15s;\n            error_page 504 =503 /json_503;\n            error_page 502
+      =503 /json_503;  # Optional, in case gunicorn is completely down    \n        }\n\n
+      \       location ~* \\.(json|woff|woff2|jpe?g|png|gif|ico|svg|css|js)$ {\n            add_header
+      Cache-Control \"public, max-age=31536000, s-maxage=31536000, immutable\";\n
+      \           try_files $uri =404;\n            gzip_static on;\n        }\n\n
+      \       location / {\n            autoindex off;\n            expires off;\n
+      \           add_header Cache-Control \"public, max-age=0, s-maxage=0, must-revalidate\"
+      always;\n            try_files $uri $uri/ /index.html =404;\n        }\n        location
+      = /json_503 {\n          # Custom JSON response for 503 Service Unavailable\n
+      \         internal;\n          add_header Content-Type application/json;\n\n
+      \         # Check if X-Request-ID is set and include it in the response\n          if
+      ($http_x_request_id) {\n              return 503 '{\"status\": \"error\", \"message\":
+      \"Service Unavailable\", \"code\": 503, \"request_id\": \"$http_x_request_id\"}';\n
+      \         }\n\n          # If X-Request-ID is not set, just return the basic
+      JSON response\n          return 503 '{\"status\": \"error\", \"message\": \"Service
+      Unavailable\", \"code\": 503}';\n      }   \n    }\n  }\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"nginx_default_conf_template":"events
+        {\n    worker_connections 1024;\n}\nhttp {\n    map $http_x_forwarded_proto
+        $remote_scheme {\n        default $http_x_forwarded_proto;\n        ''''      $scheme;\n    }\n\n    map
+        $http_x_trusted_proxy $trusted_proxy_present {\n        default \"trusted-proxy\";\n        \"\"      \"-\";\n    }\n\n    map
+        $http_x_dab_jw_token $dab_jwt_present {\n        default \"dab-jwt\";\n        \"\"      \"-\";\n    }\n\n    log_format
+        main ''$remote_addr - $remote_user [$time_local] \"$request\" ''\n                    ''$status
+        $body_bytes_sent \"$http_referer\" ''\n                    ''\"$http_user_agent\"
+        \"$http_x_forwarded_for\" ''\n                    ''rid=$request_id $trusted_proxy_present
+        $dab_jwt_present'';\n\n    access_log /dev/stdout main;\n    error_log /dev/stderr
+        warn;\n\n    include mime.types;\n    types {\n        application/manifest+json
+        webmanifest;\n    }\n\n    server {\n        listen 8080;\n                    listen
+        [::]:8080;\n        \n        server_name _;\n        server_tokens off;\n\n        autoindex
+        off;\n\n        include mime.types;\n        types {\n            application/manifest+json
+        webmanifest;\n        }\n\n        sendfile on;\n\n        root /var/lib/ansible-automation-platform/eda/ui;\n\n        location
+        ~ ^/api/eda {\n            proxy_pass http://myaap-eda-api:8000;\n            proxy_set_header
+        Origin http://myaap-eda-api:8000;\n            proxy_set_header Host $http_host;\n            proxy_set_header
+        X-Forwarded-Proto $remote_scheme;\n            proxy_set_header X-Forwarded-Port
+        $server_port;\n            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n            #
+        Return 503 Service Unavailable with JSON response if gunicorn fails to respond\n            proxy_read_timeout
+        15s;\n            error_page 504 =503 /json_503;\n            error_page 502
+        =503 /json_503;  # Optional, in case gunicorn is completely down    \n        }\n\n        location
+        ~* \\.(json|woff|woff2|jpe?g|png|gif|ico|svg|css|js)$ {\n            add_header
+        Cache-Control \"public, max-age=31536000, s-maxage=31536000, immutable\";\n            try_files
+        $uri =404;\n            gzip_static on;\n        }\n\n        location / {\n            autoindex
+        off;\n            expires off;\n            add_header Cache-Control \"public,
+        max-age=0, s-maxage=0, must-revalidate\" always;\n            try_files $uri
+        $uri/ /index.html =404;\n        }\n        location = /json_503 {\n          #
+        Custom JSON response for 503 Service Unavailable\n          internal;\n          add_header
+        Content-Type application/json;\n\n          # Check if X-Request-ID is set
+        and include it in the response\n          if ($http_x_request_id) {\n              return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503, \"request_id\": \"$http_x_request_id\"}'';\n          }\n\n          #
+        If X-Request-ID is not set, just return the basic JSON response\n          return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503}'';\n      }   \n    }\n  }\n"},"kind":"ConfigMap","metadata":{"labels":{"app.kubernetes.io/managed-by":"eda-operator","app.kubernetes.io/name":"myaap-eda","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-eda"},"name":"myaap-eda-eda-configmap","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:17:37Z'
+    labels:
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:nginx_default_conf_template: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"aeca36ff-8992-44e8-9b35-ea05168812c0"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:37Z'
+    name: myaap-eda-eda-configmap
+    namespace: aap
+    ownerReferences:
+    - apiVersion: eda.ansible.com/v1alpha1
+      kind: EDA
+      name: myaap-eda
+      uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+    resourceVersion: '1625656'
+    uid: ae051048-994a-45c2-88f0-286e1c940069
+- apiVersion: v1
+  data:
+    EDA_ALLOWED_HOSTS: '[''*'']'
+    EDA_ANSIBLE_BASE_JWT_KEY: http://myaap
+    EDA_ANSIBLE_BASE_JWT_REDIRECT_TYPE: eda
+    EDA_ANSIBLE_BASE_MANAGED_ROLE_REGISTRY: '@json {"platform_auditor": {"name": "Platform
+      Auditor", "shortname": "sys_auditor"}}'
+    EDA_CONTROLLER_SSL_VERIFY: 'yes'
+    EDA_CONTROLLER_URL: http://myaap-controller-service
+    EDA_CSRF_TRUSTED_ORIGINS: http://myaap-eda-api:8000
+    EDA_DEPLOYMENT_TYPE: k8s
+    EDA_EVENT_STREAM_BASE_URL: https://myaap-aap.apps.sno.ofam.dev/eda-event-streams
+    EDA_EVENT_STREAM_MTLS_BASE_URL: https://myaap-aap.apps.sno.ofam.dev/mtls/eda-event-streams
+    EDA_RESOURCE_SERVER__SECRET_KEY: mP1I8ORjwNdU0HjEhMXji0d8It89fWAaoI-Fywx-v2iAPeHjak_pMTuYcO_pUXz0TxLb7_7_2-YFWvjHdNAcDg
+    EDA_RESOURCE_SERVER__URL: http://myaap
+    EDA_RESOURCE_SERVER__VALIDATE_HTTPS: 'False'
+    EDA_STATIC_URL: /api/eda/static/
+    EDA_WEBSOCKET_BASE_URL: ws://myaap-eda-daphne:8001
+    EDA_WEBSOCKET_SSL_VERIFY: 'False'
+    EDA_WEBSOCKET_TOKEN_BASE_URL: http://myaap-eda-api:8000
+    ENABLE_SERVICE_BACKED_SSO: '@bool false'
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"EDA_ALLOWED_HOSTS":"[''*'']","EDA_ANSIBLE_BASE_JWT_KEY":"http://myaap","EDA_ANSIBLE_BASE_JWT_REDIRECT_TYPE":"eda","EDA_ANSIBLE_BASE_MANAGED_ROLE_REGISTRY":"@json
+        {\"platform_auditor\": {\"name\": \"Platform Auditor\", \"shortname\": \"sys_auditor\"}}","EDA_CONTROLLER_SSL_VERIFY":"yes","EDA_CONTROLLER_URL":"http://myaap-controller-service","EDA_CSRF_TRUSTED_ORIGINS":"http://myaap-eda-api:8000","EDA_DEPLOYMENT_TYPE":"k8s","EDA_EVENT_STREAM_BASE_URL":"https://myaap-aap.apps.sno.ofam.dev/eda-event-streams","EDA_EVENT_STREAM_MTLS_BASE_URL":"https://myaap-aap.apps.sno.ofam.dev/mtls/eda-event-streams","EDA_RESOURCE_SERVER__SECRET_KEY":"mP1I8ORjwNdU0HjEhMXji0d8It89fWAaoI-Fywx-v2iAPeHjak_pMTuYcO_pUXz0TxLb7_7_2-YFWvjHdNAcDg","EDA_RESOURCE_SERVER__URL":"http://myaap","EDA_RESOURCE_SERVER__VALIDATE_HTTPS":"False","EDA_STATIC_URL":"/api/eda/static/","EDA_WEBSOCKET_BASE_URL":"ws://myaap-eda-daphne:8001","EDA_WEBSOCKET_SSL_VERIFY":"False","EDA_WEBSOCKET_TOKEN_BASE_URL":"http://myaap-eda-api:8000","ENABLE_SERVICE_BACKED_SSO":"@bool
+        false"},"kind":"ConfigMap","metadata":{"labels":{"app.kubernetes.io/managed-by":"eda-operator","app.kubernetes.io/name":"myaap-eda","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-eda"},"name":"myaap-eda-eda-env-properties","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:17:37Z'
+    labels:
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:EDA_ALLOWED_HOSTS: {}
+          f:EDA_ANSIBLE_BASE_JWT_KEY: {}
+          f:EDA_ANSIBLE_BASE_JWT_REDIRECT_TYPE: {}
+          f:EDA_ANSIBLE_BASE_MANAGED_ROLE_REGISTRY: {}
+          f:EDA_CONTROLLER_SSL_VERIFY: {}
+          f:EDA_CONTROLLER_URL: {}
+          f:EDA_CSRF_TRUSTED_ORIGINS: {}
+          f:EDA_DEPLOYMENT_TYPE: {}
+          f:EDA_EVENT_STREAM_BASE_URL: {}
+          f:EDA_EVENT_STREAM_MTLS_BASE_URL: {}
+          f:EDA_RESOURCE_SERVER__SECRET_KEY: {}
+          f:EDA_RESOURCE_SERVER__URL: {}
+          f:EDA_RESOURCE_SERVER__VALIDATE_HTTPS: {}
+          f:EDA_STATIC_URL: {}
+          f:EDA_WEBSOCKET_BASE_URL: {}
+          f:EDA_WEBSOCKET_SSL_VERIFY: {}
+          f:EDA_WEBSOCKET_TOKEN_BASE_URL: {}
+          f:ENABLE_SERVICE_BACKED_SSO: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"aeca36ff-8992-44e8-9b35-ea05168812c0"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:37Z'
+    name: myaap-eda-eda-env-properties
+    namespace: aap
+    ownerReferences:
+    - apiVersion: eda.ansible.com/v1alpha1
+      kind: EDA
+      name: myaap-eda
+      uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+    resourceVersion: '1625655'
+    uid: 2d62ae45-4c79-4a99-b004-ed15c729e0b0
+- apiVersion: v1
+  data:
+    nginx_api_default_conf_template: "events {\n    worker_connections 1024;\n}\nhttp
+      {\n    map $http_x_forwarded_proto $remote_scheme {\n        default $http_x_forwarded_proto;\n
+      \       ''      $scheme;\n    }\n\n    map $http_x_trusted_proxy $trusted_proxy_present
+      {\n        default \"trusted-proxy\";\n        \"\"      \"-\";\n    }\n\n    map
+      $http_x_dab_jw_token $dab_jwt_present {\n        default \"dab-jwt\";\n        \"\"
+      \     \"-\";\n    }\n\n    log_format main '$remote_addr - $remote_user [$time_local]
+      \"$request\" '\n                    '$status $body_bytes_sent \"$http_referer\"
+      '\n                    '\"$http_user_agent\" \"$http_x_forwarded_for\" '\n                    'rid=$request_id
+      $trusted_proxy_present $dab_jwt_present';\n\n    access_log /dev/stdout main;\n
+      \   error_log /dev/stderr warn;\n\n    include mime.types;\n    types {\n        application/manifest+json
+      webmanifest;\n    }\n\n    # Define the upstream gunicorn server\n    upstream
+      gunicorn {\n        server 127.0.0.1:8002;\n    }\n\n    server {\n        listen
+      8000;\n                    listen [::]:8000;\n                    location ^~
+      /api/eda/static/ {\n            alias /var/lib/ansible-automation-platform/eda/static/;\n
+      \       }\n        location ~ ^/api/eda {\n            proxy_pass http://gunicorn;
+      \ # Forward requests to Django app\n            proxy_set_header Host $http_host;\n
+      \           proxy_set_header X-Forwarded-Host $host;\n            proxy_set_header
+      X-Forwarded-Proto $scheme;\n            proxy_set_header X-Forwarded-Port $server_port;\n
+      \           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n            #
+      Return 503 Service Unavailable with JSON response if gunicorn fails to respond\n
+      \           proxy_read_timeout 15s;\n            error_page 504 =503 /json_503;\n
+      \           error_page 502 =503 /json_503;  # Optional, in case gunicorn is
+      completely down    \n        }\n        location / {\n            root /var/lib/ansible-automation-platform/eda/static;\n
+      \           try_files /index.html =404;\n        }\n        location = /json_503
+      {\n            # Custom JSON response for 503 Service Unavailable\n            internal;\n
+      \           add_header Content-Type application/json;\n\n            # Check
+      if X-Request-ID is set and include it in the response\n            if ($http_x_request_id)
+      {\n                return 503 '{\"status\": \"error\", \"message\": \"Service
+      Unavailable\", \"code\": 503, \"request_id\": \"$http_x_request_id\"}';\n            }\n\n
+      \           # If X-Request-ID is not set, just return the basic JSON response\n
+      \           return 503 '{\"status\": \"error\", \"message\": \"Service Unavailable\",
+      \"code\": 503}';\n        }    \n    }\n}\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"nginx_api_default_conf_template":"events
+        {\n    worker_connections 1024;\n}\nhttp {\n    map $http_x_forwarded_proto
+        $remote_scheme {\n        default $http_x_forwarded_proto;\n        ''''      $scheme;\n    }\n\n    map
+        $http_x_trusted_proxy $trusted_proxy_present {\n        default \"trusted-proxy\";\n        \"\"      \"-\";\n    }\n\n    map
+        $http_x_dab_jw_token $dab_jwt_present {\n        default \"dab-jwt\";\n        \"\"      \"-\";\n    }\n\n    log_format
+        main ''$remote_addr - $remote_user [$time_local] \"$request\" ''\n                    ''$status
+        $body_bytes_sent \"$http_referer\" ''\n                    ''\"$http_user_agent\"
+        \"$http_x_forwarded_for\" ''\n                    ''rid=$request_id $trusted_proxy_present
+        $dab_jwt_present'';\n\n    access_log /dev/stdout main;\n    error_log /dev/stderr
+        warn;\n\n    include mime.types;\n    types {\n        application/manifest+json
+        webmanifest;\n    }\n\n    # Define the upstream gunicorn server\n    upstream
+        gunicorn {\n        server 127.0.0.1:8002;\n    }\n\n    server {\n        listen
+        8000;\n                    listen [::]:8000;\n                    location
+        ^~ /api/eda/static/ {\n            alias /var/lib/ansible-automation-platform/eda/static/;\n        }\n        location
+        ~ ^/api/eda {\n            proxy_pass http://gunicorn;  # Forward requests
+        to Django app\n            proxy_set_header Host $http_host;\n            proxy_set_header
+        X-Forwarded-Host $host;\n            proxy_set_header X-Forwarded-Proto $scheme;\n            proxy_set_header
+        X-Forwarded-Port $server_port;\n            proxy_set_header X-Forwarded-For
+        $proxy_add_x_forwarded_for;\n            # Return 503 Service Unavailable
+        with JSON response if gunicorn fails to respond\n            proxy_read_timeout
+        15s;\n            error_page 504 =503 /json_503;\n            error_page 502
+        =503 /json_503;  # Optional, in case gunicorn is completely down    \n        }\n        location
+        / {\n            root /var/lib/ansible-automation-platform/eda/static;\n            try_files
+        /index.html =404;\n        }\n        location = /json_503 {\n            #
+        Custom JSON response for 503 Service Unavailable\n            internal;\n            add_header
+        Content-Type application/json;\n\n            # Check if X-Request-ID is set
+        and include it in the response\n            if ($http_x_request_id) {\n                return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503, \"request_id\": \"$http_x_request_id\"}'';\n            }\n\n            #
+        If X-Request-ID is not set, just return the basic JSON response\n            return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503}'';\n        }    \n    }\n}\n"},"kind":"ConfigMap","metadata":{"name":"myaap-eda-nginx-api-configmap","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:17:38Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:nginx_api_default_conf_template: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"aeca36ff-8992-44e8-9b35-ea05168812c0"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:38Z'
+    name: myaap-eda-nginx-api-configmap
+    namespace: aap
+    ownerReferences:
+    - apiVersion: eda.ansible.com/v1alpha1
+      kind: EDA
+      name: myaap-eda
+      uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+    resourceVersion: '1625683'
+    uid: 88943ce0-bc51-47e7-a3aa-9e356220fa80
+- apiVersion: v1
+  data:
+    nginx_event_stream_default_conf_template: "events {\n    worker_connections 1024;\n}\nhttp
+      {\n    map $http_x_forwarded_proto $remote_scheme {\n        default $http_x_forwarded_proto;\n
+      \       ''      $scheme;\n    }\n\n    map $http_x_trusted_proxy $trusted_proxy_present
+      {\n        default \"trusted-proxy\";\n        \"\"      \"-\";\n    }\n\n    map
+      $http_x_dab_jw_token $dab_jwt_present {\n        default \"dab-jwt\";\n        \"\"
+      \     \"-\";\n    }\n\n    log_format main '$remote_addr - $remote_user [$time_local]
+      \"$request\" '\n                    '$status $body_bytes_sent \"$http_referer\"
+      '\n                    '\"$http_user_agent\" \"$http_x_forwarded_for\" '\n                    'rid=$request_id
+      req_len=$request_length $trusted_proxy_present $dab_jwt_present';\n\n    access_log
+      /dev/stdout main;\n    error_log /dev/stderr warn;\n\n    include mime.types;\n
+      \   types {\n        application/manifest+json webmanifest;\n    }\n\n    upstream
+      eda-api-event-stream-backend {\n        server 127.0.0.1:8002;\n    }\n\n    server
+      {\n        listen 8000;\n                    listen [::]:8000;\n        \n        location
+      / {\n            proxy_pass              http://eda-api-event-stream-backend/;\n
+      \           proxy_set_header        Host $host:$server_port;\n            proxy_set_header
+      \       X-Forwarded-Proto $scheme;\n            proxy_set_header        X-Forwarded-Host
+      $host;\n            proxy_set_header        X-Forwarded-Port $server_port;\n
+      \           proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;\n
+      \           # Return 503 Service Unavailable with JSON response if gunicorn
+      fails to respond\n            proxy_read_timeout 15s;\n            error_page
+      504 =503 /json_503;\n            error_page 502 =503 /json_503;  # Optional,
+      in case gunicorn is completely down    \n        }\n        location = /json_503
+      {\n            # Custom JSON response for 503 Service Unavailable\n            internal;\n
+      \           add_header Content-Type application/json;\n\n            # Check
+      if X-Request-ID is set and include it in the response\n            if ($http_x_request_id)
+      {\n                return 503 '{\"status\": \"error\", \"message\": \"Service
+      Unavailable\", \"code\": 503, \"request_id\": \"$http_x_request_id\"}';\n            }\n\n
+      \           # If X-Request-ID is not set, just return the basic JSON response\n
+      \           return 503 '{\"status\": \"error\", \"message\": \"Service Unavailable\",
+      \"code\": 503}';\n        }    \n    }\n}\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"nginx_event_stream_default_conf_template":"events
+        {\n    worker_connections 1024;\n}\nhttp {\n    map $http_x_forwarded_proto
+        $remote_scheme {\n        default $http_x_forwarded_proto;\n        ''''      $scheme;\n    }\n\n    map
+        $http_x_trusted_proxy $trusted_proxy_present {\n        default \"trusted-proxy\";\n        \"\"      \"-\";\n    }\n\n    map
+        $http_x_dab_jw_token $dab_jwt_present {\n        default \"dab-jwt\";\n        \"\"      \"-\";\n    }\n\n    log_format
+        main ''$remote_addr - $remote_user [$time_local] \"$request\" ''\n                    ''$status
+        $body_bytes_sent \"$http_referer\" ''\n                    ''\"$http_user_agent\"
+        \"$http_x_forwarded_for\" ''\n                    ''rid=$request_id req_len=$request_length
+        $trusted_proxy_present $dab_jwt_present'';\n\n    access_log /dev/stdout main;\n    error_log
+        /dev/stderr warn;\n\n    include mime.types;\n    types {\n        application/manifest+json
+        webmanifest;\n    }\n\n    upstream eda-api-event-stream-backend {\n        server
+        127.0.0.1:8002;\n    }\n\n    server {\n        listen 8000;\n                    listen
+        [::]:8000;\n        \n        location / {\n            proxy_pass              http://eda-api-event-stream-backend/;\n            proxy_set_header        Host
+        $host:$server_port;\n            proxy_set_header        X-Forwarded-Proto
+        $scheme;\n            proxy_set_header        X-Forwarded-Host $host;\n            proxy_set_header        X-Forwarded-Port
+        $server_port;\n            proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;\n            #
+        Return 503 Service Unavailable with JSON response if gunicorn fails to respond\n            proxy_read_timeout
+        15s;\n            error_page 504 =503 /json_503;\n            error_page 502
+        =503 /json_503;  # Optional, in case gunicorn is completely down    \n        }\n        location
+        = /json_503 {\n            # Custom JSON response for 503 Service Unavailable\n            internal;\n            add_header
+        Content-Type application/json;\n\n            # Check if X-Request-ID is set
+        and include it in the response\n            if ($http_x_request_id) {\n                return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503, \"request_id\": \"$http_x_request_id\"}'';\n            }\n\n            #
+        If X-Request-ID is not set, just return the basic JSON response\n            return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503}'';\n        }    \n    }\n}\n"},"kind":"ConfigMap","metadata":{"name":"myaap-eda-nginx-event-stream-configmap","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:17:43Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:nginx_event_stream_default_conf_template: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"aeca36ff-8992-44e8-9b35-ea05168812c0"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:43Z'
+    name: myaap-eda-nginx-event-stream-configmap
+    namespace: aap
+    ownerReferences:
+    - apiVersion: eda.ansible.com/v1alpha1
+      kind: EDA
+      name: myaap-eda
+      uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+    resourceVersion: '1625861'
+    uid: bb65802f-b99c-4331-b70b-3154d01585a1
+- apiVersion: v1
+  data:
+    redirect-page.html: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n
+      \   <meta http-equiv=\"refresh\" content=\"15; url=https://myaap-aap.apps.sno.ofam.dev\">\n
+      \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n
+      \   <title>Redirecting to Ansible Automation Platform</title>\n\n    <!-- Favicon
+      links -->\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/api/eda/static/media/favicon.ico\">\n\n
+      \   <!-- Link to DRF's CSS -->\n    <link rel=\"stylesheet\" type=\"text/css\"
+      href=\"/api/eda/static/rest_framework/css/bootstrap.min.css\">\n    <link rel=\"stylesheet\"
+      type=\"text/css\" href=\"/api/eda/static/rest_framework/css/bootstrap-theme.min.css\">\n\n
+      \   <style>\n        body {\n            font-family: Arial, sans-serif;\n            text-align:
+      center;\n            padding-top: 0px;\n            /* background-color: rgb(34,
+      34, 34); */\n        }\n        .banner {\n            background-color: #151414;\n
+      \           color: rgb(255, 255, 255);\n            padding: 20px;\n            margin-bottom:
+      20px;\n            min-height: 70px; /* Ensure the banner is tall enough to
+      fit the logo */\n        }\n        .logo {\n            width: 150px;\n            margin-bottom:
+      20px;\n            float: left;\n        }\n        a {\n            color:
+      #007BFF;\n            text-decoration: none;\n        }\n        a:hover {\n
+      \           text-decoration: underline;\n        }\n        .doc-note {\n            font-size:
+      0.7em; /* Makes the text smaller */\n            color: #555; /* Optional: Change
+      text color to a lighter shade */\n            background-color: #f9f9f9; /*
+      Optional: Light background color */\n            padding: 10px; /* Optional:
+      Add some padding */\n            margin: 10px 0; /* Optional: Add some margin
+      */\n            float: left;\n        }\n    </style>\n</head>\n<body>\n    <!--
+      Banner Section with Brand Logo -->\n    <div class=\"banner\">\n        <img
+      class=\"logo\" src=\"/api/eda/static/media/aap-logo.svg\" alt=\"Brand Logo\">\n
+      \   </div>\n\n    <h2>Redirecting to Ansible Automation Platform...</h2>\n    <p>If
+      you are not redirected automatically, <a href=\"https://myaap-aap.apps.sno.ofam.dev\">click
+      here</a> to go to AAP.</p>\n    <p class=\"doc-note\">\n        The API endpoints
+      for this platform service will temporarily remain available at the URL for this
+      service.\n        Please use the Ansible Automation Platform API endpoints corresponding
+      to this component in the future.\n        These can be found at <a href=\"https://myaap-aap.apps.sno.ofam.dev/api/eda/\"
+      target=\"_blank\">https://myaap-aap.apps.sno.ofam.dev/api/eda</a>.\n    </p>\n\n
+      \   <!-- Include any additional scripts if needed -->\n    <script src=\"/api/eda/static/rest_framework/js/jquery-3.7.1.min.js\"></script>\n
+      \   <script src=\"/api/eda/static/rest_framework/js/bootstrap.min.js\"></script>\n</body>\n</html>\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"redirect-page.html":"<!DOCTYPE
+        html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta
+        http-equiv=\"refresh\" content=\"15; url=https://myaap-aap.apps.sno.ofam.dev\">\n    <meta
+        name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Redirecting
+        to Ansible Automation Platform</title>\n\n    <!-- Favicon links -->\n    <link
+        rel=\"icon\" type=\"image/x-icon\" href=\"/api/eda/static/media/favicon.ico\">\n\n    <!--
+        Link to DRF''s CSS -->\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"/api/eda/static/rest_framework/css/bootstrap.min.css\">\n    <link
+        rel=\"stylesheet\" type=\"text/css\" href=\"/api/eda/static/rest_framework/css/bootstrap-theme.min.css\">\n\n    <style>\n        body
+        {\n            font-family: Arial, sans-serif;\n            text-align: center;\n            padding-top:
+        0px;\n            /* background-color: rgb(34, 34, 34); */\n        }\n        .banner
+        {\n            background-color: #151414;\n            color: rgb(255, 255,
+        255);\n            padding: 20px;\n            margin-bottom: 20px;\n            min-height:
+        70px; /* Ensure the banner is tall enough to fit the logo */\n        }\n        .logo
+        {\n            width: 150px;\n            margin-bottom: 20px;\n            float:
+        left;\n        }\n        a {\n            color: #007BFF;\n            text-decoration:
+        none;\n        }\n        a:hover {\n            text-decoration: underline;\n        }\n        .doc-note
+        {\n            font-size: 0.7em; /* Makes the text smaller */\n            color:
+        #555; /* Optional: Change text color to a lighter shade */\n            background-color:
+        #f9f9f9; /* Optional: Light background color */\n            padding: 10px;
+        /* Optional: Add some padding */\n            margin: 10px 0; /* Optional:
+        Add some margin */\n            float: left;\n        }\n    </style>\n</head>\n<body>\n    <!--
+        Banner Section with Brand Logo -->\n    <div class=\"banner\">\n        <img
+        class=\"logo\" src=\"/api/eda/static/media/aap-logo.svg\" alt=\"Brand Logo\">\n    </div>\n\n    <h2>Redirecting
+        to Ansible Automation Platform...</h2>\n    <p>If you are not redirected automatically,
+        <a href=\"https://myaap-aap.apps.sno.ofam.dev\">click here</a> to go to AAP.</p>\n    <p
+        class=\"doc-note\">\n        The API endpoints for this platform service will
+        temporarily remain available at the URL for this service.\n        Please
+        use the Ansible Automation Platform API endpoints corresponding to this component
+        in the future.\n        These can be found at <a href=\"https://myaap-aap.apps.sno.ofam.dev/api/eda/\"
+        target=\"_blank\">https://myaap-aap.apps.sno.ofam.dev/api/eda</a>.\n    </p>\n\n    <!--
+        Include any additional scripts if needed -->\n    <script src=\"/api/eda/static/rest_framework/js/jquery-3.7.1.min.js\"></script>\n    <script
+        src=\"/api/eda/static/rest_framework/js/bootstrap.min.js\"></script>\n</body>\n</html>\n"},"kind":"ConfigMap","metadata":{"name":"myaap-eda-redirect-page","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:17:37Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:redirect-page.html: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"aeca36ff-8992-44e8-9b35-ea05168812c0"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:37Z'
+    name: myaap-eda-redirect-page
+    namespace: aap
+    ownerReferences:
+    - apiVersion: eda.ansible.com/v1alpha1
+      kind: EDA
+      name: myaap-eda
+      uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+    resourceVersion: '1625662'
+    uid: 8a1bf5be-faea-42c8-b348-fdda5cb7f0d5
+- apiVersion: v1
+  data:
+    envoy.yaml: "node:\n  id: envoy-gateway-1\n  cluster: envoy\n\ndynamic_resources:\n
+      \ cds_config:\n    resource_api_version: V3\n    api_config_source:\n      api_type:
+      REST\n      transport_api_version: V3\n      cluster_names:\n        - gateway-control-plane-rest\n
+      \     refresh_delay:\n        seconds: 5\n      request_timeout:\n        seconds:
+      5\n\n  lds_config:\n    resource_api_version: V3\n    api_config_source:\n      api_type:
+      REST\n      transport_api_version: V3\n      cluster_names:\n        - gateway-control-plane-rest\n
+      \     refresh_delay:\n        seconds: 5\n      request_timeout:\n        seconds:
+      5\n\nstatic_resources:\n  clusters:\n  - type: STRICT_DNS\n    typed_extension_protocol_options:\n
+      \     envoy.extensions.upstreams.http.v3.HttpProtocolOptions:\n        \"@type\":
+      type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions\n
+      \       explicit_http_config:\n          http_protocol_options: {}\n    name:
+      gateway-control-plane-rest\n    load_assignment:\n      cluster_name: gateway-control-plane-rest\n
+      \     endpoints:\n      - lb_endpoints:\n        - endpoint:\n            address:\n
+      \             socket_address:\n                address: 0.0.0.0\n                port_value:
+      8080\n\n  - type: STRICT_DNS\n    typed_extension_protocol_options:\n      envoy.extensions.upstreams.http.v3.HttpProtocolOptions:\n
+      \       \"@type\": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions\n
+      \       explicit_http_config:\n          http2_protocol_options: {}\n    name:
+      gateway_control_plane\n    load_assignment:\n      cluster_name: gateway_control_plane\n
+      \     endpoints:\n      - lb_endpoints:\n        - endpoint:\n            address:\n
+      \             socket_address:\n                address: 0.0.0.0\n                port_value:
+      50051\n\nadmin:\n  address:\n    socket_address:\n      address: 0.0.0.0\n      port_value:
+      19000\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"envoy.yaml":"node:\n  id:
+        envoy-gateway-1\n  cluster: envoy\n\ndynamic_resources:\n  cds_config:\n    resource_api_version:
+        V3\n    api_config_source:\n      api_type: REST\n      transport_api_version:
+        V3\n      cluster_names:\n        - gateway-control-plane-rest\n      refresh_delay:\n        seconds:
+        5\n      request_timeout:\n        seconds: 5\n\n  lds_config:\n    resource_api_version:
+        V3\n    api_config_source:\n      api_type: REST\n      transport_api_version:
+        V3\n      cluster_names:\n        - gateway-control-plane-rest\n      refresh_delay:\n        seconds:
+        5\n      request_timeout:\n        seconds: 5\n\nstatic_resources:\n  clusters:\n  -
+        type: STRICT_DNS\n    typed_extension_protocol_options:\n      envoy.extensions.upstreams.http.v3.HttpProtocolOptions:\n        \"@type\":
+        type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions\n        explicit_http_config:\n          http_protocol_options:
+        {}\n    name: gateway-control-plane-rest\n    load_assignment:\n      cluster_name:
+        gateway-control-plane-rest\n      endpoints:\n      - lb_endpoints:\n        -
+        endpoint:\n            address:\n              socket_address:\n                address:
+        0.0.0.0\n                port_value: 8080\n\n  - type: STRICT_DNS\n    typed_extension_protocol_options:\n      envoy.extensions.upstreams.http.v3.HttpProtocolOptions:\n        \"@type\":
+        type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions\n        explicit_http_config:\n          http2_protocol_options:
+        {}\n    name: gateway_control_plane\n    load_assignment:\n      cluster_name:
+        gateway_control_plane\n      endpoints:\n      - lb_endpoints:\n        -
+        endpoint:\n            address:\n              socket_address:\n                address:
+        0.0.0.0\n                port_value: 50051\n\nadmin:\n  address:\n    socket_address:\n      address:
+        0.0.0.0\n      port_value: 19000\n"},"kind":"ConfigMap","metadata":{"labels":{"app.kubernetes.io/managed-by":"aap-gateway-operator"},"name":"myaap-envoy-conf","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:15:37Z'
+    labels:
+      app.kubernetes.io/managed-by: aap-gateway-operator
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:envoy.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:15:37Z'
+    name: myaap-envoy-conf
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1623646'
+    uid: e91d0481-a055-4fed-bbf1-737e1f053aec
+- apiVersion: v1
+  data:
+    proxy.yml: "gateway_http_ports:\n  - name: port-8000\n    number: 8000\n    use_https:
+      false\n    is_api_port: true\ngateway_service_clusters:\n  - name: gateway\n
+      \   service_type: gateway\n  - name: controller\n    service_type: controller\n
+      \ - name: hub\n    service_type: hub\n  - name: eda\n    service_type: eda\ngateway_service_nodes:\n
+      \ - name: \"Node gateway\"\n    service_cluster: gateway\n    address: '0.0.0.0'\n
+      \ - name: \"Node controller - myaap-controller\"\n    service_cluster: controller\n
+      \   address: \"myaap-controller-service\"\n  - name: \"Node galaxy - myaap-hub\"\n
+      \   service_cluster: hub\n    address: \"myaap-hub-web-svc\"\n  - name: \"Node
+      eda - myaap-eda\"\n    service_cluster: eda\n    address: \"myaap-eda-api\"\n
+      \   tags: \"eda\"\n  - name: \"Node eda event stream - myaap-eda\"\n    service_cluster:
+      eda\n    address: \"myaap-eda-event-stream\"\n    tags: \"eda-event-stream\"\ngateway_services:\n
+      \ - name: \"gateway api\"\n    api_slug: gateway\n    http_port: port-8000\n
+      \   service_cluster: gateway\n    is_service_https: false\n    service_path:
+      '/'\n    service_port: 8080\n    order: 100\n    enable_gateway_auth: false\n
+      \ - name: \"controller api\"\n    http_port: port-8000\n    api_slug: controller\n
+      \   service_cluster: controller\n    is_service_https: false\n    service_path:
+      \"/api/controller/\"\n    service_port: 80\n    order: 1\n  - name: \"galaxy
+      api\"\n    http_port: port-8000\n    api_slug: galaxy\n    service_cluster:
+      hub\n    is_service_https: false\n    service_path: '/api/galaxy/'\n    service_port:
+      24880\n    order: 2\n  - name: \"eda api\"\n    http_port: port-8000\n    api_slug:
+      eda\n    service_cluster: eda\n    is_service_https: false\n    service_path:
+      '/api/eda/'\n    service_port: 8000\n    order: 3\n    node_tags: \"eda\"\ngateway_settings:\n
+      \ gateway_proxy_url: 'http://myaap.aap.svc.cluster.local'\n  request_timeout:
+      '15'\n  jwt_expiration_buffer_in_seconds: '15'\ngateway_routes:\n  - name: \"hub
+      container registry\"\n    description: \"Hub Container Registry.\"\n    gateway_path:
+      \"/v2/\"\n    service_path: \"/v2/\"\n    http_port: port-8000\n    service_cluster:
+      hub\n    is_service_https: false\n    service_port: 24880\n    enable_gateway_auth:
+      true\n  - name: \"hub ui\"\n    description: \"Hub UI\"\n    gateway_path: \"/ui/\"\n
+      \   service_path: \"/ui/\"\n    http_port: port-8000\n    service_cluster: hub\n
+      \   service_port: 24880\n    enable_gateway_auth: true\n  - name: \"hub ui static
+      files\"\n    description: \"Hub UI Static Files\"\n    gateway_path: \"/static/galaxy_ng/\"\n
+      \   service_path: \"/static/galaxy_ng/\"\n    http_port: port-8000\n    service_cluster:
+      hub\n    service_port: 24880\n    is_service_https: false\n    enable_gateway_auth:
+      true\n  - name: \"pulp content\"\n    description: \"Pulp Content\"\n    gateway_path:
+      \"/pulp\"\n    service_path: \"/pulp\"\n    http_port: port-8000\n    service_cluster:
+      hub\n    service_port: 24880\n    is_service_https: false\n    enable_gateway_auth:
+      true\n  - name: \"pulp container tokens\"\n    description: \"Pulp Container
+      Tokens\"\n    gateway_path: \"/token\"\n    service_path: \"/token\"\n    http_port:
+      port-8000\n    service_cluster: hub\n    service_port: 24880\n    is_service_https:
+      false\n    enable_gateway_auth: true\n  - name: \"pulp container extensions\"\n
+      \   description: \"Pulp Container Extensions\"\n    gateway_path: \"/extensions\"\n
+      \   service_path: \"/extensions\"\n    http_port: port-8000\n    service_cluster:
+      hub\n    service_port: 24880\n    is_service_https: false\n    enable_gateway_auth:
+      true\n  - name: Event Drive Automation Event Stream\n    description: Proxy
+      to the EDA Event Stream\n    http_port: port-8000\n    service_cluster: eda\n
+      \   is_service_https: false\n    gateway_path: '/eda-event-streams'\n    service_path:
+      '/'\n    service_port: 8000\n    enable_gateway_auth: false\n    node_tags:
+      \"eda-event-stream\"\n  - name: Event Drive Automation Event Stream mTLS\n    description:
+      Proxy to the EDA Event Stream mTLS\n    http_port: port-8000\n    enable_mtls:
+      true\n    service_cluster: eda\n    is_service_https: false\n    gateway_path:
+      '/mtls/eda-event-streams'\n    service_path: '/'\n    service_port: 8000\n    enable_gateway_auth:
+      false\n    node_tags: \"eda-event-stream-mtls\"\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"proxy.yml":"gateway_http_ports:\n  -
+        name: port-8000\n    number: 8000\n    use_https: false\n    is_api_port:
+        true\ngateway_service_clusters:\n  - name: gateway\n    service_type: gateway\n  -
+        name: controller\n    service_type: controller\n  - name: hub\n    service_type:
+        hub\n  - name: eda\n    service_type: eda\ngateway_service_nodes:\n  - name:
+        \"Node gateway\"\n    service_cluster: gateway\n    address: ''0.0.0.0''\n  -
+        name: \"Node controller - myaap-controller\"\n    service_cluster: controller\n    address:
+        \"myaap-controller-service\"\n  - name: \"Node galaxy - myaap-hub\"\n    service_cluster:
+        hub\n    address: \"myaap-hub-web-svc\"\n  - name: \"Node eda - myaap-eda\"\n    service_cluster:
+        eda\n    address: \"myaap-eda-api\"\n    tags: \"eda\"\n  - name: \"Node eda
+        event stream - myaap-eda\"\n    service_cluster: eda\n    address: \"myaap-eda-event-stream\"\n    tags:
+        \"eda-event-stream\"\ngateway_services:\n  - name: \"gateway api\"\n    api_slug:
+        gateway\n    http_port: port-8000\n    service_cluster: gateway\n    is_service_https:
+        false\n    service_path: ''/''\n    service_port: 8080\n    order: 100\n    enable_gateway_auth:
+        false\n  - name: \"controller api\"\n    http_port: port-8000\n    api_slug:
+        controller\n    service_cluster: controller\n    is_service_https: false\n    service_path:
+        \"/api/controller/\"\n    service_port: 80\n    order: 1\n  - name: \"galaxy
+        api\"\n    http_port: port-8000\n    api_slug: galaxy\n    service_cluster:
+        hub\n    is_service_https: false\n    service_path: ''/api/galaxy/''\n    service_port:
+        24880\n    order: 2\n  - name: \"eda api\"\n    http_port: port-8000\n    api_slug:
+        eda\n    service_cluster: eda\n    is_service_https: false\n    service_path:
+        ''/api/eda/''\n    service_port: 8000\n    order: 3\n    node_tags: \"eda\"\ngateway_settings:\n  gateway_proxy_url:
+        ''http://myaap.aap.svc.cluster.local''\n  request_timeout: ''15''\n  jwt_expiration_buffer_in_seconds:
+        ''15''\ngateway_routes:\n  - name: \"hub container registry\"\n    description:
+        \"Hub Container Registry.\"\n    gateway_path: \"/v2/\"\n    service_path:
+        \"/v2/\"\n    http_port: port-8000\n    service_cluster: hub\n    is_service_https:
+        false\n    service_port: 24880\n    enable_gateway_auth: true\n  - name: \"hub
+        ui\"\n    description: \"Hub UI\"\n    gateway_path: \"/ui/\"\n    service_path:
+        \"/ui/\"\n    http_port: port-8000\n    service_cluster: hub\n    service_port:
+        24880\n    enable_gateway_auth: true\n  - name: \"hub ui static files\"\n    description:
+        \"Hub UI Static Files\"\n    gateway_path: \"/static/galaxy_ng/\"\n    service_path:
+        \"/static/galaxy_ng/\"\n    http_port: port-8000\n    service_cluster: hub\n    service_port:
+        24880\n    is_service_https: false\n    enable_gateway_auth: true\n  - name:
+        \"pulp content\"\n    description: \"Pulp Content\"\n    gateway_path: \"/pulp\"\n    service_path:
+        \"/pulp\"\n    http_port: port-8000\n    service_cluster: hub\n    service_port:
+        24880\n    is_service_https: false\n    enable_gateway_auth: true\n  - name:
+        \"pulp container tokens\"\n    description: \"Pulp Container Tokens\"\n    gateway_path:
+        \"/token\"\n    service_path: \"/token\"\n    http_port: port-8000\n    service_cluster:
+        hub\n    service_port: 24880\n    is_service_https: false\n    enable_gateway_auth:
+        true\n  - name: \"pulp container extensions\"\n    description: \"Pulp Container
+        Extensions\"\n    gateway_path: \"/extensions\"\n    service_path: \"/extensions\"\n    http_port:
+        port-8000\n    service_cluster: hub\n    service_port: 24880\n    is_service_https:
+        false\n    enable_gateway_auth: true\n  - name: Event Drive Automation Event
+        Stream\n    description: Proxy to the EDA Event Stream\n    http_port: port-8000\n    service_cluster:
+        eda\n    is_service_https: false\n    gateway_path: ''/eda-event-streams''\n    service_path:
+        ''/''\n    service_port: 8000\n    enable_gateway_auth: false\n    node_tags:
+        \"eda-event-stream\"\n  - name: Event Drive Automation Event Stream mTLS\n    description:
+        Proxy to the EDA Event Stream mTLS\n    http_port: port-8000\n    enable_mtls:
+        true\n    service_cluster: eda\n    is_service_https: false\n    gateway_path:
+        ''/mtls/eda-event-streams''\n    service_path: ''/''\n    service_port: 8000\n    enable_gateway_auth:
+        false\n    node_tags: \"eda-event-stream-mtls\"\n"},"kind":"ConfigMap","metadata":{"labels":{"app.kubernetes.io/managed-by":"aap-gateway-operator"},"name":"myaap-gateway-conf","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:15:33Z'
+    labels:
+      app.kubernetes.io/managed-by: aap-gateway-operator
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:proxy.yml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:15:33Z'
+    name: myaap-gateway-conf
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1623548'
+    uid: c3a83495-610a-4c5d-b404-366f5f12c493
+- apiVersion: v1
+  data:
+    galaxy_ng.conf: "location /ui/ {\n    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n
+      \   proxy_set_header X-Forwarded-Proto $trusted_proto;\n    proxy_set_header
+      Host $http_host;\n    rewrite /ui* /static/galaxy_ng/index.html break;\n    #
+      we don't want nginx trying to do something clever with\n    # redirects, we
+      set the Host: header above already.\n    proxy_redirect off;\n    proxy_pass
+      http://pulp-api/static/galaxy_ng/index.html;\n}\n\nlocation /api/ {\n    proxy_set_header
+      X-Forwarded-For $proxy_add_x_forwarded_for;\n    proxy_set_header X-Forwarded-Proto
+      $trusted_proto;\n    proxy_set_header Host $http_host;\n    # we don't want
+      nginx trying to do something clever with\n    # redirects, we set the Host:
+      header above already.\n    proxy_redirect off;\n    proxy_pass http://pulp-api;\n
+      \   client_max_body_size 0;\n}\n"
+    nginx.conf: "error_log /dev/stderr warn;\nworker_processes 1;\nevents {\n    worker_connections
+      1024;  # increase if you have lots of clients\n    accept_mutex off;  # set
+      to 'on' if nginx worker_processes > 1\n}\n\nhttp {\n    map $http_x_forwarded_proto
+      $trusted_proto {\n        default $scheme;\n        https   https;\n        http
+      \   http;\n    }\n\n    map $http_x_trusted_proxy $trusted_proxy_present {\n
+      \       default \"trusted-proxy\";\n        \"\"      \"-\";\n    }\n\n    map
+      $http_x_dab_jw_token $dab_jwt_present {\n        default \"dab-jwt\";\n        \"\"
+      \     \"-\";\n    }\n\n    log_format main '$remote_addr - $remote_user [$time_local]
+      \"$request\" '\n                    '$status $body_bytes_sent \"$http_referer\"
+      '\n                    '\"$http_user_agent\" \"$http_x_forwarded_for\" '\n                    '$trusted_proxy_present
+      $dab_jwt_present';\n\n    access_log /dev/stdout main;\n    include mime.types;\n
+      \   # fallback in case we can't determine a type\n    default_type application/octet-stream;\n
+      \   sendfile on;\n\n    # If left at the default of 1024, nginx emits a warning
+      about being unable\n    # to build optimal hash types.\n    types_hash_max_size
+      4096;\n\n    upstream pulp-content {\n        server myaap-hub-content-svc:24816;\n
+      \   }\n\n    upstream pulp-api {\n        server myaap-hub-api-svc:8000;\n    }\n\n
+      \   \n    server {\n                # Gunicorn docs suggest the use of the \"deferred\"
+      directive on Linux.\n        listen 8080 default_server deferred;\n        listen
+      [::]:8080 default_server deferred;\n    \n        # If you have a domain name,
+      this is where to add it\n        server_name $hostname;\n\n        proxy_read_timeout
+      15s;\n        proxy_connect_timeout 15s;\n        proxy_send_timeout 15s;\n\n
+      \       # The default client_max_body_size is 1m. Clients uploading\n        #
+      files larger than this will need to chunk said files.\n        client_max_body_size
+      10m;\n\n        # Gunicorn docs suggest this value.\n        keepalive_timeout
+      5;\n\n        # static files that can change dynamically, or are needed for
+      TLS\n        # purposes are served through the webserver.\n        root /opt/app-root/src;\n\n
+      \       location /pulp/content/ {\n            proxy_set_header X-Forwarded-For
+      $proxy_add_x_forwarded_for;\n            proxy_set_header X-Forwarded-Proto
+      $trusted_proto;\n            proxy_set_header Host $http_host;\n            #
+      we don't want nginx trying to do something clever with\n            # redirects,
+      we set the Host: header above already.\n            proxy_redirect off;\n            proxy_pass
+      http://pulp-content;\n            error_page 504 =503 /json_503;  # Return 503
+      Service Unavailable with JSON response if gunicorn fails to respond\n            error_page
+      502 =503 /json_503;  # Optional, in case gunicorn is completely down\n        }\n\n\n
+      \       location = /json_503 {\n            # Custom JSON response for 503 Service
+      Unavailable\n            internal;\n            add_header Content-Type application/json;\n\n
+      \           # Check if X-Request-ID is set and include it in the response\n
+      \           if ($http_x_request_id) {\n                return 503 '{\"status\":
+      \"error\", \"message\": \"Service Unavailable\", \"code\": 503, \"request_id\":
+      \"$http_x_request_id\"}';\n            }\n\n            # If X-Request-ID is
+      not set, just return the basic JSON response\n            return 503 '{\"status\":
+      \"error\", \"message\": \"Service Unavailable\", \"code\": 503}';\n        }\n\n
+      \       location /api/galaxy/pulp/api/v3/ {\n            proxy_set_header X-Forwarded-For
+      $proxy_add_x_forwarded_for;\n            proxy_set_header X-Forwarded-Proto
+      $trusted_proto;\n            proxy_set_header Host $http_host;\n            #
+      we don't want nginx trying to do something clever with\n            # redirects,
+      we set the Host: header above already.\n            proxy_redirect off;\n            proxy_pass
+      http://pulp-api;\n            error_page 504 =503 /json_503;  # Return 503 Service
+      Unavailable with JSON response if gunicorn fails to respond\n            error_page
+      502 =503 /json_503;  # Optional, in case gunicorn is completely down\n        }\n\n
+      \       location /auth/login/ {\n            proxy_set_header X-Forwarded-For
+      $proxy_add_x_forwarded_for;\n            proxy_set_header X-Forwarded-Proto
+      $trusted_proto;\n            proxy_set_header Host $http_host;\n            #
+      we don't want nginx trying to do something clever with\n            # redirects,
+      we set the Host: header above already.\n            proxy_redirect off;\n            proxy_pass
+      http://pulp-api;\n        }\n\n        include /etc/nginx/default.d/*.conf;\n\n
+      \       location / {\n            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n
+      \           proxy_set_header X-Forwarded-Proto $trusted_proto;\n            proxy_set_header
+      Host $http_host;\n            # we don't want nginx trying to do something clever
+      with\n            # redirects, we set the Host: header above already.\n            proxy_redirect
+      off;\n            proxy_pass http://pulp-api;\n            # static files are
+      served through whitenoise - http://whitenoise.evans.io/en/stable/\n        }\n
+      \   }\n}\n"
+    pulp_ansible.conf: "location /pulp_ansible/galaxy/ {\n    proxy_set_header X-Forwarded-For
+      $proxy_add_x_forwarded_for;\n    proxy_set_header X-Forwarded-Proto $trusted_proto;\n
+      \   proxy_set_header Host $http_host;\n    # we don't want nginx trying to do
+      something clever with\n    # redirects, we set the Host: header above already.\n
+      \   proxy_redirect off;\n    proxy_pass http://pulp-api;\n}\n"
+    pulp_container.conf: "location /v2/ {\n    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n
+      \   proxy_set_header X-Forwarded-Proto $trusted_proto;\n    proxy_set_header
+      Host $http_host;\n    # we don't want nginx trying to do something clever with\n
+      \   # redirects, we set the Host: header above already.\n    proxy_redirect
+      off;\n    proxy_pass http://pulp-api;\n    client_max_body_size 0;\n}\n\nlocation
+      /extensions/v2/ {\n    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n
+      \   proxy_set_header X-Forwarded-Proto $trusted_proto;\n    proxy_set_header
+      Host $http_host;\n    # we don't want nginx trying to do something clever with\n
+      \   # redirects, we set the Host: header above already.\n    proxy_redirect
+      off;\n    proxy_pass http://pulp-api;\n}\n\nlocation /pulp/container/ {\n    proxy_set_header
+      X-Forwarded-For $proxy_add_x_forwarded_for;\n    proxy_set_header X-Forwarded-Proto
+      $trusted_proto;\n    proxy_set_header Host $http_host;\n    # we don't want
+      nginx trying to do something clever with\n    # redirects, we set the Host:
+      header above already.\n    proxy_redirect off;\n    proxy_pass http://pulp-content;\n}\n\nlocation
+      /token/ {\n    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n
+      \   proxy_set_header X-Forwarded-Proto $trusted_proto;\n    proxy_set_header
+      Host $http_host;\n    # we don't want nginx trying to do something clever with\n
+      \   # redirects, we set the Host: header above already.\n    proxy_redirect
+      off;\n    proxy_pass http://pulp-api;\n}\n"
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: '2026-04-09T22:17:44Z'
+    labels:
+      app.kubernetes.io/component: webserver
+      app.kubernetes.io/instance: nginx-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: nginx
+      app.kubernetes.io/part-of: automationhub
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:galaxy_ng.conf: {}
+          f:nginx.conf: {}
+          f:pulp_ansible.conf: {}
+          f:pulp_container.conf: {}
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b1a976d1-2cda-486d-b116-c4d2b79daa5d"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:44Z'
+    name: myaap-hub-automationhub-configmap
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationhub.ansible.com/v1beta1
+      kind: AutomationHub
+      name: myaap-hub
+      uid: b1a976d1-2cda-486d-b116-c4d2b79daa5d
+    resourceVersion: '1625889'
+    uid: d959ccd4-9575-43cf-b830-4a363170d2b8
+- apiVersion: v1
+  data:
+    redirect-page.html: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n
+      \   <meta http-equiv=\"refresh\" content=\"15; url=https://myaap-aap.apps.sno.ofam.dev\">\n
+      \   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n
+      \   <title>Redirecting to Ansible Automation Platform</title>\n\n    <!-- Favicon
+      links -->\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"static/media/favicon.ico\">\n\n
+      \   <!-- Link to DRF's CSS -->\n    <link rel=\"stylesheet\" type=\"text/css\"
+      href=\"static/rest_framework/css/bootstrap.min.css\">\n    <link rel=\"stylesheet\"
+      type=\"text/css\" href=\"static/rest_framework/css/bootstrap-theme.min.css\">\n\n
+      \   <style>\n        body {\n            font-family: Arial, sans-serif;\n            text-align:
+      center;\n            padding-top: 0px;\n            /* background-color: rgb(34,
+      34, 34); */\n        }\n        .banner {\n            background-color: #151414;\n
+      \           color: rgb(255, 255, 255);\n            padding: 20px;\n            margin-bottom:
+      20px;\n            min-height: 70px; /* Ensure the banner is tall enough to
+      fit the logo */\n        }\n        .logo {\n            width: 150px;\n            margin-bottom:
+      20px;\n            float: left;\n        }\n        a {\n            color:
+      #007BFF;\n            text-decoration: none;\n        }\n        a:hover {\n
+      \           text-decoration: underline;\n        }\n        .doc-note {\n            font-size:
+      0.7em; /* Makes the text smaller */\n            color: #555; /* Optional: Change
+      text color to a lighter shade */\n            background-color: #f9f9f9; /*
+      Optional: Light background color */\n            padding: 10px; /* Optional:
+      Add some padding */\n            margin: 10px 0; /* Optional: Add some margin
+      */\n            float: left;\n        }\n    </style>\n</head>\n<body>\n    <!--
+      Banner Section with Brand Logo -->\n    <div class=\"banner\">\n        <img
+      class=\"logo\" src=\"/static/media/aap-logo.svg\" alt=\"Brand Logo\">\n    </div>\n\n
+      \   <h2>Redirecting to Ansible Automation Platform...</h2>\n    <p>If you are
+      not redirected automatically, <a href=\"https://myaap-aap.apps.sno.ofam.dev\">click
+      here</a> to go to AAP.</p>\n    <p class=\"doc-note\">\n        The API endpoints
+      for this platform service will temporarily remain available at the URL for this
+      service.\n        Please use the Ansible Automation Platform API endpoints corresponding
+      to this component in the future.\n        These can be found at <a href=\"https://myaap-aap.apps.sno.ofam.dev/api/galaxy/\"
+      target=\"_blank\">https://myaap-aap.apps.sno.ofam.dev/api/galaxy/</a>.\n    </p>\n\n
+      \   <!-- Include any additional scripts if needed -->\n    <script src=\"static/rest_framework/js/jquery-3.7.1.min.js\"></script>\n
+      \   <script src=\"static/rest_framework/js/bootstrap.min.js\"></script>\n</body>\n</html>\n"
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: '2026-04-09T22:18:05Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:redirect-page.html: {}
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b1a976d1-2cda-486d-b116-c4d2b79daa5d"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:18:05Z'
+    name: myaap-hub-redirect-page
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationhub.ansible.com/v1beta1
+      kind: AutomationHub
+      name: myaap-hub
+      uid: b1a976d1-2cda-486d-b116-c4d2b79daa5d
+    resourceVersion: '1626444'
+    uid: 3f61c66e-f7f5-44ae-b50e-de40c4ccc809
+- apiVersion: v1
+  data:
+    nginx.conf: "# Note: Keep this file in sync with https://github.com/ansible/aap-gateway/blob/devel/tools/configs/nginx-gateway.conf\nworker_processes
+      auto;\npid /tmp/nginx.pid;\nerror_log  /dev/stdout error;\n\n# Load dynamic
+      modules. See /usr/share/doc/nginx/README.dynamic.\ninclude /usr/share/nginx/modules/*.conf;\n\nevents
+      {\n    worker_connections 1024;\n}\n\nhttp {\n    log_format  main  '$remote_addr
+      - $remote_user [$time_local] \"$request\" '\n                    '$status $body_bytes_sent
+      ($request_time) \"$http_referer\" '\n                    '\"$http_user_agent\"
+      \"$http_x_forwarded_for\" request-id: \"$http_x_request_id\"';\n\n    access_log
+      \ /dev/stdout  main;\n\n    sendfile            on;\n    tcp_nopush          on;\n
+      \   tcp_nodelay         on;\n    keepalive_timeout   65;\n    types_hash_max_size
+      4096;\n\n    include             /etc/nginx/mime.types;\n    default_type        application/octet-stream;\n
+      \   types {\n        application/manifest+json webmanifest;\n    }\n\n\n    #
+      Load modular configuration files from the /etc/nginx/conf.d directory.\n    #
+      See http://nginx.org/en/docs/ngx_core_module.html#include\n    # for more information.\n
+      \   include /etc/nginx/conf.d/*.conf;\n\n    upstream uwsgi {\n        server
+      127.0.0.1:8050;\n    }\n\n    server {\n        listen 8080 default_server;\n
+      \       listen [::]:8080 default_server;\n\n        server_name _;\n\n        keepalive_timeout
+      65;\n\n        client_max_body_size '5M';\n\n        # HSTS (ngx_http_headers_module
+      is required) (15768000 seconds = 6 months)\n        add_header Strict-Transport-Security
+      max-age=15768000;\n        add_header X-Content-Type-Options nosniff;\n\n        gzip
+      on;\n        gzip_comp_level 6;\n        gzip_proxied any;\n        gzip_types
+      text/css text/javascript text/plain text/xml application/javascript application/json
+      application/xml;\n        gzip_vary on;\n\n        # API Static files\n        location
+      ^~ /static/ {\n            alias /var/lib/ansible-automation-platform/platform/ui/static/;\n
+      \       }\n\n        # API endpoints\n        location ~* /(v3|api|o)/ {\n            uwsgi_read_timeout
+      15s;\n            uwsgi_pass uwsgi;\n            include /etc/nginx/uwsgi_params;\n
+      \           # Return 503 Service Unavailable with JSON response if gunicorn
+      fails to respond\n            error_page 504 =503 /json_503;\n            error_page
+      502 =503 /json_503;  # Optional, in case gunicorn is completely down\n        }\n\n
+      \       location = /json_503 {\n            # Custom JSON response for 503 Service
+      Unavailable\n            internal;\n            add_header Content-Type application/json;\n\n
+      \           # Check if X-Request-ID is set and include it in the response\n
+      \           if ($http_x_request_id) {\n                return 503 '{\"status\":
+      \"error\", \"message\": \"Service Unavailable\", \"code\": 503, \"request_id\":
+      \"$http_x_request_id\"}';\n            }\n\n            # If X-Request-ID is
+      not set, just return the basic JSON response\n            return 503 '{\"status\":
+      \"error\", \"message\": \"Service Unavailable\", \"code\": 503}';\n        }\n\n
+      \       # UI files\n        location ~* \\.(json|woff|woff2|jpe?g|png|gif|ico|svg|css|js)$
+      {\n            root /var/lib/ansible-automation-platform/platform/ui;\n            add_header
+      Cache-Control \"public, max-age=31536000, s-maxage=31536000, immutable\";\n
+      \           try_files $uri =404;\n        }\n\n        # UI root\n        location
+      / {\n            root /var/lib/ansible-automation-platform/platform/ui;\n            autoindex
+      off;\n            expires off;\n            add_header Cache-Control \"public,
+      max-age=0, s-maxage=0, must-revalidate\" always;\n            try_files $uri
+      /index.html =404;\n        }\n    }\n}\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"nginx.conf":"#
+        Note: Keep this file in sync with https://github.com/ansible/aap-gateway/blob/devel/tools/configs/nginx-gateway.conf\nworker_processes
+        auto;\npid /tmp/nginx.pid;\nerror_log  /dev/stdout error;\n\n# Load dynamic
+        modules. See /usr/share/doc/nginx/README.dynamic.\ninclude /usr/share/nginx/modules/*.conf;\n\nevents
+        {\n    worker_connections 1024;\n}\n\nhttp {\n    log_format  main  ''$remote_addr
+        - $remote_user [$time_local] \"$request\" ''\n                    ''$status
+        $body_bytes_sent ($request_time) \"$http_referer\" ''\n                    ''\"$http_user_agent\"
+        \"$http_x_forwarded_for\" request-id: \"$http_x_request_id\"'';\n\n    access_log  /dev/stdout  main;\n\n    sendfile            on;\n    tcp_nopush          on;\n    tcp_nodelay         on;\n    keepalive_timeout   65;\n    types_hash_max_size
+        4096;\n\n    include             /etc/nginx/mime.types;\n    default_type        application/octet-stream;\n    types
+        {\n        application/manifest+json webmanifest;\n    }\n\n\n    # Load modular
+        configuration files from the /etc/nginx/conf.d directory.\n    # See http://nginx.org/en/docs/ngx_core_module.html#include\n    #
+        for more information.\n    include /etc/nginx/conf.d/*.conf;\n\n    upstream
+        uwsgi {\n        server 127.0.0.1:8050;\n    }\n\n    server {\n        listen
+        8080 default_server;\n        listen [::]:8080 default_server;\n\n        server_name
+        _;\n\n        keepalive_timeout 65;\n\n        client_max_body_size ''5M'';\n\n        #
+        HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)\n        add_header
+        Strict-Transport-Security max-age=15768000;\n        add_header X-Content-Type-Options
+        nosniff;\n\n        gzip on;\n        gzip_comp_level 6;\n        gzip_proxied
+        any;\n        gzip_types text/css text/javascript text/plain text/xml application/javascript
+        application/json application/xml;\n        gzip_vary on;\n\n        # API
+        Static files\n        location ^~ /static/ {\n            alias /var/lib/ansible-automation-platform/platform/ui/static/;\n        }\n\n        #
+        API endpoints\n        location ~* /(v3|api|o)/ {\n            uwsgi_read_timeout
+        15s;\n            uwsgi_pass uwsgi;\n            include /etc/nginx/uwsgi_params;\n            #
+        Return 503 Service Unavailable with JSON response if gunicorn fails to respond\n            error_page
+        504 =503 /json_503;\n            error_page 502 =503 /json_503;  # Optional,
+        in case gunicorn is completely down\n        }\n\n        location = /json_503
+        {\n            # Custom JSON response for 503 Service Unavailable\n            internal;\n            add_header
+        Content-Type application/json;\n\n            # Check if X-Request-ID is set
+        and include it in the response\n            if ($http_x_request_id) {\n                return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503, \"request_id\": \"$http_x_request_id\"}'';\n            }\n\n            #
+        If X-Request-ID is not set, just return the basic JSON response\n            return
+        503 ''{\"status\": \"error\", \"message\": \"Service Unavailable\", \"code\":
+        503}'';\n        }\n\n        # UI files\n        location ~* \\.(json|woff|woff2|jpe?g|png|gif|ico|svg|css|js)$
+        {\n            root /var/lib/ansible-automation-platform/platform/ui;\n            add_header
+        Cache-Control \"public, max-age=31536000, s-maxage=31536000, immutable\";\n            try_files
+        $uri =404;\n        }\n\n        # UI root\n        location / {\n            root
+        /var/lib/ansible-automation-platform/platform/ui;\n            autoindex off;\n            expires
+        off;\n            add_header Cache-Control \"public, max-age=0, s-maxage=0,
+        must-revalidate\" always;\n            try_files $uri /index.html =404;\n        }\n    }\n}\n"},"kind":"ConfigMap","metadata":{"labels":{"app.kubernetes.io/managed-by":"aap-gateway-operator"},"name":"myaap-nginx-conf","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:15:36Z'
+    labels:
+      app.kubernetes.io/managed-by: aap-gateway-operator
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:nginx.conf: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:15:36Z'
+    name: myaap-nginx-conf
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1623629'
+    uid: 29c23d17-7df9-4798-bd20-b245c3497a3f
+- apiVersion: v1
+  data:
+    init_component_dbs.sh: "db_exists=$(psql -tAc \"SELECT 1 FROM pg_database WHERE
+      datname='gateway'\")\nuser_exists=$(psql -tAc \"SELECT 1 FROM pg_roles WHERE
+      rolname='gateway'\")\n\nif [ -z \"$user_exists\" ]; then\n    psql -c \"CREATE
+      USER gateway WITH ENCRYPTED PASSWORD 'gitU6mZ3t1LvZpLVoeeEztCJWORd21Uf';\"\n
+      \   psql -c \"GRANT USAGE, CREATE ON SCHEMA public TO gateway\"\nfi\n\nif [
+      -z \"$db_exists\" ]; then\n    psql -c \"CREATE DATABASE gateway WITH OWNER
+      gateway;\"\nfi\n\ndb_exists=$(psql -tAc \"SELECT 1 FROM pg_database WHERE datname='automationcontroller'\")\nuser_exists=$(psql
+      -tAc \"SELECT 1 FROM pg_roles WHERE rolname='automationcontroller'\")\n\nif
+      [ -z \"$user_exists\" ]; then\n    psql -c \"CREATE USER automationcontroller
+      WITH ENCRYPTED PASSWORD 'xJVJZLHDjHUGQgFohnBoawYFQiyoTFSp';\"\n    psql -c \"GRANT
+      USAGE, CREATE ON SCHEMA public TO automationcontroller\"\nfi\n\nif [ -z \"$db_exists\"
+      ]; then\n    psql -c \"CREATE DATABASE automationcontroller WITH OWNER automationcontroller;\"\nfi\n\ndb_exists=$(psql
+      -tAc \"SELECT 1 FROM pg_database WHERE datname='automationhub'\")\nuser_exists=$(psql
+      -tAc \"SELECT 1 FROM pg_roles WHERE rolname='automationhub'\")\n\nif [ -z \"$user_exists\"
+      ]; then\n    psql -c \"CREATE USER automationhub WITH ENCRYPTED PASSWORD 'cNGhKQMQR7P8N7fUwe2YHhOSQ4F2RITW';\"\n
+      \   psql -c \"GRANT USAGE, CREATE ON SCHEMA public TO automationhub\"\nfi\n\nif
+      [ -z \"$db_exists\" ]; then\n    psql -c \"CREATE DATABASE automationhub WITH
+      OWNER automationhub\"\nfi\n\ndb_exists=$(psql -tAc \"SELECT 1 FROM pg_database
+      WHERE datname='eda'\")\nuser_exists=$(psql -tAc \"SELECT 1 FROM pg_roles WHERE
+      rolname='eda'\")\n\nif [ -z \"$user_exists\" ]; then\n    psql -c \"CREATE USER
+      eda WITH ENCRYPTED PASSWORD 'MsejixQa641FkkC620SK7p3AULjRwSid';\"\n    psql
+      -c \"GRANT USAGE, CREATE ON SCHEMA public TO eda\"\nfi\n\nif [ -z \"$db_exists\"
+      ]; then\n    psql -c \"CREATE DATABASE eda WITH OWNER eda;\"\nfi\n\n\n# Check
+      and refresh collation version for databases that need it\n# This addresses collation
+      version changes from 2.28 to 2.34 when upgrading from RHEL8 to RHEL9\necho \"Checking
+      databases for collation version refresh...\"\n\n# Function to check if a database
+      needs collation refresh\ncheck_and_refresh_collation() {\n    local db_name=\"$1\"\n
+      \   local needs_refresh\n\n    # Check if database exists first\n    if ! psql
+      -tAc \"SELECT 1 FROM pg_database WHERE datname='$db_name'\" | grep -q 1; then\n
+      \       echo \"Database $db_name does not exist, skipping collation check\"\n
+      \       return 0\n    fi\n\n    # Check if collation refresh is needed by looking
+      for version mismatches\n    # This query checks if there are any collations
+      with version mismatches\n    needs_refresh=$(psql -d \"$db_name\" -tAc \"\n
+      \       SELECT COUNT(*)\n        FROM pg_collation\n        WHERE collversion
+      IS NOT NULL\n        AND collversion != pg_collation_actual_version(oid);\"
+      2>/dev/null || echo \"0\")\n\n    if [ \"$needs_refresh\" -gt 0 ]; then\n        echo
+      \"Database $db_name needs collation version refresh ($needs_refresh mismatched
+      collations)\"\n        if psql -d \"$db_name\" -c \"ALTER DATABASE $db_name
+      REFRESH COLLATION VERSION;\" 2>/dev/null; then\n            echo \"Successfully
+      refreshed collation version for $db_name\"\n        else\n            echo \"Warning:
+      Failed to refresh collation version for $db_name\"\n        fi\n    else\n        echo
+      \"Database $db_name collation version is up to date\"\n    fi\n}\n\n# Check
+      and refresh system databases\ncheck_and_refresh_collation \"template1\"\ncheck_and_refresh_collation
+      \"postgres\"\n\n# Check and refresh gateway database\ngateway_db_name=\"gateway\"\ncheck_and_refresh_collation
+      \"$gateway_db_name\"\n\n# Check and refresh controller database\ncontroller_db_name=\"automationcontroller\"\ncheck_and_refresh_collation
+      \"$controller_db_name\"\n\n# Check and refresh hub database\nhub_db_name=\"automationhub\"\ncheck_and_refresh_collation
+      \"$hub_db_name\"\n\n# Check and refresh eda database\neda_db_name=\"eda\"\ncheck_and_refresh_collation
+      \"$eda_db_name\"\n\n\necho \"Collation version check and refresh completed.\"\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"init_component_dbs.sh":"db_exists=$(psql
+        -tAc \"SELECT 1 FROM pg_database WHERE datname=''gateway''\")\nuser_exists=$(psql
+        -tAc \"SELECT 1 FROM pg_roles WHERE rolname=''gateway''\")\n\nif [ -z \"$user_exists\"
+        ]; then\n    psql -c \"CREATE USER gateway WITH ENCRYPTED PASSWORD ''gitU6mZ3t1LvZpLVoeeEztCJWORd21Uf'';\"\n    psql
+        -c \"GRANT USAGE, CREATE ON SCHEMA public TO gateway\"\nfi\n\nif [ -z \"$db_exists\"
+        ]; then\n    psql -c \"CREATE DATABASE gateway WITH OWNER gateway;\"\nfi\n\ndb_exists=$(psql
+        -tAc \"SELECT 1 FROM pg_database WHERE datname=''automationcontroller''\")\nuser_exists=$(psql
+        -tAc \"SELECT 1 FROM pg_roles WHERE rolname=''automationcontroller''\")\n\nif
+        [ -z \"$user_exists\" ]; then\n    psql -c \"CREATE USER automationcontroller
+        WITH ENCRYPTED PASSWORD ''xJVJZLHDjHUGQgFohnBoawYFQiyoTFSp'';\"\n    psql
+        -c \"GRANT USAGE, CREATE ON SCHEMA public TO automationcontroller\"\nfi\n\nif
+        [ -z \"$db_exists\" ]; then\n    psql -c \"CREATE DATABASE automationcontroller
+        WITH OWNER automationcontroller;\"\nfi\n\ndb_exists=$(psql -tAc \"SELECT 1
+        FROM pg_database WHERE datname=''automationhub''\")\nuser_exists=$(psql -tAc
+        \"SELECT 1 FROM pg_roles WHERE rolname=''automationhub''\")\n\nif [ -z \"$user_exists\"
+        ]; then\n    psql -c \"CREATE USER automationhub WITH ENCRYPTED PASSWORD ''cNGhKQMQR7P8N7fUwe2YHhOSQ4F2RITW'';\"\n    psql
+        -c \"GRANT USAGE, CREATE ON SCHEMA public TO automationhub\"\nfi\n\nif [ -z
+        \"$db_exists\" ]; then\n    psql -c \"CREATE DATABASE automationhub WITH OWNER
+        automationhub\"\nfi\n\ndb_exists=$(psql -tAc \"SELECT 1 FROM pg_database WHERE
+        datname=''eda''\")\nuser_exists=$(psql -tAc \"SELECT 1 FROM pg_roles WHERE
+        rolname=''eda''\")\n\nif [ -z \"$user_exists\" ]; then\n    psql -c \"CREATE
+        USER eda WITH ENCRYPTED PASSWORD ''MsejixQa641FkkC620SK7p3AULjRwSid'';\"\n    psql
+        -c \"GRANT USAGE, CREATE ON SCHEMA public TO eda\"\nfi\n\nif [ -z \"$db_exists\"
+        ]; then\n    psql -c \"CREATE DATABASE eda WITH OWNER eda;\"\nfi\n\n\n# Check
+        and refresh collation version for databases that need it\n# This addresses
+        collation version changes from 2.28 to 2.34 when upgrading from RHEL8 to RHEL9\necho
+        \"Checking databases for collation version refresh...\"\n\n# Function to check
+        if a database needs collation refresh\ncheck_and_refresh_collation() {\n    local
+        db_name=\"$1\"\n    local needs_refresh\n\n    # Check if database exists
+        first\n    if ! psql -tAc \"SELECT 1 FROM pg_database WHERE datname=''$db_name''\"
+        | grep -q 1; then\n        echo \"Database $db_name does not exist, skipping
+        collation check\"\n        return 0\n    fi\n\n    # Check if collation refresh
+        is needed by looking for version mismatches\n    # This query checks if there
+        are any collations with version mismatches\n    needs_refresh=$(psql -d \"$db_name\"
+        -tAc \"\n        SELECT COUNT(*)\n        FROM pg_collation\n        WHERE
+        collversion IS NOT NULL\n        AND collversion != pg_collation_actual_version(oid);\"
+        2>/dev/null || echo \"0\")\n\n    if [ \"$needs_refresh\" -gt 0 ]; then\n        echo
+        \"Database $db_name needs collation version refresh ($needs_refresh mismatched
+        collations)\"\n        if psql -d \"$db_name\" -c \"ALTER DATABASE $db_name
+        REFRESH COLLATION VERSION;\" 2>/dev/null; then\n            echo \"Successfully
+        refreshed collation version for $db_name\"\n        else\n            echo
+        \"Warning: Failed to refresh collation version for $db_name\"\n        fi\n    else\n        echo
+        \"Database $db_name collation version is up to date\"\n    fi\n}\n\n# Check
+        and refresh system databases\ncheck_and_refresh_collation \"template1\"\ncheck_and_refresh_collation
+        \"postgres\"\n\n# Check and refresh gateway database\ngateway_db_name=\"gateway\"\ncheck_and_refresh_collation
+        \"$gateway_db_name\"\n\n# Check and refresh controller database\ncontroller_db_name=\"automationcontroller\"\ncheck_and_refresh_collation
+        \"$controller_db_name\"\n\n# Check and refresh hub database\nhub_db_name=\"automationhub\"\ncheck_and_refresh_collation
+        \"$hub_db_name\"\n\n# Check and refresh eda database\neda_db_name=\"eda\"\ncheck_and_refresh_collation
+        \"$eda_db_name\"\n\n\necho \"Collation version check and refresh completed.\"\n"},"kind":"ConfigMap","metadata":{"labels":{"app.kubernetes.io/component":"database","app.kubernetes.io/instance":"postgres-15-myaap","app.kubernetes.io/managed-by":"aap-gateway-operator","app.kubernetes.io/name":"postgres-15"},"name":"myaap-postgresql-init","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:14:55Z'
+    labels:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: postgres-15-myaap
+      app.kubernetes.io/managed-by: aap-gateway-operator
+      app.kubernetes.io/name: postgres-15
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:init_component_dbs.sh: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:14:55Z'
+    name: myaap-postgresql-init
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1622885'
+    uid: e185e451-7b25-4c45-a6fa-e5f747b36217
+- apiVersion: v1
+  data:
+    supervisord.conf: '[supervisord]
+
+      umask = 022
+
+      minfds = 4096
+
+      nodaemon = true
+
+      pidfile = /run/supervisor/supervisord.pid
+
+      logfile = /dev/stdout
+
+      logfile_maxbytes = 0
+
+      childlogdir = /run/supervisor
+
+
+      [program:nginx]
+
+      command = nginx -g "daemon off;" -c /etc/nginx/nginx.conf
+
+      autorestart = true
+
+      stopasgroup = true
+
+      killasgroup = true
+
+      stdout_logfile = /dev/stdout
+
+      stdout_logfile_maxbytes = 0
+
+      stderr_logfile = /dev/stderr
+
+      stderr_logfile_maxbytes = 0
+
+
+      [program:uwsgi]
+
+      command = uwsgi /etc/ansible-automation-platform/gateway/uwsgi.ini
+
+      autorestart = true
+
+      stopwaitsecs = 1
+
+      stopsignal = KILL
+
+      stopasgroup = true
+
+      killasgroup = true
+
+      stdout_logfile = /dev/stdout
+
+      stdout_logfile_maxbytes = 0
+
+      stderr_logfile = /dev/stderr
+
+      stderr_logfile_maxbytes = 0
+
+
+      [program:control-plane]
+
+      command = aap-gateway-manage start_grpc_server
+
+      autorestart = true
+
+      stopwaitsecs = 1
+
+      stopsignal = KILL
+
+      stopasgroup = true
+
+      killasgroup = true
+
+      stdout_logfile = /dev/stdout
+
+      stdout_logfile_maxbytes = 0
+
+      stderr_logfile = /dev/stderr
+
+      stderr_logfile_maxbytes = 0
+
+
+      [group:gateway-processes]
+
+      programs = nginx,uwsgi,control-plane
+
+      priority = 5
+
+
+      [unix_http_server]
+
+      file = /run/supervisor/supervisor.sock
+
+
+      [supervisorctl]
+
+      serverurl = unix:///run/supervisor/supervisor.sock
+
+
+      [rpcinterface:supervisor]
+
+      supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+      '
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"supervisord.conf":"[supervisord]\numask
+        = 022\nminfds = 4096\nnodaemon = true\npidfile = /run/supervisor/supervisord.pid\nlogfile
+        = /dev/stdout\nlogfile_maxbytes = 0\nchildlogdir = /run/supervisor\n\n[program:nginx]\ncommand
+        = nginx -g \"daemon off;\" -c /etc/nginx/nginx.conf\nautorestart = true\nstopasgroup
+        = true\nkillasgroup = true\nstdout_logfile = /dev/stdout\nstdout_logfile_maxbytes
+        = 0\nstderr_logfile = /dev/stderr\nstderr_logfile_maxbytes = 0\n\n[program:uwsgi]\ncommand
+        = uwsgi /etc/ansible-automation-platform/gateway/uwsgi.ini\nautorestart =
+        true\nstopwaitsecs = 1\nstopsignal = KILL\nstopasgroup = true\nkillasgroup
+        = true\nstdout_logfile = /dev/stdout\nstdout_logfile_maxbytes = 0\nstderr_logfile
+        = /dev/stderr\nstderr_logfile_maxbytes = 0\n\n[program:control-plane]\ncommand
+        = aap-gateway-manage start_grpc_server\nautorestart = true\nstopwaitsecs =
+        1\nstopsignal = KILL\nstopasgroup = true\nkillasgroup = true\nstdout_logfile
+        = /dev/stdout\nstdout_logfile_maxbytes = 0\nstderr_logfile = /dev/stderr\nstderr_logfile_maxbytes
+        = 0\n\n[group:gateway-processes]\nprograms = nginx,uwsgi,control-plane\npriority
+        = 5\n\n[unix_http_server]\nfile = /run/supervisor/supervisor.sock\n\n[supervisorctl]\nserverurl
+        = unix:///run/supervisor/supervisor.sock\n\n[rpcinterface:supervisor]\nsupervisor.rpcinterface_factory
+        = supervisor.rpcinterface:make_main_rpcinterface\n"},"kind":"ConfigMap","metadata":{"labels":{"app.kubernetes.io/managed-by":"aap-gateway-operator"},"name":"myaap-supervisord-conf","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:15:37Z'
+    labels:
+      app.kubernetes.io/managed-by: aap-gateway-operator
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:supervisord.conf: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:15:37Z'
+    name: myaap-supervisord-conf
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1623634'
+    uid: d0edd8f3-54b9-4826-8ada-6f424c79544b
+- apiVersion: v1
+  data:
+    uwsgi.ini: "[uwsgi]\nlog-format = [pid: %(pid)|app: -|req: -/-] %(addr) (%(user))
+      {%(vars) vars in %(pktsize) bytes} [%(ctime)] %(method) %(uri) => generated
+      %(rsize) bytes in %(msecs) msecs (%(proto) %(status)) %(headers) headers in
+      %(hsize) bytes (%(switches) switches on core %(core)) x-request-id: %(var.HTTP_X_REQUEST_ID)\n
+      \   socket = 127.0.0.1:8050\nbuffer-size = 10240\nprocesses = 5\nmaster = true\nvacuum
+      = true\nno-orphans = true\nlazy-apps = true\nharakiri = 10\nharakiri-graceful-timeout
+      = 2\npy-call-osafterfork = true\nmanage-script-name = true\nmount = /=aap_gateway_api.wsgi:application\n"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","data":{"uwsgi.ini":"[uwsgi]\nlog-format
+        = [pid: %(pid)|app: -|req: -/-] %(addr) (%(user)) {%(vars) vars in %(pktsize)
+        bytes} [%(ctime)] %(method) %(uri) => generated %(rsize) bytes in %(msecs)
+        msecs (%(proto) %(status)) %(headers) headers in %(hsize) bytes (%(switches)
+        switches on core %(core)) x-request-id: %(var.HTTP_X_REQUEST_ID)\n    socket
+        = 127.0.0.1:8050\nbuffer-size = 10240\nprocesses = 5\nmaster = true\nvacuum
+        = true\nno-orphans = true\nlazy-apps = true\nharakiri = 10\nharakiri-graceful-timeout
+        = 2\npy-call-osafterfork = true\nmanage-script-name = true\nmount = /=aap_gateway_api.wsgi:application\n"},"kind":"ConfigMap","metadata":{"labels":{"app.kubernetes.io/managed-by":"aap-gateway-operator"},"name":"myaap-uwsgi-ini","namespace":"aap"}}'
+    creationTimestamp: '2026-04-09T22:15:36Z'
+    labels:
+      app.kubernetes.io/managed-by: aap-gateway-operator
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:uwsgi.ini: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:15:36Z'
+    name: myaap-uwsgi-ini
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1623632'
+    uid: 00b34392-2279-4e42-afb1-d611c9cb6956

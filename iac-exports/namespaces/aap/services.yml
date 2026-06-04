@@ -1,0 +1,880 @@
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"app.kubernetes.io/component":"aap","app.kubernetes.io/managed-by":"aap-operator","app.kubernetes.io/name":"myaap","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap"},"name":"myaap","namespace":"aap"},"spec":{"ports":[{"name":"http","port":80,"protocol":"TCP","targetPort":8000}],"selector":{"app.kubernetes.io/component":"aap-gateway","app.kubernetes.io/managed-by":"aap-operator","app.kubernetes.io/name":"myaap","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap"},"type":"ClusterIP"}}'
+    creationTimestamp: '2026-04-09T22:15:34Z'
+    labels:
+      app.kubernetes.io/component: aap
+      app.kubernetes.io/managed-by: aap-operator
+      app.kubernetes.io/name: myaap
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":80,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:15:34Z'
+    name: myaap
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1623565'
+    uid: b0907fc6-77eb-485a-829d-d41e8a2bdf7c
+  spec:
+    clusterIP: 172.30.171.181
+    clusterIPs:
+    - 172.30.171.181
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8000
+    selector:
+      app.kubernetes.io/component: aap-gateway
+      app.kubernetes.io/managed-by: aap-operator
+      app.kubernetes.io/name: myaap
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"app.kubernetes.io/component":"aap-api","app.kubernetes.io/managed-by":"aap-operator","app.kubernetes.io/name":"myaap","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap"},"name":"myaap-api","namespace":"aap"},"spec":{"ports":[{"name":"gateway-api","port":80,"protocol":"TCP","targetPort":8080}],"selector":{"app.kubernetes.io/component":"aap-gateway","app.kubernetes.io/managed-by":"aap-operator","app.kubernetes.io/name":"myaap","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap"},"type":"ClusterIP"}}'
+    creationTimestamp: '2026-04-09T22:15:34Z'
+    labels:
+      app.kubernetes.io/component: aap-api
+      app.kubernetes.io/managed-by: aap-operator
+      app.kubernetes.io/name: myaap
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":80,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:15:34Z'
+    name: myaap-api
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1623579'
+    uid: 4320c540-c950-48ae-bc9e-13409ba73b6d
+  spec:
+    clusterIP: 172.30.118.226
+    clusterIPs:
+    - 172.30.118.226
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: gateway-api
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app.kubernetes.io/component: aap-gateway
+      app.kubernetes.io/managed-by: aap-operator
+      app.kubernetes.io/name: myaap
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"app.kubernetes.io/component":"automationcontroller","app.kubernetes.io/managed-by":"automationcontroller-operator","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-controller"},"name":"myaap-controller-service","namespace":"aap"},"spec":{"ports":[{"name":"http","port":80,"protocol":"TCP","targetPort":8052}],"selector":{"app.kubernetes.io/component":"automationcontroller","app.kubernetes.io/managed-by":"automationcontroller-operator","app.kubernetes.io/name":"myaap-controller-web"},"type":"ClusterIP"}}'
+    creationTimestamp: '2026-04-09T22:17:55Z'
+    labels:
+      app.kubernetes.io/component: automationcontroller
+      app.kubernetes.io/managed-by: automationcontroller-operator
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-controller
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"56e229e0-e41e-460a-8832-50d3860c1282"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":80,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:55Z'
+    name: myaap-controller-service
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationcontroller.ansible.com/v1beta1
+      kind: AutomationController
+      name: myaap-controller
+      uid: 56e229e0-e41e-460a-8832-50d3860c1282
+    resourceVersion: '1626188'
+    uid: 90cd7049-dafc-465c-abbd-e353cc197b65
+  spec:
+    clusterIP: 172.30.225.14
+    clusterIPs:
+    - 172.30.225.14
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8052
+    selector:
+      app.kubernetes.io/component: automationcontroller
+      app.kubernetes.io/managed-by: automationcontroller-operator
+      app.kubernetes.io/name: myaap-controller-web
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"app.kubernetes.io/component":"eda-api","app.kubernetes.io/managed-by":"eda-operator","app.kubernetes.io/name":"myaap-eda","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-eda"},"name":"myaap-eda-api","namespace":"aap"},"spec":{"ports":[{"port":8000,"protocol":"TCP","targetPort":8000}],"selector":{"app.kubernetes.io/component":"eda-api","app.kubernetes.io/managed-by":"eda-operator","app.kubernetes.io/name":"myaap-eda","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-eda"}}}'
+    creationTimestamp: '2026-04-09T22:17:39Z'
+    labels:
+      app.kubernetes.io/component: eda-api
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"aeca36ff-8992-44e8-9b35-ea05168812c0"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8000,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:39Z'
+    name: myaap-eda-api
+    namespace: aap
+    ownerReferences:
+    - apiVersion: eda.ansible.com/v1alpha1
+      kind: EDA
+      name: myaap-eda
+      uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+    resourceVersion: '1625698'
+    uid: d6cd6a3c-e84e-455b-9673-a878bc20beec
+  spec:
+    clusterIP: 172.30.40.156
+    clusterIPs:
+    - 172.30.40.156
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8000
+      protocol: TCP
+      targetPort: 8000
+    selector:
+      app.kubernetes.io/component: eda-api
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"app.kubernetes.io/component":"eda-daphne","app.kubernetes.io/managed-by":"eda-operator","app.kubernetes.io/name":"myaap-eda","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-eda"},"name":"myaap-eda-daphne","namespace":"aap"},"spec":{"ports":[{"port":8001,"protocol":"TCP","targetPort":8001}],"selector":{"app.kubernetes.io/component":"eda-api","app.kubernetes.io/managed-by":"eda-operator","app.kubernetes.io/name":"myaap-eda","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-eda"}}}'
+    creationTimestamp: '2026-04-09T22:17:39Z'
+    labels:
+      app.kubernetes.io/component: eda-daphne
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"aeca36ff-8992-44e8-9b35-ea05168812c0"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8001,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:39Z'
+    name: myaap-eda-daphne
+    namespace: aap
+    ownerReferences:
+    - apiVersion: eda.ansible.com/v1alpha1
+      kind: EDA
+      name: myaap-eda
+      uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+    resourceVersion: '1625702'
+    uid: 153c392f-d9ef-43ba-95b0-c9f78b59bb37
+  spec:
+    clusterIP: 172.30.53.11
+    clusterIPs:
+    - 172.30.53.11
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8001
+      protocol: TCP
+      targetPort: 8001
+    selector:
+      app.kubernetes.io/component: eda-api
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"app.kubernetes.io/component":"eda-event-stream","app.kubernetes.io/managed-by":"eda-operator","app.kubernetes.io/name":"myaap-eda","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-eda"},"name":"myaap-eda-event-stream","namespace":"aap"},"spec":{"ports":[{"port":8000,"protocol":"TCP","targetPort":8000}],"selector":{"app.kubernetes.io/component":"eda-event-stream","app.kubernetes.io/managed-by":"eda-operator","app.kubernetes.io/name":"myaap-eda","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-eda"}}}'
+    creationTimestamp: '2026-04-09T22:17:43Z'
+    labels:
+      app.kubernetes.io/component: eda-event-stream
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"aeca36ff-8992-44e8-9b35-ea05168812c0"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8000,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:43Z'
+    name: myaap-eda-event-stream
+    namespace: aap
+    ownerReferences:
+    - apiVersion: eda.ansible.com/v1alpha1
+      kind: EDA
+      name: myaap-eda
+      uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+    resourceVersion: '1625880'
+    uid: 60874117-314e-41f3-90e7-5b8810b06e40
+  spec:
+    clusterIP: 172.30.167.154
+    clusterIPs:
+    - 172.30.167.154
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8000
+      protocol: TCP
+      targetPort: 8000
+    selector:
+      app.kubernetes.io/component: eda-event-stream
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: '2026-04-09T22:18:04Z'
+    labels:
+      app.kubernetes.io/component: api
+      app.kubernetes.io/instance: automationhub-api-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: automationhub-api
+      app.kubernetes.io/part-of: automationhub
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b1a976d1-2cda-486d-b116-c4d2b79daa5d"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8000,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:18:04Z'
+    name: myaap-hub-api-svc
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationhub.ansible.com/v1beta1
+      kind: AutomationHub
+      name: myaap-hub
+      uid: b1a976d1-2cda-486d-b116-c4d2b79daa5d
+    resourceVersion: '1626429'
+    uid: 597c2a13-ffaa-4b1e-a119-f877b85f68fa
+  spec:
+    clusterIP: 172.30.243.31
+    clusterIPs:
+    - 172.30.243.31
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: api-8000
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+    selector:
+      app.kubernetes.io/component: api
+      app.kubernetes.io/instance: automationhub-api-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: automationhub-api
+      app.kubernetes.io/part-of: automationhub
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: '2026-04-09T22:17:54Z'
+    labels:
+      app.kubernetes.io/component: content-server
+      app.kubernetes.io/instance: automationhub-content-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: automationhub-content
+      app.kubernetes.io/part-of: automationhub
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b1a976d1-2cda-486d-b116-c4d2b79daa5d"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":24816,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:54Z'
+    name: myaap-hub-content-svc
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationhub.ansible.com/v1beta1
+      kind: AutomationHub
+      name: myaap-hub
+      uid: b1a976d1-2cda-486d-b116-c4d2b79daa5d
+    resourceVersion: '1626156'
+    uid: 1393132d-997c-4bac-b9a6-a7e8815a2894
+  spec:
+    clusterIP: 172.30.84.46
+    clusterIPs:
+    - 172.30.84.46
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: content-24816
+      port: 24816
+      protocol: TCP
+      targetPort: 24816
+    selector:
+      app.kubernetes.io/component: content-server
+      app.kubernetes.io/instance: automationhub-content-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: automationhub-content
+      app.kubernetes.io/part-of: automationhub
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: '2026-04-09T22:17:49Z'
+    labels:
+      app.kubernetes.io/component: cache
+      app.kubernetes.io/instance: redis-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: redis
+      app.kubernetes.io/part-of: automationhub
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b1a976d1-2cda-486d-b116-c4d2b79daa5d"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":6379,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:49Z'
+    name: myaap-hub-redis-svc
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationhub.ansible.com/v1beta1
+      kind: AutomationHub
+      name: myaap-hub
+      uid: b1a976d1-2cda-486d-b116-c4d2b79daa5d
+    resourceVersion: '1626037'
+    uid: c51740dd-35cb-4e6d-95a5-f5902d29d177
+  spec:
+    clusterIP: 172.30.181.7
+    clusterIPs:
+    - 172.30.181.7
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: redis-6379
+      port: 6379
+      protocol: TCP
+      targetPort: 6379
+    selector:
+      app.kubernetes.io/component: cache
+      app.kubernetes.io/instance: redis-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: redis
+      app.kubernetes.io/part-of: automationhub
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: '2026-04-09T22:17:47Z'
+    labels:
+      app.kubernetes.io/component: webserver
+      app.kubernetes.io/instance: nginx-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: nginx
+      app.kubernetes.io/part-of: automationhub
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b1a976d1-2cda-486d-b116-c4d2b79daa5d"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":24880,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:47Z'
+    name: myaap-hub-web-svc
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationhub.ansible.com/v1beta1
+      kind: AutomationHub
+      name: myaap-hub
+      uid: b1a976d1-2cda-486d-b116-c4d2b79daa5d
+    resourceVersion: '1625983'
+    uid: 1f30609c-f234-4393-94fc-272396c24310
+  spec:
+    clusterIP: 172.30.105.125
+    clusterIPs:
+    - 172.30.105.125
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: web-8080
+      port: 24880
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app.kubernetes.io/component: webserver
+      app.kubernetes.io/instance: nginx-myaap-hub
+      app.kubernetes.io/managed-by: automationhub-operator
+      app.kubernetes.io/name: nginx
+      app.kubernetes.io/part-of: automationhub
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"app.kubernetes.io/component":"database","app.kubernetes.io/instance":"postgres-15-myaap","app.kubernetes.io/managed-by":"aap-gateway-operator","app.kubernetes.io/name":"postgres-15"},"name":"myaap-postgres-15","namespace":"aap"},"spec":{"clusterIP":"None","ports":[{"name":"5432","port":5432,"targetPort":5432}],"selector":{"app.kubernetes.io/component":"database","app.kubernetes.io/instance":"postgres-15-myaap","app.kubernetes.io/managed-by":"aap-gateway-operator","app.kubernetes.io/name":"postgres-15"}}}'
+    creationTimestamp: '2026-04-09T22:14:56Z'
+    labels:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: postgres-15-myaap
+      app.kubernetes.io/managed-by: aap-gateway-operator
+      app.kubernetes.io/name: postgres-15
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+        f:spec:
+          f:clusterIP: {}
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":5432,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:14:56Z'
+    name: myaap-postgres-15
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1622923'
+    uid: f53d8715-ce43-4fb6-b7c9-26a0e2e2fceb
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: '5432'
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: postgres-15-myaap
+      app.kubernetes.io/managed-by: aap-gateway-operator
+      app.kubernetes.io/name: postgres-15
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"v1","kind":"Service","metadata":{"labels":{"app.kubernetes.io/component":"cache","app.kubernetes.io/instance":"redis-myaap","app.kubernetes.io/managed-by":"aap-operator","app.kubernetes.io/name":"redis","app.kubernetes.io/part-of":"aap"},"name":"myaap-redis-svc","namespace":"aap"},"spec":{"ports":[{"name":"redis-6379","port":6379,"protocol":"TCP","targetPort":6379}],"selector":{"app.kubernetes.io/component":"cache","app.kubernetes.io/instance":"redis-myaap","app.kubernetes.io/managed-by":"aap-operator","app.kubernetes.io/name":"redis","app.kubernetes.io/part-of":"aap"},"type":"ClusterIP"}}'
+    creationTimestamp: '2026-04-09T22:14:48Z'
+    labels:
+      app.kubernetes.io/component: cache
+      app.kubernetes.io/instance: redis-myaap
+      app.kubernetes.io/managed-by: aap-operator
+      app.kubernetes.io/name: redis
+      app.kubernetes.io/part-of: aap
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":6379,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:14:48Z'
+    name: myaap-redis-svc
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1622754'
+    uid: eb4a5156-dbaf-4e20-b8fb-4468fb740e2e
+  spec:
+    clusterIP: 172.30.70.138
+    clusterIPs:
+    - 172.30.70.138
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: redis-6379
+      port: 6379
+      protocol: TCP
+      targetPort: 6379
+    selector:
+      app.kubernetes.io/component: cache
+      app.kubernetes.io/instance: redis-myaap
+      app.kubernetes.io/managed-by: aap-operator
+      app.kubernetes.io/name: redis
+      app.kubernetes.io/part-of: aap
+    sessionAffinity: None
+    type: ClusterIP

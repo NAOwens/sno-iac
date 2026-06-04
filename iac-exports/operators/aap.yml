@@ -1,0 +1,67 @@
+- apiVersion: aap.ansible.com/v1alpha1
+  kind: AnsibleAutomationPlatform
+  metadata:
+    creationTimestamp: '2026-04-09T22:14:39Z'
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: aap-operator
+      app.kubernetes.io/name: myaap
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap
+    managedFields:
+    - apiVersion: aap.ansible.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:api:
+            .: {}
+            f:log_level: {}
+            f:replicas: {}
+          f:database:
+            .: {}
+            f:idle_disabled: {}
+            f:postgres_data_volume_init: {}
+          f:no_log: {}
+          f:redis_mode: {}
+          f:route_tls_termination_mechanism: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-09T22:14:39Z'
+    - apiVersion: aap.ansible.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:14:42Z'
+    - apiVersion: aap.ansible.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions: {}
+      manager: ansible-operator
+      operation: Update
+      subresource: status
+      time: '2026-06-04T01:13:50Z'
+    name: myaap
+    namespace: aap
+    resourceVersion: '78029793'
+    uid: 3367e195-087f-45ce-9138-19071d896bd5
+  spec:
+    api:
+      log_level: INFO
+      replicas: 1
+    database:
+      idle_disabled: false
+      postgres_data_volume_init: false
+    no_log: true
+    redis_mode: standalone
+    route_tls_termination_mechanism: Edge

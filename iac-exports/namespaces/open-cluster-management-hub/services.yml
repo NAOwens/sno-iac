@@ -1,0 +1,168 @@
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: 9a04a3889e6e8356dc3dac4dcf9f59423e2be27c1101c402f3ec3a19013dcfeb
+    creationTimestamp: '2026-04-09T14:29:38Z'
+    labels:
+      open-cluster-management.io/created-by-clustermanager: cluster-manager
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+          f:labels:
+            .: {}
+            f:open-cluster-management.io/created-by-clustermanager: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":9443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: registration-operator
+      operation: Update
+      time: '2026-04-09T14:29:38Z'
+    name: cluster-manager-addon-webhook
+    namespace: open-cluster-management-hub
+    resourceVersion: '1237624'
+    uid: 19c0368b-6946-4140-b7a5-80a83f832074
+  spec:
+    clusterIP: 172.30.142.200
+    clusterIPs:
+    - 172.30.142.200
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: webhook
+      port: 9443
+      protocol: TCP
+      targetPort: 9443
+    selector:
+      app: cluster-manager-addon-webhook
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: c2c51f062fb98cfe3ef530be6b7fb7dbadb052363f4996ca80124c525dbf540c
+    creationTimestamp: '2026-04-09T14:29:38Z'
+    labels:
+      open-cluster-management.io/created-by-clustermanager: cluster-manager
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+          f:labels:
+            .: {}
+            f:open-cluster-management.io/created-by-clustermanager: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":9443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: registration-operator
+      operation: Update
+      time: '2026-04-09T14:29:38Z'
+    name: cluster-manager-registration-webhook
+    namespace: open-cluster-management-hub
+    resourceVersion: '1237615'
+    uid: c7ac586d-5872-46b3-827b-f4fc21498376
+  spec:
+    clusterIP: 172.30.235.3
+    clusterIPs:
+    - 172.30.235.3
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: webhook
+      port: 9443
+      protocol: TCP
+      targetPort: 9443
+    selector:
+      app: cluster-manager-registration-webhook
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      operator.openshift.io/spec-hash: 659aba3bb314a0808d23107ffd9177598456185ba5df81c20640f3820702c749
+    creationTimestamp: '2026-04-09T14:29:38Z'
+    labels:
+      open-cluster-management.io/created-by-clustermanager: cluster-manager
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:operator.openshift.io/spec-hash: {}
+          f:labels:
+            .: {}
+            f:open-cluster-management.io/created-by-clustermanager: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":9443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: registration-operator
+      operation: Update
+      time: '2026-04-09T14:29:38Z'
+    name: cluster-manager-work-webhook
+    namespace: open-cluster-management-hub
+    resourceVersion: '1237619'
+    uid: 19fcc6f9-6cee-437f-be9f-ca5a76ac679a
+  spec:
+    clusterIP: 172.30.154.250
+    clusterIPs:
+    - 172.30.154.250
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: webhook
+      port: 9443
+      protocol: TCP
+      targetPort: 9443
+    selector:
+      app: cluster-manager-work-webhook
+    sessionAffinity: None
+    type: ClusterIP

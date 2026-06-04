@@ -1,0 +1,536 @@
+- apiVersion: operators.coreos.com/v1alpha1
+  kind: Subscription
+  metadata:
+    creationTimestamp: '2026-04-09T21:56:38Z'
+    generation: 1
+    labels:
+      operators.coreos.com/ansible-automation-platform-operator.aap: ''
+    managedFields:
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:channel: {}
+          f:installPlanApproval: {}
+          f:name: {}
+          f:source: {}
+          f:sourceNamespace: {}
+          f:startingCSV: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-09T21:56:38Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:operators.coreos.com/ansible-automation-platform-operator.aap: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T21:56:38Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:catalogHealth: {}
+          f:conditions: {}
+          f:currentCSV: {}
+          f:installPlanGeneration: {}
+          f:installPlanRef: {}
+          f:installedCSV: {}
+          f:installplan:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:uuid: {}
+          f:lastUpdated: {}
+          f:state: {}
+      manager: catalog
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:39Z'
+    name: ansible-automation-platform-operator
+    namespace: aap
+    resourceVersion: '75984950'
+    uid: 975ab203-31ad-4310-96c1-32adf5e4bbcb
+  spec:
+    channel: stable-2.6
+    installPlanApproval: Automatic
+    name: ansible-automation-platform-operator
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    startingCSV: aap-operator.v2.6.0-0.1774648945
+- apiVersion: operators.coreos.com/v1alpha1
+  kind: Subscription
+  metadata:
+    creationTimestamp: '2026-04-17T22:17:50Z'
+    generation: 1
+    labels:
+      operators.coreos.com/openshift-cert-manager-operator.cert-manager-operator: ''
+    managedFields:
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:channel: {}
+          f:installPlanApproval: {}
+          f:name: {}
+          f:source: {}
+          f:sourceNamespace: {}
+          f:startingCSV: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-17T22:17:50Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:operators.coreos.com/openshift-cert-manager-operator.cert-manager-operator: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-17T22:17:50Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:catalogHealth: {}
+          f:conditions: {}
+          f:currentCSV: {}
+          f:installPlanGeneration: {}
+          f:installPlanRef: {}
+          f:installedCSV: {}
+          f:installplan:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:uuid: {}
+          f:lastUpdated: {}
+          f:state: {}
+      manager: catalog
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:38Z'
+    name: openshift-cert-manager-operator
+    namespace: cert-manager-operator
+    resourceVersion: '75984910'
+    uid: 89d0976d-4b68-4853-b6c6-3c7e1bed7057
+  spec:
+    channel: stable-v1
+    installPlanApproval: Automatic
+    name: openshift-cert-manager-operator
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    startingCSV: cert-manager-operator.v1.18.1
+- apiVersion: operators.coreos.com/v1alpha1
+  kind: Subscription
+  metadata:
+    creationTimestamp: '2026-05-05T19:52:12Z'
+    generation: 1
+    labels:
+      operators.coreos.com/costmanagement-metrics-operator.costmanagement-metrics-operator: ''
+    managedFields:
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:channel: {}
+          f:installPlanApproval: {}
+          f:name: {}
+          f:source: {}
+          f:sourceNamespace: {}
+          f:startingCSV: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-05-05T19:52:12Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:operators.coreos.com/costmanagement-metrics-operator.costmanagement-metrics-operator: {}
+      manager: olm
+      operation: Update
+      time: '2026-05-05T19:52:12Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:catalogHealth: {}
+          f:conditions: {}
+          f:currentCSV: {}
+          f:installPlanGeneration: {}
+          f:installPlanRef: {}
+          f:installedCSV: {}
+          f:installplan:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:uuid: {}
+          f:lastUpdated: {}
+          f:state: {}
+      manager: catalog
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:34Z'
+    name: costmanagement-metrics-operator
+    namespace: costmanagement-metrics-operator
+    resourceVersion: '75984819'
+    uid: 4bb6ff1f-4e0f-43b9-bcff-fbc7e3e566fb
+  spec:
+    channel: stable
+    installPlanApproval: Automatic
+    name: costmanagement-metrics-operator
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    startingCSV: costmanagement-metrics-operator.4.4.0
+- apiVersion: operators.coreos.com/v1alpha1
+  kind: Subscription
+  metadata:
+    creationTimestamp: '2026-04-09T14:27:51Z'
+    generation: 1
+    labels:
+      installer.name: multiclusterhub
+      installer.namespace: open-cluster-management
+      multiclusterhubs.operator.open-cluster-management.io/managed-by: 'true'
+      operators.coreos.com/multicluster-engine.multicluster-engine: ''
+    managedFields:
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:installer.name: {}
+            f:installer.namespace: {}
+            f:multiclusterhubs.operator.open-cluster-management.io/managed-by: {}
+        f:spec:
+          .: {}
+          f:channel: {}
+          f:config: {}
+          f:installPlanApproval: {}
+          f:name: {}
+          f:source: {}
+          f:sourceNamespace: {}
+      manager: multiclusterhub-operator
+      operation: Update
+      time: '2026-04-09T14:27:51Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            f:operators.coreos.com/multicluster-engine.multicluster-engine: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T14:27:51Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:catalogHealth: {}
+          f:conditions: {}
+          f:currentCSV: {}
+          f:installPlanGeneration: {}
+          f:installPlanRef: {}
+          f:installedCSV: {}
+          f:installplan:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:uuid: {}
+          f:lastUpdated: {}
+          f:state: {}
+      manager: catalog
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:34Z'
+    name: multicluster-engine
+    namespace: multicluster-engine
+    resourceVersion: '75984818'
+    uid: 7d0366ea-af24-427f-a9a0-c08272ab2392
+  spec:
+    channel: stable-2.11
+    config: {}
+    installPlanApproval: Automatic
+    name: multicluster-engine
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+- apiVersion: operators.coreos.com/v1alpha1
+  kind: Subscription
+  metadata:
+    creationTimestamp: '2026-04-09T14:26:36Z'
+    generation: 1
+    labels:
+      operators.coreos.com/advanced-cluster-management.open-cluster-management: ''
+    managedFields:
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:channel: {}
+          f:installPlanApproval: {}
+          f:name: {}
+          f:source: {}
+          f:sourceNamespace: {}
+          f:startingCSV: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-09T14:26:36Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:operators.coreos.com/advanced-cluster-management.open-cluster-management: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-09T14:26:36Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:catalogHealth: {}
+          f:conditions: {}
+          f:currentCSV: {}
+          f:installPlanGeneration: {}
+          f:installPlanRef: {}
+          f:installedCSV: {}
+          f:installplan:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:uuid: {}
+          f:lastUpdated: {}
+          f:state: {}
+      manager: catalog
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:35Z'
+    name: advanced-cluster-management
+    namespace: open-cluster-management
+    resourceVersion: '75984839'
+    uid: c2029306-e0f8-4775-bc44-a49ae0ed0eaf
+  spec:
+    channel: release-2.16
+    installPlanApproval: Automatic
+    name: advanced-cluster-management
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    startingCSV: advanced-cluster-management.v2.16.0
+- apiVersion: operators.coreos.com/v1alpha1
+  kind: Subscription
+  metadata:
+    creationTimestamp: '2026-04-07T19:50:04Z'
+    generation: 1
+    labels:
+      operators.coreos.com/kubevirt-hyperconverged.openshift-cnv: ''
+    managedFields:
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:channel: {}
+          f:installPlanApproval: {}
+          f:name: {}
+          f:source: {}
+          f:sourceNamespace: {}
+          f:startingCSV: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-07T19:50:04Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:operators.coreos.com/kubevirt-hyperconverged.openshift-cnv: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-07T19:50:04Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:catalogHealth: {}
+          f:conditions: {}
+          f:currentCSV: {}
+          f:installPlanGeneration: {}
+          f:installPlanRef: {}
+          f:installedCSV: {}
+          f:installplan:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:uuid: {}
+          f:lastUpdated: {}
+          f:state: {}
+      manager: catalog
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:37Z'
+    name: kubevirt-hyperconverged
+    namespace: openshift-cnv
+    resourceVersion: '75984882'
+    uid: 2f138e03-8589-4f3c-91fd-c5c7e6612346
+  spec:
+    channel: stable
+    installPlanApproval: Automatic
+    name: kubevirt-hyperconverged
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    startingCSV: kubevirt-hyperconverged-operator.v4.21.1
+- apiVersion: operators.coreos.com/v1alpha1
+  kind: Subscription
+  metadata:
+    creationTimestamp: '2026-04-07T18:32:33Z'
+    generation: 1
+    labels:
+      operators.coreos.com/lvms-operator.openshift-lvm-storage: ''
+    managedFields:
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:channel: {}
+          f:installPlanApproval: {}
+          f:name: {}
+          f:source: {}
+          f:sourceNamespace: {}
+          f:startingCSV: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-07T18:32:33Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:operators.coreos.com/lvms-operator.openshift-lvm-storage: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-07T18:32:33Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:catalogHealth: {}
+          f:conditions: {}
+          f:currentCSV: {}
+          f:installPlanGeneration: {}
+          f:installPlanRef: {}
+          f:installedCSV: {}
+          f:installplan:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:uuid: {}
+          f:lastUpdated: {}
+          f:state: {}
+      manager: catalog
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:35Z'
+    name: lvms-operator
+    namespace: openshift-lvm-storage
+    resourceVersion: '75984838'
+    uid: f36f0fd9-549d-4396-a2cb-1a255497549d
+  spec:
+    channel: stable-4.21
+    installPlanApproval: Automatic
+    name: lvms-operator
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    startingCSV: lvms-operator.v4.21.0
+- apiVersion: operators.coreos.com/v1alpha1
+  kind: Subscription
+  metadata:
+    creationTimestamp: '2026-04-08T02:46:07Z'
+    generation: 1
+    labels:
+      operators.coreos.com/kubernetes-nmstate-operator.openshift-nmstate: ''
+    managedFields:
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:channel: {}
+          f:installPlanApproval: {}
+          f:name: {}
+          f:source: {}
+          f:sourceNamespace: {}
+          f:startingCSV: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-08T02:46:07Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:operators.coreos.com/kubernetes-nmstate-operator.openshift-nmstate: {}
+      manager: olm
+      operation: Update
+      time: '2026-04-08T02:46:07Z'
+    - apiVersion: operators.coreos.com/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:catalogHealth: {}
+          f:conditions: {}
+          f:currentCSV: {}
+          f:installPlanGeneration: {}
+          f:installPlanRef: {}
+          f:installedCSV: {}
+          f:installplan:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:uuid: {}
+          f:lastUpdated: {}
+          f:state: {}
+      manager: catalog
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:29:36Z'
+    name: kubernetes-nmstate-operator
+    namespace: openshift-nmstate
+    resourceVersion: '75984867'
+    uid: e27a070f-71c3-49c9-a6c1-c88babf1ac3d
+  spec:
+    channel: stable
+    installPlanApproval: Automatic
+    name: kubernetes-nmstate-operator
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    startingCSV: kubernetes-nmstate-operator.4.21.0-202603251225

@@ -1,0 +1,401 @@
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: '2'
+    creationTimestamp: '2026-05-05T19:52:23Z'
+    generation: 4
+    labels:
+      app: costmanagement-metrics-operator
+      control-plane: controller-manager
+      olm.deployment-spec-hash: 9KYe7AueBO8LBYf5cXF9OtDPxUjPdNH0EcDFe4
+      olm.managed: 'true'
+      olm.owner: costmanagement-metrics-operator.4.4.0
+      olm.owner.kind: ClusterServiceVersion
+      olm.owner.namespace: costmanagement-metrics-operator
+      operators.coreos.com/costmanagement-metrics-operator.costmanagement-metrics-operator: ''
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+            f:control-plane: {}
+            f:olm.deployment-spec-hash: {}
+            f:olm.managed: {}
+            f:olm.owner: {}
+            f:olm.owner.kind: {}
+            f:olm.owner.namespace: {}
+            f:operators.coreos.com/costmanagement-metrics-operator.costmanagement-metrics-operator: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"a30c59b4-4ee1-403f-8308-de79b91c7cc5"}: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:alm-examples: {}
+                f:capabilities: {}
+                f:categories: {}
+                f:certified: {}
+                f:containerImage: {}
+                f:createdAt: {}
+                f:description: {}
+                f:features.operators.openshift.io/cnf: {}
+                f:features.operators.openshift.io/cni: {}
+                f:features.operators.openshift.io/csi: {}
+                f:features.operators.openshift.io/disconnected: {}
+                f:features.operators.openshift.io/fips-compliant: {}
+                f:features.operators.openshift.io/proxy-aware: {}
+                f:features.operators.openshift.io/tls-profiles: {}
+                f:features.operators.openshift.io/token-auth-aws: {}
+                f:features.operators.openshift.io/token-auth-azure: {}
+                f:features.operators.openshift.io/token-auth-gcp: {}
+                f:olm.operatorGroup: {}
+                f:olm.operatorNamespace: {}
+                f:olm.targetNamespaces: {}
+                f:operatorframework.io/initialization-resource: {}
+                f:operatorframework.io/properties: {}
+                f:operatorframework.io/suggested-namespace: {}
+                f:operators.openshift.io/infrastructure-features: {}
+                f:operators.openshift.io/valid-subscription: {}
+                f:operators.operatorframework.io/builder: {}
+                f:operators.operatorframework.io/project_layout: {}
+                f:repository: {}
+                f:support: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:control-plane: {}
+            f:spec:
+              f:affinity:
+                .: {}
+                f:nodeAffinity:
+                  .: {}
+                  f:requiredDuringSchedulingIgnoredDuringExecution: {}
+              f:containers:
+                k:{"name":"manager"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"IN_CLUSTER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"LEADER_ELECTION_LEASE_DURATION"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"LEADER_ELECTION_RENEW_DEADLINE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"LEADER_ELECTION_RETRY_PERIOD"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"OPERATOR_CONDITION_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"WATCH_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/tmp/costmanagement-metrics-operator-reports"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:runAsNonRoot: {}
+                f:seccompProfile:
+                  .: {}
+                  f:type: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"costmanagement-metrics-operator-reports"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+      manager: olm
+      operation: Update
+      time: '2026-06-02T16:29:16Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-03T11:36:29Z'
+    name: costmanagement-metrics-operator
+    namespace: costmanagement-metrics-operator
+    ownerReferences:
+    - apiVersion: operators.coreos.com/v1alpha1
+      blockOwnerDeletion: false
+      controller: false
+      kind: ClusterServiceVersion
+      name: costmanagement-metrics-operator.4.4.0
+      uid: a30c59b4-4ee1-403f-8308-de79b91c7cc5
+    resourceVersion: '77178075'
+    uid: 71e49ae9-0fda-4b22-8b15-70fa5c8b51c0
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 1
+    selector:
+      matchLabels:
+        app: costmanagement-metrics-operator
+        control-plane: controller-manager
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        annotations:
+          alm-examples: "[\n  {\n    \"apiVersion\": \"costmanagement-metrics-cfg.openshift.io/v1beta1\",\n
+            \   \"kind\": \"CostManagementMetricsConfig\",\n    \"metadata\": {\n
+            \     \"name\": \"costmanagementmetricscfg-sample-v1beta1\"\n    },\n
+            \   \"spec\": {\n      \"authentication\": {\n        \"type\": \"token\"\n
+            \     },\n      \"packaging\": {\n        \"max_reports_to_store\": 30,\n
+            \       \"max_size_MB\": 100\n      },\n      \"prometheus_config\": {\n
+            \       \"collect_previous_data\": true,\n        \"context_timeout\":
+            120,\n        \"disable_metrics_collection_cost_management\": false,\n
+            \       \"disable_metrics_collection_resource_optimization\": false\n
+            \     },\n      \"source\": {\n        \"check_cycle\": 1440,\n        \"create_source\":
+            false,\n        \"name\": \"\"\n      },\n      \"upload\": {\n        \"upload_cycle\":
+            360,\n        \"upload_toggle\": true\n      }\n    }\n  }\n]"
+          capabilities: Seamless Upgrades
+          categories: Monitoring
+          certified: 'true'
+          containerImage: registry.redhat.io/costmanagement/costmanagement-metrics-rhel9-operator@sha256:ffd00b231de706b054325c24cb7a6e5b283c9f8cadfa76aebe120e553effb4d7
+          createdAt: '2026-04-10T17:16:48Z'
+          description: A Golang-based OpenShift Operator that generates and uploads
+            OpenShift usage metrics to cost management.
+          features.operators.openshift.io/cnf: 'false'
+          features.operators.openshift.io/cni: 'false'
+          features.operators.openshift.io/csi: 'false'
+          features.operators.openshift.io/disconnected: 'true'
+          features.operators.openshift.io/fips-compliant: 'true'
+          features.operators.openshift.io/proxy-aware: 'true'
+          features.operators.openshift.io/tls-profiles: 'false'
+          features.operators.openshift.io/token-auth-aws: 'false'
+          features.operators.openshift.io/token-auth-azure: 'false'
+          features.operators.openshift.io/token-auth-gcp: 'false'
+          olm.operatorGroup: costmanagement-metrics-operator-78d8q
+          olm.operatorNamespace: costmanagement-metrics-operator
+          olm.targetNamespaces: costmanagement-metrics-operator
+          operatorframework.io/initialization-resource: "{\n  \"apiVersion\": \"costmanagement-metrics-cfg.openshift.io/v1beta1\",\n
+            \ \"kind\": \"CostManagementMetricsConfig\",\n  \"metadata\": {\n    \"name\":
+            \"costmanagementmetricscfg-sample-v1beta1\"\n  },\n  \"spec\": {\n    \"authentication\":
+            {\n      \"token_url\": \"https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token\",\n
+            \     \"type\": \"token\"\n    },\n    \"api_url\": \"https://console.redhat.com/\",\n
+            \   \"packaging\": {\n      \"max_reports_to_store\": 30,\n      \"max_size_MB\":
+            100\n    },\n    \"upload\": {\n      \"ingress_path\": \"/api/ingress/v1/upload\",\n
+            \     \"upload_cycle\": 360,\n      \"upload_toggle\": true,\n      \"validate_cert\":
+            true\n    },\n    \"prometheus_config\": {\n      \"collect_previous_data\":
+            true,\n      \"context_timeout\": 120,\n      \"disable_metrics_collection_cost_management\":
+            false,\n      \"disable_metrics_collection_resource_optimization\": false,\n
+            \     \"service_address\": \"https://thanos-querier.openshift-monitoring.svc:9091\",\n
+            \     \"skip_tls_verification\": false\n    },\n    \"source\": {\n      \"check_cycle\":
+            1440,\n      \"create_source\": false,\n      \"name\": \"\",\n      \"sources_path\":
+            \"/api/sources/v1.0/\"\n    }\n  }\n}"
+          operatorframework.io/properties: '{"properties":[{"type":"olm.gvk","value":{"group":"costmanagement-metrics-cfg.openshift.io","kind":"CostManagementMetricsConfig","version":"v1beta1"}},{"type":"olm.package","value":{"packageName":"costmanagement-metrics-operator","version":"4.4.0"}}]}'
+          operatorframework.io/suggested-namespace: costmanagement-metrics-operator
+          operators.openshift.io/infrastructure-features: '["disconnected", "proxy-aware"]'
+          operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine",
+            "OpenShift Container Platform", "OpenShift Platform Plus"]'
+          operators.operatorframework.io/builder: operator-sdk-v1.41.1
+          operators.operatorframework.io/project_layout: go.kubebuilder.io/v4
+          repository: https://github.com/project-koku/koku-metrics-operator
+          support: Red Hat
+        labels:
+          app: costmanagement-metrics-operator
+          control-plane: controller-manager
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+                  - arm64
+                  - ppc64le
+                  - s390x
+                - key: kubernetes.io/os
+                  operator: In
+                  values:
+                  - linux
+        containers:
+        - args:
+          - --leader-elect
+          command:
+          - /usr/bin/costmanagement-metrics-operator
+          env:
+          - name: LEADER_ELECTION_LEASE_DURATION
+            value: 60s
+          - name: LEADER_ELECTION_RENEW_DEADLINE
+            value: 30s
+          - name: LEADER_ELECTION_RETRY_PERIOD
+            value: 5s
+          - name: IN_CLUSTER
+            value: 'true'
+          - name: WATCH_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.annotations['olm.targetNamespaces']
+          - name: OPERATOR_CONDITION_NAME
+            value: costmanagement-metrics-operator.4.4.0
+          image: registry.redhat.io/costmanagement/costmanagement-metrics-rhel9-operator@sha256:ffd00b231de706b054325c24cb7a6e5b283c9f8cadfa76aebe120e553effb4d7
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: manager
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 20Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: FallbackToLogsOnError
+          volumeMounts:
+          - mountPath: /tmp/costmanagement-metrics-operator-reports
+            name: costmanagement-metrics-operator-reports
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        serviceAccount: costmanagement-metrics-controller-manager
+        serviceAccountName: costmanagement-metrics-controller-manager
+        terminationGracePeriodSeconds: 10
+        volumes:
+        - name: costmanagement-metrics-operator-reports
+          persistentVolumeClaim:
+            claimName: costmanagement-metrics-operator-data

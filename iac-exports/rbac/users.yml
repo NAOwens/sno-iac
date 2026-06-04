@@ -1,0 +1,36 @@
+- apiVersion: user.openshift.io/v1
+  groups: null
+  identities:
+  - htpasswd-myusers:developer
+  kind: User
+  metadata:
+    creationTimestamp: '2026-04-07T18:16:17Z'
+    managedFields:
+    - apiVersion: user.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:identities: {}
+      manager: oauth-server
+      operation: Update
+      time: '2026-04-07T18:16:17Z'
+    name: developer
+    resourceVersion: '30120'
+    uid: ec871c61-b853-43ff-a0c0-8f99ad3070b8
+- apiVersion: user.openshift.io/v1
+  groups: null
+  identities:
+  - htpasswd-myusers:norm
+  kind: User
+  metadata:
+    creationTimestamp: '2026-04-07T18:14:47Z'
+    managedFields:
+    - apiVersion: user.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:identities: {}
+      manager: oauth-server
+      operation: Update
+      time: '2026-04-07T18:14:47Z'
+    name: norm
+    resourceVersion: '29939'
+    uid: 3517fbfc-0d2a-40d5-8fbd-95828faff599

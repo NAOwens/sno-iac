@@ -1,0 +1,224 @@
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"route.openshift.io/v1","kind":"Route","metadata":{"labels":{"app.kubernetes.io/managed-by":"aap-operator","app.kubernetes.io/name":"myaap","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap"},"name":"myaap","namespace":"aap"},"spec":{"port":{"targetPort":"http"},"tls":{"insecureEdgeTerminationPolicy":"Redirect","termination":"edge"},"to":{"kind":"Service","name":"myaap","weight":100},"wildcardPolicy":"None"}}'
+      openshift.io/host.generated: 'true'
+    creationTimestamp: '2026-04-09T22:15:34Z'
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: aap-operator
+      app.kubernetes.io/name: myaap
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap
+    managedFields:
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"3367e195-087f-45ce-9138-19071d896bd5"}: {}
+        f:spec:
+          f:port:
+            .: {}
+            f:targetPort: {}
+          f:tls:
+            .: {}
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+            f:weight: {}
+          f:wildcardPolicy: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:15:34Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:ingress: {}
+      manager: openshift-router
+      operation: Update
+      subresource: status
+      time: '2026-04-09T22:15:34Z'
+    name: myaap
+    namespace: aap
+    ownerReferences:
+    - apiVersion: aap.ansible.com/v1alpha1
+      kind: AnsibleAutomationPlatform
+      name: myaap
+      uid: 3367e195-087f-45ce-9138-19071d896bd5
+    resourceVersion: '1623588'
+    uid: 0cdba32c-59fa-4c46-99ca-155b3d61e314
+  spec:
+    host: myaap-aap.apps.sno.ofam.dev
+    port:
+      targetPort: http
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: edge
+    to:
+      kind: Service
+      name: myaap
+      weight: 100
+    wildcardPolicy: None
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"route.openshift.io/v1","kind":"Route","metadata":{"labels":{"app.kubernetes.io/component":"automationcontroller","app.kubernetes.io/managed-by":"automationcontroller-operator","app.kubernetes.io/operator-version":"","app.kubernetes.io/part-of":"myaap-controller"},"name":"myaap-controller","namespace":"aap"},"spec":{"port":{"targetPort":"http"},"tls":{"insecureEdgeTerminationPolicy":"Redirect","termination":"edge"},"to":{"kind":"Service","name":"myaap-controller-service","weight":100},"wildcardPolicy":"None"}}'
+      openshift.io/host.generated: 'true'
+    creationTimestamp: '2026-04-09T22:17:56Z'
+    generation: 1
+    labels:
+      app.kubernetes.io/component: automationcontroller
+      app.kubernetes.io/managed-by: automationcontroller-operator
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-controller
+    managedFields:
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/component: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"56e229e0-e41e-460a-8832-50d3860c1282"}: {}
+        f:spec:
+          f:port:
+            .: {}
+            f:targetPort: {}
+          f:tls:
+            .: {}
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+            f:weight: {}
+          f:wildcardPolicy: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:56Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:ingress: {}
+      manager: openshift-router
+      operation: Update
+      subresource: status
+      time: '2026-04-09T22:17:56Z'
+    name: myaap-controller
+    namespace: aap
+    ownerReferences:
+    - apiVersion: automationcontroller.ansible.com/v1beta1
+      kind: AutomationController
+      name: myaap-controller
+      uid: 56e229e0-e41e-460a-8832-50d3860c1282
+    resourceVersion: '1626207'
+    uid: bce4b96a-4ce7-4549-b3ca-ec8efb96e95e
+  spec:
+    host: myaap-controller-aap.apps.sno.ofam.dev
+    port:
+      targetPort: http
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: edge
+    to:
+      kind: Service
+      name: myaap-controller-service
+      weight: 100
+    wildcardPolicy: None
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      openshift.io/host.generated: 'true'
+    creationTimestamp: '2026-04-09T22:17:47Z'
+    generation: 1
+    labels:
+      app.kubernetes.io/managed-by: eda-operator
+      app.kubernetes.io/name: myaap-eda
+      app.kubernetes.io/operator-version: ''
+      app.kubernetes.io/part-of: myaap-eda
+    managedFields:
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/managed-by: {}
+            f:app.kubernetes.io/name: {}
+            f:app.kubernetes.io/operator-version: {}
+            f:app.kubernetes.io/part-of: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"aeca36ff-8992-44e8-9b35-ea05168812c0"}: {}
+        f:spec:
+          f:port:
+            .: {}
+            f:targetPort: {}
+          f:tls:
+            .: {}
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+            f:weight: {}
+          f:wildcardPolicy: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2026-04-09T22:17:47Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:ingress: {}
+      manager: openshift-router
+      operation: Update
+      subresource: status
+      time: '2026-04-09T22:17:47Z'
+    name: myaap-eda
+    namespace: aap
+    ownerReferences:
+    - apiVersion: eda.ansible.com/v1alpha1
+      kind: EDA
+      name: myaap-eda
+      uid: aeca36ff-8992-44e8-9b35-ea05168812c0
+    resourceVersion: '1625993'
+    uid: ef69f437-0989-4ff2-a12a-473ba7c8e2de
+  spec:
+    host: myaap-eda-aap.apps.sno.ofam.dev
+    port:
+      targetPort: '8000'
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: edge
+    to:
+      kind: Service
+      name: myaap-eda-api
+      weight: 100
+    wildcardPolicy: None

@@ -1,0 +1,105 @@
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      installer.open-cluster-management.io/release-version: 2.16.1
+    creationTimestamp: '2026-04-09T14:32:54Z'
+    generation: 1
+    labels:
+      app: console-chart-v2
+      app.kubernetes.io/instance: console
+      app.kubernetes.io/name: console-chart
+      chart: console-chart-2.16.1
+      component: console
+      installer.name: multiclusterhub
+      installer.namespace: open-cluster-management
+      release: console
+      subcomponent: acm-cli-downloads
+    managedFields:
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:installer.open-cluster-management.io/release-version: {}
+          f:labels:
+            f:app: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:chart: {}
+            f:component: {}
+            f:installer.name: {}
+            f:installer.namespace: {}
+            f:release: {}
+            f:subcomponent: {}
+        f:spec:
+          f:host: {}
+          f:port:
+            f:targetPort: {}
+          f:tls:
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+          f:wildcardPolicy: {}
+      manager: multiclusterhub-operator
+      operation: Apply
+      time: '2026-05-05T23:39:14Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:app.kubernetes.io/instance: {}
+            f:app.kubernetes.io/name: {}
+            f:component: {}
+            f:installer.name: {}
+            f:installer.namespace: {}
+            f:release: {}
+            f:subcomponent: {}
+        f:spec:
+          f:host: {}
+          f:port:
+            .: {}
+            f:targetPort: {}
+          f:tls:
+            .: {}
+            f:insecureEdgeTerminationPolicy: {}
+            f:termination: {}
+          f:to:
+            f:kind: {}
+            f:name: {}
+            f:weight: {}
+          f:wildcardPolicy: {}
+      manager: multiclusterhub-operator
+      operation: Update
+      time: '2026-04-09T14:32:54Z'
+    - apiVersion: route.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:ingress: {}
+      manager: openshift-router
+      operation: Update
+      subresource: status
+      time: '2026-04-09T14:32:54Z'
+    name: acm-cli-downloads
+    namespace: open-cluster-management
+    resourceVersion: '34483530'
+    uid: 9c124175-4d5b-41ec-9706-788c9f6f75e5
+  spec:
+    host: acm-cli-downloads.apps.sno.ofam.dev
+    port:
+      targetPort: https-8443
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: reencrypt
+    to:
+      kind: Service
+      name: acm-cli-downloads
+      weight: 100
+    wildcardPolicy: None

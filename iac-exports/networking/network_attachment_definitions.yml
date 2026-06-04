@@ -1,0 +1,60 @@
+- apiVersion: k8s.cni.cncf.io/v1
+  kind: NetworkAttachmentDefinition
+  metadata:
+    annotations:
+      k8s.ovn.org/network-id: '1'
+      k8s.ovn.org/network-name: baremetal-network
+      k8s.ovn.org/tunnel-keys: '[]'
+    creationTimestamp: '2026-04-08T03:27:37Z'
+    generation: 1
+    managedFields:
+    - apiVersion: k8s.cni.cncf.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:config: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-08T03:27:37Z'
+    - apiVersion: k8s.cni.cncf.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:k8s.ovn.org/network-id: {}
+            f:k8s.ovn.org/network-name: {}
+            f:k8s.ovn.org/tunnel-keys: {}
+      manager: '[clustermanager-nad-controller NAD controller]'
+      operation: Update
+      time: '2026-04-08T03:27:37Z'
+    name: baremetal-network
+    namespace: default
+    resourceVersion: '261226'
+    uid: a7f26428-edf9-4d10-b144-ed789bf0c4a6
+  spec:
+    config: "{\n  \"cniVersion\": \"0.3.1\",\n  \"name\": \"baremetal-network\",\n
+      \ \"type\": \"ovn-k8s-cni-overlay\",\n  \"topology\": \"localnet\",\n  \"netAttachDefName\":
+      \"default/baremetal-network\"\n}"
+- apiVersion: k8s.cni.cncf.io/v1
+  kind: NetworkAttachmentDefinition
+  metadata:
+    creationTimestamp: '2026-04-07T16:25:05Z'
+    generation: 1
+    managedFields:
+    - apiVersion: k8s.cni.cncf.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:config: {}
+      manager: geekom
+      operation: Update
+      time: '2026-04-07T16:25:05Z'
+    name: default
+    namespace: openshift-ovn-kubernetes
+    resourceVersion: '3729'
+    uid: 40226d71-3d84-4892-82b5-4ee01cbe8ea6
+  spec:
+    config: '{"cniVersion": "0.4.0", "name": "ovn-kubernetes", "type": "ovn-k8s-cni-overlay"}'

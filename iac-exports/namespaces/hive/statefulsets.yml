@@ -1,0 +1,604 @@
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    annotations:
+      hive.openshift.io/clustersync-statefulset-spec-hash: ba27c863bd8cc5745bd112c040cf8341
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{"hive.openshift.io/clustersync-statefulset-spec-hash":"ba27c863bd8cc5745bd112c040cf8341"},"labels":{"control-plane":"clustersync","controller-tools.k8s.io":"1.0"},"name":"hive-clustersync","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]},"spec":{"replicas":1,"selector":{"matchLabels":{"control-plane":"clustersync","controller-tools.k8s.io":"1.0"}},"serviceName":"","template":{"metadata":{"annotations":{"hive.openshift.io/hiveconfig-hash":"240cfc2dac1f0b7a6e2009c90557366f"},"labels":{"control-plane":"clustersync","controller-tools.k8s.io":"1.0"}},"spec":{"containers":[{"args":["--controllers","clustersync"],"command":["/opt/services/manager"],"env":[{"name":"HIVE_NS","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.namespace"}}},{"name":"HIVE_CLUSTERSYNC_POD_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.name"}}},{"name":"HIVE_SKIP_LEADER_ELECTION","value":"true"},{"name":"TMPDIR","value":"/tmp"},{"name":"HIVE_IMAGE","value":"registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885"},{"name":"HIVE_IMAGE_PULL_POLICY","value":"IfNotPresent"}],"envFrom":[{"configMapRef":{"name":"hive-controllers-config"}}],"image":"registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885","imagePullPolicy":"IfNotPresent","livenessProbe":{"failureThreshold":3,"httpGet":{"path":"/healthz","port":8080,"scheme":"HTTP"},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1},"name":"clustersync","readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/readyz","port":8080,"scheme":"HTTP"},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1},"resources":{"requests":{"cpu":"50m","memory":"512Mi"}},"securityContext":{"privileged":false,"readOnlyRootFilesystem":true},"volumeMounts":[{"mountPath":"/tmp","name":"tmp"}]}],"serviceAccount":"hive-controllers","serviceAccountName":"hive-controllers","tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/infra","operator":"Exists"},{"effect":"NoExecute","key":"node.kubernetes.io/not-ready","operator":"Exists","tolerationSeconds":300},{"effect":"NoExecute","key":"node.kubernetes.io/unreachable","operator":"Exists","tolerationSeconds":300},{"effect":"NoSchedule","key":"node.kubernetes.io/memory-pressure","operator":"Exists"}],"topologySpreadConstraints":[{"labelSelector":{"matchLabels":{"control-plane":"clustersync","controller-tools.k8s.io":"1.0"}},"maxSkew":1,"topologyKey":"kubernetes.io/hostname","whenUnsatisfiable":"DoNotSchedule"}],"volumes":[{"emptyDir":{},"name":"tmp"}]}},"updateStrategy":{}},"status":{"availableReplicas":0,"replicas":0}}
+
+        '
+    creationTimestamp: '2026-05-05T23:42:05Z'
+    generation: 1
+    labels:
+      control-plane: clustersync
+      controller-tools.k8s.io: '1.0'
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:hive.openshift.io/clustersync-statefulset-spec-hash: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:control-plane: {}
+            f:controller-tools.k8s.io: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+        f:spec:
+          f:persistentVolumeClaimRetentionPolicy:
+            .: {}
+            f:whenDeleted: {}
+            f:whenScaled: {}
+          f:podManagementPolicy: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:hive.openshift.io/hiveconfig-hash: {}
+              f:labels:
+                .: {}
+                f:control-plane: {}
+                f:controller-tools.k8s.io: {}
+            f:spec:
+              f:containers:
+                k:{"name":"clustersync"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"HIVE_CLUSTERSYNC_POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"HIVE_IMAGE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HIVE_IMAGE_PULL_POLICY"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HIVE_NS"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"HIVE_SKIP_LEADER_ELECTION"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"TMPDIR"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:topologySpreadConstraints:
+                .: {}
+                k:{"topologyKey":"kubernetes.io/hostname","whenUnsatisfiable":"DoNotSchedule"}:
+                  .: {}
+                  f:labelSelector: {}
+                  f:maxSkew: {}
+                  f:topologyKey: {}
+                  f:whenUnsatisfiable: {}
+              f:volumes:
+                .: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+          f:updateStrategy:
+            f:rollingUpdate:
+              .: {}
+              f:partition: {}
+            f:type: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-05-05T23:42:05Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:availableReplicas: {}
+          f:collisionCount: {}
+          f:currentReplicas: {}
+          f:currentRevision: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updateRevision: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:39Z'
+    name: hive-clustersync
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '75981857'
+    uid: 75013a31-065e-4320-ad68-6ba9914384a4
+  spec:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    podManagementPolicy: OrderedReady
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        control-plane: clustersync
+        controller-tools.k8s.io: '1.0'
+    serviceName: ''
+    template:
+      metadata:
+        annotations:
+          hive.openshift.io/hiveconfig-hash: 240cfc2dac1f0b7a6e2009c90557366f
+        labels:
+          control-plane: clustersync
+          controller-tools.k8s.io: '1.0'
+      spec:
+        containers:
+        - args:
+          - --controllers
+          - clustersync
+          command:
+          - /opt/services/manager
+          env:
+          - name: HIVE_NS
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: HIVE_CLUSTERSYNC_POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: HIVE_SKIP_LEADER_ELECTION
+            value: 'true'
+          - name: TMPDIR
+            value: /tmp
+          - name: HIVE_IMAGE
+            value: registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885
+          - name: HIVE_IMAGE_PULL_POLICY
+            value: IfNotPresent
+          envFrom:
+          - configMapRef:
+              name: hive-controllers-config
+          image: registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: clustersync
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            requests:
+              cpu: 50m
+              memory: 512Mi
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: hive-controllers
+        serviceAccountName: hive-controllers
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        - effect: NoExecute
+          key: node.kubernetes.io/not-ready
+          operator: Exists
+          tolerationSeconds: 300
+        - effect: NoExecute
+          key: node.kubernetes.io/unreachable
+          operator: Exists
+          tolerationSeconds: 300
+        - effect: NoSchedule
+          key: node.kubernetes.io/memory-pressure
+          operator: Exists
+        topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              control-plane: clustersync
+              controller-tools.k8s.io: '1.0'
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+        volumes:
+        - emptyDir: {}
+          name: tmp
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    annotations:
+      hive.openshift.io/machinepool-statefulset-spec-hash: 08a6b1595106d529bca33c650f40a2a5
+      kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{"hive.openshift.io/machinepool-statefulset-spec-hash":"08a6b1595106d529bca33c650f40a2a5"},"labels":{"control-plane":"machinepool","controller-tools.k8s.io":"1.0"},"name":"hive-machinepool","namespace":"hive","ownerReferences":[{"apiVersion":"hive.openshift.io/v1","blockOwnerDeletion":true,"kind":"HiveConfig","name":"hive","uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}]},"spec":{"replicas":1,"selector":{"matchLabels":{"control-plane":"machinepool","controller-tools.k8s.io":"1.0"}},"serviceName":"","template":{"metadata":{"annotations":{"hive.openshift.io/hiveconfig-hash":"240cfc2dac1f0b7a6e2009c90557366f"},"labels":{"control-plane":"machinepool","controller-tools.k8s.io":"1.0"}},"spec":{"containers":[{"args":["--controllers","machinepool"],"command":["/opt/services/manager"],"env":[{"name":"HIVE_NS","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.namespace"}}},{"name":"HIVE_MACHINEPOOL_POD_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.name"}}},{"name":"HIVE_SKIP_LEADER_ELECTION","value":"true"},{"name":"TMPDIR","value":"/tmp"},{"name":"HIVE_IMAGE","value":"registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885"},{"name":"HIVE_IMAGE_PULL_POLICY","value":"IfNotPresent"}],"envFrom":[{"configMapRef":{"name":"hive-controllers-config"}}],"image":"registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885","imagePullPolicy":"IfNotPresent","livenessProbe":{"failureThreshold":3,"httpGet":{"path":"/healthz","port":8080,"scheme":"HTTP"},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1},"name":"machinepool","readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/readyz","port":8080,"scheme":"HTTP"},"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1},"resources":{"requests":{"cpu":"50m","memory":"512Mi"}},"securityContext":{"privileged":false,"readOnlyRootFilesystem":true},"volumeMounts":[{"mountPath":"/tmp","name":"tmp"}]}],"serviceAccount":"hive-controllers","serviceAccountName":"hive-controllers","tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/infra","operator":"Exists"},{"effect":"NoExecute","key":"node.kubernetes.io/not-ready","operator":"Exists","tolerationSeconds":300},{"effect":"NoExecute","key":"node.kubernetes.io/unreachable","operator":"Exists","tolerationSeconds":300},{"effect":"NoSchedule","key":"node.kubernetes.io/memory-pressure","operator":"Exists"}],"topologySpreadConstraints":[{"labelSelector":{"matchLabels":{"control-plane":"machinepool","controller-tools.k8s.io":"1.0"}},"maxSkew":1,"topologyKey":"kubernetes.io/hostname","whenUnsatisfiable":"DoNotSchedule"}],"volumes":[{"emptyDir":{},"name":"tmp"}]}},"updateStrategy":{}},"status":{"availableReplicas":0,"replicas":0}}
+
+        '
+    creationTimestamp: '2026-05-05T23:42:07Z'
+    generation: 1
+    labels:
+      control-plane: machinepool
+      controller-tools.k8s.io: '1.0'
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:hive.openshift.io/machinepool-statefulset-spec-hash: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:control-plane: {}
+            f:controller-tools.k8s.io: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"42b0b7eb-f111-4560-bd3f-58707b34ff0d"}: {}
+        f:spec:
+          f:persistentVolumeClaimRetentionPolicy:
+            .: {}
+            f:whenDeleted: {}
+            f:whenScaled: {}
+          f:podManagementPolicy: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:hive.openshift.io/hiveconfig-hash: {}
+              f:labels:
+                .: {}
+                f:control-plane: {}
+                f:controller-tools.k8s.io: {}
+            f:spec:
+              f:containers:
+                k:{"name":"machinepool"}:
+                  .: {}
+                  f:args: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"HIVE_IMAGE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HIVE_IMAGE_PULL_POLICY"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HIVE_MACHINEPOOL_POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"HIVE_NS"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef: {}
+                    k:{"name":"HIVE_SKIP_LEADER_ELECTION"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"TMPDIR"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                  f:envFrom: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:livenessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:name: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:privileged: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/tmp"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:topologySpreadConstraints:
+                .: {}
+                k:{"topologyKey":"kubernetes.io/hostname","whenUnsatisfiable":"DoNotSchedule"}:
+                  .: {}
+                  f:labelSelector: {}
+                  f:maxSkew: {}
+                  f:topologyKey: {}
+                  f:whenUnsatisfiable: {}
+              f:volumes:
+                .: {}
+                k:{"name":"tmp"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+          f:updateStrategy:
+            f:rollingUpdate:
+              .: {}
+              f:partition: {}
+            f:type: {}
+      manager: hive6-operator
+      operation: Update
+      time: '2026-05-05T23:42:07Z'
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:availableReplicas: {}
+          f:collisionCount: {}
+          f:currentReplicas: {}
+          f:currentRevision: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updateRevision: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:28:24Z'
+    name: hive-machinepool
+    namespace: hive
+    ownerReferences:
+    - apiVersion: hive.openshift.io/v1
+      blockOwnerDeletion: true
+      kind: HiveConfig
+      name: hive
+      uid: 42b0b7eb-f111-4560-bd3f-58707b34ff0d
+    resourceVersion: '75980825'
+    uid: 0863e444-692d-4c08-b752-572b263854eb
+  spec:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    podManagementPolicy: OrderedReady
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        control-plane: machinepool
+        controller-tools.k8s.io: '1.0'
+    serviceName: ''
+    template:
+      metadata:
+        annotations:
+          hive.openshift.io/hiveconfig-hash: 240cfc2dac1f0b7a6e2009c90557366f
+        labels:
+          control-plane: machinepool
+          controller-tools.k8s.io: '1.0'
+      spec:
+        containers:
+        - args:
+          - --controllers
+          - machinepool
+          command:
+          - /opt/services/manager
+          env:
+          - name: HIVE_NS
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: HIVE_MACHINEPOOL_POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: HIVE_SKIP_LEADER_ELECTION
+            value: 'true'
+          - name: TMPDIR
+            value: /tmp
+          - name: HIVE_IMAGE
+            value: registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885
+          - name: HIVE_IMAGE_PULL_POLICY
+            value: IfNotPresent
+          envFrom:
+          - configMapRef:
+              name: hive-controllers-config
+          image: registry.redhat.io/multicluster-engine/hive-rhel9@sha256:cbb389a0b34ef8c40d7be08f1b3b3e516ff59264da2e78a54f4386592c394885
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: machinepool
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            requests:
+              cpu: 50m
+              memory: 512Mi
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: hive-controllers
+        serviceAccountName: hive-controllers
+        terminationGracePeriodSeconds: 30
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          operator: Exists
+        - effect: NoExecute
+          key: node.kubernetes.io/not-ready
+          operator: Exists
+          tolerationSeconds: 300
+        - effect: NoExecute
+          key: node.kubernetes.io/unreachable
+          operator: Exists
+          tolerationSeconds: 300
+        - effect: NoSchedule
+          key: node.kubernetes.io/memory-pressure
+          operator: Exists
+        topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              control-plane: machinepool
+              controller-tools.k8s.io: '1.0'
+          maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+        volumes:
+        - emptyDir: {}
+          name: tmp
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate

@@ -1,0 +1,173 @@
+- apiVersion: cdi.kubevirt.io/v1beta1
+  kind: DataVolume
+  metadata:
+    annotations:
+      cdi.kubevirt.io/storage.usePopulator: 'true'
+    creationTimestamp: '2026-04-10T18:42:31Z'
+    generation: 1
+    managedFields:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"dba2a93b-5daa-4e0c-8ca0-dc00a15b7b5a"}: {}
+        f:spec:
+          .: {}
+          f:source:
+            .: {}
+            f:blank: {}
+          f:storage:
+            .: {}
+            f:accessModes: {}
+            f:resources:
+              .: {}
+              f:requests:
+                .: {}
+                f:storage: {}
+            f:storageClassName: {}
+            f:volumeMode: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-10T18:42:31Z'
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:cdi.kubevirt.io/storage.usePopulator: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-10T18:42:31Z'
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:claimName: {}
+          f:conditions: {}
+          f:phase: {}
+          f:progress: {}
+      manager: virt-cdi-controller
+      operation: Update
+      subresource: status
+      time: '2026-04-10T18:42:35Z'
+    name: dv-rhel-8-ocpv-disk-for-nfsocprwx-86-czatib
+    namespace: default
+    ownerReferences:
+    - apiVersion: kubevirt.io/v1
+      blockOwnerDeletion: false
+      kind: VirtualMachine
+      name: rhel-8-ocpv
+      uid: dba2a93b-5daa-4e0c-8ca0-dc00a15b7b5a
+    resourceVersion: '2840881'
+    uid: 174bfac3-5875-44c1-a6d5-f87f77f91199
+  spec:
+    source:
+      blank: {}
+    storage:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 30Gi
+      storageClassName: lvms-vg1-immediate
+      volumeMode: Block
+- apiVersion: cdi.kubevirt.io/v1beta1
+  kind: DataVolume
+  metadata:
+    annotations:
+      cdi.kubevirt.io/allowClaimAdoption: 'true'
+      cdi.kubevirt.io/cloneType: copy
+      cdi.kubevirt.io/storage.clone.token: eyJhbGciOiJQUzI1NiJ9.eyJleHAiOjE3NzU1OTQ2NTEsImlhdCI6MTc3NTU5NDM1MSwiaXNzIjoiY2RpLWFwaXNlcnZlciIsIm5hbWUiOiJyaGVsOC0wMDRlMjRjZmFjZWMiLCJuYW1lc3BhY2UiOiJvcGVuc2hpZnQtdmlydHVhbGl6YXRpb24tb3MtaW1hZ2VzIiwibmJmIjoxNzc1NTk0MzUxLCJvcGVyYXRpb24iOiJDbG9uZSIsInBhcmFtcyI6eyJ0YXJnZXROYW1lIjoicmhlbC04LW9jcHYtdm9sdW1lIiwidGFyZ2V0TmFtZXNwYWNlIjoiZGVmYXVsdCJ9LCJyZXNvdXJjZSI6eyJncm91cCI6IiIsInJlc291cmNlIjoicGVyc2lzdGVudHZvbHVtZWNsYWltcyIsInZlcnNpb24iOiJ2MSJ9fQ.OLn6nwKLYMlN5kqTUIXJSEU7lnLQLfoANJFQ21mq7wXaLKbIeyTKXWgTcFfMCevGxdmh4UEQnO00YXQNWXpV4qQO8J8rJxwSF3dv37xMhZABqd6G3SeiY5F6R5eO8N0vYXjH79R95ImIGulEOzJ0t0kzqDj0Vw_GxWO9AfpD41aasaXIyh4vtJ0OSZ41u2m5f0Q4VZpBBEBAburFuHNHQnJohVuWLGXZwhb6uYMwWd39khFrf7VQiMJgv4cRw0CoWwO2ovWe86ckYEbqUkji4AWgPQmRXx4OHTehpFw3c07n-jzAwmpVlq3PqBGVvaaOC65EDn4u2duDQ4OABDxEiw
+      cdi.kubevirt.io/storage.extended.clone.token: eyJhbGciOiJQUzI1NiJ9.eyJleHAiOjIwOTA5NTQzNTEsImlhdCI6MTc3NTU5NDM1MSwiaXNzIjoiY2RpLWRlcGxveW1lbnQiLCJuYW1lIjoicmhlbDgtMDA0ZTI0Y2ZhY2VjIiwibmFtZXNwYWNlIjoib3BlbnNoaWZ0LXZpcnR1YWxpemF0aW9uLW9zLWltYWdlcyIsIm5iZiI6MTc3NTU5NDM1MSwib3BlcmF0aW9uIjoiQ2xvbmUiLCJwYXJhbXMiOnsidGFyZ2V0TmFtZSI6InJoZWwtOC1vY3B2LXZvbHVtZSIsInRhcmdldE5hbWVzcGFjZSI6ImRlZmF1bHQiLCJ1aWQiOiI3NWFmZGIwOS0xMWI2LTRkZjQtYTk2NC1lMjc0ZTQzOWU4ZDAifSwicmVzb3VyY2UiOnsiZ3JvdXAiOiIiLCJyZXNvdXJjZSI6InBlcnNpc3RlbnR2b2x1bWVjbGFpbXMiLCJ2ZXJzaW9uIjoidjEifX0.TwnNFNq5n7zMoZa7xJ6ZvksWCREPRcB0b_HbkFe2UudmOOa_rPFVCp1vQhp_GStxMW91ROw0eZtcu4kFweGJVK5PfIeewP4dLJWD7v05Cb1lPc49dQ-7M9vF8t2VFeiyeOPI3cTwXQTj-krABMlEOdzyB5dvwt6xS2i9QTlqiIKUFRVeHFu8oXWQTkpOBjSQXIhlSXTGMusyy-_Mh_w2pVHhnccqphJsYwiYsJ_chY7OZ47i7nkOPoiAxWqwqjk8OF2nFYU-l__q-eos0nysIUDMEwE_CgJdnhV9NftxVDe16SKRhOdb23aLe6-4clsj-Ns_8x6kXvX8k2eexnBzPg
+      cdi.kubevirt.io/storage.usePopulator: 'true'
+    creationTimestamp: '2026-04-07T20:39:11Z'
+    generation: 1
+    labels:
+      instancetype.kubevirt.io/default-instancetype: u1.medium
+      instancetype.kubevirt.io/default-preference: rhel.8
+      kubevirt.io/created-by: dba2a93b-5daa-4e0c-8ca0-dc00a15b7b5a
+    managedFields:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:cdi.kubevirt.io/cloneType: {}
+            f:cdi.kubevirt.io/storage.extended.clone.token: {}
+            f:cdi.kubevirt.io/storage.usePopulator: {}
+          f:labels:
+            f:instancetype.kubevirt.io/default-instancetype: {}
+            f:instancetype.kubevirt.io/default-preference: {}
+      manager: virt-cdi-controller
+      operation: Update
+      time: '2026-04-07T20:39:11Z'
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:cdi.kubevirt.io/allowClaimAdoption: {}
+          f:labels:
+            .: {}
+            f:kubevirt.io/created-by: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"dba2a93b-5daa-4e0c-8ca0-dc00a15b7b5a"}: {}
+        f:spec:
+          .: {}
+          f:source:
+            .: {}
+            f:pvc:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+          f:storage:
+            .: {}
+            f:resources:
+              .: {}
+              f:requests:
+                .: {}
+                f:storage: {}
+            f:storageClassName: {}
+      manager: virt-controller
+      operation: Update
+      time: '2026-04-07T20:39:11Z'
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:claimName: {}
+          f:conditions: {}
+          f:phase: {}
+          f:progress: {}
+      manager: virt-cdi-controller
+      operation: Update
+      subresource: status
+      time: '2026-04-07T20:40:14Z'
+    name: rhel-8-ocpv-volume
+    namespace: default
+    ownerReferences:
+    - apiVersion: kubevirt.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: VirtualMachine
+      name: rhel-8-ocpv
+      uid: dba2a93b-5daa-4e0c-8ca0-dc00a15b7b5a
+    resourceVersion: '73656'
+    uid: 75afdb09-11b6-4df4-a964-e274e439e8d0
+  spec:
+    source:
+      pvc:
+        name: rhel8-004e24cfacec
+        namespace: openshift-virtualization-os-images
+    storage:
+      resources:
+        requests:
+          storage: 30Gi
+      storageClassName: lvms-vg1-immediate

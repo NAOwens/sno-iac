@@ -1,0 +1,140 @@
+- apiVersion: v1
+  data:
+    hypershift-operator-imagestream: "kind: ImageStream\napiVersion: image.openshift.io/v1\nmetadata:\n
+      \ name: hypershift-operator-imagestream\nspec:\n  lookupPolicy:\n    local:
+      false\n  tags:\n  - name: cluster-api-provider-agent\n    annotations:\n      io.openshift.build.commit.id:
+      dd6353f609dc9e7bfd0312ce4b2c8d3dac5d749e\n      io.openshift.build.source-location:
+      https://github.com/openshift/cluster-api-provider-agent\n    from:\n      kind:
+      DockerImage\n      name: registry.redhat.io/multicluster-engine/cluster-api-provider-agent-rhel9@sha256:2ddf6a7796ff51604ebab1ed5426ebcaa640657fd0ffadfd6931fb0b852adbe4\n
+      \ - name: cluster-api-provider-kubevirt\n    annotations:\n      io.openshift.build.commit.id:
+      'dbdc825088513dc962ba2103efe2c1a4eb3cf524'\n      io.openshift.build.source-location:
+      https://github.com/openshift/cluster-api-provider-kubevirt\n    from:\n      kind:
+      DockerImage\n      name: registry.redhat.io/multicluster-engine/cluster-api-provider-kubevirt-rhel9@sha256:fd64f8c7c4ab7c2041a87771dbae640a380f9e70cc11be6a98ddcdfc74270a66\n
+      \ - name: hypershift-operator\n    annotations:\n      io.openshift.build.commit.id:
+      ''\n      io.openshift.build.source-location: https://github.com/openshift/hypershift\n
+      \   from:\n      kind: DockerImage\n      name: registry.redhat.io/multicluster-engine/hypershift-rhel9-operator@sha256:c3cc4224bb83b09cc7283e30587501d729c13f827e0f4ca19a0a8f3d60d6068e\n"
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: '2026-04-09T14:32:27Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:hypershift-operator-imagestream: {}
+      manager: hypershift-addon
+      operation: Update
+      time: '2026-05-05T23:39:16Z'
+    name: hypershift-install-job-imagestream
+    namespace: open-cluster-management-agent-addon
+    resourceVersion: '34483717'
+    uid: a3779016-44f9-41ac-b840-7e42c09637b9
+- apiVersion: v1
+  data:
+    imagestream: a2luZDogSW1hZ2VTdHJlYW0KYXBpVmVyc2lvbjogaW1hZ2Uub3BlbnNoaWZ0LmlvL3YxCm1ldGFkYXRhOgogIG5hbWU6IGh5cGVyc2hpZnQtb3BlcmF0b3ItaW1hZ2VzdHJlYW0Kc3BlYzoKICBsb29rdXBQb2xpY3k6CiAgICBsb2NhbDogZmFsc2UKICB0YWdzOgogIC0gbmFtZTogY2x1c3Rlci1hcGktcHJvdmlkZXItYWdlbnQKICAgIGFubm90YXRpb25zOgogICAgICBpby5vcGVuc2hpZnQuYnVpbGQuY29tbWl0LmlkOiBkZDYzNTNmNjA5ZGM5ZTdiZmQwMzEyY2U0YjJjOGQzZGFjNWQ3NDllCiAgICAgIGlvLm9wZW5zaGlmdC5idWlsZC5zb3VyY2UtbG9jYXRpb246IGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuc2hpZnQvY2x1c3Rlci1hcGktcHJvdmlkZXItYWdlbnQKICAgIGZyb206CiAgICAgIGtpbmQ6IERvY2tlckltYWdlCiAgICAgIG5hbWU6IHJlZ2lzdHJ5LnJlZGhhdC5pby9tdWx0aWNsdXN0ZXItZW5naW5lL2NsdXN0ZXItYXBpLXByb3ZpZGVyLWFnZW50LXJoZWw5QHNoYTI1NjoyZGRmNmE3Nzk2ZmY1MTYwNGViYWIxZWQ1NDI2ZWJjYWE2NDA2NTdmZDBmZmFkZmQ2OTMxZmIwYjg1MmFkYmU0CiAgLSBuYW1lOiBjbHVzdGVyLWFwaS1wcm92aWRlci1rdWJldmlydAogICAgYW5ub3RhdGlvbnM6CiAgICAgIGlvLm9wZW5zaGlmdC5idWlsZC5jb21taXQuaWQ6ICdkYmRjODI1MDg4NTEzZGM5NjJiYTIxMDNlZmUyYzFhNGViM2NmNTI0JwogICAgICBpby5vcGVuc2hpZnQuYnVpbGQuc291cmNlLWxvY2F0aW9uOiBodHRwczovL2dpdGh1Yi5jb20vb3BlbnNoaWZ0L2NsdXN0ZXItYXBpLXByb3ZpZGVyLWt1YmV2aXJ0CiAgICBmcm9tOgogICAgICBraW5kOiBEb2NrZXJJbWFnZQogICAgICBuYW1lOiByZWdpc3RyeS5yZWRoYXQuaW8vbXVsdGljbHVzdGVyLWVuZ2luZS9jbHVzdGVyLWFwaS1wcm92aWRlci1rdWJldmlydC1yaGVsOUBzaGEyNTY6ZmQ2NGY4YzdjNGFiN2MyMDQxYTg3NzcxZGJhZTY0MGEzODBmOWU3MGNjMTFiZTZhOThkZGNkZmM3NDI3MGE2NgogIC0gbmFtZTogaHlwZXJzaGlmdC1vcGVyYXRvcgogICAgYW5ub3RhdGlvbnM6CiAgICAgIGlvLm9wZW5zaGlmdC5idWlsZC5jb21taXQuaWQ6ICcnCiAgICAgIGlvLm9wZW5zaGlmdC5idWlsZC5zb3VyY2UtbG9jYXRpb246IGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuc2hpZnQvaHlwZXJzaGlmdAogICAgZnJvbToKICAgICAga2luZDogRG9ja2VySW1hZ2UKICAgICAgbmFtZTogcmVnaXN0cnkucmVkaGF0LmlvL211bHRpY2x1c3Rlci1lbmdpbmUvaHlwZXJzaGlmdC1yaGVsOS1vcGVyYXRvckBzaGEyNTY6YzNjYzQyMjRiYjgzYjA5Y2M3MjgzZTMwNTg3NTAxZDcyOWMxM2Y4MjdlMGY0Y2ExOWEwYThmM2Q2MGQ2MDY4ZQo=
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: '2026-04-09T14:32:12Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:imagestream: {}
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"13344933-9b98-4032-820a-69e93efe4a29"}: {}
+      manager: work-agent
+      operation: Update
+      time: '2026-05-05T23:38:52Z'
+    name: hypershift-operator-imagestream
+    namespace: open-cluster-management-agent-addon
+    ownerReferences:
+    - apiVersion: work.open-cluster-management.io/v1
+      kind: AppliedManifestWork
+      name: 0dae03d5867a066358318689195a2ee96803079bf46e37f4fd3def4a47173d85-addon-hypershift-addon-deploy-0
+      uid: 13344933-9b98-4032-820a-69e93efe4a29
+    resourceVersion: '34482378'
+    uid: 25e20169-e102-4fbd-b440-8e6376280a8c
+- apiVersion: v1
+  data:
+    service-ca.crt: '-----BEGIN CERTIFICATE-----
+
+      MIIDUTCCAjmgAwIBAgIIZLb+b16N8dcwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE
+
+      Awwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTc3NTU3OTE4OTAe
+
+      Fw0yNjA0MDcxNjI2MjhaFw0yODA2MDUxNjI2MjlaMDYxNDAyBgNVBAMMK29wZW5z
+
+      aGlmdC1zZXJ2aWNlLXNlcnZpbmctc2lnbmVyQDE3NzU1NzkxODkwggEiMA0GCSqG
+
+      SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCtNJITP7DdjSItKLC4aLYxLvDLz9Mgz3jP
+
+      ZRFgD5deZFuwzqcxf/HciBA2OVR2yfq5zbBEFkgO4itXi7LSjzGsZf8xAQykeyNx
+
+      7ItLo4U6XQnTCORa11q2JUhnPgqkxntvdW/iA+e6bPO3oHYyXH9Nw9O3WEYY15kh
+
+      fvHWI2mQkSdB2R8epk9iZqJrhANj7bXgT6afaRcu4sYvQzI7gaEyFygL8BGqVT66
+
+      Ff5/c9lVgMqudqdozSkwHo0sehLgxg6nmwIACx++nVdlvMt6Q6rhfcK107jWEEPw
+
+      YQYG5M60fyhT5JGQk/EAUYNKEpmT2K28NYEJ10nk+bVlhnvKYMJfAgMBAAGjYzBh
+
+      MA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTvs38Q
+
+      1CAgwZLNTZe8G5xPiqwvZzAfBgNVHSMEGDAWgBTvs38Q1CAgwZLNTZe8G5xPiqwv
+
+      ZzANBgkqhkiG9w0BAQsFAAOCAQEApc9bvXYJQIwIY55kttRrW8i0G6fKb81TNeKl
+
+      XmQLs/SyCZ+Bgxo3yQ55ciOIiOl7m9pgFHYaDv+xJGszwI+cNES3R0W64UNFkMhn
+
+      /jIeuQlZJPcYcoY0t4pXEHO9BpwddZqxaHGK1Vy789VCLP6OGdGcInRTomCvJuNP
+
+      FiIgr/TWSvqvD6m8klpo9L117djCIm3XO/p2sGK8tir5DOLwvCEu/qAPIxaYq50M
+
+      x/niiAEedLRHUEflnV8XPJR6dI+pNbLv+hhiDf0X7Y0wH7xmEa3gN91N54emBN8j
+
+      0+/Ly6Qe/XnA+3g1pSwsv9r0NEPsU2/hlSSqciPX5DYvALn4/w==
+
+      -----END CERTIFICATE-----
+
+      '
+  kind: ConfigMap
+  metadata:
+    annotations:
+      openshift.io/description: Configmap is added/updated with a data item containing
+        the CA signing bundle that can be used to verify service-serving certificates
+      openshift.io/owning-component: service-ca
+      service.alpha.openshift.io/inject-cabundle: 'true'
+    creationTimestamp: '2026-04-09T14:31:20Z'
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:service.alpha.openshift.io/inject-cabundle: {}
+      manager: agent
+      operation: Update
+      time: '2026-04-09T14:31:20Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          f:service-ca.crt: {}
+        f:metadata:
+          f:annotations:
+            f:openshift.io/description: {}
+            f:openshift.io/owning-component: {}
+      manager: service-ca-operator
+      operation: Update
+      time: '2026-04-09T14:31:20Z'
+    name: ocm-controller-metrics-ca
+    namespace: open-cluster-management-agent-addon
+    resourceVersion: '1239821'
+    uid: f1d4e3d9-b2af-4bba-a905-9a12fa061bfa

@@ -1,0 +1,199 @@
+- apiVersion: kubevirt.io/v1
+  kind: VirtualMachine
+  metadata:
+    annotations:
+      kubemacpool.io/transaction-timestamp: '2026-04-14T11:11:40.921562814Z'
+      kubevirt.io/latest-observed-api-version: v1
+      kubevirt.io/storage-observed-api-version: v1
+    creationTimestamp: '2026-04-07T20:39:10Z'
+    finalizers:
+    - kubevirt.io/virtualMachineControllerFinalize
+    generation: 16
+    labels:
+      vm.openshift.io/folder: ''
+    managedFields:
+    - apiVersion: kubevirt.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:vm.openshift.io/folder: {}
+        f:spec:
+          .: {}
+          f:dataVolumeTemplates: {}
+          f:instancetype:
+            .: {}
+            f:name: {}
+          f:preference:
+            .: {}
+            f:name: {}
+          f:template:
+            .: {}
+            f:metadata:
+              .: {}
+              f:labels:
+                .: {}
+                f:network.kubevirt.io/headlessService: {}
+            f:spec:
+              .: {}
+              f:accessCredentials: {}
+              f:domain:
+                .: {}
+                f:devices:
+                  .: {}
+                  f:autoattachPodInterface: {}
+                  f:interfaces: {}
+              f:hostname: {}
+              f:networks: {}
+              f:subdomain: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-08T20:57:00Z'
+    - apiVersion: kubevirt.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:runStrategy: {}
+      manager: virt-api
+      operation: Update
+      time: '2026-04-11T18:27:52Z'
+    - apiVersion: kubevirt.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:kubevirt.io/latest-observed-api-version: {}
+            f:kubevirt.io/storage-observed-api-version: {}
+          f:finalizers:
+            .: {}
+            v:"kubevirt.io/virtualMachineControllerFinalize": {}
+        f:spec:
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:kubevirt.io/pci-interface-slot-count: {}
+                f:kubevirt.io/pci-topology-version: {}
+            f:spec:
+              f:domain:
+                f:devices:
+                  f:disks: {}
+              f:volumes: {}
+      manager: virt-controller
+      operation: Update
+      time: '2026-04-14T11:11:40Z'
+    - apiVersion: kubevirt.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:created: {}
+          f:desiredGeneration: {}
+          f:instancetypeRef:
+            .: {}
+            f:controllerRevisionRef:
+              .: {}
+              f:name: {}
+            f:name: {}
+          f:observedGeneration: {}
+          f:preferenceRef:
+            .: {}
+            f:controllerRevisionRef:
+              .: {}
+              f:name: {}
+            f:name: {}
+          f:printableStatus: {}
+          f:ready: {}
+          f:runStrategy: {}
+          f:volumeSnapshotStatuses: {}
+      manager: virt-controller
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:30:43Z'
+    name: rhel-8-ocpv
+    namespace: default
+    resourceVersion: '75986266'
+    uid: dba2a93b-5daa-4e0c-8ca0-dc00a15b7b5a
+  spec:
+    dataVolumeTemplates:
+    - metadata:
+        creationTimestamp: null
+        name: rhel-8-ocpv-volume
+      spec:
+        sourceRef:
+          kind: DataSource
+          name: rhel8
+          namespace: openshift-virtualization-os-images
+        storage:
+          resources:
+            requests:
+              storage: 30Gi
+          storageClassName: lvms-vg1-immediate
+    instancetype:
+      name: u1.medium
+    preference:
+      name: rhel.8
+    runStrategy: Always
+    template:
+      metadata:
+        annotations:
+          kubevirt.io/pci-interface-slot-count: '9'
+          kubevirt.io/pci-topology-version: v2
+        creationTimestamp: null
+        labels:
+          network.kubevirt.io/headlessService: headless
+      spec:
+        accessCredentials:
+        - sshPublicKey:
+            propagationMethod:
+              noCloud: {}
+            source:
+              secret:
+                secretName: noowens-mac-pub
+        architecture: amd64
+        domain:
+          devices:
+            autoattachPodInterface: false
+            disks:
+            - bootOrder: 1
+              name: rootdisk
+            - disk:
+                bus: virtio
+              name: disk-for-nfsocprwx-86
+            interfaces:
+            - macAddress: 02:02:8e:09:65:53
+              masquerade: {}
+              name: default
+            - bridge: {}
+              macAddress: 02:02:8e:09:65:55
+              model: virtio
+              name: baremetal-network
+              state: up
+          firmware:
+            serial: f5af115c-81c8-4cea-9065-5095187af226
+            uuid: 44997568-7db8-4105-88d7-51960a19bcc6
+          machine:
+            type: pc-q35-rhel9.6.0
+          resources: {}
+        hostname: rhel8ocpv
+        networks:
+        - name: default
+          pod: {}
+        - multus:
+            networkName: baremetal-network
+          name: baremetal-network
+        subdomain: headless
+        volumes:
+        - dataVolume:
+            name: rhel-8-ocpv-volume
+          name: rootdisk
+        - cloudInitNoCloud:
+            userData: "#cloud-config\nchpasswd:\n  expire: false\npassword: 813e-xvs3-phxl\nuser:
+              rhel\nruncmd: []\n"
+          name: cloudinitdisk
+        - dataVolume:
+            hotpluggable: true
+            name: dv-rhel-8-ocpv-disk-for-nfsocprwx-86-czatib
+          name: disk-for-nfsocprwx-86

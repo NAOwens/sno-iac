@@ -1,0 +1,199 @@
+- apiVersion: operator.openshift.io/v1
+  kind: IngressController
+  metadata:
+    creationTimestamp: '2026-04-07T16:28:29Z'
+    finalizers:
+    - ingresscontroller.operator.openshift.io/finalizer-ingresscontroller
+    generation: 3
+    managedFields:
+    - apiVersion: operator.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"ingresscontroller.operator.openshift.io/finalizer-ingresscontroller": {}
+        f:spec:
+          .: {}
+          f:clientTLS:
+            .: {}
+            f:clientCA:
+              .: {}
+              f:name: {}
+            f:clientCertificatePolicy: {}
+          f:closedClientConnectionPolicy: {}
+          f:httpCompression: {}
+          f:httpEmptyRequestsPolicy: {}
+          f:httpErrorCodePages:
+            .: {}
+            f:name: {}
+          f:idleConnectionTerminationPolicy: {}
+          f:replicas: {}
+          f:tuningOptions:
+            .: {}
+            f:reloadInterval: {}
+          f:unsupportedConfigOverrides: {}
+      manager: ingress-operator
+      operation: Update
+      time: '2026-04-07T16:28:32Z'
+    - apiVersion: operator.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:routeSelector: {}
+      manager: hypershift-operator-manager
+      operation: Update
+      time: '2026-04-09T14:32:56Z'
+    - apiVersion: operator.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:defaultCertificate: {}
+      manager: kubectl-patch
+      operation: Update
+      time: '2026-04-18T03:50:57Z'
+    - apiVersion: operator.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Admitted"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"CanaryChecksSucceeding"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"DNSManaged"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Degraded"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"DeploymentAvailable"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"DeploymentReplicasAllAvailable"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"DeploymentReplicasMinAvailable"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"DeploymentRollingOut"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"EvaluationConditionsDetected"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"LoadBalancerManaged"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"LoadBalancerProgressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Upgradeable"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:domain: {}
+          f:endpointPublishingStrategy:
+            .: {}
+            f:hostNetwork:
+              .: {}
+              f:httpPort: {}
+              f:httpsPort: {}
+              f:protocol: {}
+              f:statsPort: {}
+            f:type: {}
+          f:observedGeneration: {}
+          f:routeSelector: {}
+          f:selector: {}
+          f:tlsProfile:
+            .: {}
+            f:ciphers: {}
+            f:minTLSVersion: {}
+      manager: ingress-operator
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:30:12Z'
+    name: default
+    namespace: openshift-ingress-operator
+    resourceVersion: '75985629'
+    uid: c69e8c98-706a-47db-81a9-40f3eddd2db1
+  spec:
+    clientTLS:
+      clientCA:
+        name: ''
+      clientCertificatePolicy: ''
+    closedClientConnectionPolicy: Continue
+    defaultCertificate:
+      name: sno-wildcard-tls
+    httpCompression: {}
+    httpEmptyRequestsPolicy: Respond
+    httpErrorCodePages:
+      name: ''
+    idleConnectionTerminationPolicy: Immediate
+    replicas: 1
+    routeSelector:
+      matchExpressions:
+      - key: hypershift.openshift.io/hosted-control-plane
+        operator: DoesNotExist
+    tuningOptions:
+      reloadInterval: 0s
+    unsupportedConfigOverrides: null

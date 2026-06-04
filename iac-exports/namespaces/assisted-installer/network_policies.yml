@@ -1,0 +1,22 @@
+- apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    creationTimestamp: '2026-04-07T16:03:01Z'
+    generation: 1
+    managedFields:
+    - apiVersion: networking.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:policyTypes: {}
+      manager: cluster-bootstrap
+      operation: Update
+      time: '2026-04-07T16:03:01Z'
+    name: assisted-installer-network-policy
+    namespace: assisted-installer
+    resourceVersion: '671'
+    uid: 8d17450d-56cd-4f61-b3df-4c7d082e982c
+  spec:
+    podSelector: {}
+    policyTypes:
+    - Ingress

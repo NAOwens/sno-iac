@@ -1,0 +1,172 @@
+- apiVersion: imageregistry.operator.openshift.io/v1
+  kind: Config
+  metadata:
+    creationTimestamp: '2026-04-07T16:29:39Z'
+    finalizers:
+    - imageregistry.operator.openshift.io/finalizer
+    generation: 3
+    managedFields:
+    - apiVersion: imageregistry.operator.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:managementState: {}
+          f:rolloutStrategy: {}
+          f:storage:
+            f:pvc:
+              .: {}
+              f:claim: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-07T19:36:10Z'
+    - apiVersion: imageregistry.operator.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"imageregistry.operator.openshift.io/finalizer": {}
+        f:spec:
+          .: {}
+          f:httpSecret: {}
+          f:logLevel: {}
+          f:observedConfig: {}
+          f:operatorLogLevel: {}
+          f:proxy: {}
+          f:replicas: {}
+          f:requests: {}
+          f:storage:
+            .: {}
+            f:managementState: {}
+          f:unsupportedConfigOverrides: {}
+      manager: cluster-image-registry-operator
+      operation: Update
+      time: '2026-04-07T19:36:10Z'
+    - apiVersion: imageregistry.operator.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"AzureStackCloudControllerDegraded"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Degraded"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"ImageConfigControllerDegraded"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"ImageRegistryCertificatesControllerDegraded"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"NodeCADaemonAvailable"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"NodeCADaemonControllerDegraded"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"NodeCADaemonProgressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Removed"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"StorageExists"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:generations:
+            .: {}
+            k:{"group":"apps","name":"image-registry","namespace":"openshift-image-registry","resource":"deployments"}:
+              .: {}
+              f:group: {}
+              f:hash: {}
+              f:lastGeneration: {}
+              f:name: {}
+              f:namespace: {}
+              f:resource: {}
+            k:{"group":"apps","name":"node-ca","namespace":"openshift-image-registry","resource":"daemonsets"}:
+              .: {}
+              f:group: {}
+              f:hash: {}
+              f:lastGeneration: {}
+              f:name: {}
+              f:namespace: {}
+              f:resource: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:storage:
+            .: {}
+            f:managementState: {}
+            f:pvc:
+              .: {}
+              f:claim: {}
+          f:storageManaged: {}
+      manager: cluster-image-registry-operator
+      operation: Update
+      subresource: status
+      time: '2026-06-02T15:53:56Z'
+    name: cluster
+    resourceVersion: '75954803'
+    uid: 0a4a02c6-4e09-4846-b9f4-0d5415143c14
+  spec:
+    httpSecret: 32beca9a2545856f3d1086f82b4665acefd511979045f6acdadfabdfc2c483ebd234d26670a33d282ad87b8fb111b92034f2e55c5fb12982745486901f001406
+    logLevel: Normal
+    managementState: Managed
+    observedConfig: null
+    operatorLogLevel: Normal
+    proxy: {}
+    replicas: 1
+    requests:
+      read:
+        maxWaitInQueue: 0s
+      write:
+        maxWaitInQueue: 0s
+    rolloutStrategy: Recreate
+    storage:
+      managementState: Unmanaged
+      pvc:
+        claim: image-registry-storage
+    unsupportedConfigOverrides: null

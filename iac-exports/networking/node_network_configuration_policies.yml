@@ -1,0 +1,41 @@
+- apiVersion: nmstate.io/v1
+  kind: NodeNetworkConfigurationPolicy
+  metadata:
+    annotations:
+      nmstate.io/webhook-mutating-timestamp: '1775618037822262250'
+    creationTimestamp: '2026-04-08T03:13:57Z'
+    generation: 1
+    managedFields:
+    - apiVersion: nmstate.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          .: {}
+          f:desiredState:
+            .: {}
+            f:ovn:
+              .: {}
+              f:bridge-mappings: {}
+      manager: Mozilla
+      operation: Update
+      time: '2026-04-08T03:13:57Z'
+    - apiVersion: nmstate.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions: {}
+      manager: manager
+      operation: Update
+      subresource: status
+      time: '2026-06-02T16:30:27Z'
+    name: ovs-br-ex-baremetal-network
+    resourceVersion: '75985915'
+    uid: 19680163-9eb2-4a72-bac3-108a11ba1b9f
+  spec:
+    desiredState:
+      ovn:
+        bridge-mappings:
+        - bridge: br-ex
+          localnet: baremetal-network
+          state: present
