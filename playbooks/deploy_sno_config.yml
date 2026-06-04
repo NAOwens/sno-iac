@@ -1,0 +1,1086 @@
+---
+- name: Deploy SNO Cluster Configuration from Infrastructure as Code
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    ocp_host: "{{ survey_url }}"
+    ocp_token: "{{ survey_token }}"
+    validate_certs_flag: "{{ validate_certs | default(false) }}"
+    import_dir: "../iac-exports"
+    # Set survey_apply_machine_configs=true to apply MachineConfigs (triggers node reboot)
+    apply_machine_configs: "{{ survey_apply_machine_configs | default(false) | bool }}"
+    # Stripped from metadata before every apply to remove cluster-instance-specific fields
+    meta_to_strip:
+      - managedFields
+      - resourceVersion
+      - uid
+      - creationTimestamp
+      - generation
+      - selfLink
+      - ownerReferences
+      - generateName
+
+  pre_tasks:
+    - name: Validate required connection variables
+      ansible.builtin.assert:
+        that:
+          - ocp_host is defined and ocp_host != ''
+          - ocp_token is defined and ocp_token != ''
+        fail_msg: "survey_url and survey_token must be provided via Extra Vars or survey"
+
+    - name: Verify import directory exists
+      ansible.builtin.stat:
+        path: "{{ import_dir }}"
+      register: _import_dir_stat
+      failed_when: not _import_dir_stat.stat.exists
+
+    - name: Verify cluster connectivity
+      kubernetes.core.k8s_info:
+        api_version: config.openshift.io/v1
+        kind: ClusterVersion
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _cluster_check
+      failed_when: _cluster_check.resources | length == 0
+
+  tasks:
+
+    # =========================================================
+    # 1. IDENTITY PROVIDER PREREQUISITES
+    # The htpasswd secret must exist in openshift-config before
+    # the OAuth config is applied, because OAuth references it
+    # by name. The export file contains multiple openshift-config
+    # secrets — filter to only the one with htpasswd data.
+    # =========================================================
+    - name: Slurp htpasswd secret export
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/rbac/htpasswd_secret.yml"
+      register: _htpasswd_raw
+
+    - name: Apply htpasswd secret
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          _htpasswd_raw.content | b64decode | from_yaml
+          | selectattr('data.htpasswd', 'defined')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+
+    # =========================================================
+    # 2. CLUSTER CONFIG SINGLETONS (config.openshift.io/v1)
+    # OAuth: restores identity providers (depends on htpasswd secret).
+    # Others patched so only exported fields are updated — the
+    # cluster operators reconcile the rest.
+    # DNS and Ingress are skipped: their specs reference the cluster
+    # base domain and ingressDomain which are cluster-instance-specific.
+    # =========================================================
+    - name: Slurp OAuth config
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/cluster/oauth.yml"
+      register: _oauth_raw
+
+    - name: Apply OAuth config (identity providers)
+      kubernetes.core.k8s:
+        state: patched
+        definition: "{{ item }}"
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _oauth_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+
+    - name: Slurp patchable cluster configs
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/cluster/{{ item }}.yml"
+      register: _cluster_config_raws
+      loop:
+        - apiserver
+        - proxy
+        - scheduler
+        - image
+        - console
+        - featuregate
+
+    - name: Apply patchable cluster configs
+      kubernetes.core.k8s:
+        state: patched
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          _cluster_config_raws.results
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+
+    # =========================================================
+    # 3. IMAGE REGISTRY OPERATOR CONFIG
+    # Restores the storage backend (emptyDir/PVC/S3), managementState,
+    # replica count, and any custom routes for the internal registry.
+    # Applied as a patch to the existing singleton.
+    # =========================================================
+    - name: Slurp image registry operator config
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/cluster/image_registry_config.yml"
+      register: _img_reg_raw
+
+    - name: Apply image registry operator config
+      kubernetes.core.k8s:
+        state: patched
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _img_reg_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+
+    # =========================================================
+    # 4. CUSTOM RBAC
+    # Custom ClusterRoles must exist before ClusterRoleBindings
+    # that reference them, and before any workloads that use them.
+    # =========================================================
+    - name: Slurp RBAC exports
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/rbac/{{ item }}"
+      register: _rbac_raws
+      loop:
+        - cluster_roles.yml
+        - cluster_role_bindings.yml
+        - users.yml
+
+    - name: Apply RBAC resources
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          _rbac_raws.results
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+
+    # =========================================================
+    # 5. NETWORKING INFRASTRUCTURE
+    # NMState instance activates the nmstate operator and must
+    # reach Available before NNCPs are applied (NNCPs configure
+    # node networking via the nmstate operator daemonset).
+    # =========================================================
+    - name: Slurp NMState instance export
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/networking/nmstate.yml"
+      register: _nmstate_raw
+
+    - name: Apply NMState instance
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _nmstate_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+      register: _nmstate_applied
+
+    - name: Wait for NMState operator to become Available
+      kubernetes.core.k8s_info:
+        api_version: nmstate.io/v1
+        kind: NMState
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _nmstate_status
+      until: >
+        _nmstate_status.resources | length > 0 and
+        (_nmstate_status.resources[0].status.conditions | default([])
+         | selectattr('type', 'equalto', 'Available')
+         | selectattr('status', 'equalto', 'True')
+         | list | length > 0)
+      retries: 20
+      delay: 15
+      when: _nmstate_raw.content | b64decode | from_yaml | select('mapping') | list | length > 0
+
+    - name: Slurp NodeNetworkConfigurationPolicies export
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/networking/node_network_configuration_policies.yml"
+      register: _nncp_raw
+
+    - name: Apply NodeNetworkConfigurationPolicies
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _nncp_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+
+    - name: Slurp cluster-scoped Network Attachment Definitions
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/networking/network_attachment_definitions.yml"
+      register: _nad_raw
+
+    - name: Apply cluster-scoped Network Attachment Definitions
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _nad_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+
+    - name: Slurp IngressControllers export
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/networking/ingress_controllers.yml"
+      register: _ingress_ctrl_raw
+
+    - name: Apply IngressControllers
+      # Patched to avoid overwriting the cluster-assigned ingressDomain.
+      # Restores custom TLS, nodePlacement, and replica configuration.
+      kubernetes.core.k8s:
+        state: patched
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _ingress_ctrl_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+
+    # =========================================================
+    # 6. STORAGE CLASSES
+    # Must exist before PVCs and any operator that references a
+    # specific storageClassName (e.g. HyperConverged, AAP).
+    # =========================================================
+    - name: Slurp storage class exports
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/storage/{{ item }}"
+      register: _storage_raws
+      loop:
+        - storage_classes.yml
+        - volume_snapshot_classes.yml
+
+    - name: Apply StorageClasses and VolumeSnapshotClasses
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          _storage_raws.results
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+
+    # =========================================================
+    # 7. NAMESPACES AND PROJECTS
+    # All namespace-scoped resources (OLM OperatorGroups,
+    # workloads, PVCs) require the namespace to exist first.
+    # =========================================================
+    - name: Slurp namespace and project exports
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/namespaces/{{ item }}"
+      register: _ns_raws
+      loop:
+        - namespaces.yml
+        - projects.yml
+
+    - name: Apply Namespaces and Projects
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          _ns_raws.results
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+
+    # =========================================================
+    # 8. OLM OPERATOR INSTALLATION
+    # Order: OperatorGroups → Subscriptions → wait for AtLatestKnown.
+    # CatalogSources are skipped — the export is empty because all
+    # operators use the default Red Hat catalog sources which are
+    # present on every OCP cluster.
+    # =========================================================
+    - name: Slurp OperatorGroups export
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/operators/operator_groups.yml"
+      register: _og_raw
+
+    - name: Apply OperatorGroups
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _og_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+
+    - name: Slurp Subscriptions export
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/operators/subscriptions.yml"
+      register: _sub_raw
+
+    - name: Apply Subscriptions
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _sub_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+
+    - name: Wait for all subscriptions to reach AtLatestKnown state
+      # AtLatestKnown means OLM has resolved the subscription and the
+      # current CSV is fully installed. Required before applying operator CRs.
+      kubernetes.core.k8s_info:
+        api_version: operators.coreos.com/v1alpha1
+        kind: Subscription
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _subs_status
+      until: >
+        _subs_status.resources | length > 0 and
+        (_subs_status.resources
+         | rejectattr('status.state', 'equalto', 'AtLatestKnown')
+         | list | length == 0)
+      retries: 40
+      delay: 30
+      when: _sub_raw.content | b64decode | from_yaml | select('mapping') | list | length > 0
+
+    # =========================================================
+    # 9. OPERATOR CUSTOM RESOURCES
+    # Applied only after operators are confirmed installed.
+    # HyperConverged must be Available before VMs can be created.
+    # AAP CRs are applied last as they have no downstream dependents.
+    # =========================================================
+    - name: Slurp HyperConverged export
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/operators/hyperconverged.yml"
+      register: _hco_raw
+
+    - name: Apply HyperConverged (OpenShift Virtualization)
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _hco_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+
+    - name: Wait for HyperConverged to become Available
+      kubernetes.core.k8s_info:
+        api_version: hco.kubevirt.io/v1beta1
+        kind: HyperConverged
+        namespace: openshift-cnv
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _hco_status
+      until: >
+        _hco_status.resources | length > 0 and
+        (_hco_status.resources[0].status.conditions | default([])
+         | selectattr('type', 'equalto', 'Available')
+         | selectattr('status', 'equalto', 'True')
+         | list | length > 0)
+      retries: 30
+      delay: 30
+      when: _hco_raw.content | b64decode | from_yaml | select('mapping') | list | length > 0
+
+    - name: Slurp AAP operator CR exports
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/operators/{{ item }}"
+      register: _aap_raws
+      loop:
+        - aap.yml
+        - automation_controller.yml
+        - automation_hub.yml
+        - eda.yml
+
+    - name: Apply AAP operator CRs
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          _aap_raws.results
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+
+    # =========================================================
+    # 10. PER-NAMESPACE WORKLOADS
+    # Namespace directories are discovered from the export tree.
+    # secrets_inventory.yml is intentionally skipped — it contains
+    # metadata only (no secret data); secrets must be recreated
+    # manually before starting workloads that depend on them.
+    #
+    # Within each namespace, resources are applied in dependency order:
+    #   ConfigMaps → NADs → NetworkPolicies → PVCs
+    #   → Workloads → Services → Routes
+    #   → DataVolumes → VirtualMachines
+    # =========================================================
+    - name: Find namespace export directories
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        file_type: directory
+        recurse: false
+      register: _ns_dirs
+
+    - name: Set deploy namespace list
+      ansible.builtin.set_fact:
+        deploy_namespaces: "{{ _ns_dirs.files | map(attribute='path') | map('basename') | list | sort }}"
+
+    - name: Display namespaces to deploy
+      ansible.builtin.debug:
+        msg: "Deploying resources into {{ deploy_namespaces | length }} namespace(s): {{ deploy_namespaces | join(', ') }}"
+
+    # --- ConfigMaps (referenced by workloads via envFrom/volumeMounts) ---
+    - name: Find ConfigMap exports
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        patterns: "configmaps.yml"
+        recurse: true
+      register: _cm_files
+
+    - name: Slurp ConfigMap exports
+      ansible.builtin.slurp:
+        src: "{{ item.path }}"
+      register: _cm_raws
+      loop: "{{ _cm_files.files | sort(attribute='path') }}"
+      when: _cm_files.files | length > 0
+
+    - name: Apply ConfigMaps
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          (_cm_raws.results | default([]))
+          | selectattr('content', 'defined')
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+      when: _cm_files.files | length > 0
+
+    # --- Namespace-scoped NADs (required by VM network interface references) ---
+    - name: Find namespace-scoped NAD exports
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        patterns: "network_attachment_definitions.yml"
+        recurse: true
+      register: _ns_nad_files
+
+    - name: Slurp namespace-scoped NAD exports
+      ansible.builtin.slurp:
+        src: "{{ item.path }}"
+      register: _ns_nad_raws
+      loop: "{{ _ns_nad_files.files | sort(attribute='path') }}"
+      when: _ns_nad_files.files | length > 0
+
+    - name: Apply namespace-scoped Network Attachment Definitions
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          (_ns_nad_raws.results | default([]))
+          | selectattr('content', 'defined')
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+      when: _ns_nad_files.files | length > 0
+
+    # --- NetworkPolicies ---
+    - name: Find NetworkPolicy exports
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        patterns: "network_policies.yml"
+        recurse: true
+      register: _np_files
+
+    - name: Slurp NetworkPolicy exports
+      ansible.builtin.slurp:
+        src: "{{ item.path }}"
+      register: _np_raws
+      loop: "{{ _np_files.files | sort(attribute='path') }}"
+      when: _np_files.files | length > 0
+
+    - name: Apply NetworkPolicies
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          (_np_raws.results | default([]))
+          | selectattr('content', 'defined')
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+      when: _np_files.files | length > 0
+
+    # --- PVCs (must exist before workloads that mount them) ---
+    - name: Find PVC exports
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        patterns: "pvcs.yml"
+        recurse: true
+      register: _pvc_files
+
+    - name: Slurp PVC exports
+      ansible.builtin.slurp:
+        src: "{{ item.path }}"
+      register: _pvc_raws
+      loop: "{{ _pvc_files.files | sort(attribute='path') }}"
+      when: _pvc_files.files | length > 0
+
+    - name: Apply PersistentVolumeClaims
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          (_pvc_raws.results | default([]))
+          | selectattr('content', 'defined')
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+      when: _pvc_files.files | length > 0
+
+    # --- Workloads: Deployments, StatefulSets, DaemonSets, CronJobs ---
+    - name: Find workload exports
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        patterns:
+          - "deployments.yml"
+          - "statefulsets.yml"
+          - "daemonsets.yml"
+          - "cronjobs.yml"
+        recurse: true
+      register: _workload_files
+
+    - name: Slurp workload exports
+      ansible.builtin.slurp:
+        src: "{{ item.path }}"
+      register: _workload_raws
+      loop: "{{ _workload_files.files | sort(attribute='path') }}"
+      when: _workload_files.files | length > 0
+
+    - name: Apply workloads
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          (_workload_raws.results | default([]))
+          | selectattr('content', 'defined')
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+      when: _workload_files.files | length > 0
+
+    # --- Services (before Routes which target them) ---
+    - name: Find Service exports
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        patterns: "services.yml"
+        recurse: true
+      register: _svc_files
+
+    - name: Slurp Service exports
+      ansible.builtin.slurp:
+        src: "{{ item.path }}"
+      register: _svc_raws
+      loop: "{{ _svc_files.files | sort(attribute='path') }}"
+      when: _svc_files.files | length > 0
+
+    - name: Apply Services
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          (_svc_raws.results | default([]))
+          | selectattr('content', 'defined')
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+      when: _svc_files.files | length > 0
+
+    # --- Routes ---
+    - name: Find Route exports
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        patterns: "routes.yml"
+        recurse: true
+      register: _route_files
+
+    - name: Slurp Route exports
+      ansible.builtin.slurp:
+        src: "{{ item.path }}"
+      register: _route_raws
+      loop: "{{ _route_files.files | sort(attribute='path') }}"
+      when: _route_files.files | length > 0
+
+    - name: Apply Routes
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          (_route_raws.results | default([]))
+          | selectattr('content', 'defined')
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+      when: _route_files.files | length > 0
+
+    # --- DataVolumes before VirtualMachines ---
+    - name: Find DataVolume exports
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        patterns: "data_volumes.yml"
+        recurse: true
+      register: _dv_files
+
+    - name: Slurp DataVolume exports
+      ansible.builtin.slurp:
+        src: "{{ item.path }}"
+      register: _dv_raws
+      loop: "{{ _dv_files.files | sort(attribute='path') }}"
+      when: _dv_files.files | length > 0
+
+    - name: Apply DataVolumes
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          (_dv_raws.results | default([]))
+          | selectattr('content', 'defined')
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+      when: _dv_files.files | length > 0
+
+    # --- VirtualMachines (last: depend on HCO, NADs, PVCs, DataVolumes) ---
+    - name: Find VirtualMachine exports
+      ansible.builtin.find:
+        paths: "{{ import_dir }}/namespaces"
+        patterns: "virtual_machines.yml"
+        recurse: true
+      register: _vm_files
+
+    - name: Slurp VirtualMachine exports
+      ansible.builtin.slurp:
+        src: "{{ item.path }}"
+      register: _vm_raws
+      loop: "{{ _vm_files.files | sort(attribute='path') }}"
+      when: _vm_files.files | length > 0
+
+    - name: Apply VirtualMachines
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: >-
+        {{
+          (_vm_raws.results | default([]))
+          | selectattr('content', 'defined')
+          | map(attribute='content')
+          | map('b64decode')
+          | map('from_yaml')
+          | flatten
+          | select('mapping')
+          | list
+        }}
+      loop_control:
+        loop_var: resource
+      when: _vm_files.files | length > 0
+
+    # =========================================================
+    # 11. MACHINE CONFIGS (optional — triggers SNO node reboot)
+    # Disabled by default. The SNO node reboots once for each
+    # MachineConfig that changes the rendered config. Enable only
+    # after all workloads are running and a maintenance window
+    # has been scheduled for the reboot.
+    # =========================================================
+    - name: Skip MachineConfig deployment (disabled)
+      ansible.builtin.debug:
+        msg: "MachineConfig deployment skipped. Pass survey_apply_machine_configs=true to enable (triggers SNO node reboot)."
+      when: not apply_machine_configs
+
+    - name: Slurp MachineConfig export
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/machine-config/machine_configs.yml"
+      register: _mc_raw
+      when: apply_machine_configs
+
+    - name: Apply MachineConfigs
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _mc_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+      when: apply_machine_configs
+
+    - name: Slurp MachineConfigPool export
+      ansible.builtin.slurp:
+        src: "{{ import_dir }}/machine-config/machine_config_pools.yml"
+      register: _mcp_raw
+      when: apply_machine_configs
+
+    - name: Apply MachineConfigPools
+      kubernetes.core.k8s:
+        state: present
+        definition: >-
+          {{
+            resource | combine({'metadata':
+              resource.metadata | default({}) | dict2items
+              | rejectattr('key', 'in', meta_to_strip) | items2dict
+            })
+          }}
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      loop: "{{ _mcp_raw.content | b64decode | from_yaml | select('mapping') | list }}"
+      loop_control:
+        loop_var: resource
+      when: apply_machine_configs
+
+    - name: Wait for MachineConfigPools to finish rolling out
+      # The SNO node will reboot during this wait — 60 retries x 30s = 30 minutes.
+      kubernetes.core.k8s_info:
+        api_version: machineconfiguration.openshift.io/v1
+        kind: MachineConfigPool
+        host: "{{ ocp_host }}"
+        api_key: "{{ ocp_token }}"
+        verify_ssl: "{{ validate_certs_flag }}"
+      register: _mcp_status
+      until: >
+        _mcp_status.resources | length > 0 and
+        (_mcp_status.resources
+         | map(attribute='status.conditions') | flatten
+         | selectattr('type', 'equalto', 'Updating')
+         | selectattr('status', 'equalto', 'True')
+         | list | length == 0)
+      retries: 60
+      delay: 30
+      when: apply_machine_configs
+
+  post_tasks:
+    - name: Display deployment summary
+      ansible.builtin.debug:
+        msg: |
+          SNO Configuration Deploy Complete
+          Source: {{ import_dir }}
+
+          Applied in order:
+            1.  htpasswd secret (openshift-config, OAuth prerequisite)
+            2.  Cluster configs: OAuth, APIServer, Proxy, Scheduler, Image, Console, FeatureGate
+            3.  Image registry operator config
+            4.  RBAC: ClusterRoles, ClusterRoleBindings, Users
+            5.  Networking: NMState (waited for Available), NNCPs, cluster NADs, IngressControllers
+            6.  Storage: StorageClasses, VolumeSnapshotClasses
+            7.  Namespaces and Projects
+            8.  OLM: OperatorGroups → Subscriptions (waited for AtLatestKnown)
+            9.  Operator CRs: HyperConverged (waited for Available), AAP CRs
+            10. Per-namespace ({{ deploy_namespaces | length }} namespaces):
+                ConfigMaps → NADs → NetworkPolicies → PVCs
+                → Workloads → Services → Routes
+                → DataVolumes → VirtualMachines
+            11. MachineConfigs: {{ 'Applied (node reboot in progress — wait for cluster recovery)' if apply_machine_configs else 'Skipped (survey_apply_machine_configs=false)' }}
+
+          ACTION REQUIRED:
+            - Secrets were NOT exported. Review secrets_inventory.yml files in each
+              namespace and recreate any required secrets before starting workloads.
+            - VM disk data was NOT migrated. PVCs are created but empty. Restore
+              data via snapshots or storage-level replication before starting VMs.
+            - The htpasswd OAuth provider references secret name 'htpasswd-prpwh'
+              from the source cluster. Verify this name matches what was applied.
